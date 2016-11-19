@@ -1,0 +1,492 @@
+td img
+{
+    max-width: 50px;
+}
+select.basic
+{
+    padding: 10px;
+    border: 1px solid #d0d0d0;
+}
+.titletable
+{
+        font-size: 20px;
+    color: red;
+}
+.boxhoadon .hinhhoadon 
+{
+    max-width: 50px;
+}
+.boxhoadon .tongket 
+{
+        background-color: red;
+    color: white;
+    font-weight: bold;
+}
+.boxhoadon .logo
+{
+    width: 250px;
+        
+}
+.boxhoadon .tieude
+{
+    width: 250px;
+    text-align: center;
+    font-weight: bold;
+}
+.boxhoadon
+{
+
+    width: 800px !important;
+}
+.boxhoadon .tieude
+{
+    float: left;
+}
+th,td
+{
+    text-align: center;
+}
+.fullload
+{
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.ruttientichluy
+{
+    right: 100px !important;
+    background: #f1cc16 !important;
+}
+.mieuta
+{
+     max-height: 300px;
+    overflow-y: scroll;
+}
+.scrool
+{
+    max-height: 500px;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgba(45, 179, 61, 0.64);
+}
+
+.giasanpham
+{
+        background-color: #2db33d;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+.red
+{
+     color: #dc0909;
+    font-weight: bold;
+    font-size: 20px;
+}
+.green
+{
+  color: green;
+    font-weight: bold;
+    font-size: 20px;   
+}
+.fullload .boxload
+{
+    position: absolute;
+    top:40%;
+    left: 50%;
+}
+a,label
+{
+    cursor: pointer;
+    text-decoration: none !important;
+}
+i.icon
+{
+    color: white;
+}
+.item-radio
+{
+       float: left;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #f1f0f0;
+    border-radius: 5px;
+}
+label.label i 
+{
+    color: white !important;
+}
+.macdinh
+{
+  color: #ff0200;
+}
+.imgtaikhoan
+{
+    max-width: 50px;
+}
+.sethienthi i
+{
+    width: 100px;
+}
+.itemedit i,.deletemenu i
+{
+    color: white;
+}
+
+.sanpham th,td
+{ text-align: center;
+}
+.btnthanhtoan
+{
+    position: relative;
+}
+.btnthanhtoan span
+{
+    position: absolute;
+      animation: topbot 4s ease-in-out infinite;
+}
+/*@-webkit-keyframes topbot{
+    0%,50%{-webkit-transform:scale(1)}
+    25%{-webkit-transform:scale(1,2.2)}}*/
+.btnthanhtoan b
+{
+    margin-left: 20px;
+}
+.dataTables_length
+{
+    float: left;
+}
+.dataTables_filter
+{
+    float: right ;
+}
+.cart_product img
+{
+    max-width: 80px;
+}
+.hienthichitiet
+{
+    display: none;
+}
+.listtrang .icheckbox_md
+{
+  float: left;
+}
+.hinhdangchon
+{
+    box-shadow: 0px 0px 10px 1px;
+    transition: all 0.2s;
+}
+.listgiasanpham td
+{
+ max-width: 100px;
+ overflow-x: hidden;
+}
+.slideder li
+{
+    margin-top:10px
+}
+.itemslideder
+{
+    min-height: 100px;
+    min-width: 150px;
+    max-height: 200px;
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+    border: 1px solid #EFEFEF;
+    box-shadow:0px 0px 10px -4px;
+    padding: 5px;
+}
+.itemslideder:before
+{
+    content: "";
+    border-color: transparent #32B4F3 transparent transparent;
+    position: absolute;
+    top: 0px;
+    border-width: 0 4px 8px 0;
+    border-style: solid;
+    right: 46px;
+    opacity: 0;
+     transition: opacity 0.4s;
+}
+.itemslideder a
+{
+    position: absolute;
+    top: -80px;
+    right: 10px;
+    background-color: #39f;
+    padding: 5px;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: top 0.5s,opacity  0.1s ease-in-out;
+    color: white;
+    font-weight: bold;
+  
+}
+.itemslideder:hover a
+{ 
+     top:0px;
+     
+}
+.itemslideder:hover a.deleteslideder
+{ 
+     top:50px;
+     
+}
+.itemslideder:hover a.loai
+{ 
+   top: 100px;
+     
+}
+.itemslideder a:hover
+{
+      opacity: 1;
+}
+.itemslideder:hover:before
+{ 
+   
+     opacity: 1;
+} 
+.uk-modal-dialog .uk-modal-header
+{
+    background-color: #F6F6F6 !important;
+    padding: 16px;
+    margin-top: -22px;
+}
+.uk-modal-dialog .uk-modal-footer
+{
+        background-color: #F6F6F6 !important;
+        margin: 18px -24px -21px -24px;
+}
+.chondanhmuc
+{
+        padding: 10px;
+    border: 1px solid #D7DFE6;
+    border-radius: 2px;
+   
+}
+.chondanhmuc:hover
+{cursor: pointer;
+  border: 1px solid  #99C6F5;
+}
+.danhmucsanpham
+{
+        position: absolute;
+    background-color: white;
+    z-index: 999;
+    height: 200px;
+    overflow-y: scroll;
+    border: 2px solid #DCDEDF;
+    border-radius: 2px;
+    display: none;
+}
+.danhmucsanpham ul li 
+{
+    list-style: none;
+}
+#dt_tableTools1_processing
+{
+    display: block;
+    position: fixed;
+    top: 50%;
+    z-index: 999;
+    left: 50%;
+    width: 100px;
+    background-color: rgba(56, 113, 216, 0.83);
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+.thongbao
+{
+       width: 50px;
+    height: 50px;
+    background-color: #FFFFFF;
+    position: fixed;
+    right: 0px;
+    top: 100px;
+    z-index: 99999;
+    border-radius: 100%;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #D6D6DE;
+}
+.thongbao i
+{
+          font-size: 20px;
+        margin-top: 3px;
+}
+.alertok
+{
+    color: green;
+}
+.uk-form-row select
+{
+    padding: 5px;
+}
+.boxchonfile
+{
+    position: relative;
+}
+.boxchonfile input
+{
+        width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 0;
+    cursor: pointer
+}
+.dangloadanh
+ {
+  //  height: 50px;
+ }
+.dangload
+ {
+    
+     border-radius: 5px;
+     display: block;
+     background-image: url('../images/dangload.gif');
+     background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 50% 50%;
+ }
+.uk-form-select option
+{
+    color: #003366;
+}
+.uk-position-relative img
+{
+     max-width: 100%;
+    max-height: 100%;
+    border-radius: 2px;
+   
+}
+ .boxanhdaidien:hover a.changeavatar
+ {
+    opacity: 1;
+     bottom: 0px;
+     color: white;
+     
+ }
+ 
+   a.changeavatar input
+  {
+    position: absolute;
+    width: 200%;
+    height: 50px;
+    top: 0px;
+    left: -100px;
+    opacity: 0;
+    z-index: 999;
+    cursor: pointer;
+    
+  }
+.boxanhdaidien
+ {
+   margin-top: 5px;
+    width: 200px;
+    border: 2px solid rgba(211, 211, 213, 0.64);
+    height: 200px;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+    margin: auto;
+ }
+  .boxanhdaidien img
+ {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+ }
+ a.changeavatar
+  {left: 0px;
+      opacity: 0;
+     position: absolute;
+    bottom: -10px; 
+    background: rgba(0, 0, 0, .6);
+    padding: 10px;
+    width: 100%;
+    text-align: right;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: blink;
+    border-radius: 2px;
+    transition:  all .14s ease-out
+  }
+
+.treedanhmuc li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative
+}
+.treedanhmuc li::before, .treedanhmuc li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.treedanhmuc li::before {
+    border-left:1px solid #999;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.treedanhmuc li::after {
+    border-top:1px solid #999;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.treedanhmuc li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+   // border:1px solid #999;
+    border-radius:5px;
+    display:inline-block;
+  //  padding:3px 8px;
+    text-decoration:none
+}
+.treedanhmuc li.parent_li>span {
+    cursor:pointer
+}
+.treedanhmuc>ul>li::before, .treedanhmuc>ul>li::after {
+    border:0
+}
+.treedanhmuc li:last-child::before {
+    height:30px
+}
+.treedanhmuc li.parent_li>span:hover, .treedanhmuc li.parent_li>span:hover+ul li span {
+    background:#eee;
+    border:1px solid #94a0b4;
+    color:#000
+}
