@@ -1,0 +1,19 @@
+
+RewriteEngine On
+Options All -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+<Files ~ "^.*\.(xml)"> 
+#   Order allow,deny 
+    Deny from all 
+</Files> 
+
+<Files index.php>
+ allow from all 
+</Files>
+<Files "config.php">
+ Deny from all 
+</Files>
