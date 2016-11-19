@@ -64,7 +64,7 @@
  * By default development will show errors but testing and live will hide them.
  */   
         // abc 456
-switch (ENVIRONMENT)
+switch (ENVIRONMENTZXC)
 {
 	case 'development':
 		error_reporting(-1);
