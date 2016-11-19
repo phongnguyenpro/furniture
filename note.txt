@@ -1,1 +1,24 @@
 ﻿
+Quản lý module
+	Thêm module quảng cáo -> chọn trang chủ
+
+md  Quảng cáo:
+ Thêm module 
+		Hình anh -> chọn trang chủ
+
+
+
+====================================
+
+Người dùng chọn trang chủ
+    -> Nhấn thêm module
+	-> chọn module nào
+	   -> cấu hình module
+
+   === Trang chủ ===
+
+----------Module quảng cáo----------
+  module qc 1  |   module qc 2  .....
+-----------Module sản phẩm------------
+ module sp1  | module sp 2
+-------------------------
