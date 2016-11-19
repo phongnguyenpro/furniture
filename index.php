@@ -62,9 +62,10 @@
  *
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
- */   
+ */
+//  abc 124344
         // abc 456
-switch (ENVIRONMENTZXC)
+switch (ENVIRONMENTABC)
 {
 	case 'development':
 		error_reporting(-1);
