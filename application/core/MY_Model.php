@@ -4,10 +4,7 @@ class MY_Model extends CI_Model {
 
     public function __construct($type = null) {
         parent::__construct();
-        $CI = & get_instance();
-        if (!isset($CI->mydb)) {
-            $this->load->library("mydb");
-        }
+        // thừa kế dữ liệu class parent, ko lấy dữ liệu của controller gọi nó
     }
 
 }
