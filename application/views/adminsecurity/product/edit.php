@@ -32,6 +32,49 @@ function buiding_menu($parent, $menuData, $data) {
 }
 ?>
 
+        <!-- modal hinh anh -->
+        <div id='chonhinhanh' class="uk-modal">
+            <div class="uk-modal-dialog">
+
+                <div class="uk-modal-header">Chọn hình ảnh</div>
+
+                <ul class="uk-grid uk-grid-small uk-grid-width-1-4 listchonhinh">
+
+                    <li data-name="<?= $data['sanpham']['hinhdaidien'] ?>" class="uk-grid-margin itemhinhchon">
+                        <img title="<?= $data['sanpham']['hinhdaidien'] ?>"
+                             src="<?= URL ?>public/upload/images/hinhsanpham/<?= $data['sanpham']['hinhdaidien'] ?>"
+                             alt="" class="img-responsive img_small">
+                    </li>
+                    <?php foreach ($data['sanpham']['hinh'] as $key => $value) { ?>
+
+                        <li data-name="<?= $value['tenhinh'] ?>" class="uk-grid-margin itemhinhchon">
+                            <img title="<?= $value['tenhinh'] ?>"
+                                 src="<?= URL ?>public/upload/images/hinhsanpham/<?= $value['tenhinh'] ?>" alt=""
+                                 class="img-responsive img_small">
+                        </li>
+
+                    <?php } ?>
+
+
+                </ul>
+
+                <div class="uk-modal-footer ">
+                    <a href="" class="uk-modal-close uk-close uk-close-alt"></a>
+                    <a class="pull-right md-btn md-btn-primary btnchonhinh">Chọn hình</a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
 <form action="<?= ADMIN_URL ?>product/update" class="uk-form-stacked" id="formcapnhatsanpham"
       method="post">
 
