@@ -43,7 +43,8 @@ $(document).ready(function (e) {
             {"searchable": false, "orderable": false},
         ],
         "createdRow": function (row, data, dataIndex) {
-            $(row).attr('data-id', data[0] + '.' + data[1]);
+            $(row).attr('data-id', data[0]);
+            $(row).attr('data-stt', data[1]);
             $(row).attr('id', data[0]);
         },
         "fnInitComplete": function () {

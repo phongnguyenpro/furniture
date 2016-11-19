@@ -12,7 +12,8 @@ class MY_Controller extends CI_Controller {
             $this->load->model("adminsecurity/".$name_controller . '_model', 'model');
         }
             // kiểm tra quyền user theo controller và function
-            $this->load->library("adminsecurity",$this->mydb);
+            $this->load->library("adminsecurity");
+            $this->adminsecurity->mydb = $this->mydb;
             $this->adminsecurity->checkrole();
             $this->data["menu_item"] = $this->adminsecurity->menu_item();
         }

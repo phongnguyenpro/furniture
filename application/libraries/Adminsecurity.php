@@ -3,14 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Adminsecurity
 {
-    public function __construct($mydb)
+    public function __construct()
     {
+        // tham so truyen kieu mang
 //          $this->CI = &get_instance();
 //          $this->CI->load->library("mydb");
 //
 //        //  $this->url =$this->CI->uri->rsegments;
 //        $this->mydb =$this->CI->mydb;
-        $this->mydb = $mydb;
 
     }
 
@@ -136,7 +136,7 @@ class Adminsecurity
 
     public function checkrole($controler = "", $actione = "")
     {
-        debug($this->mydb);
+
     }
 }
 

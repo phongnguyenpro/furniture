@@ -113,8 +113,8 @@ class Product extends MY_Controller {
             $height_thumb = $width_thumb * $tyle;
         } else {
             $tyle = $width / $height;
-            $width_thumb = 100;
-            $height_thumb = $width_thumb * $tyle;
+            $height_thumb = 100;
+            $width_thumb = $height_thumb * $tyle;
         }
 
         if ($_POST['id_sanpham'] != "") {
