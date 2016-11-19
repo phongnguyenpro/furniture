@@ -9,7 +9,7 @@ class Main extends MY_Controller {
     function Index()
     {
           $this->load->view("adminsecurity/header");
-          $this->load->view("adminsecurity",'main/index');
+          $this->load->view("adminsecurity/main/index");
           $this->load->view("adminsecurity/footer");
            
     }
