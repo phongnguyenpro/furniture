@@ -2,13 +2,14 @@
 
 class Main extends MY_Controller {
 
-    function __construct() {
-        parent::__construct("Index", "admin");
-    }
+       public function __construct()
+  {
+      parent::__construct("Main","admin");
+  } 
     function Index()
     {
           $this->load->view("adminsecurity/header");
-          $this->view->render("adminsecurity",'main/index');
+          $this->load->view("adminsecurity",'main/index');
           $this->load->view("adminsecurity/footer");
            
     }
