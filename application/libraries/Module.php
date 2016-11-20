@@ -6,14 +6,16 @@ class Module {
     }
 
     function run() {
+        
+        
         // load dữ liệu module ở đây
+          
     }
 
     function category() {
-    
       // load dữ liệu cho quá trình sử dụng lại. Ví dụ danh mục sản phẩm
         $this->load("header");
-        $this->header->category();
+        return  $this->header->category();
         
     }
 

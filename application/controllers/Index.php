@@ -16,6 +16,7 @@ class Index extends MY_Controller {
         
         
         $this->data["category"] = $this->module->category();
+        debug($this->data["category"]);
         $this->load->view("shop/header");
         
         
