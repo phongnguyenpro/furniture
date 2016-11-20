@@ -63,7 +63,7 @@
             //slider.goToNextSlide();
         
         
-        $('[data-toggle="tooltip"]').tooltip();
+       // $('[data-toggle="tooltip"]').tooltip();
         /* Resize top menu*/
         resizeTopmenu();
         /* Zoom image */
@@ -144,7 +144,7 @@ $('.zoomContainer').remove();
             return false;
         })
         /** SELECT CATEGORY **/
-        $('.select-category').select2();
+      //  $('.select-category').select2();
         /* Toggle nav menu*/
         $(document).on('click','.toggle-menu',function(){
             $(this).closest('.nav-menu').find('.navbar-collapse').toggle();

@@ -1,28 +1,16 @@
 
 <?php 
 
-cache_view_start()
-?>
-
-<b>abc</b>
-<?php
-cache_view_end();
-?>
-<?php 
-debug(1);
-$danhmuc=$this->data['danhmucsanpham'];
+$category=$this->data['category'];
 $menu=$this->data['menu'];
 $giohang= isset($_COOKIE['giohang'])==true?unserialize($_COOKIE['giohang']):array();
 $yeuthich= isset($_COOKIE['yeuthich'])==true?count(unserialize($_COOKIE['yeuthich'])):"";
 $taikhoan=isset($_COOKIE['taikhoan'])==true?unserialize($_COOKIE['taikhoan']):array();
-define("URLNOW", "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-$_SESSION['URLNOW']=URLNOW;
+define("URL_NOW", "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+$_SESSION['URL_NOW']=URL_NOW;
 if(!isset($_SESSION['token']))
-$_SESSION['token']=generatePassword(20);
-$ngonngu=new \lib\table\NgonNgu;
-$datangonngu=$ngonngu->loadngonngunguoidung();
-$this->langview=$ngonngu->getdata(NGONNGU);
-$cache=new lib\Cache();
+$_SESSION['token']=  generate_password(20);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,30 +22,30 @@ $cache=new lib\Cache();
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
          <title><?= $this->data['meta']['title'] ?></title>
-         <meta name="description" content="<?=$this->data['meta']['mieuta'] ?> ">
+         <meta name="description" content="<?= $this->data['meta']['description'] ?> ">
          <!-- Mạng xã hội -->
   <meta property="og:type" content="website" />
  <meta property="og:title" content="<?= $this->data['meta']['title'] ?>" >
- <meta property="og:description"  content="<?= $this->data['meta']['mieuta'] ?>" >
+ <meta property="og:description"  content="<?= $this->data['meta']['description'] ?>" >
  <meta property="og:image" content="<?= $this->data['meta']['image'] ?>" >
  <meta property="fb:app_id" content="416654985192230" />     
  <meta property="fb:admins" content="100005194575333" /> 
     
     
     
-    <link rel="stylesheet" type="text/css" href="<?= URL."view/".THEME ?>/assets/lib/bootstrap/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="<?= URL."view/".THEME ?>/assets/css/style.css" />
+<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
+<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/style.css"); ?>" />
+<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/responsive.css"); ?>" />
 
 
-
-    <script type="text/javascript" src="<?= URL."view/".THEME ?>/assets/lib/jquery/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="<?= URL ?>lib/public/js/config.js"></script>
-    <script type="text/javascript" src="<?= URL ?>lib/public/js/function.js"></script>
-  
-    
- 
+<script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery/jquery-1.11.2.min.js"); ?>"></script>
+<script type="text/javascript" src="<?=  BASE_URL."public/js/function.js" ; ?>"></script>
+<script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery.bxslider/jquery.bxslider.min.js") ?>"></script> <!-- Trình chiếu -->
+<script type="text/javascript" src="<?= load_frontend_view("assets/js/jquery.actual.min.js"); ?>"></script>
+<script type="text/javascript" src="<?= BASE_URL."public/js/lazyload.js" ?> "></script>
+<script type="text/javascript" src="<?= load_frontend_view("assets/js/theme-script.js");?>"></script>
+   
 <?php echo "<script >token='".$_SESSION['token']."'</script>";  ?>
-
 <style>
     .left-block img
     {
@@ -71,54 +59,41 @@ $cache=new lib\Cache();
     <div class="top-header">
         <div class="container">
             <div class="nav-top-links">
-                <a class="first-item" ><img alt="phone" src="<?= URL."view/".THEME ?>/assets/images/phone.png" /><?= SDT ?></a>
-                <a ><img alt="email" src="<?= URL."view/".THEME ?>/assets/images/email.png" /><?= EMAIL ?></a>
+                <a class="first-item" ><?= $this->data["config"]["sdt"] ?></a>
+                <a ><?= $this->data["config"]["email"] ?></a>
        
                      
             </div>
            
 
             <div id="user-info-top" class="user-info pull-right">
-                       <?php if(kiemtradangnhapuser(array(1,2,3,4))) {?>
+                       <?php if(check_login_user(array(1,2,3,4))) {?>
                 <div class="dropdown drdtaikhoan">
                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
                     <span><?= $taikhoan['emaildangnhap'] ?></span>
                     <span class="glyphicon glyphicon-menu-down"></span></a>
                     <ul class="dropdown-menu mega_dropdown" role="menu">
-                        <li><a href="<?= URL ?>login/logout">Đăng xuất</a></li>
-                        <li><a href="<?= URL ?>taikhoan/edit">Quản lý tài khoản</a></li>
+                        <li><a href="<?= BASE_URL ?>login/logout">Đăng xuất</a></li>
+                        <li><a href="<?= BASE_URL ?>taikhoan/edit">Quản lý tài khoản</a></li>
                      
                     </ul>
                 </div>
                    <?php }else{ ?>
-                   <a href="" class="current-open"  data-toggle="modal" data-target="#modal_dk_dn"><span><?= $this->langview->dn ?></span></a>                 
-                   <?php } ?>
-       
-            
-                   <a  href="<?= URL ?>sanpham/yeuthich" class="sanphamyeuthich" > <?= $this->langview->yt ?>  <i class="fa fa-heart"></i><span><?= $yeuthich ?></span></a>
-                          <?php if(count($datangonngu)>1){ ?>
-                <div class="dropdown drdngonngu">
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span><?= $this->langview->nn ?></span> 
-                        <span class="glyphicon glyphicon-menu-down"></span>
-                    </a>
-                    <ul class="dropdown-menu mega_dropdown" role="menu">
-                       <?php foreach ($datangonngu as $key=>$value){ ?>
-                        <li > <a class="changelang" data-id="<?= $value['id_ngonngu'] ?>" > <img src="<?= $value['icon'] ?>" > <?= $value['tenngonngu'] ?> </a> </li>
-                       <?php }?>
-                    </ul>
-                </div>
-               <?php }?>
+                   <a href="" class="current-open"  data-toggle="modal" data-target="#modal_dk_dn"><span>Login</span></a>                 
+                   <?php } ?>    
+                   <a  href="<?= BASE_URL ?>sanpham/yeuthich" class="sanphamyeuthich" >Yêu thích  <i class="fa fa-heart"></i><span><?= $yeuthich ?></span></a>
+
             </div>
         </div>
     </div>
 </div>
     <!--/.top-header -->
-    
+    <?php    debug(1); ?>
     <!-- MAIN HEADER -->
     <div class="container main-header">
         <div class="row">
             <div class="col-xs-12 col-sm-3 logo">
-                <a href="<?= URL ?>"><img alt="<?= TENSHOP ?>" src="<?= LOGO ?>" /></a>
+                <a href="<?= BASE_URL ?>"><img alt="<?= TENSHOP ?>" src="<?= LOGO ?>" /></a>
             </div>
             <div class="col-xs-7 col-sm-7 header-search-box">
                 <form class="form-inline">
@@ -147,7 +122,7 @@ $cache=new lib\Cache();
                 </form>
             </div>
             <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
-                <a class="cart-link" href="<?=URL."sanpham/checkout" ?>">
+                <a class="cart-link" href="<?=BASE_URL."sanpham/checkout" ?>">
                     <span class="title"><?= $this->langview->gh ?></span>
                     <span class="total"><?= $total= count($giohang)?> <?= $this->langview->sp ?></span>
                     <span class="notify notify-left "><?= $total ?></span>
@@ -176,7 +151,7 @@ $cache=new lib\Cache();
                                   {
                                   
                                      
-                                   $temp=$menu['item'][$value]['slug']==URLNOW?"":""; 
+                                   $temp=$menu['item'][$value]['slug']==BASE_URLNOW?"":""; 
                                   $html.='<li class="link_container li-sub '.$temp.' ">'
                                           . '<a href="'.$menu['item'][$value]['slug'].'">'.$menu['item'][$value]['ten'].'</a>';
                                   $html.=submenu($menu,$value,1);
@@ -184,7 +159,7 @@ $cache=new lib\Cache();
                                   }
                                   else
                                   {
-                                    $temp=$menu['item'][$value]['slug']==URLNOW?"":""; 
+                                    $temp=$menu['item'][$value]['slug']==BASE_URLNOW?"":""; 
                                 $html.='<li class="link_container '.$temp.'"><a href="'.$menu['item'][$value]['slug'].'">'.$menu['item'][$value]['ten'].'</a>';
                                   }   
                                 
@@ -205,8 +180,8 @@ $cache=new lib\Cache();
                                     $html.="<ul class='sub-sanpham'>";
                              foreach ($danhmuc['parent'][$cha] as $value)
                              {
-                           $url=URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
-                            $curren=URLNOW==$url?"":"";
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                            $curren=BASE_URLNOW==$url?"":"";
                                 $html.="<li class='".$curren."'><a href='$url'>".$danhmuc['item'][$value]['ten']."</a>";
                                 $html.=submenu_sanpham($danhmuc,$value);
                                 $html.="</li>";
@@ -250,9 +225,9 @@ foreach ($danhmuc['parent'][0] as $value)
  {
                            ?>
                 <?php if(isset($danhmuc['parent'][$value]) || isset($this->data['module']['quangcao']['data']['menu'][$quangcao]) || isset($this->data['module']['html']['data']['menu'][$quangcao])  ){
-                    $url=URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                    $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
                     ?>            
-                            <li class=" <?= $item>10?"cat-link-orther":"" ?> <?= URLNOW==$url?"menuactive":"" ?>">       
+                            <li class=" <?= $item>10?"cat-link-orther":"" ?> <?= BASE_URLNOW==$url?"menuactive":"" ?>">       
                          <a class="parent" href="<?= $url ?>">
                 <?php if($danhmuc['item'][$value]['icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['icon'] ?>"> <?php }?>
      <?= $danhmuc['item'][$value]['ten'] ?>
@@ -264,19 +239,19 @@ foreach ($danhmuc['parent'][0] as $value)
                 <?php           if(isset($danhmuc['parent'][$value])) {  ?>
                 <?php  $i=0; foreach ($danhmuc['parent'][$value] as $value1) {
                     
-                           $url=URL."danh-muc/".$danhmuc['item'][$value1]['id_danhmuc']."/".$danhmuc['item'][$value1]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['id_danhmuc']."/".$danhmuc['item'][$value1]['slug'];
                     
                     $i++;?>
                  <div class="mega-group col-sm-4">
-                     <h4 class="mega-group-header"><span><b class="<?= URLNOW==$url?"":"" ?>"><a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['ten'] ?></a></b></span></h4>
+                     <h4 class="mega-group-header"><span><b class="<?= BASE_URLNOW==$url?"":"" ?>"><a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['ten'] ?></a></b></span></h4>
                         <?php if(isset($danhmuc['parent'][$value1])){ ?>
                      
                      <ul class="group-link-default">
                           <?php  foreach ($danhmuc['parent'][$value1] as $value2) {
-                           $url=URL."danh-muc/".$danhmuc['item'][$value2]['id_danhmuc']."/".$danhmuc['item'][$value2]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value2]['id_danhmuc']."/".$danhmuc['item'][$value2]['slug'];
                               ?>
                          
-                         <li class="<?= URLNOW==$url?"":"" ?>"><a href="<?= $url ?>" ><?= $danhmuc['item'][$value2]['ten'] ?></a>
+                         <li class="<?= BASE_URLNOW==$url?"":"" ?>"><a href="<?= $url ?>" ><?= $danhmuc['item'][$value2]['ten'] ?></a>
                           
                             <?= submenu_sanpham($danhmuc,$value2) ?>
                           
@@ -311,9 +286,9 @@ foreach ($danhmuc['parent'][0] as $value)
         </div>
         </li>
                    <?php } else{
-                           $url=URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
                        ?>
-        <li class="<?= $item>10?"cat-link-orther":"" ?> <?= URLNOW==$url?"":"" ?>" ><a href="<?= $url ?>">
+        <li class="<?= $item>10?"cat-link-orther":"" ?> <?= BASE_URLNOW==$url?"":"" ?>" ><a href="<?= $url ?>">
                      <?php if($danhmuc['item'][$value]['icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['icon'] ?>"> <?php }?>
                 <i class="<?= $danhmuc['item'][$value]['icon'] ?>"></i> <?= $danhmuc['item'][$value]['ten'] ?></a></li>
                    <?php } ?>
@@ -377,7 +352,7 @@ foreach ($danhmuc['parent'][0] as $value)
                                                  $i=0;    
                                                   foreach ($danhmuc['parent'][0] as $value)
  {
-                           $url=URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
                                                       $i++;
                            ?>
                      
@@ -393,7 +368,7 @@ foreach ($danhmuc['parent'][0] as $value)
                      
                     
                           <?php foreach ($danhmuc['parent'][$value] as $value1) {
-                           $url=URL."danh-muc/".$danhmuc['item'][$value1]['id_danhmuc']."/".$danhmuc['item'][$value1]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['id_danhmuc']."/".$danhmuc['item'][$value1]['slug'];
                               ?>
                                          <li class="link_container danhmuccap2">
                                              <a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['ten'] ?></a>
@@ -493,7 +468,7 @@ foreach ($danhmuc['parent'][0] as $value)
             </div>
             <!-- CART ICON ON MMENU -->
             <div id="shopping-cart-box-ontop">
-                <a href="<?= URL ?>sanpham/checkout"><i class="fa fa-shopping-cart"></i></a>
+                <a href="<?= BASE_URL ?>sanpham/checkout"><i class="fa fa-shopping-cart"></i></a>
                 <div class="shopping-cart-box-ontop-content"></div>
             </div>
         </div>
@@ -555,7 +530,7 @@ foreach ($danhmuc['parent'][0] as $value)
  <div class="btn-group">
                     <a class="btn btn-primary disabled" style="height: 40px;
     opacity: 0.8;"><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
-                    <a class="btn btn-primary loginfacebook" href="https://www.facebook.com/dialog/oauth?client_id=<?= ID_FB ?>&redirect_uri=<?= URL ?>/login/facebook" style="width:14em;height: 40px;"> <?= $this->langview->dn ?> Facebook</a>
+                    <a class="btn btn-primary loginfacebook" href="https://www.facebook.com/dialog/oauth?client_id=<?= ID_FB ?>&redirect_uri=<?= BASE_URL ?>/login/facebook" style="width:14em;height: 40px;"> <?= $this->langview->dn ?> Facebook</a>
 	</div>
            </div>
         </div>
@@ -665,7 +640,7 @@ foreach ($danhmuc['parent'][0] as $value)
     <div class="container" id="columns">
          
         <div class="breadcrumb clearfix">
-            <a class="home" href="<?= URL ?>" title="Return to Home">Home</a>
+            <a class="home" href="<?= BASE_URL ?>" title="Return to Home">Home</a>
             <span class="navigation-pipe">&nbsp;</span>
             <?php 
             for($i=count($this->data["bre"]['info'])-1;$i>=0;$i--)

@@ -12,6 +12,10 @@ function load_admin_public($name)
     return BASE_URL . "application/views/adminsecurity/public/" . $name;
 }
 
+function load_frontend_view($name)
+{
+    return BASE_URL."application/views/".THEME."/". $name;
+}
 function load_public($name)
 {
 
@@ -263,20 +267,35 @@ function search_all_schild($data, $id_danhmuc, $list_child)
 
 //  =========== cache view  ============ //
 
-function cache_view_start()
-{
-    ob_start();
+
+function cache_view_start($name = "", $cache = 1, $time = 86400) {
+    $name = "application/cache/html/" . $name;
+    //time() <= (fileatime($cacheFile) + $time_update_cache
+    if (file_exists($name) &&
+            (filemtime($name) > (time() - $time)) && $cache == 1) {
+        return unserialize(file_get_contents($name));
+    } else {
+        if ($cache == 1)
+            ob_start();
+        return false;
+    }
+}
+function cache_view_end($name, $cache = 1) {
+    $name = "application/cache/html/" . $name;
+    if ($cache == 1) {
+        $content = ob_get_contents();
+        ob_end_clean();
+        // Ghi cache file 
+        file_put_contents($name, serialize($content));
+        echo $content;
+    }
 }
 
-function cache_view_end()
+// =============== check user login =======//
+function check_login_user($arr)
 {
-    $content = ob_get_contents();
-    ob_end_clean();
-    // Ghi cache file 
-//    $cache->putcacheview($filecache,$content);
-    echo $content;
+    return false;
 }
-
 function kiemtraurl($arr, $id)
 {
     if (!is_numeric($id))

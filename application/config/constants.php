@@ -7,12 +7,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         define('ADMIN_URL',"http://localhost/furniture/adminsecurity/");
         define('HASH_KEY',"ILOVEYOY");
         
-     // Vũ
-        define('BASE_URL',"http://localhost:81/furniture/");
-        define('ADMIN_URL',"http://localhost:81/furniture/adminsecurity/");
-        define('HASH_KEY',"ILOVEYOY");
+// MY CONSTANTS
+        
+define("THEME","shop"); 
 /*
  * 
+
+
 
 |--------------------------------------------------------------------------
 | Display Debug backtrace
