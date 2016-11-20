@@ -128,7 +128,7 @@ $(document).ready(function (e) {
           
             name = $('.hinhdangchon').attr("data-name");
             url = BASE_URL + 'public/upload/images/product/' + name;
-            $('#inputproduct').prop('value', name);
+            $('#inputhinhsanpham').prop('value', name);
             html = '<img title="' + name + '" src="' + BASE_URL + 'public/upload/images/product/' + name + '" alt="" class="img-responsive">';
             $('.hinhsanphamchitiet').html(html);
 
@@ -158,12 +158,11 @@ $(document).ready(function (e) {
     tr = null;
     $(document).on("click", ".suasanphamchitiet", function () {
         tr = $(this).parent().parent();
-        console.log(tr);
         modal.show();
         id_sanphamchitiet = $(this).attr("data-idsanphamchitiet");
         giasanpham = $(this).attr("data-giasanpham");
         soluongsanpham = $(this).attr("data-soluongsanpham");
-        giatri = $(this).parents().prevAll('td.attr_val_value');
+        giatri = $(this).parents().prevAll('td.giatrithuoctinhchon');
         hinhsanpham = $(this).attr("data-hinhsanphamchitiet");
         $(".chonthuoctinhsanphamchitietedit option").attr('selected', false);
 
@@ -196,26 +195,26 @@ $(document).ready(function (e) {
 
     $(document).on("click", ".btncapnhatsanphamchitiet", function () {
 
-        current = $(this);
+         current = $(this);
         btnlinkload(current);
         sotien = $("#giasanphamchitietedit").val();
         soluong = $("#soluongsanphamchitietedit").val();
-        product = $("#productchitiet").val();
+        hinhsanpham = $("#hinhsanphamchitiet").val();
         id_sanphamchitiet = $('#idsanphamchitietedit').val();
         thuoctinh = new Array();
         $(".chonthuoctinhsanphamchitietedit").each(function () {
             temp = $(this).val();
             thuoctinh.push(temp);
         })
-        $.post(BASE_URL + "administrator247/sanpham/updatesanphamchitiet", {
+        $.post(ADMIN_URL + "product/update_product_detail", {
             "thuoctinh": thuoctinh,
             "sotien": sotien,
-            "product": product,
+            "hinhsanpham": hinhsanpham,
             "soluong": soluong,
             "id_sanpham": id_sanpham,
             "id_sanphamchitiet": id_sanphamchitiet
         }, function (o) {
-            if (o.tinhtrang == 1) {
+            if (o.status == 1) {
                 modal.hide();
                 tr.html(o.html);
             }

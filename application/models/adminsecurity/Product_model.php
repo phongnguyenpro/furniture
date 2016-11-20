@@ -638,7 +638,9 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
                         $sqlwhere = "attr_val.attr_val_id=" . implode(" or attr_val.attr_val_id= ", $data['thuoctinh']);
                         $kq = $this->mydb->select("select productattr.productattr_id,attr_val_id,attr_val_value,attr_val_label  from productattr,attr_val where productattr.productattr_id=attr_val.productattr_id and ( $sqlwhere )", array());
                         if (!empty($kq) && $data['soluong'] != '' && $data['sotien'] != '') {
+                            
                             $row = $this->mydb->insert("product_detail", $ar);
+                            
                             $product_detail_id = $row['id'];
                             $ar = null;
                             foreach ($kq as $value) {
@@ -653,7 +655,7 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
                             $tenthuoctinh['-1'] = "Null";
                             $html = '<tr>';
                             foreach ($data['thuoctinh'] as $value) {
-                                $html .= '<td class="attr_val" data-giatri="' . $value . '">' . $tenthuoctinh[$value] . '</td>';
+                                $html .= '<td class="giatrithuoctinhchon" data-giatri="' . $value . '">' . $tenthuoctinh[$value] . '</td>';
                             }
                             $html .= "<td>" . $data['sotien'] . "</td>";
                             $html .= "<td>" . $data['soluong'] . "</td>";
@@ -679,4 +681,102 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
             return array("status" => 0, "tinnhan" => "Điền đầy đủ thông tin"); // thuoc tinh rỗng
     }
 
+    
+    function update_product_detail($data)
+    {
+       $list = array();
+        foreach ($data['thuoctinh'] as $value) {
+            if ($value != -1)
+                $list[] = $value;
+        }
+        if (!empty($list)) {
+            $chophepthem = true;
+            $id_productattr = array();
+            // kiem tra thuoc tinh chon
+            $kq = $this->mydb->select("select DISTINCT productattr_id from productattr_detail where product_detail_id=-1 and product_id=:product_id ", array("product_id" => $data['id_sanpham']));
+            foreach ($kq as $value) {
+                $id_productattr[] = $value['productattr_id'];
+            }
+            // lay thuoc tinh chon sap them
+            $sqlwhere = "attr_val_id=" . implode(" or attr_val_id=", $list);
+            $kq = $this->mydb->select("select productattr_id from attr_val where $sqlwhere", array());
+            foreach ($kq as $value) {
+                if (in_array($value['productattr_id'], $id_productattr)) {
+                    $chophepthem = false;
+                }
+            }
+            if ($chophepthem) {
+
+                $ar['product_detail_price'] = price_input($data['sotien']);
+                $ar['product_detail_total'] = $data['soluong'];
+                $ar['product_id'] = $data['id_sanpham'];
+                
+                $id_sanphamchitiet = $data['id_sanphamchitiet'];
+                if (!empty($list)) {
+                   
+                    $sqlwhere = " 
+select product_detail_id from productattr_detail where productattr_detail.attr_val_id=" . implode(" ) and  product_detail.product_detail_id IN
+(
+select product_detail_id from productattr_detail where productattr_detail.attr_val_id=", $list) . ")";
+                    $sql = "select  DISTINCT( product_detail.product_detail_id) from product_detail,productattr_detail where product_detail.product_detail_id=productattr_detail.product_detail_id
+and productattr_detail.product_id=:product_id and  product_detail.product_detail_id IN (" . $sqlwhere;
+
+                 $kq = $this->mydb->select($sql, array("product_id" => $ar['product_id']));
+
+                    if (!empty($kq))
+                        $lastid = $kq[0]['product_detail_id'];
+                    else
+                        $lastid = $id_sanphamchitiet;
+
+                    if ($lastid == $id_sanphamchitiet) {
+                          $sqlwhere = "attr_val.attr_val_id=" . implode(" or attr_val.attr_val_id= ", $data['thuoctinh']);
+                         $kq = $this->mydb->select("select productattr.productattr_id,attr_val_id,attr_val_value,attr_val_label  from productattr,attr_val where productattr.productattr_id=attr_val.productattr_id and ( $sqlwhere )", array());
+                        if (!empty($kq) && $data['soluong'] != '' && $data['sotien'] != '') {
+                                      
+                            $row = $this->mydb->update("product_detail", $ar, "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet)); 
+                            $this->mydb->deleteall("productattr_detail", "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));
+                            $ar = null;
+                            foreach ($kq as $value) {
+                                $tenthuoctinh[$value['attr_val_id']] = $value['attr_val_label'];
+                                $ar['product_id'] = $data['id_sanpham'];
+                                $ar['product_detail_id'] = $id_sanphamchitiet;
+                                $ar['attr_val_id'] = $value['attr_val_id'];
+                                $ar['productattr_id'] = $value['productattr_id'];
+
+                                $this->mydb->insert("productattr_detail", $ar);
+                            }
+                            
+                            $tenthuoctinh[-1] = "Null";
+
+                            $html = '';
+                            foreach ($data['thuoctinh'] as $value) {
+                                $html .= '<td class="giatrithuoctinhchon" data-giatri="' . $value . '">' . $tenthuoctinh[$value] . '</td>';
+                            }
+                            $html .= "<td>" . $data['sotien'] . "</td>";
+                            $html .= "<td>" . $data['soluong'] . "</td>";
+                            $html .= '<td> <a type="button" data-id_sanphamchitiet="' . $id_sanphamchitiet . '"  class="xoahinhsanphamchitiet uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>';
+                            $html .= ' <div  data-id_sanphamchitiet="' . $id_sanphamchitiet . '" data-type="2" class="boxanhdaidien showmodalhinhanh" style="width: 100%;height:50px">';
+                            $html .= '<img  class="img-responsive " title="' . $data['hinhsanpham'] . '" id="hinhsanpham" src="' . BASE_URL . 'public/upload/images/product/' . $data['hinhsanpham'] . '" ></div></td>';
+                            $sua = '<a data-hinhsanphamchitiet="' . $data['hinhsanpham'] . '" data-idsanphamchitiet="' . $id_sanphamchitiet . '" data-giasanpham="' . $data['sotien'] . '" data-soluongsanpham="' . $data['soluong'] . '" class=" label label-info suasanphamchitiet">Sửa</a>';
+                            $html .= '<td>' . $sua . ' <a data-id_sanphamchitiet="' . $id_sanphamchitiet . '" class="label label-danger xoasanphamchitiet">Xóa</a> </td>';
+
+                            return array("status" => 1, "tinnhan" => "Thành công", "html" => $html);
+                        }// Nếu thuộc tính không rỗng, tiền và số lượng không rỗng
+                        else
+                            return array("status" => 0, "tinnhan" => "Lỗi! Tiền và số lượng không rỗng");
+                    }// 2 id_sanpham chi tiet bang nhau, nghĩa là chưa tồn tại cái giống vậy
+                    else {
+                        return array("status" => 0, "tinnhan" => "Lỗi! Thuộc tính sản phẩm tồn tại");
+                    }
+
+                }// thuoc tinh khong rong
+                else
+                    return array("status" => 0, "tinnhan" => "Lỗi! Chọn một thuộc tính cần thiết");
+            } else
+                return array("status" => 0, "tinnhan" => "Lỗi! Thuộc tính đã tồn tại");
+        }
+        return array("status" => 0, "tinnhan" => "Điền đầy đủ thông tin"); // thuoc tinh rỗng
+        
+        
+    }
 }

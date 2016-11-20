@@ -411,7 +411,7 @@ function buiding_menu($parent, $menuData, $data) {
 
                                         <?php foreach ($idthuoctinhchon as $value2) { ?>
 
-                                            <td class="attr_val_value"
+                                            <td class="giatrithuoctinhchon"
                                                 data-giatri="<?= isset($value['attr_val_value'][$value2]) == true ? $value['attr_val_value'][$value2] : "-1" ?>"><?= isset($value['attr_val_value'][$value2]) == true ? $productattr_name[$value['attr_val_value'][$value2]] : "Null" ?></td>
                                         <?php } ?>
                                         <td><?= $value['product_detail_price'] ?></td>
