@@ -72,13 +72,12 @@ class Career_model extends MY_Model
             $id_thuoctinh = $value['product_prop_id'];
             $this->product_prop_model->delete($id_thuoctinh, 2);
         }
-//        // Xóa sản phẩm
-//        $kq = $this->mydb->select("select product_id from product where career_id=:career_id", array("career_id" => $idxoa));
-//        foreach ($kq as $value) {
-//            $id_sanpham = $value['product_id'];
-//            $this->product_model->delete($id_sanpham);
-//        }
-
+        // Xóa sản phẩm
+        $kq = $this->mydb->select("select product_id from product where career_id=:career_id", array("career_id" => $idxoa));
+        foreach ($kq as $value) {
+            $id_sanpham = $value['product_id'];
+            $this->product_model->delete_product($id_sanpham);
+        }
 
         $this->mydb->delete("career", "career_id=:career_id", array("career_id" => $idxoa));
         header("Location:" . ADMIN_URL . "career");
