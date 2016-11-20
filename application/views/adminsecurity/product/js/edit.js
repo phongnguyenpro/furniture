@@ -74,18 +74,18 @@ $(document).ready(function (e) {
         modalhinhanh.show();
     })
 
-    $(document).on("click", ".xoaproductchitiet", function (e) {
+    $(document).on("click", ".xoahinhsanphamchitiet", function (e) {
         current = $(this);
         id_sanphamchitiet = $(this).attr('data-id_sanphamchitiet');
-        $(this).removeClass("xoaproductchitiet");
+        $(this).removeClass("xoahinhsanphamchitiet");
         $(this).attr('ref', '#');
         $(this).addClass("uk-icon-spin");
 
-        $.post(BASE_URL + "administrator247/sanpham/xoaproductchitiet", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
-            if (o.tinhtrang == 1) {
+        $.post(ADMIN_URL + "product/delete_image_product_detail", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
+            if (o.status == 1) {
                 current.next().children("img").remove();
                 current.removeClass("uk-icon-spin");
-                current.addClass("xoaproductchitiet");
+                current.addClass("xoahinhsanphamchitiet");
             }
             else {
 
@@ -95,15 +95,15 @@ $(document).ready(function (e) {
         }, "JSON")
     })
     $(document).on("click", ".xoasanphamchitiet", function () {
-        var r = confirm("Bạn có chắc! Đều này rất quan trọng");
+        var r = confirm("Bạn có chắc muốn xóa");
         if (r == true) {
 
             current = ($(this));
             btnlinkload($(this));
             id_sanphamchitiet = $(this).attr('data-id_sanphamchitiet');
 
-            $.post(BASE_URL + "administrator247/sanpham/xoasanphamchitiet", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
-                if (o.tinhtrang == 1) {
+            $.post(ADMIN_URL + "product/delete_product_detail", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
+                if (o.status == 1) {
                     current.parent().parent().remove();
                 }
                 else {
@@ -140,11 +140,11 @@ $(document).ready(function (e) {
             html = '<img title="' + name + '" src="' + BASE_URL + 'public/upload/images/product/' + name + '" alt="" class="img-responsive">';
             current.html(html);
             current.parent().next().children().attr("data-productchitiet", name);
-            $.post(BASE_URL + "administrator247/sanpham/updateproductchitiet", {
+            $.post(ADMIN_URL + "product/update_image_product_detail", {
                 "name": name,
                 "id_sanphamchitiet": id_doihinh
             }, function (o) {
-                if (o.tinhtrang == 1)
+                if (o.status == 1)
                     modalhinhanh.hide();
                 else {
 
