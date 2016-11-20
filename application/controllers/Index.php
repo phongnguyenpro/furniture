@@ -9,15 +9,14 @@ class Index extends MY_Controller {
         parent::__construct("Index");
     }
 
-    function home() {
+    function home(){
         $this->load->model(array("module_model"));
         $this->data["category"] = $this->module_model->category();
-        
-        
-    
-      $this->load->view("shop/header");
- 
-            debug(1);
+        $this->data["menu"]  = $this->module_model->menu();
+        debug($this->data);
+        $this->load->view("shop/header");
     }
+    
+    
 
 }
