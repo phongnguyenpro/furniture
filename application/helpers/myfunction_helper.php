@@ -108,6 +108,25 @@ function slug($str) {
         $str = mb_convert_case($str, MB_CASE_LOWER, "UTF-8");
         return $str;
     }
+    
+    
+       function string_upper($str)
+    {
+        $str = mb_convert_case($str, MB_CASE_UPPER, "UTF-8");
+        return $str;
+    }
+
+    function string_title($str)
+    {
+        $str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
+        return $str;
+    }
+
+    function remove_empty($str)
+    {
+        return $str = preg_replace('/\s\s+/', ' ', $str);
+    }
+
 //======================Session============================
 
 function session_init() {

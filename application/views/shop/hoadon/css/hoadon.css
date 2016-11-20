@@ -1,0 +1,87 @@
+.boxhoadon
+{
+    padding: 10px;
+       width: 600px;
+    margin: auto;
+    background-color: #FFFFFF;
+    height: auto;
+    border: 1px solid #E1E0DF;
+}
+.boxhoadon .logo
+{
+    float: left;
+}
+.boxhoadon .info
+{
+    float: right;
+}
+.thongtinkhachhang h4
+{
+       border-bottom-style: solid;
+    border-bottom-color: #FE8AAA;
+    width: 300px;
+    margin-top: 30px;
+}
+.boxthongtinkhachhang
+{
+   width: 550px;
+    margin: auto;
+   padding: 10px;
+}
+
+
+.thongtinsanpham h4
+{
+   border-bottom-style: solid;
+    border-bottom-color: #FE8AAA;
+    width: 300px;
+    margin-top: 10px;
+}
+
+.boxthongtinsanpham
+{
+  width:100%;
+}
+.col-1
+{
+    width: 250px;
+    float: left;
+}
+.col-2
+{
+    width: 250px;
+    float: left;
+}
+.tongtien
+{
+        background-color: #777A7D;
+    padding: 10px;
+    float: right;
+    color: yellow;
+    font-size: 18px;
+}
+.huongdanthanhtoan 
+{
+   width: 500px;
+    margin: auto;
+    border: 1px solid #E9EBEB;
+    position: relative;
+ 
+}
+.huongdanthanhtoan  img
+{
+   position: absolute;
+    left: -25px;
+    top: -27px;
+    background-color: white;
+    width: 50px;
+}
+.huongdanthanhtoan ol 
+{
+   border-top-style: solid;
+    border-top-width: 4px;
+    margin: 0px 10px 10px 26px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0px 3px 1px 1px #D0CCCC;
+}

@@ -11,6 +11,12 @@ class Index extends MY_Controller {
  
     function home()
     {
+        $this->load->library("module");
+        $this->module->mydb = $this->mydb;
+        
+        
+        $this->data["category"] = $this->module->category();
+        $this->load->view("shop/header");
         
         
     }
