@@ -11,27 +11,31 @@
  *
  * @author Phong
  */
-class Productcategory  extends MY_Controller{
-    
-    function __construct() {
-        parent::__construct("Productcategory","admin");
+class Productcategory extends MY_Controller
+{
+
+    function __construct()
+    {
+        parent::__construct("Productcategory", "admin");
     }
 
-            function index()
+    function index()
     {
-     
+
         $this->data["productcategory"] = $this->model->index();
         $this->load->model("adminsecurity/career_model");
-        $this->data["career"]=  $this->career_model->index();
+        $this->data["career"] = $this->career_model->index();
         $this->load->view("adminsecurity/header");
         $this->load->view("adminsecurity/productcategory/index");
         $this->load->view("adminsecurity/footer");
     }
+
     function insert()
     {
-       echo json_encode($this->model->insert($_POST));
-        
+        echo json_encode($this->model->insert($_POST));
+
     }
+
     function update()
     {
         if (isset($_POST['productcategory_show']))
@@ -45,21 +49,23 @@ class Productcategory  extends MY_Controller{
         $data = $_POST;
         echo json_encode($this->model->update($data));
     }
+
     function delete()
     {
         $id = $_POST['id'];
-        echo json_encode($this->model->delete($id)); 
+        echo json_encode($this->model->delete($id));
     }
-            function load_category_edit()
+
+    function load_category_edit()
     {
         $id = $_POST['id'];
         echo json_encode($this->model->load_category_edit($id));
     }
-    
+
     function sort_category()
     {
         echo $this->model->sort_category($_POST);
-        
+
     }
 
 }

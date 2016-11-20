@@ -1,6 +1,7 @@
 <?php
 
-class Productcategory_model extends MY_Model {
+class Productcategory_model extends MY_Model
+{
 
     public $productcategory_id;
     public $productcategory_name;
@@ -15,7 +16,9 @@ class Productcategory_model extends MY_Model {
     public $productcategory_date_update;
     public $productcategory_user_update;
     public $index;
-            function index() {
+
+    function index()
+    {
         $menuData = array();
         $result = $this->mydb->select("select * from productcategory ORDER by productcategory_index ");
 
@@ -26,9 +29,10 @@ class Productcategory_model extends MY_Model {
 
         return $this->buiding_category(0, $menuData);
     }
- function insert($data)
+
+    function insert($data)
     {
-        
+
         $count = $this->mydb->select("select max(productcategory_index) as max from productcategory", array());
         $index = $count[0]['max'] + 1;
         $data['productcategory_index'] = $index;
@@ -38,24 +42,25 @@ class Productcategory_model extends MY_Model {
         $insert = $this->mydb->insert("productcategory", $data);
         return array('status' => 1, 'id' => $insert['id'], 'name' => $data['productcategory_name']);
     }
+
     function update($data)
     {
-         $kq = $this->mydb->select("select career_id from productcategory where productcategory_id=:productcategory_id", array("productcategory_id" => $data['productcategory_id']));
+        $kq = $this->mydb->select("select career_id from productcategory where productcategory_id=:productcategory_id", array("productcategory_id" => $data['productcategory_id']));
         $current_career = $kq[0]['career_id'];
-        
+
         // Nganh nghe doi
         if ($current_career != $data['career_id']) {
-          //  $this->deleteall("danhmucsanphamchitiet", "id_danhmuc=:id_danhmuc", array("id_danhmuc" => $data['id_danhmuc']));
+            //  $this->deleteall("danhmucsanphamchitiet", "id_danhmuc=:id_danhmuc", array("id_danhmuc" => $data['id_danhmuc']));
         }
-        $data["productcategory_date_update"]=  today();
+        $data["productcategory_date_update"] = today();
         $this->mydb->update("productcategory", $data, "productcategory_id=:productcategory_id", array('productcategory_id' => $data['productcategory_id']));
         return array('status' => 1);
     }
-         
+
     function delete($id)
     {
-          $this->load->model("adminsecurity/menu_model");
-          $result = $this->mydb->select("select * from productcategory ORDER by productcategory_index ", array());
+        $this->load->model("adminsecurity/menu_model");
+        $result = $this->mydb->select("select * from productcategory ORDER by productcategory_index ", array());
 
 
         foreach ($result as $value) {
@@ -65,17 +70,18 @@ class Productcategory_model extends MY_Model {
         $datadelete = $this->menu_model->buiding_deletemenu(array(), $id, $menuData);
 
         if (!empty($datadelete)) {
-            $strdelete = "productcategory_id=" . implode($datadelete, ' or productcategory_id=');
+            $strdelete = "productcategory_id=" . implode(' or productcategory_id=', $datadelete);
             $this->mydb->deleteall("productcategory", $strdelete, array());
-         //   $this->deleteall("danhmucsanphamchitiet", $strxoa, array());
+            $this->mydb->deleteall("productcategory_detail", $strdelete, array());
         }
 
 
         $this->mydb->delete("productcategory", "productcategory_id=:productcategory_id", array('productcategory_id' => $id));
-        //$this->deleteall("danhmucsanphamchitiet", "id_danhmuc=:id_danhmuc", array('id_danhmuc' => $id));
-        return array("id" => $id, "status" => 1);   
+        $this->mydb->delete("productcategory_detail", "productcategory_id=:productcategory_id", array('productcategory_id' => $id));
+        return array("id" => $id, "status" => 1);
     }
-            function load_category_edit($id)
+
+    function load_category_edit($id)
     {
         $this->load->model("adminsecurity/career_model");
         $nganhnghe = $this->career_model->index();
@@ -86,9 +92,9 @@ class Productcategory_model extends MY_Model {
         $id = $kq['productcategory_id'];
         $slugview = BASE_URL . "danh-muc/" . $id . "/" . $slug;
         $icon = $kq['productcategory_icon'];
-        $quangcao=$kq["productcategory_panel"];
+        $quangcao = $kq["productcategory_panel"];
         $id_nganhnhge = $kq['career_id'];
- 
+
 
         if ($kq['productcategory_show'] == 1)
             $hienthi = '<input  value=1 type="checkbox" checked name="productcategory_show">';
@@ -189,27 +195,28 @@ ABC;
         return array('html' => $html, 'status' => 1);
     }
 
-    public function buiding_category($parent, $menuData) {
+    public function buiding_category($parent, $menuData)
+    {
         $html = "";
         if (isset($menuData['parent'][$parent])) {
             if ($parent != 0)
-                $html.="<ul class='uk-nestable-list'>";
+                $html .= "<ul class='uk-nestable-list'>";
             foreach ($menuData['parent'][$parent] as $value) {
-                $html.="<li data-id=" . $menuData['items'][$value]['productcategory_id'] . " class='uk-nestable-item '>";
-                $html.="<div class='uk-nestable-panel'>"
-                        . "<div class='uk-nestable-toggle' data-nestable-action='toggle'></div><span>" . $menuData['items'][$value]['productcategory_name'] . "</span> <a class='itemedit uk-badge'><i class='uk-icon-pencil-square-o'></i> Chỉnh sửa</a> ";
-                    $html.="--- <a class='deletemenu uk-badge uk-badge-danger' ref='" . $menuData['items'][$value]['productcategory_id'] . "'><i class='uk-icon-times'></i>Xóa</a> ";
-                $html.="</div>";
-                $html.=$this->buiding_category($value, $menuData);
-                $html.="</li>";
+                $html .= "<li data-id=" . $menuData['items'][$value]['productcategory_id'] . " class='uk-nestable-item '>";
+                $html .= "<div class='uk-nestable-panel'>"
+                    . "<div class='uk-nestable-toggle' data-nestable-action='toggle'></div><span>" . $menuData['items'][$value]['productcategory_name'] . "</span> <a class='itemedit uk-badge'><i class='uk-icon-pencil-square-o'></i> Chỉnh sửa</a> ";
+                $html .= "--- <a class='deletemenu uk-badge uk-badge-danger' ref='" . $menuData['items'][$value]['productcategory_id'] . "'><i class='uk-icon-times'></i>Xóa</a> ";
+                $html .= "</div>";
+                $html .= $this->buiding_category($value, $menuData);
+                $html .= "</li>";
             }
             if ($parent != 0)
-                $html.="</ul>";
+                $html .= "</ul>";
         }
         return $html;
     }
-    
-   
+
+
     function sort_category()
     {
         $this->load->model("adminsecurity/menu_model");
@@ -230,34 +237,36 @@ ABC;
                 }
             }
         }
-   
+
         if ($this->model->update_sort($menu))
             echo json_encode(array('status' => 1));
     }
+
     function update_sort($menu)
     {
-         foreach ($menu as $value) {
-            $data=array();
+        foreach ($menu as $value) {
+            $data = array();
             $data['productcategory_id'] = $value['menu_id'];
             $data['productcategory_parent'] = $value['menu_parent'];
             $data['productcategory_index'] = $value['menu_index'];
-            $data["productcategory_date_update"]=  today();
+            $data["productcategory_date_update"] = today();
             $this->mydb->update("productcategory", $data, "productcategory_id=:productcategory_id", array('productcategory_id' => $value['menu_id']));
         }
         return true;
     }
-    function load_category_condition($career_id="")
+
+    function load_category_condition($career_id = "")
     {
-        if($career_id!="")
-        $result= $this->mydb->select("select * from productcategory where career_id=:career_id ORDER by productcategory_index ",array("career_id"=>$career_id));
+        if ($career_id != "")
+            $result = $this->mydb->select("select * from productcategory where career_id=:career_id ORDER by productcategory_index ", array("career_id" => $career_id));
         else
-          $result= $this->mydb->select("select * from productcategory ORDER by productcategory_index ",array());
-        $category =array();
-          foreach ($result as $value) {
+            $result = $this->mydb->select("select * from productcategory ORDER by productcategory_index ", array());
+        $category = array();
+        foreach ($result as $value) {
             $category['items'][$value['productcategory_id']] = $value;
             $category['parent'][$value['productcategory_parent']][] = $value['productcategory_id'];
         }
-      return  $category;
+        return $category;
     }
-    
+
 }

@@ -1,30 +1,36 @@
 <?php
 
-class Career extends MY_Controller {
+class Career extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct("Career", "admin");
     }
 
-    function index() {
+    function index()
+    {
         $this->data["career"] = $this->model->index();
         $this->load->view("adminsecurity/header");
         $this->load->view("adminsecurity/career/index");
         $this->load->view("adminsecurity/footer");
     }
 
-    function insert() {
+    function insert()
+    {
         $career_name = string_input($_POST['career_name']);
         $this->model->insert($career_name);
     }
 
     function update()
     {
-        $career_name= string_input($_GET['career_name']);
-        $career_id=  string_input($_GET['career_id']);
-        $this->model->update($career_name,$career_id);
+        $career_name = string_input($_GET['career_name']);
+        $career_id = string_input($_GET['career_id']);
+        $this->model->update($career_name, $career_id);
     }
-            function sort_career() {
+
+    function sort_career()
+    {
         $obj = $_POST['nganhnghe'];
 
         $sort = json_decode($obj);
@@ -39,6 +45,12 @@ class Career extends MY_Controller {
             }
         }
         $this->model->sort_career($data);
+    }
+
+    function delete()
+    {
+        $idxoa = string_input($_GET['idxoa']);
+        $this->model->delete($idxoa);
     }
 
 }

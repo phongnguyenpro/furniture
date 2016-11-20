@@ -6,9 +6,11 @@
  * and open the template in the editor.
  */
 
-class Product_prop_model extends MY_Model {
+class Product_prop_model extends MY_Model
+{
 
-    function index() {
+    function index()
+    {
         $result = $this->mydb->select("select * from product_prop,career where  product_prop.career_id=career.career_id order by career_index,product_prop.product_prop_index", array());
         $data = array();
         foreach ($result as $key => $value) {
@@ -17,7 +19,8 @@ class Product_prop_model extends MY_Model {
         return $data;
     }
 
-    function insert($data) {
+    function insert($data)
+    {
         $kq = $this->mydb->select("select max(product_prop_index) as max from product_prop", array());
         $max = $kq[0]['max'] + 1;
         $data['product_prop_index'] = $max;
@@ -26,7 +29,8 @@ class Product_prop_model extends MY_Model {
         header("Location:" . ADMIN_URL . "product_prop/index?career_id=" . $data['career_id']);
     }
 
-    function product_prop_sort($data) {
+    function product_prop_sort($data)
+    {
 
         foreach ($data as $value) {
             $dataupdate['product_prop_id'] = $value['id'];
@@ -37,7 +41,8 @@ class Product_prop_model extends MY_Model {
         echo json_encode(array("status" => 1));
     }
 
-    function update($data) {
+    function update($data)
+    {
 
         $result = $this->mydb->select("select career_id from product_prop where product_prop_id=:product_prop_id", array("product_prop_id" => $data["product_prop_id"]));
         $current_career = $result[0]['career_id'];
@@ -48,14 +53,17 @@ class Product_prop_model extends MY_Model {
         header("Location:" . ADMIN_URL . "product_prop");
     }
 
-    function delete($id) {
+    function delete($id, $type = 1)
+    {
         $this->mydb->delete("product_prop", "product_prop_id=:product_prop_id", array("product_prop_id" => $id));
-        //   $this->deleteall("thuoctinhchitiet","id_thuoctinh=:id_thuoctinh",array("id_thuoctinh"=>$idxoa)); 
-        header("Location:" . ADMIN_URL . "product_prop");
+        $this->mydb->delete("product_prop_detail", "product_prop_id=:product_prop_id", array("product_prop_id" => $id));
+        if ($type == 1)
+            header("Location:" . ADMIN_URL . "product_prop");
     }
+
     function load_prop_condition($career_id)
     {
-       return $this->mydb->select("select * from product_prop where career_id=:career_id order by product_prop_index", array("career_id"=>$career_id));
+        return $this->mydb->select("select * from product_prop where career_id=:career_id order by product_prop_index", array("career_id" => $career_id));
     }
 
 }
