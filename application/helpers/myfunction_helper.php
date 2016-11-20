@@ -240,3 +240,19 @@ foreach ($xml as $key => $value) {
                 }
           return $list_child;
     }
+    
+    //  =========== cache view  ============ //
+    
+function  cache_view_start()
+{
+    ob_start();
+}
+
+function  cache_view_end()
+{
+     $content = ob_get_contents(); 
+    ob_end_clean(); 
+    // Ghi cache file 
+//    $cache->putcacheview($filecache,$content);
+    echo  $content;
+}

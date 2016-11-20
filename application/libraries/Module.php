@@ -18,8 +18,11 @@ class Module {
         return  $this->header->category();
         
     }
-
-    function load($name) {
+    function menu()
+    {
+        
+    }
+                function load($name) {
         $name_class = string_title($name).'_module';
         if (file_exists($file_path = APPPATH . "libraries/module/" .$name_class.".php")) {
             require $file_path;

@@ -1,3 +1,13 @@
+
+<?php 
+
+cache_view_start()
+?>
+
+<b>abc</b>
+<?php
+cache_view_end();
+?>
 <?php 
 debug(1);
 $danhmuc=$this->data['danhmucsanpham'];

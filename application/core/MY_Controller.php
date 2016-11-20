@@ -17,6 +17,10 @@ class MY_Controller extends CI_Controller {
             $this->adminsecurity->checkrole();
             $this->data["menu_item"] = $this->adminsecurity->menu_item();
         }
+        else 
+        {
+            $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
+        }
     }
     
 

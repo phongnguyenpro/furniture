@@ -8,17 +8,16 @@ class Index extends MY_Controller {
     public function __construct() {
         parent::__construct("Index");
     }
+
+    function home() {
+        $this->load->model(array("module_model"));
+        $this->data["category"] = $this->module_model->category();
+        
+        
+    
+      $this->load->view("shop/header");
  
-    function home()
-    {
-        $this->load->library("module");
-        $this->module->mydb = $this->mydb;
-        
-        
-        $this->data["category"] = $this->module->category();
-        debug($this->data["category"]);
-        $this->load->view("shop/header");
-        
-        
+            debug(1);
     }
+
 }
