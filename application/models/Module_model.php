@@ -12,7 +12,7 @@ class Module_model extends MY_Model {
             $this->load->model("module/header_model");
             $category = $this->header_model->category();
             // Save into the cache for 5 minutes
-            $this->cache->save('sql/category', $category, 300);
+            CACHE==1?$this->cache->save('sql/category', $category, 300):null;
         }
 
         return $category;
@@ -25,7 +25,7 @@ class Module_model extends MY_Model {
             $this->load->model("module/header_model");
             $menu = $this->header_model->menu();
             // Save into the cache for 5 minutes
-            $this->cache->save('sql/menu', $menu, 300);
+          CACHE==1? $this->cache->save('sql/menu', $menu, 300):NULL;
         }
         return $menu;
     }

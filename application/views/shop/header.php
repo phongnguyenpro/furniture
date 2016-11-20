@@ -1,7 +1,7 @@
 
 <?php 
 
-$category=$this->data['category'];
+$danhmuc=$this->data['category'];
 $menu=$this->data['menu'];
 $giohang= isset($_COOKIE['giohang'])==true?unserialize($_COOKIE['giohang']):array();
 $yeuthich= isset($_COOKIE['yeuthich'])==true?count(unserialize($_COOKIE['yeuthich'])):"";
@@ -24,7 +24,7 @@ $_SESSION['token']=  generate_password(20);
          <title><?= $this->data['meta']['title'] ?></title>
          <meta name="description" content="<?= $this->data['meta']['description'] ?> ">
          <!-- Mạng xã hội -->
-  <meta property="og:type" content="website" />
+ <meta property="og:type" content="website" />
  <meta property="og:title" content="<?= $this->data['meta']['title'] ?>" >
  <meta property="og:description"  content="<?= $this->data['meta']['description'] ?>" >
  <meta property="og:image" content="<?= $this->data['meta']['image'] ?>" >
@@ -35,8 +35,9 @@ $_SESSION['token']=  generate_password(20);
     
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/style.css"); ?>" />
+<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/reset.css"); ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/responsive.css"); ?>" />
-
+    <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/font-awesome/css/font-awesome.min.css") ?>" />
 
 <script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery/jquery-1.11.2.min.js"); ?>"></script>
 <script type="text/javascript" src="<?=  BASE_URL."public/js/function.js" ; ?>"></script>
@@ -52,6 +53,10 @@ $_SESSION['token']=  generate_password(20);
         width: <?= WIDTHTHUMB ?>px;
     }
 </style>
+<script>
+    ADMIN_URL = "<?= ADMIN_URL ?>";
+    BASE_URL = "<?= BASE_URL ?>";
+</script>
 </head>
 <body class=" <?= isset($this->data['home'])==true?"home":"product-info" ?>" style="">    
     <!-- HEADER -->
@@ -88,12 +93,12 @@ $_SESSION['token']=  generate_password(20);
     </div>
 </div>
     <!--/.top-header -->
-    <?php    debug(1); ?>
+
     <!-- MAIN HEADER -->
     <div class="container main-header">
         <div class="row">
             <div class="col-xs-12 col-sm-3 logo">
-                <a href="<?= BASE_URL ?>"><img alt="<?= TENSHOP ?>" src="<?= LOGO ?>" /></a>
+                <a href="<?= BASE_URL ?>"><img alt="<?= $this->data['config']["tenshop"] ?>" src="<?= $this->data['config']["logo"] ?>" /></a>
             </div>
             <div class="col-xs-7 col-sm-7 header-search-box">
                 <form class="form-inline">
@@ -102,13 +107,13 @@ $_SESSION['token']=  generate_password(20);
                               <option value="-1">All</option>
                          <?php  foreach ($danhmuc['parent'][0] as $value) {?>
                           
-                            <option value="<?=  $danhmuc['item'][$value]['id_danhmuc'] ?>"><?=  $danhmuc['item'][$value]['ten'] ?></option>
+                            <option value="<?=  $danhmuc['item'][$value]['productcategory_id'] ?>"><?=  $danhmuc['item'][$value]['productcategory_name'] ?></option>
                             
                          <?php } ?>
                         </select>
                       </div>
                       <div class="form-group input-serach">
-                          <input type="text" id="search-terms"  placeholder="<?= $this->langview->mttk ?>">
+                          <input type="text" id="search-terms"  placeholder="Tìm kiếm">
                         
                       </div>
                     <button type="button" class="pull-right btnsearch"><i class="fa fa-search" id="search-icon"></i></button>
@@ -123,8 +128,8 @@ $_SESSION['token']=  generate_password(20);
             </div>
             <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
                 <a class="cart-link" href="<?=BASE_URL."sanpham/checkout" ?>">
-                    <span class="title"><?= $this->langview->gh ?></span>
-                    <span class="total"><?= $total= count($giohang)?> <?= $this->langview->sp ?></span>
+                    <span class="title">Giỏ hàng</span>
+                    <span class="total"><?= $total= count($giohang)?> sản phẩm</span>
                     <span class="notify notify-left "><?= $total ?></span>
                 </a>
                   <div class="cart-block">
@@ -134,9 +139,9 @@ $_SESSION['token']=  generate_password(20);
         </div>
         
     </div>
+   
     <!-- END MANIN HEADER -->
     <?php
-    
                   function submenu($menu,$cha,$in)
                       {
                           $html='';
@@ -151,16 +156,16 @@ $_SESSION['token']=  generate_password(20);
                                   {
                                   
                                      
-                                   $temp=$menu['item'][$value]['slug']==BASE_URLNOW?"":""; 
+                                   $temp=$menu['item'][$value]['menu_slug']==BASE_URL?"":""; 
                                   $html.='<li class="link_container li-sub '.$temp.' ">'
-                                          . '<a href="'.$menu['item'][$value]['slug'].'">'.$menu['item'][$value]['ten'].'</a>';
+                                          . '<a href="'.$menu['item'][$value]['menu_slug'].'">'.$menu['item'][$value]['menu_name'].'</a>';
                                   $html.=submenu($menu,$value,1);
                                   $html.="</li>";
                                   }
                                   else
                                   {
-                                    $temp=$menu['item'][$value]['slug']==BASE_URLNOW?"":""; 
-                                $html.='<li class="link_container '.$temp.'"><a href="'.$menu['item'][$value]['slug'].'">'.$menu['item'][$value]['ten'].'</a>';
+                                    $temp=$menu['item'][$value]['menu_slug']==BASE_URL?"":""; 
+                                $html.='<li class="link_container '.$temp.'"><a href="'.$menu['item'][$value]['menu_slug'].'">'.$menu['item'][$value]['menu_name'].'</a>';
                                   }   
                                 
                                   }
@@ -180,9 +185,9 @@ $_SESSION['token']=  generate_password(20);
                                     $html.="<ul class='sub-sanpham'>";
                              foreach ($danhmuc['parent'][$cha] as $value)
                              {
-                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
-                            $curren=BASE_URLNOW==$url?"":"";
-                                $html.="<li class='".$curren."'><a href='$url'>".$danhmuc['item'][$value]['ten']."</a>";
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['productcategory_id']."/".$danhmuc['item'][$value]['productcategory_slug'];
+                            $curren=BASE_URL==$url?"":"";
+                                $html.="<li class='".$curren."'><a href='$url'>".$danhmuc['item'][$value]['productcategory_name']."</a>";
                                 $html.=submenu_sanpham($danhmuc,$value);
                                 $html.="</li>";
                                 
@@ -197,20 +202,14 @@ $_SESSION['token']=  generate_password(20);
             <div class="row">
                 
                 <!-- BAT DAU CACHE DANH MUC SP -->
-                <?php 
-                $filecache="public/cache/view_".NGONNGU."_danhmucsanpham.html";
-                if($cache->kiemtra($filecache))
-                {
-                    echo $cache->getcacheview($filecache);
-                }
-                else
-                {
-                    ob_start();
-                ?>
+                  <?php
+                  if(!$cache_category=cache_view_start("category"))
+                  {
+                  ?>
                 <div class="col-sm-3" id="box-vertical-megamenus">
                     <div class="box-vertical-megamenus">
                         <h4 class="title">
-                            <span class="title-menu"><?= $this->langview->dmsp ?></span>
+                            <span class="title-menu">DANH MỤC SẢN PHẨM</span>
                             <span class="btn-open-mobile pull-right home-page"><i class="fa fa-bars"></i></span>
                         </h4>
                     <div class="vertical-menu-content is-home">
@@ -225,12 +224,12 @@ foreach ($danhmuc['parent'][0] as $value)
  {
                            ?>
                 <?php if(isset($danhmuc['parent'][$value]) || isset($this->data['module']['quangcao']['data']['menu'][$quangcao]) || isset($this->data['module']['html']['data']['menu'][$quangcao])  ){
-                    $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                    $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['productcategory_id']."/".$danhmuc['item'][$value]['productcategory_slug'];
                     ?>            
-                            <li class=" <?= $item>10?"cat-link-orther":"" ?> <?= BASE_URLNOW==$url?"menuactive":"" ?>">       
+                            <li class="<?= $item>10?"cat-link-orther":"" ?> <?= BASE_URL==$url?"menuactive":"" ?>">       
                          <a class="parent" href="<?= $url ?>">
-                <?php if($danhmuc['item'][$value]['icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['icon'] ?>"> <?php }?>
-     <?= $danhmuc['item'][$value]['ten'] ?>
+                <?php if($danhmuc['item'][$value]['productcategory_icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['productcategory_icon'] ?>"> <?php }?>
+     <?= $danhmuc['item'][$value]['productcategory_name'] ?>
                          </a>
                    
               
@@ -239,19 +238,19 @@ foreach ($danhmuc['parent'][0] as $value)
                 <?php           if(isset($danhmuc['parent'][$value])) {  ?>
                 <?php  $i=0; foreach ($danhmuc['parent'][$value] as $value1) {
                     
-                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['id_danhmuc']."/".$danhmuc['item'][$value1]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['productcategory_id']."/".$danhmuc['item'][$value1]['productcategory_slug'];
                     
                     $i++;?>
                  <div class="mega-group col-sm-4">
-                     <h4 class="mega-group-header"><span><b class="<?= BASE_URLNOW==$url?"":"" ?>"><a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['ten'] ?></a></b></span></h4>
+                     <h4 class="mega-group-header"><span><b class="<?= BASE_URL==$url?"":"" ?>"><a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['productcategory_name'] ?></a></b></span></h4>
                         <?php if(isset($danhmuc['parent'][$value1])){ ?>
                      
                      <ul class="group-link-default">
                           <?php  foreach ($danhmuc['parent'][$value1] as $value2) {
-                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value2]['id_danhmuc']."/".$danhmuc['item'][$value2]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value2]['productcategory_id']."/".$danhmuc['item'][$value2]['productcategory_slug'];
                               ?>
                          
-                         <li class="<?= BASE_URLNOW==$url?"":"" ?>"><a href="<?= $url ?>" ><?= $danhmuc['item'][$value2]['ten'] ?></a>
+                         <li class="<?= BASE_URL==$url?"":"" ?>"><a href="<?= $url ?>" ><?= $danhmuc['item'][$value2]['productcategory_name'] ?></a>
                           
                             <?= submenu_sanpham($danhmuc,$value2) ?>
                           
@@ -286,11 +285,11 @@ foreach ($danhmuc['parent'][0] as $value)
         </div>
         </li>
                    <?php } else{
-                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['productcategory_id']."/".$danhmuc['item'][$value]['productcategory_slug'];
                        ?>
-        <li class="<?= $item>10?"cat-link-orther":"" ?> <?= BASE_URLNOW==$url?"":"" ?>" ><a href="<?= $url ?>">
-                     <?php if($danhmuc['item'][$value]['icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['icon'] ?>"> <?php }?>
-                <i class="<?= $danhmuc['item'][$value]['icon'] ?>"></i> <?= $danhmuc['item'][$value]['ten'] ?></a></li>
+        <li class="<?= $item>10?"cat-link-orther":"" ?> <?= BASE_URL==$url?"":"" ?>" ><a href="<?= $url ?>">
+                     <?php if($danhmuc['item'][$value]['productcategory_icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['productcategory_icon'] ?>"> <?php }?>
+                <?= $danhmuc['item'][$value]['productcategory_name'] ?></a></li>
                    <?php } ?>
                      
                      
@@ -306,23 +305,15 @@ foreach ($danhmuc['parent'][0] as $value)
                     </div>
                 </div>
                 </div>
-                <?php 
-                $conten= ob_get_contents();
-                ob_end_clean();
-                echo $conten;
-                $cache->putcacheview($filecache,$conten);
-                // cache danh muc
-                }?>
-                <!-- IN MENU -->
-                <?php 
-                  $filecache="public/cache/view_".NGONNGU."_menu.html";
-                   if($cache->kiemtra($filecache)){
-                       echo $cache->getcacheview($filecache);
-                   }
-                   else
-                   {
-                          ob_start(); 
+                
+                <?php
+    cache_view_end("category");
+                  }
+                  else
+                     echo $cache_category;
                 ?>
+
+                <!-- IN MENU -->
                 <div id="main-menu" class="col-sm-9 main-menu">
                     <nav class="navbar navbar-default">
                         <div class="container-fluid">
@@ -340,11 +331,11 @@ foreach ($danhmuc['parent'][0] as $value)
  foreach ($menu['parent'][0] as $value)
  {
     
-     if($menu['item'][$value]['type']==2)
+     if($menu['item'][$value]['menu_format']=="productcat")
      {
                                   ?>  
       <li class="dropdown">
-                     <a  class="dropdown-toggle"><?= $menu['item'][$value]['ten'] ?></a>
+                     <a  class="dropdown-toggle"><?= $menu['item'][$value]['menu_name'] ?></a>
                  <ul class="mega_dropdown dropdown-menu" style="width: 830px; left: 36px;">
                            
                                               
@@ -352,15 +343,15 @@ foreach ($danhmuc['parent'][0] as $value)
                                                  $i=0;    
                                                   foreach ($danhmuc['parent'][0] as $value)
  {
-                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['id_danhmuc']."/".$danhmuc['item'][$value]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['productcategory_id']."/".$danhmuc['item'][$value]['productcategory_slug'];
                                                       $i++;
                            ?>
                      
                       <li class="block-container col-sm-3 menudanhmuc">
                                                 <ul class="block">
   <li class="link_container group_header">
-        <?php if($danhmuc['item'][$value]['icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['icon'] ?>"> <?php }?>
-                                                        <a href="<?= $url ?>"><?= $danhmuc['item'][$value]['ten'] ?></a>
+        <?php if($danhmuc['item'][$value]['productcategory_icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['productcategory_icon'] ?>"> <?php }?>
+                                                        <a href="<?= $url ?>"><?= $danhmuc['item'][$value]['productcategory_name'] ?></a>
                                                    </li>   
                                                     
                                            
@@ -368,10 +359,10 @@ foreach ($danhmuc['parent'][0] as $value)
                      
                     
                           <?php foreach ($danhmuc['parent'][$value] as $value1) {
-                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['id_danhmuc']."/".$danhmuc['item'][$value1]['slug'];
+                           $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['productcategory_id']."/".$danhmuc['item'][$value1]['productcategory_slug'];
                               ?>
                                          <li class="link_container danhmuccap2">
-                                             <a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['ten'] ?></a>
+                                             <a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['productcategory_name'] ?></a>
                                            <?= submenu_sanpham($danhmuc,$value1) ?>
                                                         
                                          </li>
@@ -408,37 +399,21 @@ foreach ($danhmuc['parent'][0] as $value)
          ?>
                                     
                                         <li class="dropdown  ">
-                                        <a href="<?=$menu['item'][$value]['slug'] ?>" class="dropdown-toggle" data-toggle="dropdown"><?= $menu['item'][$value]['ten'] ?></a>
+                                        <a href="<?= $menu['item'][$value]['menu_slug'] ?>" class="dropdown-toggle" data-toggle="dropdown"><?= $menu['item'][$value]['menu_name'] ?></a>
                                         <ul class="dropdown-menu container-fluid">
                                             <li class="block-container">
                                                 <ul class="block">
 <!--                                                    in con-->
 
 <?= submenu($menu,$value,0) ?>
-<!--                                                    <li class="link_container li-sub"><a href="#">Mobile</a>
-                                                        <ul class="block-sub">
-                                                              <li class="link_container"><a href="#">Tablets1</a></li>
-                                                           <li class="link_container li-sub"><a href="#">Tablets2</a>
-                                                               <ul class="block-sub">
-                                                                      <li class="link_container"><a href="#">Tablets2.1</a></li>
-                                                                       <li class="link_container"><a href="#">Tablets2.2</a></li>
-                                                               </ul>
-                                                           
-                                                           </li>
-                                                           <li class="link_container"><a href="#">Tablets3</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="link_container"><a href="#">Tablets</a></li>
-                                                    <li class="link_container"><a href="#">Laptop</a></li>
-                                                    <li class="link_container"><a href="#">Memory Cards</a></li>
-                                                    <li class="link_container"><a href="#">Accessories</a></li>-->
+
                                                 </ul>
                                             </li>
                                         </ul> 
                                     </li>                          
          <?php }else{?>
           <li class="">
-             <a href="<?=$menu['item'][$value]['slug'] ?>" ><?= $menu['item'][$value]['ten'] ?></a>
+             <a href="<?=$menu['item'][$value]['menu_slug'] ?>" ><?= $menu['item'][$value]['menu_name'] ?></a>
                </li>   
  <?php }}} ?>
 
@@ -452,14 +427,8 @@ foreach ($danhmuc['parent'][0] as $value)
                         </div>
                     </nav>
                 </div>
-                   <?php 
-    $content = ob_get_contents(); 
-    ob_end_clean(); 
-    // Ghi cache file 
-    $cache->putcacheview($filecache,$content);
-    echo  $content;
-                      }?>
             </div>
+            <?php debug(''); ?>
             <!-- userinfo on top-->
             <div id="form-search-opntop">
             </div>
@@ -476,163 +445,6 @@ foreach ($danhmuc['parent'][0] as $value)
     
 <!-- end header -->
 
- <?php if(!kiemtradangnhapuser(array(1,2,3,4))){ ?>
-
-  <!-- Modal thông báo -->
-   <div class="modal fade " id="modal_dk_dn" role="dialog">
-    <div  class="modal-dialog">   
-      <div class="modal-content">
-        <div class="modal-header">
-            <a title="Đóng" > <button type="button" class="close" data-dismiss="modal" style="font-size: 30px">&times;</button></a>
-          <h4 class="modal-title"><?= $this->langview->dn ?> | <?= $this->langview->dk ?> </h4>
-             
-        </div>
-        <div class="modal-body box-authentication">  
-                       <ul class="nav nav-tabs">
-                           <li class="active"><a data-toggle="tab" href="#home"><i class="glyphicon glyphicon-log-in"></i> <?= $this->langview->dn ?></a></li>
-                           <li><a  data-toggle="tab" href="#menu1"><i class="glyphicon glyphicon-plus"></i> <?= $this->langview->dk ?></a></li>
-  </ul>
-                        <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-<form id="frmdangnhap" action="dangnhapungvien.php" class="form-horizontal">
-    <br>
-    <div class="form-group">
-    <label class="control-label col-sm-3" for="email"> <?= $this->langview->email ?>:</label>
-    <div class="col-sm-7">
-        <input name="email" required="" type="email" class="form-control" placeholder="Nhập email">
-    </div>
-  </div>
-    <div class="form-group">
-    <label class="control-label col-sm-3" for="email"> <?= $this->langview->mk ?>:</label>
-    <div class="col-sm-7">
-        <input  minlength="3"  required="" name="pass" type="password" class="form-control" placeholder="Nhập mật khẩu">
-    </div>
-  </div>
-    
-          <div align="center">
-              <div style="margin-top: 15px"> 
-                  <button  class="button"  type="submit" id="btndangnhapungvien" >
-           <i class="glyphicon glyphicon-log-in"></i>  <?= $this->langview->dn ?>
-                  </button></div>
-          </div>
-      </form>
-        <hr>
-        <div class="row">
-             <div class="col-md-6 text-center">
- <div class="btn-group">
-                    <a class="btn btn-danger disabled" style="height: 40px;
-    opacity: 0.8;"><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
-                    <a class="btn btn-danger logingoogle" href="#" style="width:14em;height: 40px;"> <?= $this->langview->dn ?> Google</a>
-	</div>
-           </div>
-            
-             <div class="col-md-6 text-center">
- <div class="btn-group">
-                    <a class="btn btn-primary disabled" style="height: 40px;
-    opacity: 0.8;"><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
-                    <a class="btn btn-primary loginfacebook" href="https://www.facebook.com/dialog/oauth?client_id=<?= ID_FB ?>&redirect_uri=<?= BASE_URL ?>/login/facebook" style="width:14em;height: 40px;"> <?= $this->langview->dn ?> Facebook</a>
-	</div>
-           </div>
-        </div>
-       
-    </div>
-    <div id="menu1" class="tab-pane fade">
-        <br>
-                       <form  method="post" class="form-horizontal" id="frmdangky">
-
-               <div class="form-group  has-feedback ">
-      <label class="col-sm-3 control-label" for="inputWarning">Email đăng nhập</label>
-    <div class="col-sm-9">
-        <input name="email"  type="email" required="" placeholder="Nhập địa chỉ Email của bạn"   class="form-control tendangnhap">
-       
-    </div>
-  </div>
-    <div class="form-group has-feedback ">
-    <label class="col-sm-3 control-label">Mật khẩu</label>
-    <div class="col-sm-9">
-        <input  minlength="3"  required="" name="matkhau" type="text" class="form-control" placeholder="Nhập mật khẩu">
-     
-      <i></i>
-    </div>
-  </div>
-               
-           
-               <div class="form-group  has-feedback thongtin">
-    <label class="col-sm-3 control-label" for="inputWarning">Họ và tên:</label>
-    <div class="col-sm-9">
-        <input name="tentaikhoan" type="text" required="" class="form-control">
-      <span class=" form-control-feedback"></span>
-      <i></i>
-    </div>
-  </div>
-           
-               
-        
-               
-               
-           <div class="form-group  has-feedback thongtin">
-    <label class="col-sm-3 control-label" for="inputWarning">Tuổi</label>
-    <div class="col-sm-9">
-       
-   <input type="number" min="10" name="tuoi" class="required form-control" placeholder="Tuổi">
-      <i></i>
-    </div>
-  </div>
-  <div class="form-group  has-feedback thongtin">
-    <label class="col-sm-3 control-label" for="inputWarning">Giới tính</label>
-    <div class="col-sm-9" >
-        <div class="icheck">
-            <div class="itemicheck">
-                <input checked=""  value="1" class="required" name="gioitinh" id="nam" type="radio">
-                <label  class="view " for="nam">Nam<span class="button"></span></label>
-            </div>
-            <div class="itemicheck">
-                <input class="required" value="2" name="gioitinh" id="nu" type="radio">
-        <label class="view" for="nu">Nữ<span class="button"></span></label>
-            </div>
-        </div>
-    </div>
-  </div>                
-                 <div class="form-group  has-feedback thongtin">
-    <label class="col-sm-3 control-label" for="inputWarning">SDT:</label>
-    <div class="col-sm-9">
-        <input name="sdt" type="text" required="" class="form-control">
-      <span class=" form-control-feedback"></span>
-      <i></i>
-    </div>
-  </div>     
-                                   <div class="form-group  has-feedback thongtin">
-    <label class="col-sm-3 control-label" for="inputWarning">Địa chỉ:</label>
-    <div class="col-sm-9">
-        <input name="diachi" type="text" required="" class="form-control">
-      <span class=" form-control-feedback"></span>
-      <i></i>
-    </div>
-  </div>   
-                           
-                           <div align="center" id="ketquadangky"> 
-                               <button  class="button " type="submit" id="btndangky" >
-                               <i class="fa fa-user-plus"></i> Đăng Ký</button><br>
-                               <div class="alert alert-danger thongbaodangky"></div>
-                          </div> 
-                       </form>
-      
-    </div>
-                        </div>
-            
-        </div>
-        <div class="modal-footer ">
-            
-           
-          
-        </div>
-      </div>
-      
-   
-      
-    </div>
-  </div>
- <?php }?>
 
 
         <?php if(!isset($this->data["home"])) {?>

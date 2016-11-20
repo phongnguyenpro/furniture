@@ -145,13 +145,10 @@
 <!-- Script-->
 
   <!-- lib -->
-    <script type="text/javascript" src="<?= URL ?>lib/public/lib/validate/jquery.validate.js"></script> 
-    <script type="text/javascript" src="<?= URL ?>lib/public/lib/login/dangnhap_dangky.js"></script> 
-    <script type="text/javascript" src="<?= URL ?>lib/public/js/like.js"></script> 
-    <script type="text/javascript" src="<?= URL ?>lib/public/lib/login/mangxahoi.js"></script> 
+
    <!-- end lib -->
 <script type="text/javascript" src="<?= URL."view/".THEME ?>/assets/lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?= URL."view/".THEME ?>/assets/lib/select2/js/select2.min.js"></script>
+
 <script type="text/javascript" src="<?= URL."view/".THEME ?>/assets/lib/jquery.bxslider/jquery.bxslider.min.js"></script> <!-- Trình chiếu -->
 <script type="text/javascript" src="<?= URL."view/".THEME ?>/assets/lib/owl.carousel/owl.carousel.min.js"></script>
 <script type="text/javascript" src="<?= URL."view/".THEME ?>/assets/js/jquery.actual.min.js"></script>

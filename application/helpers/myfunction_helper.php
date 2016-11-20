@@ -244,11 +244,15 @@ function delete_image($name, $type = "product")
     }
 }
 
-function load_config()
+function load_config($constans=array())
 {
     $xml = simplexml_load_file("public/file/xml/config.xml") or die("Error: Cannot create object");
     foreach ($xml as $key => $value) {
         $data[$key] = $xml->$key;
+    }
+    foreach ($constans as $k=>$v)
+    {
+        define($v,$data[string_lower($v)]);
     }
     return $data;
 }
@@ -268,21 +272,21 @@ function search_all_schild($data, $id_danhmuc, $list_child)
 //  =========== cache view  ============ //
 
 
-function cache_view_start($name = "", $cache = 1, $time = 86400) {
+function cache_view_start($name = "",$time = 86400) {
     $name = "application/cache/html/" . $name;
     //time() <= (fileatime($cacheFile) + $time_update_cache
     if (file_exists($name) &&
-            (filemtime($name) > (time() - $time)) && $cache == 1) {
+            (filemtime($name) > (time() - $time)) && CACHE) {
         return unserialize(file_get_contents($name));
     } else {
-        if ($cache == 1)
+        if (CACHE)
             ob_start();
         return false;
     }
 }
-function cache_view_end($name, $cache = 1) {
+function cache_view_end($name) {
     $name = "application/cache/html/" . $name;
-    if ($cache == 1) {
+    if (CACHE) {
         $content = ob_get_contents();
         ob_end_clean();
         // Ghi cache file 

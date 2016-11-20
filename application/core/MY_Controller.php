@@ -20,6 +20,7 @@ class MY_Controller extends CI_Controller {
         else 
         {
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
+            $this->data["config"]=  load_config(array("CACHE"));
         }
     }
     
