@@ -74,18 +74,18 @@ $(document).ready(function (e) {
         modalhinhanh.show();
     })
 
-    $(document).on("click", ".xoahinhsanphamchitiet", function (e) {
+    $(document).on("click", ".xoaproductchitiet", function (e) {
         current = $(this);
         id_sanphamchitiet = $(this).attr('data-id_sanphamchitiet');
-        $(this).removeClass("xoahinhsanphamchitiet");
+        $(this).removeClass("xoaproductchitiet");
         $(this).attr('ref', '#');
         $(this).addClass("uk-icon-spin");
 
-        $.post(URL + "administrator247/sanpham/xoahinhsanphamchitiet", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
+        $.post(BASE_URL + "administrator247/sanpham/xoaproductchitiet", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
             if (o.tinhtrang == 1) {
                 current.next().children("img").remove();
                 current.removeClass("uk-icon-spin");
-                current.addClass("xoahinhsanphamchitiet");
+                current.addClass("xoaproductchitiet");
             }
             else {
 
@@ -102,7 +102,7 @@ $(document).ready(function (e) {
             btnlinkload($(this));
             id_sanphamchitiet = $(this).attr('data-id_sanphamchitiet');
 
-            $.post(URL + "administrator247/sanpham/xoasanphamchitiet", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
+            $.post(BASE_URL + "administrator247/sanpham/xoasanphamchitiet", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
                 if (o.tinhtrang == 1) {
                     current.parent().parent().remove();
                 }
@@ -125,21 +125,22 @@ $(document).ready(function (e) {
 
     $(".btnchonhinh").click(function () {
         if (kieuchonhinh == "add") {
+          
             name = $('.hinhdangchon').attr("data-name");
-            url = URL + 'public/upload/images/hinhsanpham/' + name;
-            $('#inputhinhsanpham').prop('value', name);
-            html = '<img title="' + name + '" src="' + URL + 'public/upload/images/hinhsanpham/' + name + '" alt="" class="img-responsive">';
+            url = BASE_URL + 'public/upload/images/product/' + name;
+            $('#inputproduct').prop('value', name);
+            html = '<img title="' + name + '" src="' + BASE_URL + 'public/upload/images/product/' + name + '" alt="" class="img-responsive">';
             $('.hinhsanphamchitiet').html(html);
 
             modalhinhanh.hide();
         }
         else {
             name = $('.hinhdangchon').attr("data-name");
-            url = URL + 'public/upload/images/hinhsanpham/' + name;
-            html = '<img title="' + name + '" src="' + URL + 'public/upload/images/hinhsanpham/' + name + '" alt="" class="img-responsive">';
+            url = BASE_URL + 'public/upload/images/product/' + name;
+            html = '<img title="' + name + '" src="' + BASE_URL + 'public/upload/images/product/' + name + '" alt="" class="img-responsive">';
             current.html(html);
-            current.parent().next().children().attr("data-hinhsanphamchitiet", name);
-            $.post(URL + "administrator247/sanpham/updatehinhsanphamchitiet", {
+            current.parent().next().children().attr("data-productchitiet", name);
+            $.post(BASE_URL + "administrator247/sanpham/updateproductchitiet", {
                 "name": name,
                 "id_sanphamchitiet": id_doihinh
             }, function (o) {
@@ -162,17 +163,17 @@ $(document).ready(function (e) {
         id_sanphamchitiet = $(this).attr("data-idsanphamchitiet");
         giasanpham = $(this).attr("data-giasanpham");
         soluongsanpham = $(this).attr("data-soluongsanpham");
-        giatri = $(this).parents().prevAll('td.giatrithuoctinhchon');
+        giatri = $(this).parents().prevAll('td.attr_val_value');
         hinhsanpham = $(this).attr("data-hinhsanphamchitiet");
         $(".chonthuoctinhsanphamchitietedit option").attr('selected', false);
 
         $(".chonthuoctinhsanphamchitietedit").each(function () {
             select = $(this);
-
             giatri.each(function () {
                 id_giatri = $(this).attr("data-giatri");
                 if (id_giatri != -1) {
-
+                            
+                       
                     select.children().each(function () {
                         if ($(this).val() == id_giatri && id_giatri != -1) {
                             select.prop('value', id_giatri);
@@ -183,7 +184,6 @@ $(document).ready(function (e) {
             })
 
         })
-
 
         $("#giasanphamchitietedit").prop("value", giasanpham);
         $("#soluongsanphamchitietedit").prop("value", soluongsanpham);
@@ -200,17 +200,17 @@ $(document).ready(function (e) {
         btnlinkload(current);
         sotien = $("#giasanphamchitietedit").val();
         soluong = $("#soluongsanphamchitietedit").val();
-        hinhsanpham = $("#hinhsanphamchitiet").val();
+        product = $("#productchitiet").val();
         id_sanphamchitiet = $('#idsanphamchitietedit').val();
         thuoctinh = new Array();
         $(".chonthuoctinhsanphamchitietedit").each(function () {
             temp = $(this).val();
             thuoctinh.push(temp);
         })
-        $.post(URL + "administrator247/sanpham/updatesanphamchitiet", {
+        $.post(BASE_URL + "administrator247/sanpham/updatesanphamchitiet", {
             "thuoctinh": thuoctinh,
             "sotien": sotien,
-            "hinhsanpham": hinhsanpham,
+            "product": product,
             "soluong": soluong,
             "id_sanpham": id_sanpham,
             "id_sanphamchitiet": id_sanphamchitiet
@@ -240,14 +240,14 @@ $(document).ready(function (e) {
 
         })
 
-        $.post(URL + "administrator247/sanpham/themsanphamchitiet", {
+        $.post(ADMIN_URL + "product/add_product_detail", {
             "thuoctinh": thuoctinh,
             "sotien": sotien,
             "soluong": soluong,
             "hinhsanpham": hinhsanpham,
             "id_sanpham": id_sanpham
         }, function (o) {
-            if (o.tinhtrang == 1) {
+            if (o.status == 1) {
                 $('.listgiasanpham').append(o.html);
                 btnlinkthanhcong(current, "+");
             }
@@ -276,7 +276,6 @@ $(document).ready(function (e) {
     dangcapnhat = false;
 
     $('#formcapnhatsanpham').submit(function () {
-        return true;
         if (!dangcapnhat) {
             dangcapnhat = true;
             $('.ketqua').html('<span class="uk-icon-spinner uk-icon-spin"> </span>');
@@ -349,10 +348,10 @@ $(document).ready(function (e) {
                             if (ketqua.status == 1) {
                                 $('.img-responsive[title="' + ketqua.tenanhxoa + '"]').parent('li').remove();
                                 $('.img-responsive[title="' + ketqua.tenanhxoa + '"]').remove();
-                                if ($("#inputhinhsanpham").val() == ketqua.tenanhxoa)
-                                    $("#inputhinhsanpham").prop("value", "");
+                                if ($("#inputproduct").val() == ketqua.tenanhxoa)
+                                    $("#inputproduct").prop("value", "");
 
-                                htmlchonhinh = '<li data-name="' + ketqua.tenanh + '" class="uk-grid-margin itemhinhchon" ><img title="' + ketqua.tenanh + '" src="' + URL + 'public/upload/images/hinhsanpham/' + ketqua.tenanh + '" alt="" class="img-responsive img_small"></li>';
+                                htmlchonhinh = '<li data-name="' + ketqua.tenanh + '" class="uk-grid-margin itemhinhchon" ><img title="' + ketqua.tenanh + '" src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenanh + '" alt="" class="img-responsive img_small"></li>';
                                 $('.listchonhinh').append(htmlchonhinh);
 
                                 $('#doiavatar').prop('value', null);
@@ -425,12 +424,11 @@ $(document).ready(function (e) {
                     if (ketqua.status == 1) {
 
                         progwith.remove();
-
-
                         html = '<a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>\n\
                         <div><img src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img_small"></div>';
+                        htmlchonhinh = '<li data-name="' + ketqua.tenhinh + '" class="uk-grid-margin itemhinhchon" ><img title="' + ketqua.tenhinh + '" src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img-responsive img_small"></li>';
                         boxupload.append(html);
-                        $("#tmp_photo").val($("#tmp_photo").val() + ketqua.tenhinh + ";");
+                        $('.listchonhinh').append(htmlchonhinh);
                         boxupload.attr("data-id", ketqua.id_hinh);
                         return true;
                     }
@@ -474,8 +472,8 @@ $(document).ready(function (e) {
                     box.remove();
                     $('.img-responsive[title="' + tenhinh + '"]').parent('li').remove();
                     $('.img-responsive[title="' + tenhinh + '"]').remove();
-                    if ($("#inputhinhsanpham").val() == tenhinh)
-                        $("#inputhinhsanpham").prop("value", "");
+                    if ($("#inputproduct").val() == tenhinh)
+                        $("#inputproduct").prop("value", "");
                     dangxoa = false;
                 }
 

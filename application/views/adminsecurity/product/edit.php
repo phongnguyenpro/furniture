@@ -40,16 +40,16 @@ function buiding_menu($parent, $menuData, $data) {
 
                 <ul class="uk-grid uk-grid-small uk-grid-width-1-4 listchonhinh">
 
-                    <li data-name="<?= $data['sanpham']['hinhdaidien'] ?>" class="uk-grid-margin itemhinhchon">
-                        <img title="<?= $data['sanpham']['hinhdaidien'] ?>"
-                             src="<?= URL ?>public/upload/images/hinhsanpham/<?= $data['sanpham']['hinhdaidien'] ?>"
+                    <li data-name="<?= $product["product"]['product_avatar'] ?>" class="uk-grid-margin itemhinhchon">
+                        <img title="<?= $product["product"]['product_avatar'] ?>"
+                             src="<?= BASE_URL ?>public/upload/images/product/<?= $product["product"]['product_avatar'] ?>"
                              alt="" class="img-responsive img_small">
                     </li>
-                    <?php foreach ($data['sanpham']['hinh'] as $key => $value) { ?>
+                    <?php foreach ($product['product_images'] as $key => $value) { ?>
 
-                        <li data-name="<?= $value['tenhinh'] ?>" class="uk-grid-margin itemhinhchon">
-                            <img title="<?= $value['tenhinh'] ?>"
-                                 src="<?= URL ?>public/upload/images/hinhsanpham/<?= $value['tenhinh'] ?>" alt=""
+                        <li data-name="<?= $value['product_images_name'] ?>" class="uk-grid-margin itemhinhchon">
+                            <img title="<?= $value['product_images_name'] ?>"
+                                 src="<?= BASE_URL ?>public/upload/images/product/<?= $value['product_images_name'] ?>" alt=""
                                  class="img-responsive img_small">
                         </li>
 
@@ -67,7 +67,57 @@ function buiding_menu($parent, $menuData, $data) {
         </div>
 
 
+        <!-- modal edit -->
+        <div id='showedit' class="uk-modal">
+            <div class="uk-modal-dialog">
 
+                <div class="uk-modal-header">EDIT</div>
+
+
+                <fieldset>
+                    <?php
+
+                    foreach ($attribute as $value) { ?>
+                        <div class="uk-form-row">
+                            <label class="uk-form-label"
+                                   for="product_edit_tags_control"><?= $value['productattr_name'] ?></label>
+
+                            <select class=" chonthuoctinhsanphamchitietedit form-control ">
+                                <option value="-1">Không chọn</option>
+                                <?php foreach ($value['value'] as $giatri) { ?>
+                                    <option
+                                        value="<?= $giatri['attr_val_id'] ?>"><?= $giatri['attr_val_label'] ?></option>
+                                <?php } ?>
+                            </select>
+
+                        </div>
+
+                    <?php } ?>
+                    <div class="form-group uk-form-row">
+                        <label class="control-label col-sm-3" for="email">Giá sản phẩm:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control  txtgia" id="giasanphamchitietedit" type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group uk-form-row">
+                        <label class="control-label col-sm-3" for="email">Số lượng:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" id="soluongsanphamchitietedit" type="text" placeholder="">
+                            <input class="form-control hidden" id="idsanphamchitietedit" type="number" min="1"
+                                   placeholder="">
+                            <input class="form-control hidden" id="hinhsanphamchitiet" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="uk-form-row text-center ">
+                        <button class="uk-button btnlink btncapnhatsanphamchitiet">Cập nhật</button>
+                    </div>
+                </fieldset>
+
+                <div class="uk-modal-footer"><a href="" class="uk-modal-close uk-close uk-close-alt"></a></div>
+
+            </div>
+        </div>
 
 
 
@@ -317,7 +367,7 @@ function buiding_menu($parent, $menuData, $data) {
                                             <i class="uk-icon-edit"></i>
                                         </span>
                                             <label for="product_edit_name_control">Giá</label>
-                                            <input type="text" class="md-input  txtgia" id="giasanpham"/>
+                                            <input type="text" class="md-input  txtgia input_price" id="giasanpham"/>
                                         </div>
                                     </div>
                                     <div class="uk-form-row">
@@ -361,28 +411,28 @@ function buiding_menu($parent, $menuData, $data) {
 
                                         <?php foreach ($idthuoctinhchon as $value2) { ?>
 
-                                            <td class="giatrithuoctinhchon"
-                                                data-giatri="<?= isset($value['giatrithuoctinhchon'][$value2]) == true ? $value['giatrithuoctinhchon'][$value2] : "-1" ?>"><?= isset($value['giatrithuoctinhchon'][$value2]) == true ? $productattr_name[$value['giatrithuoctinhchon'][$value2]] : "Null" ?></td>
+                                            <td class="attr_val_value"
+                                                data-giatri="<?= isset($value['attr_val_value'][$value2]) == true ? $value['attr_val_value'][$value2] : "-1" ?>"><?= isset($value['attr_val_value'][$value2]) == true ? $productattr_name[$value['attr_val_value'][$value2]] : "Null" ?></td>
                                         <?php } ?>
-                                        <td><?= $value['giasanpham'] ?></td>
-                                        <td><?= $value['soluongsanpham'] ?></td>
+                                        <td><?= $value['product_detail_price'] ?></td>
+                                        <td><?= $value['product_detail_total'] ?></td>
                                         <td><a type="button" data-id_sanphamchitiet="<?= $key ?>"
-                                               ref='<?= $value['hinhsanpham'] ?>'
+                                               ref='<?= $value['product_detail_avatar'] ?>'
                                                class="xoahinhsanphamchitiet uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>
 
                                             <div data-id_sanphamchitiet="<?= $key ?>" data-type="2"
                                                  class="boxanhdaidien showmodalhinhanh"
                                                  style="width: 100%;height:50px">
-                                                <img class="img-responsive " title="<?= $value['hinhsanpham'] ?>"
+                                                <img class="img-responsive " title="<?= $value['product_detail_avatar'] ?>"
                                                      id="hinhsanpham"
-                                                     src="<?= URL ?>public/upload/images/hinhsanpham/<?= $value['hinhsanpham'] ?>">
+                                                     src="<?= BASE_URL ?>public/upload/images/product/<?= $value['product_detail_avatar'] ?>">
                                             </div>
                                         </td>
                                         <td>
-                                            <a data-hinhsanphamchitiet="<?= $value['hinhsanpham'] ?>"
+                                            <a data-hinhsanphamchitiet="<?= $value['product_detail_avatar'] ?>"
                                                data-idsanphamchitiet="<?= $key ?>"
-                                               data-giasanpham="<?= $value['giasanpham'] ?>"
-                                               data-soluongsanpham="<?= $value['soluongsanpham'] ?>"
+                                               data-giasanpham="<?= $value['product_detail_price'] ?>"
+                                               data-soluongsanpham="<?= $value['product_detail_total'] ?>"
                                                class=" label label-info suasanphamchitiet">Sửa</a>
                                             <a data-id_sanphamchitiet="<?= $key ?>"
                                                class="label label-danger xoasanphamchitiet">Xóa</a>

@@ -171,5 +171,10 @@ class Product extends MY_Controller {
         
         echo json_encode($this->model->update($_POST));
     }
+    
+    function add_product_detail()
+    {
+        echo json_encode($this->model->add_product_detail($_POST));
+    }
 
 }
