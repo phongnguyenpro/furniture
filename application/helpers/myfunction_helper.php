@@ -14,8 +14,9 @@ function load_admin_public($name)
 
 function load_frontend_view($name)
 {
-    return BASE_URL."application/views/".THEME."/". $name;
+    return BASE_URL . "application/views/" . THEME . "/" . $name;
 }
+
 function load_public($name)
 {
 
@@ -244,17 +245,20 @@ function delete_image($name, $type = "product")
     }
 }
 
-function load_config($constans=array())
+function load_config($constans = array())
 {
     $xml = simplexml_load_file("public/file/xml/config.xml") or die("Error: Cannot create object");
-    foreach ($xml as $key => $value) {
-        $data[$key] = $xml->$key;
+    if (empty($constans)) {
+        foreach ($xml as $key => $value) {
+            $data[$key] = $xml->$key;
+        }
+        return $data;
+    }else{
+        foreach ($constans as $k => $v) {
+            $temp = string_lower($v);
+            define($v, $xml->$temp);
+        }
     }
-    foreach ($constans as $k=>$v)
-    {
-        define($v,$data[string_lower($v)]);
-    }
-    return $data;
 }
 
 //  =====  category, menu ====
@@ -272,11 +276,13 @@ function search_all_schild($data, $id_danhmuc, $list_child)
 //  =========== cache view  ============ //
 
 
-function cache_view_start($name = "",$time = 86400) {
+function cache_view_start($name = "", $time = 86400)
+{
     $name = "application/cache/html/" . $name;
     //time() <= (fileatime($cacheFile) + $time_update_cache
     if (file_exists($name) &&
-            (filemtime($name) > (time() - $time)) && CACHE) {
+        (filemtime($name) > (time() - $time)) && CACHE
+    ) {
         return unserialize(file_get_contents($name));
     } else {
         if (CACHE)
@@ -284,7 +290,9 @@ function cache_view_start($name = "",$time = 86400) {
         return false;
     }
 }
-function cache_view_end($name) {
+
+function cache_view_end($name)
+{
     $name = "application/cache/html/" . $name;
     if (CACHE) {
         $content = ob_get_contents();
@@ -300,6 +308,7 @@ function check_login_user($arr)
 {
     return false;
 }
+
 function kiemtraurl($arr, $id)
 {
     if (!is_numeric($id))

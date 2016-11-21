@@ -26,7 +26,7 @@ class Product_category extends MY_Controller
                     if (isset($_GET['orderby']))
                         $orderby = $_GET['orderby'];
                     else
-                        $orderby = 'stt';
+                        $orderby = 'product_index';
                     // end ORDER BY
 
                     // FITER
@@ -61,14 +61,13 @@ class Product_category extends MY_Controller
                     else
                         $type = "desc";
                     $this->danhmucit($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer);
-
                 }
             } else {
                 // ORDER BY
                 if (isset($_GET['orderby']))
                     $orderby = $_GET['orderby'];
                 else
-                    $orderby = 'stt';
+                    $orderby = 'product_index';
                 // end ORDER BY
 
                 // FITER
@@ -111,7 +110,7 @@ class Product_category extends MY_Controller
 
     public function category_more($id_danhmuc, $concapmot, $menu, $danhmuc, $footer)
     {
-        $data = $this->model->data_product_more($id_danhmuc, $concapmot);
+        $data = $this->model->data_product_moreCategory($id_danhmuc, $concapmot);
 
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['ten'];
@@ -135,7 +134,6 @@ class Product_category extends MY_Controller
 
     public function category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer)
     {
-
         // load sap xep
         $sapxep = array("stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
         foreach ($sapxep as $key => $value) {
@@ -167,7 +165,6 @@ class Product_category extends MY_Controller
         $this->view->render(THEME, 'header');
         $this->view->render(THEME, 'sanpham/danhmuc');
         $this->view->render(THEME, 'footer');
-
     }
 
     public function danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)

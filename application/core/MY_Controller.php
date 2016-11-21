@@ -5,6 +5,8 @@ class MY_Controller extends CI_Controller {
     public function __construct($name_controller, $type = null) {
         parent::__construct();
         $this->load->helper(array("myfunction"));
+
+
         $this->load->library("mydb");
 
         if ($type == "admin") {
@@ -16,11 +18,14 @@ class MY_Controller extends CI_Controller {
             $this->adminsecurity->mydb = $this->mydb;
             $this->adminsecurity->checkrole();
             $this->data["menu_item"] = $this->adminsecurity->menu_item();
+
+            load_config(array("CACHE","URLANHCHEN"));
         }
         else 
         {
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
-            $this->data["config"]=  load_config(array("CACHE"));
+
+            load_config(array("CACHE","LIMITDANHMUCIT","LIMITDANHMUCNHIEU"));
         }
     }
     
