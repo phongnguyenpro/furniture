@@ -164,7 +164,7 @@ class Product_category extends MY_Controller
 //        $this->view->sapxep = $sapxep;
         $this->data=$data;
         $this->load->view(THEME."/header");
-        $this->load->view(THEME. 'sanpham/danhmuc');
+        $this->load->view(THEME. '/sanpham/danhmuc');
         $this->load->view(THEME. 'footer');
     }
 
