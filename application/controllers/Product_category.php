@@ -113,9 +113,9 @@ class Product_category extends MY_Controller
         $data = $this->model->data_product_moreCategory($id_danhmuc, $concapmot);
 
         $meta = array();
-        $meta['title'] = $data['thongtindanhmuc']['ten'];
-        $meta['mieuta'] = $data['thongtindanhmuc']['ten'] . "/ " . SDT . "/ " . DIACHI;
-        $meta['image'] = LOGO;
+        $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
+//        $meta['mieuta'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
+//        $meta['image'] = LOGO;
         $data['meta'] = $meta;
 
         $data['menu'] = $menu;
@@ -125,11 +125,11 @@ class Product_category extends MY_Controller
 //        $module = new Module();
 //        $data['module'] = $module->loadmodule("danhmucsanpham");
 
-        $this->view->data = $data;
+        $this->data = $data;
 
-//        $this->view->render(THEME, 'header');
-//        $this->view->render(THEME, 'sanpham/danhmucnhieu');
-//        $this->view->render(THEME, 'footer');
+        $this->load->view(THEME . '/header');
+        $this->load->view(THEME . '/sanpham/danhmucnhieu');
+        $this->load->view(THEME . '/footer');
     }
 
     public function category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer)
@@ -162,10 +162,10 @@ class Product_category extends MY_Controller
 //        $this->view->data = $data;
 //
 //        $this->view->sapxep = $sapxep;
-        $this->data=$data;
-        $this->load->view(THEME."/header");
-        $this->load->view(THEME. '/sanpham/danhmuc');
-        $this->load->view(THEME. 'footer');
+        $this->data = $data;
+        $this->load->view(THEME . "/header");
+        $this->load->view(THEME . '/sanpham/danhmuc');
+        $this->load->view(THEME . '/footer');
     }
 
     public function danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)
