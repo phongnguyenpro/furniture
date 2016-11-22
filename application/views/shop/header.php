@@ -32,12 +32,11 @@ $_SESSION['token']=  generate_password(20);
  <meta property="fb:admins" content="100005194575333" /> 
     
     
-    
+ <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/font-awesome/css/font-awesome.min.css") ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/style.css"); ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/reset.css"); ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/responsive.css"); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/font-awesome/css/font-awesome.min.css") ?>" />
 
 <script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery/jquery-1.11.2.min.js"); ?>"></script>
 <script type="text/javascript" src="<?=  BASE_URL."public/js/function.js" ; ?>"></script>
@@ -46,6 +45,13 @@ $_SESSION['token']=  generate_password(20);
 <script type="text/javascript" src="<?= BASE_URL."public/js/lazyload.js" ?> "></script>
 <script type="text/javascript" src="<?= load_frontend_view("assets/js/theme-script.js");?>"></script>
    
+
+
+
+
+
+
+
 <?php echo "<script >token='".$_SESSION['token']."'</script>";  ?>
 <style>
     .left-block img
@@ -64,8 +70,8 @@ $_SESSION['token']=  generate_password(20);
     <div class="top-header">
         <div class="container">
             <div class="nav-top-links">
-                <a class="first-item" ><?= $this->data["config"]["sdt"] ?></a>
-                <a ><?= $this->data["config"]["email"] ?></a>
+                <a class="first-item" ><?= SDT ?></a>
+                <a ><?= EMAIL ?></a>
        
                      
             </div>
@@ -98,7 +104,7 @@ $_SESSION['token']=  generate_password(20);
     <div class="container main-header">
         <div class="row">
             <div class="col-xs-12 col-sm-3 logo">
-                <a href="<?= BASE_URL ?>"><img alt="<?= $this->data['config']["tenshop"] ?>" src="<?= $this->data['config']["logo"] ?>" /></a>
+                <a href="<?= BASE_URL ?>"><img alt="<?= TENSHOP ?>" src="<?= LOGO ?>" /></a>
             </div>
             <div class="col-xs-7 col-sm-7 header-search-box">
                 <form class="form-inline">
@@ -428,7 +434,7 @@ foreach ($danhmuc['parent'][0] as $value)
                     </nav>
                 </div>
             </div>
-            <?php debug(''); ?>
+
             <!-- userinfo on top-->
             <div id="form-search-opntop">
             </div>

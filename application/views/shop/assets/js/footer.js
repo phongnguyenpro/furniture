@@ -79,17 +79,6 @@ jQuery(window).load(function () {
 //    },  50000 ); 
 //});
 
-
-// TICKER
-$('.ticker').easyTicker({
- controls: {
-			up: '.up',
-			down: '.down',
-			toggle: '.toggle',
-			stopText: 'Stop !!!'
-		}
-});
-
     
 menuactive=$('li.menuactive').parents('li.li-sub').addClass("menuactive");
 menuactive=$('li.menuactive').parents('li.dropdown').addClass("menuactive");

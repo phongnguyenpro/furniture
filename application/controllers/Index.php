@@ -17,7 +17,8 @@ class Index extends MY_Controller {
         $this->data["meta"] =array("title"=>"Home","description"=>"Home","image"=>"image");
         $this->data["home"]=true;
         
-        $this->load->view("shop/header");
+        $this->load->view( THEME."/header");
+        $this->load->view(THEME."/footer");
     }
     
     
