@@ -17,7 +17,7 @@ class Product_category extends MY_Controller
                 $this->load->model(array("module_model"));
                 $danhmuc = $this->module_model->category();
                 $menu = $this->module_model->menu();
-                $footer = $this->module_model->footer();
+                $footer = null;
                 $this->model->setProductCategory($danhmuc);
                 if ($concapmot = $this->model->findChildCategory_FirstLevel($danhmuc, $id_danhmuc, array()))
                     $this->category_more($id_danhmuc, $concapmot, $menu, $danhmuc, $footer);
@@ -60,7 +60,7 @@ class Product_category extends MY_Controller
                         $type = string_input($_GET['type']);
                     else
                         $type = "desc";
-                    $this->danhmucit($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer);
+                    $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer);
                 }
             } else {
                 // ORDER BY
@@ -144,27 +144,28 @@ class Product_category extends MY_Controller
         }
 
         // end load sap xep
-        $data = $this->model->loaddatadanhmucit($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
+        $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
 
         $meta = array();
-        $meta['title'] = $data['thongtindanhmuc']['ten'];
-        $meta['mieuta'] = $data['thongtindanhmuc']['ten'] . "/ " . SDT . "/ " . DIACHI;
-        $meta['image'] = LOGO;
+        $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
+//        $meta['mieuta'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
+//        $meta['image'] = LOGO;
         $data['meta'] = $meta;
 
         $data['menu'] = $menu;
         $data['danhmucsanpham'] = $danhmuc;
         $data['footer'] = $footer;
 
-        $module = new Module();
-        $data['module'] = $module->loadmodule("danhmucsanpham");
+//        $module = new Module();
+//        $data['module'] = $module->loadmodule("danhmucsanpham");
 
-        $this->view->data = $data;
-
-        $this->view->sapxep = $sapxep;
-        $this->view->render(THEME, 'header');
-        $this->view->render(THEME, 'sanpham/danhmuc');
-        $this->view->render(THEME, 'footer');
+//        $this->view->data = $data;
+//
+//        $this->view->sapxep = $sapxep;
+        $this->data=$data;
+        $this->load->view(THEME."/header");
+        $this->load->view(THEME. 'sanpham/danhmuc');
+        $this->load->view(THEME. 'footer');
     }
 
     public function danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)

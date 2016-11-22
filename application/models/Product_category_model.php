@@ -1,11 +1,11 @@
 <?php
 
-class Product_category extends MY_Model
+class Product_category_model extends MY_Model
 {
 
-    function __construct()
+    function __construct($type = null)
     {
-        parent::__construct();
+        parent::__construct($type);
     }
 
     public $danhmucsanpham;
@@ -40,12 +40,12 @@ class Product_category extends MY_Model
         if (isset($data['item'][$id_danhmuc]['productcategory_id'])) {
             // thong tin cho bre
             $temp['productcategory_id'] = $data['item'][$id_danhmuc]['productcategory_id'];
-            $temp['ten'] = $data['item'][$id_danhmuc]['ten'];
-            $temp['slug'] = URL . "danh-muc/" . $temp['productcategory_id'] . "/" . $data['item'][$id_danhmuc]['slug'];
+            $temp['ten'] = $data['item'][$id_danhmuc]['productcategory_name'];
+            $temp['slug'] = BASE_URL . "danh-muc/" . $temp['productcategory_id'] . "/" . $data['item'][$id_danhmuc]['productcategory_slug'];
             $danhsach['info'][] = $temp;
 
             //$danhsach['itemdanhmucsanpham'][$data['item'][$id_danhmuc]['productcategory_id']]=$temp;
-            $cha = $data['item'][$id_danhmuc]['cha'];
+            $cha = $data['item'][$id_danhmuc]['productcategory_parent'];
             if ($cha != 0) {
                 $danhsach = $this->findParentAll($this->danhmucsanpham, $cha, $danhsach);
             }
@@ -292,4 +292,6 @@ where product.product_id=productcategory_detail.product_id  and  productcategory
         }
         return $thuoctinhchon;
     }
+
+    public function error(){}
 }
