@@ -1,5 +1,5 @@
 
-<?php 
+<?php
 
 $danhmuc=$this->data['category'];
 $menu=$this->data['menu'];
@@ -16,7 +16,7 @@ $_SESSION['token']=  generate_password(20);
 <html>
 
 <head>
-    
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="content-language" content="vi">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,10 +28,10 @@ $_SESSION['token']=  generate_password(20);
  <meta property="og:title" content="<?= $this->data['meta']['title'] ?>" >
  <meta property="og:description"  content="<?= $this->data['meta']['description'] ?>" >
  <meta property="og:image" content="<?= $this->data['meta']['image'] ?>" >
- <meta property="fb:app_id" content="416654985192230" />     
- <meta property="fb:admins" content="100005194575333" /> 
-    
-    
+ <meta property="fb:app_id" content="416654985192230" />
+ <meta property="fb:admins" content="100005194575333" />
+
+
  <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/font-awesome/css/font-awesome.min.css") ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/bootstrap/css/bootstrap.min.css"); ?>" />
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/style.css"); ?>" />
@@ -44,7 +44,7 @@ $_SESSION['token']=  generate_password(20);
 <script type="text/javascript" src="<?= load_frontend_view("assets/js/jquery.actual.min.js"); ?>"></script>
 <script type="text/javascript" src="<?= BASE_URL."public/js/lazyload.js" ?> "></script>
 <script type="text/javascript" src="<?= load_frontend_view("assets/js/theme-script.js");?>"></script>
-   
+
 
 
 
@@ -64,7 +64,7 @@ $_SESSION['token']=  generate_password(20);
     BASE_URL = "<?= BASE_URL ?>";
 </script>
 </head>
-<body class=" <?= isset($this->data['home'])==true?"home":"product-info" ?>" style="">    
+<body class=" <?= isset($this->data['home'])==true?"home":"product-info" ?>" style="">
     <!-- HEADER -->
 <div id="header" class="header">
     <div class="top-header">
@@ -72,10 +72,10 @@ $_SESSION['token']=  generate_password(20);
             <div class="nav-top-links">
                 <a class="first-item" ><?= SDT ?></a>
                 <a ><?= EMAIL ?></a>
-       
-                     
+
+
             </div>
-           
+
 
             <div id="user-info-top" class="user-info pull-right">
                        <?php if(check_login_user(array(1,2,3,4))) {?>
@@ -86,12 +86,12 @@ $_SESSION['token']=  generate_password(20);
                     <ul class="dropdown-menu mega_dropdown" role="menu">
                         <li><a href="<?= BASE_URL ?>login/logout">Đăng xuất</a></li>
                         <li><a href="<?= BASE_URL ?>taikhoan/edit">Quản lý tài khoản</a></li>
-                     
+
                     </ul>
                 </div>
                    <?php }else{ ?>
-                   <a href="" class="current-open"  data-toggle="modal" data-target="#modal_dk_dn"><span>Login</span></a>                 
-                   <?php } ?>    
+                   <a href="" class="current-open"  data-toggle="modal" data-target="#modal_dk_dn"><span>Login</span></a>
+                   <?php } ?>
                    <a  href="<?= BASE_URL ?>sanpham/yeuthich" class="sanphamyeuthich" >Yêu thích  <i class="fa fa-heart"></i><span><?= $yeuthich ?></span></a>
 
             </div>
@@ -112,23 +112,23 @@ $_SESSION['token']=  generate_password(20);
                           <select class="select-category" id="selectdanhmuc">
                               <option value="-1">All</option>
                          <?php  foreach ($danhmuc['parent'][0] as $value) {?>
-                          
+
                             <option value="<?=  $danhmuc['item'][$value]['productcategory_id'] ?>"><?=  $danhmuc['item'][$value]['productcategory_name'] ?></option>
-                            
+
                          <?php } ?>
                         </select>
                       </div>
                       <div class="form-group input-serach">
                           <input type="text" id="search-terms"  placeholder="Tìm kiếm">
-                        
+
                       </div>
                     <button type="button" class="pull-right btnsearch"><i class="fa fa-search" id="search-icon"></i></button>
-                      
+
                       <div class="timkiem" id="ketquatim">
                           <ul class="ketquatim" >
-       
+
                             </ul>
-                            
+
                         </div>
                 </form>
             </div>
@@ -139,13 +139,13 @@ $_SESSION['token']=  generate_password(20);
                     <span class="notify notify-left "><?= $total ?></span>
                 </a>
                   <div class="cart-block">
-                
+
                  </div>
             </div>
         </div>
-        
+
     </div>
-   
+
     <!-- END MANIN HEADER -->
     <?php
                   function submenu($menu,$cha,$in)
@@ -157,12 +157,12 @@ $_SESSION['token']=  generate_password(20);
                                 }
                             foreach ($menu['parent'][$cha] as $value)
                             {
-                                
+
                                   if(isset($menu['parent'][$value]))
                                   {
-                                  
-                                     
-                                   $temp=$menu['item'][$value]['menu_slug']==BASE_URL?"":""; 
+
+
+                                   $temp=$menu['item'][$value]['menu_slug']==BASE_URL?"":"";
                                   $html.='<li class="link_container li-sub '.$temp.' ">'
                                           . '<a href="'.$menu['item'][$value]['menu_slug'].'">'.$menu['item'][$value]['menu_name'].'</a>';
                                   $html.=submenu($menu,$value,1);
@@ -170,12 +170,12 @@ $_SESSION['token']=  generate_password(20);
                                   }
                                   else
                                   {
-                                    $temp=$menu['item'][$value]['menu_slug']==BASE_URL?"":""; 
+                                    $temp=$menu['item'][$value]['menu_slug']==BASE_URL?"":"";
                                 $html.='<li class="link_container '.$temp.'"><a href="'.$menu['item'][$value]['menu_slug'].'">'.$menu['item'][$value]['menu_name'].'</a>';
-                                  }   
-                                
                                   }
-                                           
+
+                                  }
+
                                if($in==1)
                                 {
                                      $html.='</ul>';
@@ -196,7 +196,7 @@ $_SESSION['token']=  generate_password(20);
                                 $html.="<li class='".$curren."'><a href='$url'>".$danhmuc['item'][$value]['productcategory_name']."</a>";
                                 $html.=submenu_sanpham($danhmuc,$value);
                                 $html.="</li>";
-                                
+
                              }
                               $html.="</ul>";
                              }
@@ -206,7 +206,7 @@ $_SESSION['token']=  generate_password(20);
     <div id="nav-top-menu" class="nav-top-menu">
         <div class="container">
             <div class="row">
-                
+
                 <!-- BAT DAU CACHE DANH MUC SP -->
                   <?php
                   if(!$cache_category=cache_view_start("category"))
@@ -220,10 +220,10 @@ $_SESSION['token']=  generate_password(20);
                         </h4>
                     <div class="vertical-menu-content is-home">
                         <ul class="vertical-menu-list">
-                           
-                           <?php 
-                
-$quangcao=1;$item=0; 
+
+                           <?php
+
+$quangcao=1;$item=0;
 if(isset($danhmuc['parent'][0]))
 {
 foreach ($danhmuc['parent'][0] as $value)
@@ -231,62 +231,62 @@ foreach ($danhmuc['parent'][0] as $value)
                            ?>
                 <?php if(isset($danhmuc['parent'][$value]) || isset($this->data['module']['quangcao']['data']['menu'][$quangcao]) || isset($this->data['module']['html']['data']['menu'][$quangcao])  ){
                     $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['productcategory_id']."/".$danhmuc['item'][$value]['productcategory_slug'];
-                    ?>            
-                            <li class="<?= $item>10?"cat-link-orther":"" ?> <?= BASE_URL==$url?"menuactive":"" ?>">       
+                    ?>
+                            <li class="<?= $item>10?"cat-link-orther":"" ?> <?= BASE_URL==$url?"menuactive":"" ?>">
                          <a class="parent" href="<?= $url ?>">
                 <?php if($danhmuc['item'][$value]['productcategory_icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['productcategory_icon'] ?>"> <?php }?>
      <?= $danhmuc['item'][$value]['productcategory_name'] ?>
                          </a>
-                   
-              
+
+
         <div class="vertical-dropdown-menu">
             <div class="vertical-groups  col-sm-12">
                 <?php           if(isset($danhmuc['parent'][$value])) {  ?>
                 <?php  $i=0; foreach ($danhmuc['parent'][$value] as $value1) {
-                    
+
                            $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['productcategory_id']."/".$danhmuc['item'][$value1]['productcategory_slug'];
-                    
+
                     $i++;?>
                  <div class="mega-group col-sm-4">
                      <h4 class="mega-group-header"><span><b class="<?= BASE_URL==$url?"":"" ?>"><a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['productcategory_name'] ?></a></b></span></h4>
                         <?php if(isset($danhmuc['parent'][$value1])){ ?>
-                     
+
                      <ul class="group-link-default">
                           <?php  foreach ($danhmuc['parent'][$value1] as $value2) {
                            $url=BASE_URL."danh-muc/".$danhmuc['item'][$value2]['productcategory_id']."/".$danhmuc['item'][$value2]['productcategory_slug'];
                               ?>
-                         
+
                          <li class="<?= BASE_URL==$url?"":"" ?>"><a href="<?= $url ?>" ><?= $danhmuc['item'][$value2]['productcategory_name'] ?></a>
-                          
+
                             <?= submenu_sanpham($danhmuc,$value2) ?>
-                          
+
                           </li>
-                         
+
                          <?php } ?>
-                         
+
                      </ul>
-                     
-                     
+
+
                          <?php } ?>
-                    
+
                  </div>
                  <?php if($i==3){ echo "<div class='clearfix'></div>" ; $i=0;}?>
                 <?php }}?>
-               
-               
+
+
                 <div class=" col-sm-12 quangcaomenu " style="height: 100%">
-          <?php 
+          <?php
                 if(isset($this->data['module']['quangcao']['data']['menu'][$quangcao]))
-                {   
+                {
                 ?>
                     <a id="itemquangcao" href="<?= $this->data['module']['quangcao']['data']['menu'][$quangcao]["linkurl"] ?>" ><img src="<?= $this->data['module']['quangcao']['data']['menu'][$quangcao]["linkimage"] ?>" alt="Banner"></a>
-                <?php }?>               
- <?php if(isset($this->data['module']['html']['data']['menu'][$quangcao])){ ?>     
-                     <div class="htmlmenu " ><?= $this->data['module']['html']['data']['menu'][$quangcao]['noidung'] ?></div> 
+                <?php }?>
+ <?php if(isset($this->data['module']['html']['data']['menu'][$quangcao])){ ?>
+                     <div class="htmlmenu " ><?= $this->data['module']['html']['data']['menu'][$quangcao]['noidung'] ?></div>
                 <?php }?>
                 </div>
                 <?php unset($this->data['module']['quangcao']['data']['menu'][$quangcao]);?>
-                 
+
             </div>
         </div>
         </li>
@@ -297,12 +297,12 @@ foreach ($danhmuc['parent'][0] as $value)
                      <?php if($danhmuc['item'][$value]['productcategory_icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['productcategory_icon'] ?>"> <?php }?>
                 <?= $danhmuc['item'][$value]['productcategory_name'] ?></a></li>
                    <?php } ?>
-                     
-                     
+
+
 <?php $quangcao++;$item++; }} ?>
-                            
-                           
-                           
+
+
+
                         </ul>
                         <?php if($item>11){ ?>
 <div class="all-category"><span class="open-cate">Xem tất cả</span></div>
@@ -311,7 +311,7 @@ foreach ($danhmuc['parent'][0] as $value)
                     </div>
                 </div>
                 </div>
-                
+
                 <?php
     cache_view_end("category");
                   }
@@ -331,59 +331,59 @@ foreach ($danhmuc['parent'][0] as $value)
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
-                                  <?php 
+                                  <?php
 
-               if(isset($menu['parent'][0]))                   
+               if(isset($menu['parent'][0]))
  foreach ($menu['parent'][0] as $value)
  {
-    
+
      if($menu['item'][$value]['menu_format']=="productcat")
      {
-                                  ?>  
+                                  ?>
       <li class="dropdown">
                      <a  class="dropdown-toggle"><?= $menu['item'][$value]['menu_name'] ?></a>
                  <ul class="mega_dropdown dropdown-menu" style="width: 830px; left: 36px;">
-                           
-                                              
-                                                 <?php 
-                                                 $i=0;    
+
+
+                                                 <?php
+                                                 $i=0;
                                                   foreach ($danhmuc['parent'][0] as $value)
  {
                            $url=BASE_URL."danh-muc/".$danhmuc['item'][$value]['productcategory_id']."/".$danhmuc['item'][$value]['productcategory_slug'];
                                                       $i++;
                            ?>
-                     
+
                       <li class="block-container col-sm-3 menudanhmuc">
                                                 <ul class="block">
   <li class="link_container group_header">
         <?php if($danhmuc['item'][$value]['productcategory_icon']!=''){ ?>   <img   src="<?= $danhmuc['item'][$value]['productcategory_icon'] ?>"> <?php }?>
                                                         <a href="<?= $url ?>"><?= $danhmuc['item'][$value]['productcategory_name'] ?></a>
-                                                   </li>   
-                                                    
-                                           
+                                                   </li>
+
+
                                                          <?php if(isset($danhmuc['parent'][$value])){ ?>
-                     
-                    
+
+
                           <?php foreach ($danhmuc['parent'][$value] as $value1) {
                            $url=BASE_URL."danh-muc/".$danhmuc['item'][$value1]['productcategory_id']."/".$danhmuc['item'][$value1]['productcategory_slug'];
                               ?>
                                          <li class="link_container danhmuccap2">
                                              <a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['productcategory_name'] ?></a>
                                            <?= submenu_sanpham($danhmuc,$value1) ?>
-                                                        
+
                                          </li>
-                                                    
-                                                    
+
+
                                                          <?php }}?>
-                                                        
-                                          
-                                
+
+
+
                                                 </ul>
-                                            </li>  
+                                            </li>
                                             <?php if($i==4){ echo "<div class='clearfix'></div>" ; $i=0;}?>
-                                            
+
  <?php }?>
-                          <div class='clearfix'></div>;                                     
+                          <div class='clearfix'></div>;
 <!--                     <li class="block-container col-sm-12">
                                                 <ul class="block">
                                                     <li class="img_container">
@@ -391,19 +391,19 @@ foreach ($danhmuc['parent'][0] as $value)
                                                     </li>
                                                 </ul>
                                             </li>                 -->
-                                             
-                                            
-                                         
+
+
+
 
                                         </ul>
                                     </li>
      <?php } else{?>
-                                    
-         <?php 
+
+         <?php
          if(isset($menu['parent'][$value]))
-         {         
+         {
          ?>
-                                    
+
                                         <li class="dropdown  ">
                                         <a href="<?= $menu['item'][$value]['menu_slug'] ?>" class="dropdown-toggle" data-toggle="dropdown"><?= $menu['item'][$value]['menu_name'] ?></a>
                                         <ul class="dropdown-menu container-fluid">
@@ -415,19 +415,19 @@ foreach ($danhmuc['parent'][0] as $value)
 
                                                 </ul>
                                             </li>
-                                        </ul> 
-                                    </li>                          
+                                        </ul>
+                                    </li>
          <?php }else{?>
           <li class="">
              <a href="<?=$menu['item'][$value]['menu_slug'] ?>" ><?= $menu['item'][$value]['menu_name'] ?></a>
-               </li>   
+               </li>
  <?php }}} ?>
 
-                                  
-                       
-                                   
-                                    
-                                    
+
+
+
+
+
                                 </ul>
                             </div><!--/.nav-collapse -->
                         </div>
@@ -448,7 +448,7 @@ foreach ($danhmuc['parent'][0] as $value)
             </div>
         </div>
     </div>
-    
+
 <!-- end header -->
 
 
@@ -456,20 +456,20 @@ foreach ($danhmuc['parent'][0] as $value)
         <?php if(!isset($this->data["home"])) {?>
     <div class="columns-container">
     <div class="container" id="columns">
-         
+
         <div class="breadcrumb clearfix">
             <a class="home" href="<?= BASE_URL ?>" title="Return to Home">Home</a>
             <span class="navigation-pipe">&nbsp;</span>
-            <?php 
+            <?php
             for($i=count($this->data["bre"]['info'])-1;$i>=0;$i--)
             {
             ?>
              <span class="navigation_page">
-                 <a 
+                 <a
                      <?php if(isset($this->data['bre']['info'][$i]['slug'])){ ?>
                      href="<?= $this->data['bre']['info'][$i]['slug'] ?>"
                          <?php }?>
-                     >             
+                     >
    <?=$this->data['bre']['info'][$i]['ten'] ?>
                  </a>
              </span>

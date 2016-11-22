@@ -120,7 +120,7 @@ class Product_category extends MY_Controller
 
         $data['menu'] = $menu;
         $data['footer'] = $footer;
-        $data['danhmucsanpham'] = $danhmuc;
+        $data['category'] = $danhmuc;
 
 //        $module = new Module();
 //        $data['module'] = $module->loadmodule("danhmucsanpham");
@@ -146,26 +146,27 @@ class Product_category extends MY_Controller
         // end load sap xep
         $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
 
-        $meta = array();
-        $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
+//        $meta = array();
+//        $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
 //        $meta['mieuta'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
 //        $meta['image'] = LOGO;
-        $data['meta'] = $meta;
+//        $data['meta'] = $meta;
 
         $data['menu'] = $menu;
-        $data['danhmucsanpham'] = $danhmuc;
-        $data['footer'] = $footer;
+        $data['category'] = $danhmuc;
+//        $data['footer'] = $footer;
 
 //        $module = new Module();
 //        $data['module'] = $module->loadmodule("danhmucsanpham");
 
 //        $this->view->data = $data;
 //
-//        $this->view->sapxep = $sapxep;
+        $this->sapxep = $sapxep;
         $this->data = $data;
+        $this->data["meta"] =array("title"=>"Home","description"=>"Home","image"=>"image");
         $this->load->view(THEME . "/header");
-        $this->load->view(THEME . '/sanpham/danhmuc');
-        $this->load->view(THEME . '/footer');
+//        $this->load->view(THEME . "/sanpham/danhmuc");
+        $this->load->view(THEME . "/footer");
     }
 
     public function danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)
