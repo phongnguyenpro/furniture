@@ -29,7 +29,7 @@ unset($data['bre']);
 
             <h2 class="page-heading">
                         <span class="page-heading-title">
-                            <a href="<?= URL . "danh-muc/" . $danhmuc['thongtin']['id_danhmuc'] . "/" . $danhmuc['thongtin']['slug'] ?>"><?= $danhmuc['thongtin']['ten'] ?>
+                            <a href="<?= BASE_URL . "Product_category/category/" . $danhmuc['thongtin']['productcategory_id'] . "/" . $danhmuc['thongtin']['productcategory_slug'] ?>"><?= $danhmuc['thongtin']['productcategory_name'] ?>
                                 <span class="fa fa-angle-right"> xem nhiều hơn</span></a></span>
 
             </h2>
@@ -45,55 +45,55 @@ unset($data['bre']);
 
                         <li>
                             <?php
-                            if ($value['noibat'] == 1) {
+                            if ($value['product_feature'] == 1) {
                                 ?>
                                 <div class="featured-text"><span></span></div>
                             <?php } ?>
                             <div class="">
                                 <div class="left-block">
-                                    <a title="<?= $value['tensanpham'] ?>"
-                                       href="<?= URL ?>san-pham/<?= $value['id_sanpham'] . '/' . $value['slugsanpham'] ?>"
+                                    <a title="<?= $value['product_name'] ?>"
+                                       href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"
                                        class="loading">
-                                        <img class="img-responsive " title="<?= $value['tensanpham'] ?>"
-                                             alt="<?= $value['tensanpham'] ?>"
-                                             src="<?= URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['hinhdaidien'] ?>"/>
+                                        <img class="img-responsive " title="<?= $value['product_name'] ?>"
+                                             alt="<?= $value['product_name'] ?>"
+                                             src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
                                     </a>
                                     <div class="quick-view">
-                                        <a title="Yêu thích" data-id="<?= $value['id_sanpham'] ?>"
+                                        <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
                                            class="heart yeuthich"></a>
                                     </div>
                                     <div class="add-to-cart">
-                                        <?php if (kiemtranull($value['ngangon'])) { ?>
-                                            <a> <?= neods($value['ngangon'], 120) ?></a>
+                                        <?php if (kiemtranull($value['product_description'])) { ?>
+                                            <a> <?= neods($value['product_description'], 120) ?></a>
                                         <?php } else {
                                         } ?>
                                     </div>
                                     <?php
-                                    if ($value['giamgia'] > 0) {
+                                    if ($value['product_sale'] > 0) {
                                         ?>
-                                        <div class="price-percent-reduction2">-<?= $value['giamgia'] ?>%<br>SAFE</div>
+                                        <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE</div>
                                     <?php } ?>
                                     <div class="group-price">
                                         <?php
-                                        if ($value['moi'] == 1) {
+                                        if ($value['product_new'] == 1) {
                                             ?>
                                             <span class="product-new">New</span>
                                         <?php } ?>
                                     </div>
                                 </div>
                                 <div class="right-block">
-                                    <h5 class="product-name"><a title="<?= $value['tensanpham'] ?>"
-                                                                href="<?= URL ?>san-pham/<?= $value['id_sanpham'] . '/' . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?></a>
+                                    <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
+                                                                href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
                                     </h5>
 
                                     <div class="content_price">
-                                        <?php if ($value['gia'] != $value['giamoi']) { ?>
-                                            <span class="price product-price"><?= tien($value['giamoi']) ?>
+                                        <?php if ($value['product_price'] != $value['product_price_new']) { ?>
+                                            <span class="price product-price"><?= tien($value['product_price_new']) ?>
                                                 &nbsp;₫</span>
-                                            <span class="price old-price"><?= tien($value['gia']) ?></span>
+                                            <span class="price old-price"><?= tien($value['product_price']) ?></span>
                                         <?php } ELSE { ?>
-                                            <span class="price product-price"><?= tien($value['gia']) ?>&nbsp;₫</span>
+                                            <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
                                         <?php } ?>
                                     </div>
 

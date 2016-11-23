@@ -116,17 +116,17 @@ class Product_category extends MY_Controller
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
 //        $meta['mieuta'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
 //        $meta['image'] = LOGO;
-        $data['meta'] = $meta;
+//        $data['meta'] = $meta;
 
         $data['menu'] = $menu;
-        $data['footer'] = $footer;
+//        $data['footer'] = $footer;
         $data['category'] = $danhmuc;
 
 //        $module = new Module();
 //        $data['module'] = $module->loadmodule("danhmucsanpham");
 
         $this->data = $data;
-
+        $this->data["meta"] =array("title"=>"Home","description"=>"Home","image"=>"image");
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/danhmucnhieu');
         $this->load->view(THEME . '/footer');
