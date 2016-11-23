@@ -10,6 +10,7 @@ $_SESSION['URL_NOW'] = URL_NOW;
 if (!isset($_SESSION['token']))
     $_SESSION['token'] = generate_password(20);
 ?>
+
 <!DOCTYPE html>
 <html>
 

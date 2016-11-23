@@ -47,19 +47,19 @@ $phantrang = $this->data['phantrang'];
 
                                 <?php default : { ?>
                                 <!-- bo loc -->
-                                <div class="layered_subtitle"><?= $value['thongtin']['tenthuoctinhchon'] ?></div>
+                                <div class="layered_subtitle"><?= $value['thongtin']['productattr_name'] ?></div>
                                 <div class="layered-content filter-size">
 
                                     <ul class="check-box-list">
                                         <?php foreach ($value['data'] as $value2) { ?>
                                             <li>
-                                                <input <?= in_array($value2['id_giatrithuoctinhchon'], $this->data['filter']) == true ? "checked" : "" ?>
-                                                    class="filter" value="<?= $value2['id_giatrithuoctinhchon'] ?>"
-                                                    type="checkbox" id="<?= $value2['id_giatrithuoctinhchon'] ?>"
+                                                <input <?= in_array($value2['attr_val_id'], $this->data['filter']) == true ? "checked" : "" ?>
+                                                    class="filter" value="<?= $value2['attr_val_id'] ?>"
+                                                    type="checkbox" id="<?= $value2['attr_val_id'] ?>"
                                                     name="filter[]">
-                                                <label for="<?= $value2['id_giatrithuoctinhchon'] ?>">
+                                                <label for="<?= $value2['attr_val_id'] ?>">
                                                     <span class="button"></span>
-                                                    <?= string_output($value2['giatri']) ?>
+                                                    <?= string_output($value2['attr_val_value']) ?>
                                                 </label>
                                             </li>
                                         <?php } ?>
