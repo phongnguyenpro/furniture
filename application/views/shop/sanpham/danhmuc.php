@@ -59,7 +59,7 @@ $phantrang = $this->data['phantrang'];
                                                     name="filter[]">
                                                 <label for="<?= $value2['id_giatrithuoctinhchon'] ?>">
                                                     <span class="button"></span>
-                                                    <?= $xuly->output($value2['giatri']) ?>
+                                                    <?= string_output($value2['giatri']) ?>
                                                 </label>
                                             </li>
                                         <?php } ?>
@@ -147,36 +147,36 @@ $phantrang = $this->data['phantrang'];
                 <li class="col-xs-6 col-sm-4">
                     <div class="product-container">
                         <div class="left-block">
-                            <a title="<?= $value['tensanpham'] ?>"
-                               href="<?= URL ?>san-pham/<?= $value['id_sanpham'] . '/' . $value['slugsanpham'] ?>"
+                            <a title="<?= $value['product_name'] ?>"
+                               href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"
                                class="loading">
-                                <img class="img-responsive b-lazy" title="<?= $value['tensanpham'] ?>"
-                                     alt="<?= $value['tensanpham'] ?>"
-                                     data-src="<?= URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['hinhdaidien'] ?>"/>
+                                <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
+                                     alt="<?= $value['product_name'] ?>"
+                                     data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
                             </a>
                             <div class="quick-view">
-                                <a title="Yêu thích" data-id="<?= $value['id_sanpham'] ?>" class="heart yeuthich"></a>
+                                <a title="Yêu thích" data-id="<?= $value['product_id'] ?>" class="heart yeuthich"></a>
 
                             </div>
                             <div class="add-to-cart">
-                                <?php if (kiemtranull($value['ngangon'])) { ?>
-                                    <a> <?= neods($value['ngangon'], 120) ?></a>
+                                <?php if (kiemtranull($value['product_description'])) { ?>
+                                    <a> <?= neods($value['product_description'], 120) ?></a>
                                 <?php } else {
                                 } ?>
                             </div>
                             <?php
-                            if ($value['giamgia'] > 0) {
+                            if ($value['product_sale'] > 0) {
                                 ?>
-                                <div class="price-percent-reduction2">-<?= $value['giamgia'] ?>%<br>SAFE</div>
+                                <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE</div>
                             <?php } ?>
                             <?php
-                            if ($value['noibat'] == 1) {
+                            if ($value['product_feature'] == 1) {
                                 ?>
                                 <div class="featured-text"><span></span></div>
                             <?php } ?>
 
                             <?php
-                            if ($value['moi'] == 1) {
+                            if ($value['product_new'] == 1) {
                                 ?>
                                 <div class="group-price">
                                     <span class="product-new">New</span>
@@ -185,8 +185,8 @@ $phantrang = $this->data['phantrang'];
 
                         </div>
                         <div class="right-block">
-                            <h5 class="product-name"><a title="<?= $value['tensanpham'] ?>"
-                                                        href=<?= URL ?>san-pham/<?= $value['id_sanpham'] . '/' . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?></a>
+                            <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
+                                                        href=<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
                             </h5>
 
@@ -194,14 +194,15 @@ $phantrang = $this->data['phantrang'];
 
                                 <div class="info-orther">
                                     <div class="product-desc">
-                                        <?= neods($value['ngangon'], 120) ?>
+                                        <?= neods($value['product_description'], 120) ?>
                                     </div>
                                 </div>
-                                <?php if ($value['gia'] != $value['giamoi']) { ?>
-                                    <span class="price product-price"><?= tien($value['giamoi']) ?>&nbsp;₫</span>
-                                    <span class="price old-price"><?= tien($value['gia']) ?></span>
+                                <?php if ($value['product_price'] != $value['product_price_new']) { ?>
+                                    <span class="price product-price"><?= tien($value['product_price_new']) ?>
+                                        &nbsp;₫</span>
+                                    <span class="price old-price"><?= tien($value['product_price']) ?></span>
                                 <?php } ELSE { ?>
-                                    <span class="price product-price"><?= tien($value['gia']) ?>&nbsp;₫</span>
+                                    <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
                                 <?php } ?>
                             </div>
 
@@ -226,7 +227,7 @@ $phantrang = $this->data['phantrang'];
                 ?>
                 <ul class="pagination">
                     <?=
-                    phantrangajax($totalpage, $currentpage, URL);
+                    phantrangajax($totalpage, $currentpage, BASE_URL);
                     ?>
 
                 </ul>
@@ -245,6 +246,6 @@ $phantrang = $this->data['phantrang'];
 </div>
 
 <script>
-    URLNOW = "<?=  URL . "danh-muc/" . $thongtindanhmuc['id_danhmuc'] . "/" . $this->data['thongtindanhmuc']['slug'] ?>";
+    URLNOW = "<?=  BASE_URL . "Product_category/category/" . $thongtindanhmuc['productcategory_id'] . "/" . $this->data['thongtindanhmuc']['productcategory_slug'] ?>";
 </script>
-<script src="<?= URL ?>view/<?= THEME ?>/sanpham/js/danhmuc.js"></script>
+<script src="<?= load_frontend_view('sanpham/js/danhmuc.js') ?>"></script>

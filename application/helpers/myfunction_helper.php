@@ -253,7 +253,7 @@ function load_config($constans = array())
             $data[$key] = $xml->$key;
         }
         return $data;
-    }else{
+    } else {
         foreach ($constans as $k => $v) {
             $temp = string_lower($v);
             define($v, $xml->$temp);
@@ -309,7 +309,7 @@ function check_login_user($arr)
     return false;
 }
 
-function kiemtraurl($arr, $id)
+function check_url($arr, $id)
 {
     if (!is_numeric($id))
         return false;
@@ -318,4 +318,68 @@ function kiemtraurl($arr, $id)
             return false;
     }
     return true;
+}
+// ============== ******====================//
+function phantrangajax($page_count, $cur_page, $link)
+{
+    $current_range = array(($cur_page - 2 < 1 ? 1 : $cur_page - 2), ($cur_page + 2 > $page_count ? $page_count : $cur_page + 2));
+
+    // First and Last pages
+    $first_page = $cur_page > 3 ? '<li  data-page="1" class="page" ><a  >1</a></li>' . ($cur_page < 5 ? ', ' : '<li> <a>...</a> <li>') : null;
+    $last_page = $cur_page < $page_count - 2 ? ($cur_page > $page_count - 4 ? ', ' : ' <li> <a>...</a> <li> ') . '<li data-page="' . $page_count . '" class="page"><a>' . $page_count . '</a></li>' : null;
+
+    // Previous and next page
+    $previous_page = $cur_page > 1 ? '<li data-page="' . ($cur_page - 1) . '" class="page" ><a >Previous</a></li> ' : null;
+    $next_page = $cur_page < $page_count ? ' <li data-page="' . ($cur_page + 1) . '" class="page"> <a >Next</a></li>' : null;
+
+    // Display pages that are in range
+    for ($x = $current_range[0]; $x <= $current_range[1]; ++$x)
+        $pages[] = '<li data-page="' . $x . '" class="page ' . ($x == $cur_page ? "active" : NULL) . '"><a>' . $x . '</a></li>';
+
+    if ($page_count > 1)
+        return $previous_page . $first_page . implode(' ', $pages) . $last_page . $next_page;
+}
+
+function kiemtranull($data)
+{
+    if (is_array($data) || $data === NULL) {
+        if (!empty($data))
+            return true;
+        else
+            return false;
+    } else {
+        if ($data == '' || $data == null)
+            return FALSE;
+        else
+            return true;
+    }
+}
+
+function neods($string, $len)
+{
+    $string = strip_tags($string);//bo php va html
+    if ($len > strlen($string)) {
+        $len = strlen($string);
+    };
+
+    $pos = strpos($string, ' ', $len);
+
+    if ($pos) {
+        $string = substr($string, 0, $pos) . "...";
+    } else {
+        mb_internal_encoding("UTF-8");
+        $string = mb_substr($string, 0, $len);
+    }
+
+    // $string=  str_replace("\r\n", "<br>",$string);
+    return $string;
+}
+
+function tien($str)
+{
+    if ($str != 0)
+        return str_replace(',', '.', number_format($str));
+    else
+        return '0';
+
 }

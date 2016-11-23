@@ -139,7 +139,7 @@ order by product_index desc limit $limit ) as t
         $orderby = string_input($orderby);
         $filter = string_input($filter);
         $type = string_input($type);
-        if (!kiemtraurl(array(), $id_danhmuc))
+        if (!check_url(array(), $id_danhmuc))
             $this->error();
         // kiem tra orderby
         $sapxep = array("stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
@@ -163,7 +163,7 @@ order by product_index desc limit $limit ) as t
             $this->error();
         if (!$ajax) {
             if (!isset($this->danhmucsanpham['item'][$id_danhmuc]))
-                Header("Location:" . URL . "error");
+                Header("Location:" . BASE_URL . "error");
         }
         // Tạo order by
         $orderby = $orderby;

@@ -10,7 +10,6 @@ define("URL_NOW", "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 $_SESSION['URL_NOW']=URL_NOW;
 if(!isset($_SESSION['token']))
 $_SESSION['token']=  generate_password(20);
-
 ?>
 <!DOCTYPE html>
 <html>

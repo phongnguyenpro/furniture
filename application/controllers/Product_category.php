@@ -12,7 +12,7 @@ class Product_category extends MY_Controller
 
     public function category($id_danhmuc)
     {
-        if (kiemtraurl(array($id_danhmuc), $id_danhmuc)) {
+        if (check_url(array($id_danhmuc), $id_danhmuc)) {
             if (!isset($_POST['ajax'])) {
                 $this->load->model(array("module_model"));
                 $danhmuc = $this->module_model->category();
@@ -63,6 +63,7 @@ class Product_category extends MY_Controller
                     $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer);
                 }
             } else {
+
                 // ORDER BY
                 if (isset($_GET['orderby']))
                     $orderby = $_GET['orderby'];
@@ -103,7 +104,6 @@ class Product_category extends MY_Controller
                     $type = "desc";
                 $this->danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
             }
-            die();
         } else
             $this->error();
     }
@@ -165,12 +165,12 @@ class Product_category extends MY_Controller
         $this->data = $data;
         $this->data["meta"] =array("title"=>"Home","description"=>"Home","image"=>"image");
         $this->load->view(THEME . "/header");
-//        $this->load->view(THEME . "/sanpham/danhmuc");
+        $this->load->view(THEME . "/sanpham/danhmuc");
         $this->load->view(THEME . "/footer");
     }
 
     public function danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)
     {
-        echo json_encode($this->view->data = $this->model->loaddatadanhmucit($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, true));
+        echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, true));
     }
 }
