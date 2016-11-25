@@ -230,7 +230,7 @@ function debug($parameter = "")
     echo "<pre>";
     print_r($parameter);
     echo "</pre>";
-    die();
+    exit();
 }
 
 function delete_image($name, $type = "product")

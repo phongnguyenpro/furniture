@@ -17,7 +17,23 @@ function getrole() {
     );
 }
 
-function get_format_menu()
+function get_format_menu() {
+    return array("link" => "Liên kết", "productcategory" => "Danh mục sản phẩm");
+}
+
+function get_type_module() {
+
+    return array("slider"=>"slider","product"=>"product");
+}
+
+function get_page() {
+    return array("-1"=>"Tất cả","home"=>"Home","productcategory"=>"ProductCategory","productdetail"=>"ProductDetail");
+}
+
+function get_module_type() {
+    return array("slider" => "Trình chiếu ảnh", "product" => "Sản phẩm");
+}
+function get_module_location()
 {
-  return array("link"=>"Liên kết","productcategory"=>"Danh mục sản phẩm");
+   return array("header"=>"header","menu"=>"menu","main"=>"main","left"=>"left","right"=>"right","footer"=>"footer");
 }

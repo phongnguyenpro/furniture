@@ -15,6 +15,7 @@ class MY_Controller extends CI_Controller
             if (file_exists($file_path = APPPATH . "models/adminsecurity/" . $name_controller . '_model.php')) {
                 $this->load->model("adminsecurity/" . $name_controller . '_model', 'model');
             }
+            $this->load->helper(array("mydata_helper"));
             // kiểm tra quyền user theo controller và function
             $this->load->library("adminsecurity");
             $this->adminsecurity->mydb = $this->mydb;
@@ -27,10 +28,10 @@ class MY_Controller extends CI_Controller
                 $this->load->model($name_controller . '_model', 'model');
             }
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
-
-            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI", "WIDTHTHUMB","LIMITSANPHAMLIENQUAN"));
+            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI", "WIDTHTHUMB","LIMITDANHMUCTRANGCHU"));
         }
     }
+   
 
 
 }
