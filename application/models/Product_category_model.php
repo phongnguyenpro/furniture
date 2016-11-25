@@ -293,5 +293,180 @@ where product.product_id=productcategory_detail.product_id  and  productcategory
         return $thuoctinhchon;
     }
 
-    public function error(){}
+    public function loadinfo($id_sanpham)
+    {
+        if (isset($_SESSION['daxem'])) {
+            if ($_SESSION['daxem'] != $id_sanpham) {
+                $this->mydb->exec("update product set product_view=product_view+1  where product_id=$id_sanpham");
+            }
+        } else {
+            $this->mydb->exec("update product set product_view=product_view+1  where product_id=$id_sanpham");
+        }
+//        $ses = new Session();
+//        $ses->set("daxem", $id_sanpham);
+
+        $kq = $this->mydb->select("select *,CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new from product where product_id=:product_id limit 1", array("product_id" => $id_sanpham));
+        if (!empty($kq)) {
+            $data['sanpham'] = $kq[0];
+            $x = strpos($data['sanpham']['product_content'], "{readmore}");
+            if ($x > 0) {
+                $data['sanpham']['product_description'] = substr($data['sanpham']['product_content'], 0, $x);
+                $data['sanpham']['product_content'] = substr($data['sanpham']['product_content'], $x + 10);
+            } else {
+                $data['sanpham']['product_description'] = '';
+            }
+            // Load hình sản phẩm
+
+            $kq = $this->mydb->select("select * from product_images where product_id=:product_id order by product_images_index", array("product_id" => $id_sanpham));
+            $data['sanpham']['hinh'] = $kq;
+            // end load hình sản phẩm
+            // Load danh muc san pham
+            $danhmuc = $this->mydb->select("select productcategory_id from productcategory_detail where product_id=:product_id ", array("product_id" => $id_sanpham));
+            // end load danh muc san pham
+
+
+            // Load bre
+            $data['bre']['info'] = array();
+            $data['bre']['itemdanhmucsanpham'] = array();
+            if (!empty($danhmuc)) {
+                $temp['ten'] = $data['sanpham']['product_name'];
+                $temp['slug'] = "#";
+                $bre['info'][] = $temp;
+                $id_danhmuc = $danhmuc[0]['productcategory_id'];
+                $bre = $this->findParentAll($this->danhmucsanpham, $id_danhmuc, $bre);
+                $data['bre'] = $bre;
+            }
+            // End load bre
+            //
+            // Load thuoc tinh chon
+            $kq = $this->mydb->select("select DISTINCT productattr_detail.attr_val_id,product_id,productattr_detail.productattr_id,productattr.productattr_name,attr_val.attr_val_value from productattr_detail JOIN productattr ON productattr.productattr_id=productattr_detail.productattr_id JOIN attr_val ON productattr_detail.attr_val_id=attr_val.attr_val_id and product_id=:product_id and product_detail_id!=-2 order by productattr.productattr_index,attr_val.attr_val_index", array("product_id" => $id_sanpham));
+            $thuoctinhchon = array();
+            foreach ($kq as $value) {
+                $thuoctinhchon[$value['productattr_name']][] = $value;
+            }
+// load san pham chi tiet
+            $kq = $this->mydb->select("select product_detail.product_detail_id,attr_val_id,	product_detail_price,product_detail_avatar,product_detail_total
+from product_detail JOIN productattr_detail
+ON product_detail.product_detail_id=productattr_detail.product_detail_id
+and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
+            $sanphamchitiet = array();
+            foreach ($kq as $value) {
+                $sanphamchitiet[$value['product_detail_id']]['thuoctinh'][] = $value['attr_val_id'];
+                $sanphamchitiet[$value['product_detail_id']]["giasanpham"] = $value['product_detail_price'];
+                $sanphamchitiet[$value['product_detail_id']]["soluongsanpham"] = $value['product_detail_total'];
+                $sanphamchitiet[$value['product_detail_id']]["hinhsanpham"] = $value['product_detail_avatar'];
+                $sanphamchitiet[$value['product_detail_id']]["id_sanphamchitiet"] = $value["product_detail_id"];
+            }
+            $data['sanpham']['sanphamchitiet'] = $sanphamchitiet;
+
+            // thuoc tinh chi tiet
+            $data['sanpham']['thuoctinhchitiet'] = $this->mydb->select("select product_prop_id,product_prop_detail_value from product_prop_detail where product_id=:product_id", array("product_id" => $id_sanpham));
+            $kq = $this->mydb->select("select product_prop_id,product_prop_name from product_prop", array());
+            $thuoctinh = array();
+            foreach ($kq as $value) {
+                $thuoctinh[$value['product_prop_id']] = $value['product_prop_name'];
+            }
+            $data['val']['thuoctinh'] = $thuoctinh;
+            $data['sanpham']['thuoctinhchon'] = $thuoctinhchon;
+
+            // load tag
+            $kq = $this->mydb->select("select * from tag,product_tag where tag.tag_id=product_tag.tag_id and product_id=:product_id order by tag_index", array("product_id" => $id_sanpham));
+            $data['tag'] = $kq;
+
+            // end load thuoc tinh chon
+            $data['sanphamlienquan'] = array();
+            if (!empty($danhmuc)) {
+                // Load san pham lien quan
+
+                $sql = " product_id in ( SELECT * FROM ( select DISTINCT (product.product_id) from product,productcategory_detail where product.product_id=productcategory_detail.product_id and product.product_id!=$id_sanpham and product_show=1 and product_date_create < now() and";
+                foreach ($danhmuc as $value) {
+                    $listdanhmuc[] = $value['productcategory_id'];
+                }
+                $limit = LIMITSANPHAMLIENQUAN;
+                $sql .= "( productcategory_id=" . implode(" or productcategory_id=", $listdanhmuc) . ") order by product_index desc limit $limit ) as t )";
+
+                if (!empty($data['tag'])) {
+                    $sql .= " or product_id in ( SELECT * FROM ( select DISTINCT (product.product_id) from product,product_tag where product.product_id=product_tag.product_id and product.product_id!=$id_sanpham and product_show=1 and product_date_create < now() and";
+                    foreach ($data['tag'] as $value) {
+                        $listtag[] = $value['tag_id'];
+                    }
+                    $limit = LIMITSANPHAMLIENQUAN;
+                    $sql .= "( tag_id=" . implode(" or tag_id=", $listtag) . ") order by product_index desc limit $limit ) as t )";
+
+                }
+                $sql = "select product_id,product_feature,product_sale,product_date_create,product_name,product_slug,product_price,product_avatar,product_code,product_description,product_new,CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new from product where " . $sql;
+                $data['sanphamlienquan'] = $this->mydb->select($sql, array());
+
+                // End load san pham lien quan
+            }
+            // Load san pham apriori
+
+//            $listidgiohang = array();
+//            // load apriori khach hang
+//            if (isset($_COOKIE['giohang'])) {
+//                $giohang = unserialize($_COOKIE['giohang']);
+//                foreach ($giohang as $value) {
+//                    $listidgiohang[$value["product_id"]] = $value['product_id'];
+//                }
+//            }
+//
+//            if (check_login_user(array(1, 2, 3, 4))) {
+//                $arrtuoi = Datapublic::getTuoi();
+//                $taikhoan = unserialize($_COOKIE['taikhoan']);
+//                $goitinh = $taikhoan['gioitinh'];
+//                $tuoi = $taikhoan['tuoi'];
+//                foreach ($arrtuoi as $key => $value) {
+//                    $temp = explode("-", $value);
+//                    $min = $temp[0];
+//                    $max = $temp[1];
+//                    if ($tuoi >= $min && $tuoi <= $max) {
+//                        $tuoi = $key;
+//                        break;
+//                    }
+//                }
+//
+//                $itemleft = $tuoi . "-" . $goitinh;
+//                $arr[] = $itemleft;
+//                $arr[] = $id_sanpham;
+//                asort($arr);
+//                $itemleft2 = implode(",", $arr);
+//                $arrsql[] = "SELECT * FROM ( select id_apriori from apriori where ( itemleft='$itemleft' or itemleft='$itemleft2' ) order by value desc limit 5 ) as t  ) ";
+//
+//            }
+//
+//            $arrsql[] = " SELECT * FROM ( select id_apriori from apriori where itemleft='$id_sanpham'  order by value desc limit 5 ) as t )";
+//            $sql = "select itemright from apriori where id_apriori in (" . implode(" or id_apriori in ( ", $arrsql);
+//            $kq = $this->select($sql, array());
+//
+//            $temp = array();
+//            if (!empty($kq)) {
+//                foreach ($kq as $value) {
+//
+//                    $temp[] = explode(",", $value['itemright']);
+//                }
+//                $list = array("-1");
+//                foreach ($temp as $value) {
+//
+//                    foreach ($value as $value2) {
+//                        if (($value2 != $id_sanpham) && !in_array($value2, $listidgiohang)) {
+//                            $list[$value2] = $value2;
+//                        }
+//                    }
+//                }
+//                $sql = "select  id_sanpham,tensanpham,noibat,moi,giamgia,ngaytao,slugsanpham,gia,hinhdaidien,masanpham,ngangon,giamgia,CAST((gia-((giamgia/100)*gia))  AS UNSIGNED ) as giamoi from sanpham where ngaytao<now() and hienthi=1 and id_sanpham!='$id_sanpham' and ( id_sanpham=" . implode(" or id_sanpham=", $list) . " ) order by stt desc limit $limit";
+//                $data['apriori'] = $this->select($sql, array());
+//
+//            } else
+//                $data['apriori'] = null;
+            // end load apriori
+
+
+            return $data;
+        } else
+            $this->error();
+    }
+
+    public function error()
+    {
+    }
 }

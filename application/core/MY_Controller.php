@@ -28,7 +28,7 @@ class MY_Controller extends CI_Controller
             }
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 
-            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI", "WIDTHTHUMB"));
+            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI", "WIDTHTHUMB","LIMITSANPHAMLIENQUAN"));
         }
     }
 

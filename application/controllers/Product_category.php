@@ -102,7 +102,7 @@ class Product_category extends MY_Controller
                     $type = string_input($_GET['type']);
                 else
                     $type = "desc";
-                $this->danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
+                $this->category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
             }
         } else
             $this->error();
@@ -126,7 +126,7 @@ class Product_category extends MY_Controller
 //        $data['module'] = $module->loadmodule("danhmucsanpham");
 
         $this->data = $data;
-        $this->data["meta"] =array("title"=>"Home","description"=>"Home","image"=>"image");
+        $this->data["meta"] = array("title" => "Home", "description" => "Home", "image" => "image");
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/danhmucnhieu');
         $this->load->view(THEME . '/footer');
@@ -163,14 +163,65 @@ class Product_category extends MY_Controller
 //
         $this->sapxep = $sapxep;
         $this->data = $data;
-        $this->data["meta"] =array("title"=>"Home","description"=>"Home","image"=>"image");
+        $this->data["meta"] = array("title" => "Home", "description" => "Home", "image" => "image");
         $this->load->view(THEME . "/header");
         $this->load->view(THEME . "/sanpham/danhmuc");
         $this->load->view(THEME . "/footer");
     }
 
-    public function danhmucitajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)
+    public function category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)
     {
         echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, true));
+    }
+
+    public function product_detail($id_sanpham, $i = false)
+    {
+//        $xuly = new Xulydulieu;
+//        if (isset($_GET['vip'])) {
+//            $backlink = new backlink_controller();
+//            $data = $xuly->input($_GET['vip']);
+//            $arrdata = explode(",", $data);
+//
+//            if (count($arrdata) == 2) {
+//
+//                $para1 = $xuly->input($arrdata[0]);
+//                $para2 = $xuly->input($id_sanpham);
+//                $para3 = $xuly->input($arrdata[1]);
+//                // id_taikhoan,id_sanpham,id_share
+//                $para4 = (new \lib\MaHoa())->createsha1(array($para1, $para2));
+//
+//                $backlink->action($para1, $para2, $para3, $para4);
+//            }
+//
+//        }
+        if (check_url(array($id_sanpham), $id_sanpham)) {
+            $this->load->model(array("module_model"));
+            $danhmuc = $this->module_model->category();
+            $this->model->setProductCategory($danhmuc);
+            $data = $this->model->loadinfo($id_sanpham);//----------------------------------------------toi day
+
+            $meta = array();
+            $meta['title'] = $data['sanpham']['product_name'];
+            $meta['description'] = neods($data['sanpham']['product_description'], 120);
+            $meta['image'] = BASE_URL . "public/upload/images/thumb_hinhsanpham/" . $data['sanpham']['product_avatar'];
+            $data['meta'] = $meta;
+            $data['menu'] = $this->module_model->menu();
+            $data['category'] = $danhmuc;
+//            $data['footer'] = $header->loadfooter();
+
+//            $module = new Module();
+//            $data['module'] = $module->loadmodule("chitietsanpham");
+
+            $this->data = $data;
+
+            $this->load->view(THEME . '/header');
+            $this->load->view(THEME . '/sanpham/chitiet');
+            $this->load->view(THEME . '/footer');
+        } else
+            $this->error();
+    }
+
+    public function error()
+    {
     }
 }
