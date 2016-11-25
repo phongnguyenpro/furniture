@@ -1,5 +1,5 @@
 <script type="text/javascript"
-        src="<?= BASE_URL . "application/view/" . THEME ?>/assets/lib/jquery.elevatezoom.js"></script>
+        src="<?= load_frontend_view('assets/lib/jquery.elevatezoom.js') ?>"></script>
 
 <?php
 $data = $this->data;
@@ -133,12 +133,12 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                     <div class="check-box-list listgiatri" data-label="<?= $key ?>">
                                         <?php foreach ($value as $value2) { ?>
 
-                                            <input data-name="<?= $value2['giatri'] ?>" class="giatrithuoctinhchon"
+                                            <input data-name="<?= $value2['attr_val_value'] ?>" class="giatrithuoctinhchon"
                                                    name="<?= $key ?>" type="radio"
-                                                   id="<?= $value2['id_giatrithuoctinhchon'] ?>"
-                                                   value="<?= $value2['id_giatrithuoctinhchon'] ?>"/>
-                                            <label style=" background:<?= $value2['giatri'] ?>;"
-                                                   for="<?= $value2['id_giatrithuoctinhchon'] ?>"><span
+                                                   id="<?= $value2['attr_val_id'] ?>"
+                                                   value="<?= $value2['attr_val_id'] ?>"/>
+                                            <label style=" background:<?= $value2['attr_val_value'] ?>;"
+                                                   for="<?= $value2['attr_val_id'] ?>"><span
                                                     class="button"></span></label>
 
 
@@ -157,11 +157,11 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                         <div class="check-box-list listgiatri" data-label="<?= $key ?>">
                                             <?php foreach ($value as $value2) { ?>
                                                 <input class="filter giatrithuoctinhchon"
-                                                       data-name="<?= $value2['giatri'] ?>" data-label="<?= $key ?>"
-                                                       value="<?= $value2['id_giatrithuoctinhchon'] ?>" type="radio"
-                                                       id="<?= $value2['id_giatrithuoctinhchon'] ?>" name="<?= $key ?>">
-                                                <label for="<?= $value2['id_giatrithuoctinhchon'] ?>"><span
-                                                        class="button"></span><span><?= $value2['giatri'] ?></span></label>
+                                                       data-name="<?= $value2['attr_val_value'] ?>" data-label="<?= $key ?>"
+                                                       value="<?= $value2['attr_val_id'] ?>" type="radio"
+                                                       id="<?= $value2['attr_val_id'] ?>" name="<?= $key ?>">
+                                                <label for="<?= $value2['attr_val_id'] ?>"><span
+                                                        class="button"></span><span><?= $value2['attr_val_value'] ?></span></label>
 
 
                                             <?php } ?>
