@@ -21,19 +21,18 @@ function get_format_menu() {
     return array("link" => "Liên kết", "productcategory" => "Danh mục sản phẩm");
 }
 
-function get_type_module() {
-
-    return array("slider"=>"slider","product"=>"product");
-}
-
 function get_page() {
     return array("-1"=>"Tất cả","home"=>"Home","productcategory"=>"ProductCategory","productdetail"=>"ProductDetail");
 }
 
 function get_module_type() {
-    return array("slider" => "Trình chiếu ảnh", "product" => "Sản phẩm");
+    return array("slider" => "Trình chiếu ảnh","banner"=>"Quảng cáo", "product" => "Sản phẩm");
 }
 function get_module_location()
 {
    return array("header"=>"Top đầu trang","menu"=>"Menu, Danh mục sản phẩm","main"=>"Chính giữa trang","left"=>"Phía bên trái","right"=>"Phía bên phải","footer"=>"Phía dưới trang");
+}
+function get_product_type()
+{
+    return array("hot"=>"Sản phẩm nổi bật","selling"=>"Sản phẩm bán chạy");
 }

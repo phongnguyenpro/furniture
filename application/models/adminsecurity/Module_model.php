@@ -34,7 +34,7 @@ class Module_model extends MY_Model {
          if($result["row"]==0 || $result["row"]>0)
         {
             $link = session_get("module_page")?"detail/".session_get("module_page"):"";
-            session_set("notify",array("type"=>3,"messager"=>"Xóa module thành công"));
+            session_set("notify",array("type"=>3,"messager"=>"Tạo module thành công"));
             Header("Location:".ADMIN_URL."module/".$link);
              
         }
@@ -61,6 +61,29 @@ class Module_model extends MY_Model {
         {
             $link = session_get("module_page")?"detail/".session_get("module_page"):"";
             session_set("notify",array("type"=>3,"messager"=>"Xóa module thành công"));
+            Header("Location:".ADMIN_URL."module/".$link);
+             
+        }
+    }
+    function update($data)
+    {
+          if(isset($data["module_page"]))
+        $module_page =$data["module_page"];
+          else
+             $module_page=array(-1); 
+           unset($data["module_page"]);
+                   
+        $result=$this->mydb->update("module",$data,"module_id=:module_id",array("module_id"=>$data["module_id"]));
+        $this->mydb->deleteall("module_detail","module_id=:module_id",array("module_id"=>$data["module_id"]));
+        foreach ($module_page as $k=>$v )
+        {
+             $this->mydb->insert("module_detail", array("module_id" =>$data["module_id"], "module_detail_page" => $v));
+        }
+        if($result["row"]==0 || $result["row"]>0)
+        {
+           
+            $link = session_get("module_page")?"detail/".session_get("module_page"):"";
+            session_set("notify",array("type"=>3,"messager"=>"Cập nhật thành công"));
             Header("Location:".ADMIN_URL."module/".$link);
              
         }

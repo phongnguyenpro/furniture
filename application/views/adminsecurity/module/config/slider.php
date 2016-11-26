@@ -38,7 +38,7 @@ $config = unserialize($module["module_config"]);
                 <?php
                 foreach ($module_location = get_module_location() as $k => $v) {
                     ?>
-                    <option value="<?= $k ?>"><?= $v ?></option>
+                    <option <?= $module["module_location"]==$k?"selected":"" ?> value="<?= $k ?>"><?= $v ?></option>
                 <?php } ?>
             </select>
         </div>
@@ -93,9 +93,9 @@ $config = unserialize($module["module_config"]);
           <div class="uk-form-row">
             <div class="uk-input-group">
                 <span class="uk-input-group-addon">
-                    <a title="Chọn ảnh slider" id="openCKf" ><i style="color:blue" class="uk-icon-edit uk-margin-small-top"></i></a>
+                    <a title="Chọn ảnh slider" id="openCKf" onclick="BrowseServer('set_link<?= $k ?>', 'Images')" ><i style="color:blue" class="uk-icon-edit uk-margin-small-top"></i></a>
                 </span>
-                <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Image: </label><input required="" name="module_image[]"   title="Chọn ảnh" value="<?= $v["module_image"] ?>"  type="text" class="md-input module_img"><span class="md-input-bar"></span></div>
+                <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Image: </label><input required="" id="set_link<?= $k ?>" name="module_image[]"   title="Chọn ảnh" value="<?= $v["module_image"] ?>"  type="text" class="md-input module_img"><span class="md-input-bar"></span></div>
 
             </div>
 

@@ -1,6 +1,7 @@
 
 <?php 
 session_set("module_page",$this->data["page"]);
+$page_list =get_page();
 ?>
 <ol class="breadcrumb">
     <li class="active">
@@ -10,7 +11,7 @@ session_set("module_page",$this->data["page"]);
         <i class="fa fa-list"></i> Quản lý module
     </li>
     <li class="active">
-        <i class="fa fa-list"></i><?= string_title($this->data["page"]) ?>
+        <i class="fa fa-list"></i><?= $page_list[$this->data["page"]] ?>
     </li>
 </ol>
 
@@ -23,6 +24,14 @@ session_set("module_page",$this->data["page"]);
     {
         background-color: #00aef0 !important;
         color: white;
+    }
+    .md-card.md-card-hover
+    {
+        overflow: visible;
+    }
+    .md-card.md-card-overlay .md-card-content
+    {
+        height: 250px;
     }
 </style>
 
@@ -37,7 +46,7 @@ session_set("module_page",$this->data["page"]);
                     <div class="col-sm-8">
                         <select name="module_type">                           
                             <?php
-                            foreach ($module_type = get_type_module() as $k => $v) {
+                            foreach ($module_type = get_module_type() as $k => $v) {
                                 ?>
                                 <option value="<?= $k ?>"><?= $v ?></option>
                             <?php } ?>
@@ -81,7 +90,7 @@ session_set("module_page",$this->data["page"]);
                     <label class="control-label col-sm-3" for="email">Trang:</label>
                     <div class="col-sm-8">
                         <ul class="listtrang">
-                            <?php foreach (get_page() as $key => $value) { ?>
+                            <?php foreach ($page_list as $key => $value) { ?>
                                 <li>
                                     <input  name="module_page[]" class="<?= $key != -1 ? "check_page" : "check_all" ?>" data-md-icheck type="checkbox" id="edit<?= $key ?>" value="<?= $key ?>">
                                     <label for="edit<?= $key ?>"><?= $value ?></label>
@@ -132,15 +141,14 @@ foreach ($this->data["module"] as $k => $v) {
                     <div>
                         <div class="md-card md-card-hover md-card-overlay">
                             <div class="md-card-content truncate-text is-truncated" style="word-wrap: break-word;">
+                                <h4>   <?= $val_module["module_name"] ?></h4>
                                 <p><b>Vị trí:</b> <?= $module_location[$val_module["module_location"]] ?></p>                    
                                 <p><b>Thứ tự:</b> <?= $val_module["module_index"] ?></p>
                                 <p>- <?= $val_module["module_description"] ?> -</p>
 
                                 <div class="md-card-overlay-content">
                                     <div class="uk-clearfix md-card-overlay-header">
-                                        <div class="pull-left">
-                                            <?= $val_module["module_name"] ?>
-                                        </div>
+                                  
                                         <div class="pull-right">
                                             <a onclick="_confirm_link('<?= ADMIN_URL."module/delete/".$val_module["module_id"] ?>')"    class="md-btn md-btn-flat-danger">Delete</a>
                                             <a data-type="<?= $k ?>" data-id="<?= $val_module["module_id"] ?>"  class="md-btn md-btn-flat-primary btn-edit">Edit</a>

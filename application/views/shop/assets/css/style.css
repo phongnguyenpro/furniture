@@ -1968,19 +1968,26 @@ span.notify-right{
 .header-top-right{
     margin-left: -15px;
     padding: 0;
-    border-top: 3px solid #ff3366;
+    margin-top: 12px;
 }
 .header-top-right .homeslider{
-  width: 74%;
+  width: 68%;
   float: left;
+  margin-left: 14px;
 }
 .header-top-right .header-banner{
-    width: 26%;
+    width: 29%;
     float: right;
 }
 .header-top-right .header-banner img{
   width: 100%;
   height: auto;
+}
+.header-top-right .header-banner li{
+        margin-bottom: 12px;
+}
+.header-top-right .header-banner li:last-child{
+        margin-bottom: 0px;
 }
 .header-top-right .homeslider img{
     width: 100%;
@@ -1997,46 +2004,29 @@ span.notify-right{
 }
 .header-top-right .homeslider .bx-controls-direction .bx-prev,
 .header-top-right .homeslider .bx-controls-direction .bx-next{
-  background: #FF3366;
-  text-indent: 0px!important;
-  color: #fff;
-  font-size:24px;
-  text-align: center;
-  line-height: 38px;
-  -moz-transition: all 0.45s ease;
-  -webkit-transition: all 0.45s ease;
-  -o-transition: all 0.45s ease;
-  -ms-transition: all 0.45s ease;
-  transition: all 0.45s ease;
-  position: absolute;
-  opacity: 0;
-  visibility: hidden;
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+    background: rgba(172, 172, 172, 0.64);
+    text-indent: 0px!important;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    line-height: 49px;
+    position: absolute;
+    opacity: 1;
+    visibility: inherit;
+    width: 30px;
+    height: 52px;;
+
 }
 .header-top-right .homeslider .bx-controls-direction .bx-prev{
-  left: 50%;
+  left: 0%;
 }
 .header-top-right .homeslider .bx-controls-direction .bx-next{
-  right: 50%;
+  right: 0%;
 }
-.header-top-right .homeslider:hover .bx-controls-direction .bx-next{
-  right: 10px;
-  opacity: 1;
-  visibility: inherit;
-}
-.header-top-right .homeslider:hover .bx-controls-direction .bx-prev{
-  left: 10px;
-  opacity: 1;
-  visibility: inherit;
-}
-.header-top-right .homeslider .bx-controls-direction .bx-prev:hover,
-.header-top-right .homeslider .bx-controls-direction .bx-next:hover{
-  opacity: 0.8;
-}
-.header-top-right .homeslider .bx-wrapper:hover .bx-prev,.bx-wrapper:hover .bx-next{
-    display: block;
+.header-top-right .homeslider .bx-controls-direction .bx-next:hover,
+.header-top-right .homeslider .bx-controls-direction .bx-prev:hover
+{
+      background: rgba(10, 10, 10, 0.95);
 }
 .header-top-right .homeslider .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
   position: absolute;

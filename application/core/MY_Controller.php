@@ -1,10 +1,8 @@
 <?php
 
-class MY_Controller extends CI_Controller
-{
+class MY_Controller extends CI_Controller {
 
-    public function __construct($name_controller, $type = null)
-    {
+    public function __construct($name_controller, $type = null) {
         parent::__construct();
         $this->load->helper(array("myfunction"));
 
@@ -22,16 +20,16 @@ class MY_Controller extends CI_Controller
             $this->adminsecurity->checkrole();
             $this->data["menu_item"] = $this->adminsecurity->menu_item();
 
-            load_config(array("CACHE", "URLANHCHEN"));
+            load_config(array("CACHE", "URLANHCHEN", "LOGO"));
         } else {
             if (file_exists($file_path = APPPATH . "models/" . $name_controller . '_model.php')) {
                 $this->load->model($name_controller . '_model', 'model');
             }
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
-            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI", "WIDTHTHUMB","LIMITDANHMUCTRANGCHU"));
+            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU",
+                             "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI",
+                              "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE"));
         }
     }
-   
-
 
 }
