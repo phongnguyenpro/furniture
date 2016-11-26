@@ -32,8 +32,51 @@
                  <?php }?>
                     </ul>
                 </div>
+                <!-- END Home slideder-->
+
+   <!-- servives -->
+    <div class="service ">
+        <div class="col-xs-6 col-sm-3 service-item">
+            <div class="icon">
+            </div>
+            <div class="info">
+                <a   ><h3>vận chuyển</h3></a>
+                <span>Nhanh chóng </span>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 service-item">
+            <div class="icon">
+            </div>
+            <div class="info">
+                <a   ><h3>Đổi trả</h3></a>
+                <span>15 ngày</span>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 service-item">
+            <div class="icon">
+            </div>
+            
+            <div class="info" >
+                <a   ><h3>Phụ vụ</h3></a>
+                <span> 24/7</span>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 service-item">
+            <div class="icon">
+            </div>
+            <div class="info">
+                <a   ><h3>Giá rẻ</h3></a>
+                <span>Tốt nhất</span>
+            </div>
+        </div>
+</div>
+<!-- end services -->
+
             </div>
         </div>
     </div>
 </div>
-<!-- END Home slideder-->
+
+
+
+

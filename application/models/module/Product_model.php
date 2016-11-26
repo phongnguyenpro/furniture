@@ -19,26 +19,26 @@ class Product_model extends MY_Model {
             $limit = $config["module_product_limit"];
         else
             $limit = LIMITMODULE;
+        $select = "product.product_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_pricenew,product_name,product_slug,product_avatar,product_code,product_description";
         $data = array();
 
         switch ($product_type) {
             case "hot":
-                $data = $this->select("select  id_sanpham,tensanpham,noibat,moi,giamgia,ngaytao,slugsanpham,gia,hinhdaidien,masanpham,ngangon,giamgia,CAST((gia-((giamgia/100)*gia))  AS UNSIGNED ) as giamoi from sanpham where ngaytao<now() and noibat=1 and hienthi=1 and (id_ngonngu=:id_ngonngu or id_ngonngu=-1) order by stt desc limit $limit ", array("id_ngonngu" => NGONNGU));
+                $data = $this->mydb->select("select $select from product where product_date_create<=now() and product_feature=1 and product_show=1  order by product_index desc limit $limit ", array( ));
                 break;
             case "selling":
-                $data = $this->select("select  id_sanpham,tensanpham,noibat,moi,giamgia,ngaytao,slugsanpham,gia,hinhdaidien,masanpham,ngangon,giamgia,CAST((gia-((giamgia/100)*gia))  AS UNSIGNED ) as giamoi from sanpham where ngaytao<now() and banchay=1 and hienthi=1 and (id_ngonngu=:id_ngonngu or id_ngonngu=-1) order by stt desc limit $limit ", array("id_ngonngu" => NGONNGU));
+                $data = $this->mydb->select("select $select from product where product_date_create<=now() and product_selling=1 and product_show=1 order by product_index desc limit $limit ", array( ));
                 break;
             case "new":
-                $data = $this->select("select  id_sanpham,tensanpham,noibat,moi,giamgia,ngaytao,slugsanpham,gia,hinhdaidien,masanpham,ngangon,giamgia,CAST((gia-((giamgia/100)*gia))  AS UNSIGNED ) as giamoi from sanpham where ngaytao<now() and moi=1 and hienthi=1 and (id_ngonngu=:id_ngonngu or id_ngonngu=-1) order by stt desc limit $limit ", array("id_ngonngu" => NGONNGU));
+                $data = $this->mydb->select("select  $select from product where product_date_create<=now() and product_new=1 and product_show=1 order by product_index desc limit $limit ", array( ));
                 break;
             case "sale":
-                $data = $this->select("select  id_sanpham,tensanpham,noibat,moi,giamgia,ngaytao,slugsanpham,gia,hinhdaidien,masanpham,ngangon,giamgia,CAST((gia-((giamgia/100)*gia))  AS UNSIGNED ) as giamoi from sanpham where ngaytao<now() and giamgia>0 and hienthi=1 and (id_ngonngu=:id_ngonngu or id_ngonngu=-1) order by stt desc limit $limit ", array("id_ngonngu" => NGONNGU));
+                $data = $this->mydb->select("select  $select from product where product_date_create<=now() and product_sale>0 and product_show=1  order by product_index desc limit $limit ", array( ));
                 break;
-
             default :
-
                 break;
         }
+        return $data;
     }
 
 }

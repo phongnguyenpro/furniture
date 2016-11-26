@@ -2063,7 +2063,7 @@ span.notify-right{
   border: 1px solid #fff;
 }
 .bx-wrapper{
-    margin: 0;
+    margin: 0 !important;
 }
 /*---------------
 [6. Page top]

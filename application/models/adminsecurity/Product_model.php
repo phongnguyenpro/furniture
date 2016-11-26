@@ -148,7 +148,6 @@ class Product_model extends MY_Model {
 
         $kq = $this->mydb->select("select max(product_index) as max from product", array());
         $max = $kq[0]['max'] + 1;
-        $data['product_index'] = $max;
         $data['product_price'] = price_input($data['product_price']);
         $data['product_sale'] = 0;
         $data['product_search'] = loaibodau($data['product_name']) . " " . $data['product_price'];
@@ -407,8 +406,6 @@ class Product_model extends MY_Model {
             $data['product_selling'] = 1;
         else
             $data['product_selling'] = 2;
-        $data['product_view'] = 0;
-        $data['product_like'] = 0;
 
         // xu ly mieu ta va readmore
         $x = strpos($data['product_content'], "{readmore}");
@@ -457,8 +454,11 @@ class Product_model extends MY_Model {
             $product_tag = $data['tag'];
             unset($data['tag']);
         }
-
-
+        $data['product_price'] = price_input($data['product_price']);
+        $data['product_search'] = loaibodau($data['product_name']) . " " . $data['product_price'];
+        $data['product_date_update'] = today();
+        $data['product_date_create'] = date_input($data['product_date_create']);
+        
         $this->mydb->update("product", $data, "product_id=:product_id", array("product_id" => $product_id));
 
 

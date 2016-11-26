@@ -31,7 +31,6 @@ class Module_model extends MY_Model {
                     break;
             }
         }
-        debug($data);
         return $data;
        //module_type
           // location 
