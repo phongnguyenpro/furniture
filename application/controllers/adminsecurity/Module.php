@@ -48,4 +48,22 @@ class Module extends MY_Controller {
         
        
     }
+    
+    function update()
+    {
+        $type =$_POST["module_type"];
+        switch ($type)
+        {
+            case "slider":
+               $this->load->model("module/slider_model");
+               $this->slider_model->update($_POST);    
+            break;
+            
+            
+        }
+    } 
+    function delete($module_id)
+    {
+        $this->model->delete($module_id);
+    }
 }

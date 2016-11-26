@@ -1,5 +1,7 @@
 <?php
 $module = $this->data["module"][0];
+$page = $this->data["page"];
+$config = unserialize($module["module_config"]);
 ?>
 
 <style>
@@ -14,7 +16,9 @@ $module = $this->data["module"][0];
         opacity: 0;
     }
 </style>
-<form action="<?= ADMIN_URL . "module/insert" ?>" method="POST">              
+<form action="<?= ADMIN_URL . "module/update" ?>" method="POST">   
+    <input class="hidden" name="module_id" value="<?= $module["module_id"] ?>">
+     <input class="hidden" name="module_type" value="<?= $module["module_type"] ?>">
     <div class="form-group uk-form-row">
         <label class="control-label col-sm-3" >Tên module</label>
         <div class="col-sm-8">
@@ -43,7 +47,7 @@ $module = $this->data["module"][0];
     <div class="form-group uk-form-row">
         <label class="control-label col-sm-3" >Thứ tự</label>
         <div class="col-sm-8">
-            <input value="<?= $module["module_index"] ?>" required class="form-control" name="module_description"  type="text" placeholder="">
+            <input value="<?= $module["module_index"] ?>" required class="form-control" name="module_index"  type="text" placeholder="">
         </div>
     </div>
     <div class="form-group uk-form-row">
@@ -52,45 +56,64 @@ $module = $this->data["module"][0];
             <ul class="listtrang">
                 <?php foreach (get_page() as $key => $value) { ?>
                     <li>
-                        <input  name="module_page[]" class="<?= $key != -1 ? "check_page" : "check_all" ?>" data-md-icheck type="checkbox" id="edit_module<?= $key ?>" value="<?= $key ?>">
+                        <input   <?= in_array($key, $page) == true ? "checked" : "" ?>  name="module_page[]" class="<?= $key != -1 ? "check_page" : "check_all" ?>" data-edit="1" type="checkbox" id="edit_module<?= $key ?>" value="<?= $key ?>">
                         <label for="edit_module<?= $key ?>"><?= $value ?></label>
                     </li>
                 <?php } ?>
             </ul>
         </div>
     </div>
-    <div class="list-row-slider">       
-        <div class="row-slider">
-            <div class="uk-form-row">
-                <div class="uk-input-group">
-                    <span class="uk-input-group-addon">
-                        <a title="Đổi logo" id="openCKf" onclick="BrowseServer('product_edit_name_control_logo', 'Images');"><i style="color:blue" class="uk-icon-edit uk-margin-small-top"></i></a>
-                    </span>
-                    <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">LOGO: </label><input title="Click hình bên trái để đổi logo" value="public/upload/images/logo%5B1%5D%5B1%5D.png" required="" type="text" class="md-input" id="product_edit_name_control_logo" name="logo"><span class="md-input-bar"></span></div>
-
-                </div>
+    <div class="row-slider-add hidden">
+        <div class="uk-form-row">
+            <div class="uk-input-group">
+                <span class="uk-input-group-addon">
+                    <a title="Chọn ảnh slider" id="openCKf" ><i style="color:blue" class="uk-icon-edit uk-margin-small-top"></i></a>
+                </span>
+                <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Image: </label><input required="" disabled="" title="Chọn ảnh" value=""  type="text" class="md-input module_img"><span class="md-input-bar"></span></div>
 
             </div>
-            <div class="uk-form-row">
-                <div class="uk-input-group">
-                    <span class="uk-input-group-addon">
-                    </span>
-                    <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Link: </label><input title="" value="" required="" type="text" class="md-input" id="product_edit_name_control_logo" name="logo"><span class="md-input-bar"></span></div>
 
-                </div>
-
-            </div>
-            <div class="uk-form-row">
-                <div class="uk-input-group">
-                    <span class="uk-input-group-addon">
-                    </span>
-                    <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Thứ tự: </label><input title="" value="" required="" type="text" class="md-input" id="product_edit_name_control_logo" name="logo"><span class="md-input-bar"></span></div>
-
-                </div>
-
-            </div>
         </div>
-        <div class="row-slider-hide"></div>
+        <div class="uk-form-row">
+            <div class="uk-input-group">
+                <span class="uk-input-group-addon">
+                </span>
+                <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Link: </label><input required="" disabled="" title="" value="" type="text" class="md-input module_link" ><span class="md-input-bar"></span></div>
+
+            </div>
+
+        </div>
+        <button type="button" class="pull-right btn btn-sm btn-danger btn-delete">Xóa</button>
+    </div>
+     
+     
+    <div class="list-row-slider">       
+        <?php if(is_array($config)) foreach ($config as $k=>$v){ ?>
+         <div class="row-slider clearfix">
+          <div class="uk-form-row">
+            <div class="uk-input-group">
+                <span class="uk-input-group-addon">
+                    <a title="Chọn ảnh slider" id="openCKf" ><i style="color:blue" class="uk-icon-edit uk-margin-small-top"></i></a>
+                </span>
+                <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Image: </label><input required="" name="module_image[]"   title="Chọn ảnh" value="<?= $v["module_image"] ?>"  type="text" class="md-input module_img"><span class="md-input-bar"></span></div>
+
+            </div>
+
+        </div>
+        <div class="uk-form-row">
+            <div class="uk-input-group">
+                <span class="uk-input-group-addon">
+                </span>
+                <div class="md-input-wrapper md-input-filled"><label for="product_edit_name_control_logo">Link: </label><input required=""  name="module_link[]" title="" value="<?= $v["module_link"] ?>" type="text" class="md-input module_link" ><span class="md-input-bar"></span></div>
+
+            </div>
+
+        </div>
+        <button type="button" class="pull-right btn btn-sm btn-danger btn-delete">Xóa</button>
+ </div>
+        <?php }?>
+        
+        <div class="row-slider-hide clearfix"></div>
     </div>
     <button type="button" class="btn btn-info btn-add">Thêm ảnh</button>
     <hr>
@@ -99,11 +122,29 @@ $module = $this->data["module"][0];
 </form>
 
 <script>
+    id_input_link =<?= count($config) ?>;
     $(".btn-add").click(function () {
-        var x = $(".row-slider-hide").html($(".row-slider").html());
+
+        id_input_link += 1;
+        var x = $(".row-slider-hide").html($(".row-slider-add").html());
         x.removeClass("row-slider-hide").addClass("row-slider");
-        $(".list-row-slider").append('<div class="row-slider-hide"></div>');
+        x.find("a#openCKf").attr("onclick", "BrowseServer('set_link" + id_input_link + "', 'Images')");
+        x.find("input.module_img").attr("id", "set_link" + id_input_link).attr("name", "module_image[]").attr("disabled", false);
+        x.find("input.module_link").attr("name", "module_link[]").attr("disabled", false);
+
+        $(".list-row-slider").append('<div class="row-slider-hide clearfix"></div>');
+
+    });
+
+    $(document).on("click", ".btn-delete", function () {
+        var el = $(this);
+        _delete = function (el) {
+            el.parents(".row-slider").remove();
+        };
+
+        var x = confirm("Bạn có chắc muốn xóa");
+        if (x)
+            _delete(el);
 
     })
-
 </script>

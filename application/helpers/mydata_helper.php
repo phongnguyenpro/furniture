@@ -35,5 +35,5 @@ function get_module_type() {
 }
 function get_module_location()
 {
-   return array("header"=>"header","menu"=>"menu","main"=>"main","left"=>"left","right"=>"right","footer"=>"footer");
+   return array("header"=>"Top đầu trang","menu"=>"Menu, Danh mục sản phẩm","main"=>"Chính giữa trang","left"=>"Phía bên trái","right"=>"Phía bên phải","footer"=>"Phía dưới trang");
 }

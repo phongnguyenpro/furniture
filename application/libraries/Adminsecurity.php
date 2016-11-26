@@ -94,6 +94,18 @@ class Adminsecurity
                     )
                 )
         ),
+        "Module"=>array(
+            "attr"=>"",
+            "controller"=>
+                array(
+                    "Module"=>array(
+                        "attr"=>array("label"=>"Quản lý"),
+                        "action"=>array(
+                            "index"
+                        )
+                    )
+                )
+        )
     );
 
     public function menu_item()

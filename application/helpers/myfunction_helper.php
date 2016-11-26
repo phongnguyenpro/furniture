@@ -1,30 +1,25 @@
 <?php
 
-function load_admin_view($name)
-{
+function load_admin_view($name) {
 
     return BASE_URL . "application/views/adminsecurity/" . $name;
 }
 
-function load_admin_public($name)
-{
+function load_admin_public($name) {
 
     return BASE_URL . "application/views/adminsecurity/public/" . $name;
 }
 
-function load_frontend_view($name)
-{
+function load_frontend_view($name) {
     return BASE_URL . "application/views/" . THEME . "/" . $name;
 }
 
-function load_public($name)
-{
+function load_public($name) {
 
     return BASE_URL . "public/" . $name;
 }
 
-function generate_password($length = 8)
-{
+function generate_password($length = 8) {
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $count = mb_strlen($chars);
 
@@ -37,8 +32,7 @@ function generate_password($length = 8)
 }
 
 //========================================== xử lý dữ liệu===========================
-function check_post($post, $array = array())
-{
+function check_post($post, $array = array()) {
     $check_isset = true;
     foreach ($array as $value) {
         if (!isset($post[$value])) {
@@ -49,8 +43,7 @@ function check_post($post, $array = array())
     return $check_isset;
 }
 
-function checksum($data = "")
-{
+function checksum($data = "") {
     if (isset($data['checksum'])) {
         $checksum = $data['checksum'];
         unset($data['checksum']);
@@ -64,8 +57,7 @@ function checksum($data = "")
         return false;
 }
 
-function string_input($str)
-{
+function string_input($str) {
     //   \pL đại diện cho các kí tự chữ cái kể cả unicode
     //\pN đại diện cho các kí tự số
     //\x20-\x7F đại diện cho các kí tự chữ cái Latinh và các chữ số
@@ -79,14 +71,12 @@ function string_input($str)
     return $str;
 }
 
-function string_output($str)
-{
+function string_output($str) {
     $str = str_replace("<br>", "\r\n", $str);
     return $str = stripslashes($str);
 }
 
-function slug($str)
-{
+function slug($str) {
     $str = trim(mb_strtolower($str, "UTF-8"));
     $str = preg_replace('/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/', 'a', $str);
     $str = preg_replace('/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/', 'e', $str);
@@ -100,59 +90,50 @@ function slug($str)
     return string_lower($str);
 }
 
-function price_input($str)
-{
+function price_input($str) {
     return str_replace('.', '', $str);
 }
 
-function loaibodau($str)
-{
+function loaibodau($str) {
     $str = string_input($str);
 
     $unicode = array('a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ', 'd' => 'đ', 'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ', 'i' => 'í|ì|ỉ|ĩ|ị', 'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ', 'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự', 'y' => 'ý|ỳ|ỷ|ỹ|ỵ',
-
         'A' => 'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ', 'D' => 'Đ', 'E' => 'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ', 'I' => 'Í|Ì|Ỉ|Ĩ|Ị', 'O' => 'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ', 'U' => 'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự', 'Y' => 'Ý|Ỳ|Ỷ|Ỹ|Ỵ',);
 
     foreach ($unicode as $nonUnicode => $uni) {
         $str = preg_replace("/($uni)/i", $nonUnicode, $str);
     }
     return string_lower($str);
-
 }
 
-function string_lower($str)
-{
+function string_lower($str) {
     $str = mb_convert_case($str, MB_CASE_LOWER, "UTF-8");
     return $str;
 }
 
-
-function string_upper($str)
-{
+function string_upper($str) {
     $str = mb_convert_case($str, MB_CASE_UPPER, "UTF-8");
     return $str;
 }
 
-function string_title($str)
-{
+function string_title($str) {
     $str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");
     return $str;
 }
 
-function remove_empty($str)
-{
+function remove_empty($str) {
     return $str = preg_replace('/\s\s+/', ' ', $str);
 }
 
 //======================Session============================
 
-function session_init()
-{
-    @session_start();
+function session_init() {
+    if (session_status() == PHP_SESSION_NONE) {
+        @session_start();
+    }
 }
 
-function session_set($key, $value)
-{
+function session_set($key, $value) {
     session_init();
     if (is_array($value))
         $_SESSION[$key] = serialize($value);
@@ -160,8 +141,7 @@ function session_set($key, $value)
         $_SESSION[$key] = $value;
 }
 
-function session_get($key)
-{
+function session_get($key) {
     session_init();
     if (isset($_SESSION[$key])) {
         if (@unserialize($_SESSION[$key]))
@@ -171,22 +151,19 @@ function session_get($key)
         return false;
 }
 
-function session_delete($key)
-{
+function session_delete($key) {
     session_init();
     if (isset($_SESSION[$key]))
         unset($_SESSION[$key]);
 }
 
 //========================= DATETIME ==============================
-function today($format = "datetime")
-{
+function today($format = "datetime") {
     $format = $format == "date" ? "Y-m-d" : "Y-m-d H:i:s";
     return date($format);
 }
 
-function date_input($date, $format = "d/m/Y")
-{
+function date_input($date, $format = "d/m/Y") {
     if ($date) {
         $datetime = DateTime::createFromFormat($format, $date)->format("Y-m-d");
         return date('Y-m-d', strtotime($datetime));
@@ -194,21 +171,18 @@ function date_input($date, $format = "d/m/Y")
         return today();
 }
 
-function date_out($date)
-{
+function date_out($date) {
     return date('d/m/Y', strtotime($date));
 }
 
-function validate_date($date, $format)
-{
+function validate_date($date, $format) {
     $d = DateTime::createFromFormat($format, $date);
     return $d && $d->format($format) == $date;
 }
 
 //===== function for sortable and nestable =====
 
-function sort_data($json)
-{
+function sort_data($json) {
     $data = array();
     $sort = json_decode($json);
     $index = 1;
@@ -225,16 +199,14 @@ function sort_data($json)
 
 // ======= extention === 
 
-function debug($parameter = "")
-{
+function debug($parameter = "") {
     echo "<pre>";
     print_r($parameter);
     echo "</pre>";
     exit();
 }
 
-function delete_image($name, $type = "product")
-{
+function delete_image($name, $type = "product") {
     if (strlen($name) > 3) {
         $link_full = "public/upload/images/" . $type . "/" . $name;
         $link_thumb = "public/upload/images/thumb_" . $type . "/" . $name;
@@ -245,8 +217,7 @@ function delete_image($name, $type = "product")
     }
 }
 
-function load_config($constans = array())
-{
+function load_config($constans = array()) {
     $xml = simplexml_load_file("public/file/xml/config.xml") or die("Error: Cannot create object");
     if (empty($constans)) {
         foreach ($xml as $key => $value) {
@@ -262,8 +233,7 @@ function load_config($constans = array())
 }
 
 //  =====  category, menu ====
-function search_all_schild($data, $id_danhmuc, $list_child)
-{
+function search_all_schild($data, $id_danhmuc, $list_child) {
     if (isset($data['parent'][$id_danhmuc])) {
         foreach ($data['parent'][$id_danhmuc] as $value) {
             $list_child[] = $value;
@@ -276,12 +246,11 @@ function search_all_schild($data, $id_danhmuc, $list_child)
 //  =========== cache view  ============ //
 
 
-function cache_view_start($name = "", $time = 86400)
-{
+function cache_view_start($name = "", $time = 86400) {
     $name = "application/cache/html/" . $name;
     //time() <= (fileatime($cacheFile) + $time_update_cache
     if (file_exists($name) &&
-        (filemtime($name) > (time() - $time)) && CACHE
+            (filemtime($name) > (time() - $time)) && CACHE
     ) {
         return unserialize(file_get_contents($name));
     } else {
@@ -291,8 +260,7 @@ function cache_view_start($name = "", $time = 86400)
     }
 }
 
-function cache_view_end($name)
-{
+function cache_view_end($name) {
     $name = "application/cache/html/" . $name;
     if (CACHE) {
         $content = ob_get_contents();
@@ -304,13 +272,11 @@ function cache_view_end($name)
 }
 
 // =============== check user login =======//
-function check_login_user($arr)
-{
+function check_login_user($arr) {
     return false;
 }
 
-function check_url($arr, $id)
-{
+function check_url($arr, $id) {
     if (!is_numeric($id))
         return false;
     foreach ($arr as $value) {
@@ -319,9 +285,9 @@ function check_url($arr, $id)
     }
     return true;
 }
+
 // ============== ******====================//
-function phantrangajax($page_count, $cur_page, $link)
-{
+function phantrangajax($page_count, $cur_page, $link) {
     $current_range = array(($cur_page - 2 < 1 ? 1 : $cur_page - 2), ($cur_page + 2 > $page_count ? $page_count : $cur_page + 2));
 
     // First and Last pages
@@ -340,8 +306,7 @@ function phantrangajax($page_count, $cur_page, $link)
         return $previous_page . $first_page . implode(' ', $pages) . $last_page . $next_page;
 }
 
-function kiemtranull($data)
-{
+function kiemtranull($data) {
     if (is_array($data) || $data === NULL) {
         if (!empty($data))
             return true;
@@ -355,9 +320,8 @@ function kiemtranull($data)
     }
 }
 
-function neods($string, $len)
-{
-    $string = strip_tags($string);//bo php va html
+function neods($string, $len) {
+    $string = strip_tags($string); //bo php va html
     if ($len > strlen($string)) {
         $len = strlen($string);
     };
@@ -375,11 +339,9 @@ function neods($string, $len)
     return $string;
 }
 
-function tien($str)
-{
+function tien($str) {
     if ($str != 0)
         return str_replace(',', '.', number_format($str));
     else
         return '0';
-
 }

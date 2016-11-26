@@ -1,4 +1,7 @@
 
+<?php 
+session_set("module_page",$this->data["page"]);
+?>
 <ol class="breadcrumb">
     <li class="active">
         <i class="fa fa-dashboard"></i>Quản trị
@@ -139,6 +142,7 @@ foreach ($this->data["module"] as $k => $v) {
                                             <?= $val_module["module_name"] ?>
                                         </div>
                                         <div class="pull-right">
+                                            <a onclick="_confirm_link('<?= ADMIN_URL."module/delete/".$val_module["module_id"] ?>')"    class="md-btn md-btn-flat-danger">Delete</a>
                                             <a data-type="<?= $k ?>" data-id="<?= $val_module["module_id"] ?>"  class="md-btn md-btn-flat-primary btn-edit">Edit</a>
                                         </div>
 

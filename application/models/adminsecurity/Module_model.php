@@ -19,7 +19,10 @@ class Module_model extends MY_Model {
     function insert($data) {
         $page = $data["page"];
         unset($data["page"]);
+        if(isset($data["module_page"]))
         $list_page = $data["module_page"];
+        else 
+            $list_page =array(-1);
         unset($data["module_page"]);
         if (empty($list_page))
             $list_page = array("0" => -1);
@@ -35,9 +38,26 @@ class Module_model extends MY_Model {
     {
         $data=array();
         $data["module"]=$this->mydb->select("select * from module where module_id=:module_id",array("module_id"=>$module_id));
-        $data["page"]=$this->mydb->select("select * from module_detail where module_id=:module_id",array("module_id"=>$module_id));
+        $result=$this->mydb->select("select module_detail_page  from module_detail where module_id=:module_id",array("module_id"=>$module_id));
+        foreach ($result as $k=>$v)
+        {
+            $data["page"][]=$v["module_detail_page"];
+        }
+        
         return $data;
         
+    }
+    function delete($module_id)
+    {
+        $this->mydb->delete("module","module_id=:module_id",array("module_id"=>$module_id));
+        $this->mydb->delete("module_detail","module_id=:module_id",array("module_id"=>$module_id));
+        if($result["row"]==0 || $result["row"]>0)
+        {
+            $link = session_get("module_page")?"detail/".session_get("module_page"):"";
+            session_set("notify",array("type"=>3,"messager"=>"Xóa module thành công"));
+            Header("Location:".ADMIN_URL."module/".$link);
+             
+        }
     }
 
 }
