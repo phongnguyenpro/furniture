@@ -31,7 +31,13 @@ class Module_model extends MY_Model {
         foreach ($list_page as $k => $v) {
             $this->mydb->insert("module_detail", array("module_id" => $id, "module_detail_page" => $v));
         }
-        debug($id);
+         if($result["row"]==0 || $result["row"]>0)
+        {
+            $link = session_get("module_page")?"detail/".session_get("module_page"):"";
+            session_set("notify",array("type"=>3,"messager"=>"Xóa module thành công"));
+            Header("Location:".ADMIN_URL."module/".$link);
+             
+        }
     }
     
     function config($type,$module_id)
