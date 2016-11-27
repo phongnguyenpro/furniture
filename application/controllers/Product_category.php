@@ -218,6 +218,124 @@ class Product_category extends MY_Controller
             $this->error();
     }
 
+    public function add_cart()
+    {
+        if (check_post($_POST, array("id_sanpham", "soluongthem", "giatri", "id_sanphamchitiet", "checksum"))) {
+            if (checksum($_POST)) {
+//$cook->huycook("giohang");
+//die();
+                if (!isset($_POST['id_sanphamchitiet']))
+                    $this->error();
+
+                unset($_POST['token']);
+                unset($_POST['checksum']);
+
+                foreach ($_POST as $key => $value) {
+                    if (in_array($key, array("id_sanpham", "id_sanphamchitiet", "soluongthem", "giatri")))
+                        $_data[$key] = string_input($value);
+                }
+                $soluongthem = $_data['soluongthem'];
+                if ($soluongthem < 1) {
+                    echo json_encode(array("tinhtrang" => 0));
+                    return false;
+                }
+                if (isset($_COOKIE['giohang'])) {
+                    $giohang = unserialize($_COOKIE['giohang']);
+                    $id_sanphamchitiet = $_data['id_sanphamchitiet'];
+
+                    if ($id_sanphamchitiet == -1) {
+                        unset($_data['id_sanphamchitiet']);
+                    }
+
+
+                    foreach ($giohang as $key => $value) {
+                        if ($value['id_sanpham'] == $_data['id_sanpham']) {
+                            $giatri = explode(",", $value['giatri']);
+                            $giatripost = explode(",", $_data['giatri']);
+                            $kiemtra = array_diff($giatri, $giatripost);
+                            if (empty($kiemtra)) {
+                                // nếu trùng
+                                $giohang[$key]['soluongthem'] = $_data['soluongthem'];
+                                create_cook("giohang", serialize($giohang));
+                                $giohang = $this->model->load_cart($giohang)['giohang'];
+                                echo json_encode(array("status" => 1, 'data' => $giohang));
+                                return;
+                            }
+                        }
+
+                    }
+                    // nếu chưa tồn tại sp
+                    $giohang[] = $_data;
+                    create_cook("giohang", serialize($giohang));
+                    $giohang = $this->model->load_cart($giohang)['giohang'];
+                    echo json_encode(array("status" => 1, 'data' => $giohang));
+                    return;
+                } else {
+                    $temp = $_data['id_sanphamchitiet'];
+
+                    if ($temp == -1) {
+                        unset($_data['id_sanphamchitiet']);
+                        $data[] = $_data;
+                        create_cook("giohang", serialize($data));
+                    } else {
+                        $data[] = $_POST;
+                        create_cook("giohang", serialize($data));
+                    }
+
+                    $data = $this->model->loadgiohang($data)['giohang'];
+                    echo json_encode(array("status" => 1, 'data' => $data));
+                }
+            } else        $this->error(); // checksum
+        } else        $this->error();
+
+    }
+
+    public function delete_cart()
+    {
+        if (check_post($_POST, array("key", "token", "checksum"))) {
+            if (checksum($_POST)) {
+                if (isset($_COOKIE['giohang'])) {
+                    if (isset($_POST['checkout'])) {
+                        $key = string_input($_POST['key']);
+                        $data = unserialize($_COOKIE['giohang']);
+                        unset($data[$key]);
+                        create_cook("giohang", serialize($data));
+                        if (empty($data)) {
+                            echo json_encode(array("status" => 1, "tientotal" => 0, "sl" => 0));
+                            return;
+                        }
+                        $kq = $this->model->load_cart($data);
+                        $data = $kq['giohang'];
+                        $set = $kq['set'];
+                        if ($set) {
+                            echo json_encode(array("status" => 0));
+                            return;
+                        }
+                        $tientotal = 0;
+                        foreach ($data as $value) {
+                            $tongtiensanpham = $value['giasanpham'] * $value['soluongthem'];
+                            $tiengiamgia = ($value['giasanpham'] * $value['soluongthem']) * ($value['giamgia'] / 100);
+                            $tien = $tongtiensanpham - $tiengiamgia;
+                            $tientotal += $tien;
+                        }
+
+                        echo json_encode(array("status" => 1, "tientotal" => $tientotal, "sl" => count($data)));
+
+                    } else {
+                        $key = string_input($_POST['key']);
+                        $data = unserialize($_COOKIE['giohang']);
+                        unset($data[$key]);
+                        $kq = $this->model->load_cart($data);
+                        create_cook("giohang", serialize($data));
+
+                        echo json_encode(array("status" => 1, 'data' => $kq['giohang']));
+                    }
+                } else  $this->error();
+            } else          $this->error();
+        } else        $this->error();
+
+    }
+
     public function error()
     {
     }

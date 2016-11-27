@@ -177,6 +177,27 @@ function session_delete($key)
         unset($_SESSION[$key]);
 }
 
+//======================Cookie============================
+function create_cook($key, $value)
+{
+    setcookie($key, $value, time() + (86400 * 10), "/");
+}
+
+function delete_cook($key, $value = FALSE)
+{
+    setcookie($key, $value, time() - (86400 * 10), '/');
+}
+
+function create_cook_time($key, $value, $time)
+{
+    setcookie($key, $value, time() + $time, "/");
+}
+
+function delete_cook_time($key, $time, $value = false)
+{
+    setcookie($key, $value, time() - $time, '/');
+}
+
 //========================= DATETIME ==============================
 function today($format = "datetime")
 {
@@ -227,7 +248,7 @@ function sort_data($json)
 function debug($parameter = "")
 {
     echo "<pre>";
-    print_r($parameter);
+    print_r(session_get('token'));
     echo "</pre>";
     exit();
 }

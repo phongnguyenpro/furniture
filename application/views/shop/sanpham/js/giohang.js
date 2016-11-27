@@ -43,21 +43,21 @@ $(document).ready(function () {
                         formdata.append("giatri", giatri);
                         formdata.append("token", token);
                         var http = new XMLHttpRequest();
-                        http.open("POST", URL + "checksum/createchecksum", true);
+                        http.open("POST", BASE_URL + "checksum/createchecksum", true);
                         http.send(formdata);
                         http.onreadystatechange = function (event) {
                             if (http.readyState == 4 && http.status == 200) {
                                 var ketqua = JSON.parse(http.responseText);
-                                if (ketqua.tinhtrang == 1) {
+                                if (ketqua.status == 1) {
                                     token = ketqua.token;
                                     var checksum = ketqua.checksum;
                                     formdata.append("checksum", checksum);
                                     http = new XMLHttpRequest();
-                                    http.open("POST", URL + "sanpham/themgiohang", true);
+                                    http.open("POST", BASE_URL + "product_category/add_cart", true);
                                     http.onreadystatechange = function (event) {
                                         if (http.readyState == 4 && http.status == 200) {
                                             ketqua = JSON.parse(http.responseText);
-                                            if (ketqua.tinhtrang == 1) {
+                                            if (ketqua.status == 1) {
                                                 capnhatgiohang(ketqua);
                                                 btnlinkthanhcong(curren, "Thêm vào giỏ hàng");
                                             }
@@ -161,21 +161,21 @@ $(document).ready(function () {
                         formdata.append("giatri", giatri);
                         formdata.append("token", token);
                         var http = new XMLHttpRequest();
-                        http.open("POST", BASE_URL + "Checksum/createchecksum", true);
+                        http.open("POST", BASE_URL + "checksum/createchecksum", true);
                         http.send(formdata);
                         http.onreadystatechange = function (event) {
                             if (http.readyState == 4 && http.status == 200) {
                                 var ketqua = JSON.parse(http.responseText);
-                                if (ketqua.tinhtrang == 1) {
+                                if (ketqua.status == 1) {
                                     token = ketqua.token;
                                     var checksum = ketqua.checksum;
                                     formdata.append("checksum", checksum);
                                     http = new XMLHttpRequest();
-                                    http.open("POST", BASE_URL + "sanpham/themgiohang", true);
+                                    http.open("POST", BASE_URL + "product_category/add_cart", true);
                                     http.onreadystatechange = function (event) {
                                         if (http.readyState == 4 && http.status == 200) {
                                             ketqua = JSON.parse(http.responseText);
-                                            if (ketqua.tinhtrang == 1) {
+                                            if (ketqua.status == 1) {
                                                 capnhatgiohang(ketqua);
                                                 btnlinkthanhcong(curren, "Thêm vào giỏ hàng");
                                             }
@@ -215,23 +215,22 @@ $(document).ready(function () {
         formdata.append("key", key);
         formdata.append("token", token);
         var http = new XMLHttpRequest();
-        http.open("POST", URL + "checksum/createchecksum", true);
+        http.open("POST", BASE_URL + "checksum/createchecksum", true);
         http.onreadystatechange = function (event) {
             if (http.readyState == 4 && http.status == 200) {
                 var ketqua = JSON.parse(http.responseText);
-                if (ketqua.tinhtrang == 1) {
+                if (ketqua.status == 1) {
                     token = ketqua.token;
                     var checksum = ketqua.checksum;
                     formdata.append("checksum", checksum);
                     http = new XMLHttpRequest();
-                    http.open("POST", URL + "sanpham/xoagiohang", true);
+                    http.open("POST", BASE_URL + "product_category/delete_cart", true);
                     http.onreadystatechange = function (event) {
                         if (http.readyState == 4 && http.status == 200) {
                             o = JSON.parse(http.responseText);
-                            if (o.tinhtrang == 1) {
+                            if (o.status == 1) {
                                 if (capnhatgiohang(o)) {
                                     item.parent().parent().remove();
-
                                 }
                             }
                             else {
@@ -260,7 +259,7 @@ $(document).ready(function () {
             total++;
             html += '<li class="product-info">';
             html += '<div class="p-left">  <a data-id="' + key + '" class="remove_link xoasanpham"></a>  <a >';
-            html += '<img class="img-responsive" src="' + URL + 'public/upload/images/thumb_hinhsanpham/' + obj.hinhsanpham + '" alt="p10"> </a> </div>';
+            html += '<img class="img-responsive" src="' + BASE_URL + 'public/upload/images/thumb_hinhsanpham/' + obj.hinhsanpham + '" alt="p10"> </a> </div>';
             html += '<div class="p-right">';
             html += '<p class="p-name">' + obj.tensanpham + '</p>';
             if (obj.tengiatri != '')
@@ -279,7 +278,7 @@ $(document).ready(function () {
         html += '</ul></div>';
         html += ' <div class="toal-cart"> <span>Tổng cộng:</span>';
         html += '  <span class="toal-price pull-right">$' + format1(tongtien, '') + '&#8363;</span> </div>'
-        html += '<div class="cart-buttons">  <a href="' + URL + 'sanpham/checkout" class="btn-check-out">Lập hóa đơn</a>  </div></div>';
+        html += '<div class="cart-buttons">  <a href="' + BASE_URL + 'sanpham/checkout" class="btn-check-out">Lập hóa đơn</a>  </div></div>';
 
         $('html, body').animate({
             scrollTop: ($(".notify-left").offset().top) - 100

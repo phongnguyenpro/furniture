@@ -7,7 +7,7 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
         $this->load->helper(array("myfunction"));
-
+        session_init();
 
         $this->load->library("mydb");
 

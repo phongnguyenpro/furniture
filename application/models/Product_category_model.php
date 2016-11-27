@@ -448,6 +448,165 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
             $this->error();
     }
 
+    function load_cart($giohang = -1)
+    {
+        $setlai = false;
+        $idtontai = array();
+        $id = array();
+        $kq = $this->mydb->select("select attr_val_id,attr_val_value,attr_val_label from attr_val", array());
+        foreach ($kq as $value) {
+            $data['thuoctinhchon'][$value['attr_val_id']] = $value;
+        }
+
+        if ($giohang == -1)
+            if (isset($_COOKIE['giohang']))
+                $giohang = unserialize($_COOKIE['giohang']);
+            else
+                $giohang = array();
+
+
+        // kiem tra gio hang
+
+        foreach ($giohang as $key => $value) {
+            if (check_post($value, array("soluongthem", "id_sanpham", "giatri"))) {
+                if ($value['soluongthem'] < 1) {
+                    unset($giohang[$key]);
+                    $setlai = true;
+                }
+            } else {
+                unset($giohang[$key]);
+                $setlai = true;
+            }
+        }
+        $giohangtemp = $giohang;  // de ti luu lai
+        $id = array();
+        $idgiohang = array();
+        foreach ($giohang as $key => $value) {
+            if (isset($value['id_sanphamchitiet']))
+                $idgiohang[1][$key] = $value['id_sanphamchitiet'];
+            else
+                $idgiohang[-1][$key] = $value['id_sanpham'];
+
+            $id[] = $value['id_sanpham'];
+            $giatri = explode(",", $value['giatri']);
+            if (!empty($giatri)) {
+                $ten = array();
+                foreach ($giatri as $valuegiatri) {
+                    if (isset($data['thuoctinhchon'][$valuegiatri]['nhan']))
+                        $ten[] = $data['thuoctinhchon'][$valuegiatri]['nhan'];
+                }
+                $giohang[$key]['tengiatri'] = implode("/", $ten);
+            } else {
+                $giohang[$key]['tengiatri'] = "";
+            }
+        }
+        if (isset($idgiohang[1])) {
+            // san pham chi tiet
+            $sqlwhere = "product_detail_id=" . implode(" or product_detail_id=", $idgiohang[1]);
+            $kq = $this->mydb->select("select product_detail_total,product_detail_price,product_detail_avatar,product_detail_id,product_sale,product_name,product_code,product_slug from product_detail,product where product_detail.product_id=product.product_id and ($sqlwhere)");
+            foreach ($giohang as $key => $value) {
+                if (isset($value['id_sanphamchitiet'])) {
+                    foreach ($kq as $value2) {
+                        if ($value['id_sanphamchitiet'] == $value2['product_detail_id']) {
+                            $sosanh = true;
+                            // so sanh thuoc tinh chon
+                            $arrthuoctinh = $this->mydb->select("select attr_val_id from productattr_detail where product_detail_id=:product_detail_id", array("product_detail_id" => $value2['product_detail_id']));
+                            $thuoctinhssgiohang = explode(",", $giohang[$key]['giatri']);
+                            //truong hop ngoai le
+                            $sqlwhere = "attr_val_id=" . implode(" or attr_val_id=", $thuoctinhssgiohang);
+                            $kqthuoctinh = $this->mydb->select("select count(DISTINCT(attr_val_id)) as row from productattr_detail where product_id=:product_id and ($sqlwhere)", array("product_id" => $giohang[$key]['id_sanpham']));
+                            if (empty($kqthuoctinh)) {
+                                $sosanh = false;
+                            } else {
+                                if ($kqthuoctinh[0]['row'] != count($thuoctinhssgiohang)) {
+                                    $sosanh = false;
+                                }
+                            }
+                            // so sanh thuoc tinh chon
+                            foreach ($arrthuoctinh as $value) {
+                                $giatrisosanh = $value['attr_val_id'];
+                                if (!in_array($giatrisosanh, $thuoctinhssgiohang))
+                                    $sosanh = false;
+                            }
+
+                            if ($sosanh) {
+
+                                $idtontai[$key] = $value2['product_detail_id'];
+                                $giohang[$key]['soluongsanpham'] = $value2['product_detail_total'];
+                                $giohang[$key]['tensanpham'] = $value2['product_name'];
+                                $giohang[$key]['masanpham'] = $value2['product_code'];
+                                $giohang[$key]['giasanpham'] = $value2['product_detail_price'];
+                                $giohang[$key]['hinhsanpham'] = $value2['product_detail_avatar'];
+                                $giohang[$key]['giamgia'] = $value2['product_sale'];
+                                $giohang[$key]['slugsanpham'] = $value2['product_slug'];
+//                                $giohang[$key]['loinhuan'] = $value2['loinhuan'];
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            foreach ($idgiohang[1] as $key => $value) {
+                if (!isset($idtontai[$key])) {
+                    // xoa di
+                    $setlai = true;
+                    unset($giohang[$key]);
+                    unset($giohangtemp[$key]);
+                }
+            }
+        }
+
+        if (isset($idgiohang[-1])) {
+            $sqlwhere = "product_id=" . implode(" or product_id=", $idgiohang[-1]);
+            $kq = $this->mydb->select("select product_total,product_price,product_avatar,product_sale,product_id,product_name,product_code,product_slug from product where ($sqlwhere)");
+            foreach ($giohang as $key => $value) {
+                if (!isset($value['id_sanphamchitiet'])) {
+                    foreach ($kq as $value2) {
+                        if ($value['id_sanpham'] == $value2['product_id']) {
+                            $sosanh = true;
+                            if (!empty($giohang[$key]['giatri'])) {
+                                //so sanh thuoc tinh
+                                $thuoctinhssgiohang = explode(",", $giohang[$key]['giatri']);
+                                $sqlwhere = "attr_val_id=" . implode(" or attr_val_id=", $thuoctinhssgiohang);
+                                $kqthuoctinh = $this->mydb->select("select count(DISTINCT(attr_val_id)) as row from productattr_detail where product_id=:product_id and ($sqlwhere)", array("product_id" => $giohang[$key]['id_sanpham']));
+                                if (empty($kqthuoctinh)) {
+                                    $sosanh = false;
+                                } else {
+                                    if ($kqthuoctinh[0]['row'] != count($thuoctinhssgiohang))
+                                        $sosanh = false;
+                                }
+                            }
+                            if ($sosanh) {
+                                $idtontai[$key] = $value2['product_id'];
+                                $giohang[$key]['soluongsanpham'] = $value2['product_total'];
+                                $giohang[$key]['tensanpham'] = $value2['product_name'];
+                                $giohang[$key]['masanpham'] = $value2['product_code'];
+                                $giohang[$key]['giasanpham'] = $value2['product_price'];
+                                $giohang[$key]['hinhsanpham'] = $value2['product_avatar'];
+                                $giohang[$key]['giamgia'] = $value2['product_sale'];
+                                $giohang[$key]['slugsanpham'] = $value2['product_slug'];
+//                                $giohang[$key]['loinhuan'] = $value2['loinhuan'];
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            foreach ($idgiohang[-1] as $key => $value) {
+                if (!isset($idtontai[$key])) {
+                    // xoa di
+                    $setlai = true;
+                    unset($giohang[$key]);
+                    unset($giohangtemp[$key]);
+                }
+            }
+        }
+        if ($setlai) {
+            create_cook("giohang", serialize($giohangtemp));
+        }
+        return array("giohang" => $giohang, "id" => $id, "set" => $setlai);
+    }
+
     public function error()
     {
     }
