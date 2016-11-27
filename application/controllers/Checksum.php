@@ -3,15 +3,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //$CI = &get_instance();
-class Checksum extends MY_Controller {
+class Checksum extends MY_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct("Checksum");
     }
 
-    public function createchecksum() {
+    public function createchecksum()
+    {
+        session_start();
+        debug($_SESSION['token']);
         if (isset($_SESSION['token']) && isset($_POST['token'])) {
-
             if ($_POST['token'] == $_SESSION['token']) {
                 unset($_SESSION['token']);
                 $_SESSION['token'] = generate_password();

@@ -206,7 +206,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 
                 <div class="form-action">
                     <div class="button-group">
-                        <button class="btn-add-cart " <?= $data['sanpham']['product_total'] == 0 ? "disabled" : "" ?>
+                        <button class="btn-add-cart" <?= $data['sanpham']['product_total'] == 0 ? "disabled" : "" ?>
                                 data-hinhsanpham="<?= $data['sanpham']['product_avatar'] ?>"
                                 data-soluongsanpham="<?= $data['sanpham']['product_total'] ?>"
                                 data-giamgia="<?= $data['sanpham']['product_sale'] ?>"
