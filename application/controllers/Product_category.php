@@ -19,7 +19,7 @@ class Product_category extends MY_Controller
                 $menu = $this->module_model->menu();
                 $footer = null;
                 $this->model->setProductCategory($danhmuc);
-                if ($concapmot = $this->model->findChildCategory_FirstLevel($danhmuc, $id_danhmuc, array()))
+                if ($concapmot = search_all_child_first_level($danhmuc, $id_danhmuc, array()))
                     $this->category_more($id_danhmuc, $concapmot, $menu, $danhmuc, $footer);
                 else {
                     // ORDER BY
@@ -63,7 +63,6 @@ class Product_category extends MY_Controller
                     $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer);
                 }
             } else {
-
                 // ORDER BY
                 if (isset($_GET['orderby']))
                     $orderby = $_GET['orderby'];
@@ -122,8 +121,8 @@ class Product_category extends MY_Controller
 //        $data['footer'] = $footer;
         $data['category'] = $danhmuc;
 
-//        $module = new Module();
-//        $data['module'] = $module->loadmodule("danhmucsanpham");
+        $this->load->model(array("module_model"));
+        $data['module'] = $this->module_model->run("product");
 
         $this->data = $data;
         $this->data["meta"] = array("title" => "Home", "description" => "Home", "image" => "image");
@@ -156,8 +155,8 @@ class Product_category extends MY_Controller
         $data['category'] = $danhmuc;
 //        $data['footer'] = $footer;
 
-//        $module = new Module();
-//        $data['module'] = $module->loadmodule("danhmucsanpham");
+        $this->load->model(array("module_model"));
+        $data['module'] = $this->module_model->run("product");
 
 //        $this->view->data = $data;
 //
@@ -174,7 +173,7 @@ class Product_category extends MY_Controller
         echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, true));
     }
 
-    public function product_detail($id_sanpham, $i = false)
+    public function product($id_sanpham, $i = false)
     {
 //        $xuly = new Xulydulieu;
 //        if (isset($_GET['vip'])) {
@@ -209,8 +208,8 @@ class Product_category extends MY_Controller
             $data['category'] = $danhmuc;
 //            $data['footer'] = $header->loadfooter();
 
-//            $module = new Module();
-//            $data['module'] = $module->loadmodule("chitietsanpham");
+            $this->load->model(array("module_model"));
+            $data['module'] = $this->module_model->run("product");
 
             $this->data = $data;
 

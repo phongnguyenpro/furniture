@@ -16,24 +16,6 @@ class Product_category_model extends MY_Model
         $this->danhmucsanpham = $data;
     }
 
-    public function findChildCategory_FirstLevel($data, $id_danhmuc, $danhsach)
-    {
-        if (isset($data['parent'][$id_danhmuc])) {
-            return $data['parent'][$id_danhmuc];
-        } else
-            return false;
-    }
-
-    public function findChildCategory_AllLevel($data, $id_danhmuc, $danhsach)
-    {
-        if (isset($data['parent'][$id_danhmuc])) {
-            foreach ($data['parent'][$id_danhmuc] as $value) {
-                $danhsach[] = $value;
-                $danhsach = $this->findChildCategory_AllLevel($data, $value, $danhsach);
-            }
-        }
-        return $danhsach;
-    }
 
     public function findParentAll($data, $id_danhmuc, $danhsach)
     {
@@ -61,7 +43,7 @@ class Product_category_model extends MY_Model
         $listdanhmuc = array();
         foreach ($concapmot as $value) {
             $danhsachcon = array(); // liet ke danh sach con
-            if (empty($danhsachcon = $this->findChildCategory_AllLevel($this->danhmucsanpham, $value, array())))
+            if (empty($danhsachcon = search_all_child($this->danhmucsanpham, $value, array())))
                 $danhsachcon = array($value);
             else {
                 $listdanhmuc[$value] = $danhsachcon;   // để sau này add sản phẩm vô

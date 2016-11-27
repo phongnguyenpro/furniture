@@ -1,8 +1,10 @@
 <?php
 
-class MY_Controller extends CI_Controller {
+class MY_Controller extends CI_Controller
+{
 
-    public function __construct($name_controller, $type = null) {
+    public function __construct($name_controller, $type = null)
+    {
         parent::__construct();
         $this->load->helper(array("myfunction"));
 
@@ -26,9 +28,9 @@ class MY_Controller extends CI_Controller {
                 $this->load->model($name_controller . '_model', 'model');
             }
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
-            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU",
-                             "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI",
-                              "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE"));
+            load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "LIMITSANPHAMLIENQUAN",
+                "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI",
+                "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE"));
         }
     }
 
