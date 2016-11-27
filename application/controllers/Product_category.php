@@ -113,9 +113,9 @@ class Product_category extends MY_Controller
 
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
-//        $meta['mieuta'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
-//        $meta['image'] = LOGO;
-//        $data['meta'] = $meta;
+        $meta['description'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
+        $meta['image'] = LOGO;
+        $data['meta'] = $meta;
 
         $data['menu'] = $menu;
 //        $data['footer'] = $footer;
@@ -125,7 +125,6 @@ class Product_category extends MY_Controller
         $data['module'] = $this->module_model->run("product");
 
         $this->data = $data;
-        $this->data["meta"] = array("title" => "Home", "description" => "Home", "image" => "image");
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/danhmucnhieu');
         $this->load->view(THEME . '/footer');
@@ -145,11 +144,11 @@ class Product_category extends MY_Controller
         // end load sap xep
         $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
 
-//        $meta = array();
-//        $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
-//        $meta['mieuta'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
-//        $meta['image'] = LOGO;
-//        $data['meta'] = $meta;
+        $meta = array();
+        $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
+        $meta['description'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
+        $meta['image'] = LOGO;
+        $data['meta'] = $meta;
 
         $data['menu'] = $menu;
         $data['category'] = $danhmuc;
@@ -162,7 +161,6 @@ class Product_category extends MY_Controller
 //
         $this->sapxep = $sapxep;
         $this->data = $data;
-        $this->data["meta"] = array("title" => "Home", "description" => "Home", "image" => "image");
         $this->load->view(THEME . "/header");
         $this->load->view(THEME . "/sanpham/danhmuc");
         $this->load->view(THEME . "/footer");
