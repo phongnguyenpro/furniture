@@ -15,15 +15,15 @@
                               <a href="<?= $value['module_link'] ?>">
                                 <img alt="Funky roots" src="<?= $value['module_image'] ?>" title="<?= $this->data['module']['slider']["main"][1]["name"] ?>" />
                               </a>
-                              </li>  
-                              
+                              </li>
+
                             <?php } ?>
                         </ul>
                     </div>
                 </div>
                 <div class="header-banner banner-opacity">
-                    <ul>        
-                 <?php if(isset($this->data['module']['banner']['main'][2]["data"])){ 
+                    <ul>
+                 <?php if(isset($this->data['module']['banner']['main'][2]["data"])){
                         foreach ($this->data['module']['banner']['main'][2]["data"]  as $value){
                      ?>
                         <li><a href=""><img alt="Funky roots" src="<?= $value['module_image'] ?>" /></a></li>
@@ -55,7 +55,7 @@
         <div class="col-xs-6 col-sm-3 service-item">
             <div class="icon">
             </div>
-            
+
             <div class="info" >
                 <a   ><h3>Phụ vụ</h3></a>
                 <span> 24/7</span>

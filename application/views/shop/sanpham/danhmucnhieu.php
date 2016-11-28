@@ -52,7 +52,7 @@ unset($data['bre']);
                             <div class="">
                                 <div class="left-block">
                                     <a title="<?= $value['product_name'] ?>"
-                                       href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"
+                                       href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
                                        class="loading">
                                         <img class="img-responsive " title="<?= $value['product_name'] ?>"
                                              alt="<?= $value['product_name'] ?>"
@@ -71,7 +71,8 @@ unset($data['bre']);
                                     <?php
                                     if ($value['product_sale'] > 0) {
                                         ?>
-                                        <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE</div>
+                                        <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
+                                        </div>
                                     <?php } ?>
                                     <div class="group-price">
                                         <?php
@@ -83,7 +84,7 @@ unset($data['bre']);
                                 </div>
                                 <div class="right-block">
                                     <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
+                                                                href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
                                     </h5>
 

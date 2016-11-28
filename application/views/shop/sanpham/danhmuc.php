@@ -144,100 +144,100 @@ $phantrang = $this->data['phantrang'];
         <ul class="row product-list grid dulieusanpham">
             <?php foreach ($this->data['sanpham'] as $value) { ?>
 
-                <li class="col-xs-6 col-sm-4">
-                    <div class="product-container">
-                        <div class="left-block">
-                            <a title="<?= $value['product_name'] ?>"
-                               href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"
-                               class="loading">
-                                <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
-                                     alt="<?= $value['product_name'] ?>"
-                                     data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
-                            </a>
-                            <div class="quick-view">
-                                <a title="Yêu thích" data-id="<?= $value['product_id'] ?>" class="heart yeuthich"></a>
-
-                            </div>
-                            <div class="add-to-cart">
-                                <?php if (kiemtranull($value['product_description'])) { ?>
-                                    <a> <?= neods($value['product_description'], 120) ?></a>
-                                <?php } else {
-                                } ?>
-                            </div>
-                            <?php
-                            if ($value['product_sale'] > 0) {
-                                ?>
-                                <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE</div>
-                            <?php } ?>
-                            <?php
-                            if ($value['product_feature'] == 1) {
-                                ?>
-                                <div class="featured-text"><span></span></div>
-                            <?php } ?>
-
-                            <?php
-                            if ($value['product_new'] == 1) {
-                                ?>
-                                <div class="group-price">
-                                    <span class="product-new">New</span>
-                                </div>
-                            <?php } ?>
+            <li class="col-xs-6 col-sm-4">
+                <div class="product-container">
+                    <div class="left-block">
+                        <a title="<?= $value['product_name'] ?>"
+                           href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
+                           class="loading">
+                            <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
+                                 alt="<?= $value['product_name'] ?>"
+                                 data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
+                        </a>
+                        <div class="quick-view">
+                            <a title="Yêu thích" data-id="<?= $value['product_id'] ?>" class="heart yeuthich"></a>
 
                         </div>
-                        <div class="right-block">
-                            <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                        href=<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
+                        <div class="add-to-cart">
+                            <?php if (kiemtranull($value['product_description'])) { ?>
+                                <a> <?= neods($value['product_description'], 120) ?></a>
+                            <?php } else {
+                            } ?>
+                        </div>
+                        <?php
+                        if ($value['product_sale'] > 0) {
+                            ?>
+                            <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE</div>
+                        <?php } ?>
+                        <?php
+                        if ($value['product_feature'] == 1) {
+                            ?>
+                            <div class="featured-text"><span></span></div>
+                        <?php } ?>
+
+                        <?php
+                        if ($value['product_new'] == 1) {
+                            ?>
+                            <div class="group-price">
+                                <span class="product-new">New</span>
+                            </div>
+                        <?php } ?>
+
+                    </div>
+                    <div class="right-block">
+                        <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
+                                                    href=<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
                             </h5>
 
-                            <div class="content_price">
+                            <div class=" content_price">
 
-                                <div class="info-orther">
-                                    <div class="product-desc">
-                                        <?= neods($value['product_description'], 120) ?>
-                                    </div>
+                            <div class="info-orther">
+                                <div class="product-desc">
+                                    <?= neods($value['product_description'], 120) ?>
                                 </div>
-                                <?php if ($value['product_price'] != $value['product_price_new']) { ?>
-                                    <span class="price product-price"><?= tien($value['product_price_new']) ?>
-                                        &nbsp;₫</span>
-                                    <span class="price old-price"><?= tien($value['product_price']) ?></span>
-                                <?php } ELSE { ?>
-                                    <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
-                                <?php } ?>
                             </div>
-
-                        </div>
+                            <?php if ($value['product_price'] != $value['product_price_new']) { ?>
+                                <span class="price product-price"><?= tien($value['product_price_new']) ?>
+                                    &nbsp;₫</span>
+                                <span class="price old-price"><?= tien($value['product_price']) ?></span>
+                            <?php } ELSE { ?>
+                                <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
+                            <?php } ?>
                     </div>
-                </li>
-            <?php } ?>
 
-
-        </ul>
-        <!-- ./PRODUCT LIST -->
+                </div>
     </div>
+    </li>
+    <?php } ?>
 
-    <!-- ./view-product-list-->
-    <div class="sortPagiBar">
-        <div class="bottom-pagination">
 
-            <nav>
-                <?php
-                $totalpage = $this->data['phantrang']['totalpage'];
-                $currentpage = $this->data['phantrang']['currentpage'];
+    </ul>
+    <!-- ./PRODUCT LIST -->
+</div>
+
+<!-- ./view-product-list-->
+<div class="sortPagiBar">
+    <div class="bottom-pagination">
+
+        <nav>
+            <?php
+            $totalpage = $this->data['phantrang']['totalpage'];
+            $currentpage = $this->data['phantrang']['currentpage'];
+            ?>
+            <ul class="pagination">
+                <?=
+                phantrangajax($totalpage, $currentpage, BASE_URL);
                 ?>
-                <ul class="pagination">
-                    <?=
-                    phantrangajax($totalpage, $currentpage, BASE_URL);
-                    ?>
 
-                </ul>
-            </nav>
-        </div>
-        <form method="GET" id="locsanpham">
-
-
-        </form>
+            </ul>
+        </nav>
     </div>
+    <form method="GET" id="locsanpham">
+
+
+    </form>
+</div>
 </div>
 <!-- ./ Center colunm -->
 </div>
