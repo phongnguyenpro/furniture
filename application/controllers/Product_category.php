@@ -330,9 +330,78 @@ class Product_category extends MY_Controller
 
                         echo json_encode(array("status" => 1, 'data' => $kq['giohang']));
                     }
-                } else  $this->error();
-            } else          $this->error();
-        } else        $this->error();
+                } else
+                    $this->error();
+            } else
+                $this->error();
+        } else
+            $this->error();
+
+    }
+
+    public function checkout()
+    {
+        $data = $this->model->checkout();
+        $data['bre'] = array("item" => "");
+
+        $this->load->model(array("module_model"));
+        $data['category'] = $this->module_model->category();
+        $data['menu'] = $this->module_model->menu();
+//        $data['footer'] = $header->loadfooter();
+
+//        $this->load->model(array("module_model"));
+//        $data['module'] = $this->module_model->run("product");
+
+        $data["bre"]['info'][] = array("ten" => "Lập hóa đơn", "slug" => "#");
+        $data["bre"]['itemdanhmucsanpham'][] = array();
+        $data['checkout'] = true;
+        $this->load->helper(array("mydata"));
+        $data['hinhthucthanhtoan'] = get_checkout_type();
+
+        $meta = array();
+        $meta['title'] = TENSHOP;
+        $meta['description'] = MIEUTA;
+        $meta['image'] = LOGO;
+        $data['meta'] = $meta;
+        $this->data = $data;
+
+        $this->load->view(THEME . '/header');
+        $this->load->view(THEME . '/sanpham/checkout');
+        $this->load->view(THEME . '/footer');
+    }
+
+    public function update_cart()
+    {
+        if (check_post($_POST, array("soluongthem", "key", "token"))) {
+            if (checksum($_POST)) {
+                if (isset($_COOKIE['giohang'])) {
+                    $key = string_input($_POST['key']);
+                    $soluongthem = string_input($_POST['soluongthem']);
+                    $data = unserialize($_COOKIE['giohang']);
+                    $data[$key]['soluongthem'] = $soluongthem;
+                    create_cook("giohang", serialize($data));
+                    $kq = $this->model->load_cart($data);
+                    $data = $kq['giohang'];
+                    $set = $kq['set'];
+                    if (!$set) {
+                        $tienchinhsua = $data[$key]['soluongthem'] * $data[$key]['giasanpham'];
+                        $tienchinhsuagiamgia = $tienchinhsua * ($data[$key]['giamgia'] / 100);
+                        $tienchinhsua = $tienchinhsua - $tienchinhsuagiamgia;
+                        $tientotal = 0;
+                        $tien = 0;
+                        foreach ($data as $value) {
+                            $tongtiensanpham = $value['giasanpham'] * $value['soluongthem'];
+                            $tiengiamgia = ($value['giasanpham'] * $value['soluongthem']) * ($value['giamgia'] / 100);
+                            $tien = $tongtiensanpham - $tiengiamgia;
+                            $tientotal += $tien;
+                        }
+
+                        echo json_encode(array("status" => 1, "tien" => $tienchinhsua, "tientotal" => $tientotal));
+                    } else
+                        echo json_encode(array("status" => 0));
+                } else echo json_encode(array("status" => 0));  // khong ton tai gio hang
+            } else echo json_encode(array("status" => 0)); // checksum
+        } else echo json_encode(array("status" => 0)); // kiem tra post
 
     }
 

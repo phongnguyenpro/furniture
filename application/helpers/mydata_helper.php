@@ -42,3 +42,8 @@ function get_product_type()
 {
     return array("hot" => "Sản phẩm nổi bật", "selling" => "Sản phẩm bán chạy");
 }
+
+function get_checkout_type()
+{
+    return array('1' => "Khi nhận được hàng", '2' => "Chuyển khoản ngân hàng", '3' => "Ví Bảo Kim / Thẻ Nội Địa / Visa");
+}

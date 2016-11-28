@@ -607,6 +607,86 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         return array("giohang" => $giohang, "id" => $id, "set" => $setlai);
     }
 
+    public function checkout()
+    {
+        $giohang = $this->load_cart();
+        $data['giohang'] = $giohang['giohang'];
+        $id = $giohang['id'];
+        // Load san pham apriori
+        // load apriori khach hang
+
+//        if (kiemtradangnhapuser(array(1, 2, 3, 4))) {
+//            $arrtuoi = Datapublic::getTuoi();
+//            $taikhoan = unserialize($_COOKIE['taikhoan']);
+//            $goitinh = $taikhoan['gioitinh'];
+//            $tuoi = $taikhoan['tuoi'];
+//            foreach ($arrtuoi as $key => $value) {
+//                $temp = explode("-", $value);
+//                $min = $temp[0];
+//                $max = $temp[1];
+//                if ($tuoi >= $min && $tuoi <= $max) {
+//                    $tuoi = $key;
+//                    break;
+//                }
+//            }
+//            $itemleft = $tuoi . "-" . $goitinh;
+//            $arr[] = $itemleft;
+//            foreach ($id as $value) {
+//                $arr[] = $value;
+//            }
+//            asort($arr);
+//            $itemleft2 = implode(",", $arr);
+//            $arrsql[] = "SELECT * FROM ( select id_apriori from apriori where ( itemleft='$itemleft' or itemleft='$itemleft2' ) order by value desc limit 5 ) as t  ) ";
+//        }
+//
+//        asort($id);
+//        $listid = implode(',', $id);
+//
+//
+//        $arrsql[] = " SELECT * FROM (  select id_apriori from apriori where itemleft='$listid' order by value desc limit 5 ) as t  )";
+//        $sql = "select itemright from apriori where id_apriori in (" . implode(" or id_apriori in ( ", $arrsql);
+//
+//        $kq = $this->select($sql, array());
+//
+//
+//        if (!empty($kq)) {
+//            $temp = array();
+//            foreach ($kq as $value) {
+//
+//                $temp[] = explode(",", $value['itemright']);
+//            }
+//            $list = array("-1");
+//            foreach ($temp as $value) {
+//                foreach ($value as $value2) {
+//                    if (!in_array($value2, $id))
+//                        $list[$value2] = $value2;
+//                }
+//            }
+//
+//            $sql = "select  id_sanpham,tensanpham,noibat,slugsanpham,gia,hinhdaidien,masanpham,ngangon,giamgia,moi,CAST((gia-((giamgia/100)*gia))  AS UNSIGNED ) as giamoi from sanpham where ngaytao<now() and hienthi=1 and  id_sanpham=" . implode(" or id_sanpham=", $list) . " order by stt desc limit 6";
+//            $data['apriori'] = $this->select($sql, array());
+//
+//        } else
+//            $data['apriori'] = null;
+        // end load apriori
+
+        if (check_login_user(array(1, 2, 3, 4, 5))) {
+            $taikhoan = isset($_COOKIE['taikhoan']) == true ? unserialize($_COOKIE['taikhoan']) : array();
+            $id_taikhoan = $taikhoan['id_taikhoan'];
+            $kq = $this->mydb->select("select user_id,user_name,user_email,user_address,user_phone from user where user_id=:user_id", array("user_id" => $id_taikhoan));
+            if (!empty($kq))
+                $data['taikhoan'] = $kq[0];
+            else {
+                delete_cook("taikhoan");
+            }
+        }
+        // load phi van chuyen
+        $data['phivanchuyen'] = array();
+        $kq = $this->mydb->select("select fee_shipping_id,fee_shipping_name,fee_shipping_parent,fee_shipping_value from fee_shipping order by fee_shipping_index");
+        $data['phivanchuyen'] = $kq;
+        return $data;
+    }
+
     public function error()
     {
     }

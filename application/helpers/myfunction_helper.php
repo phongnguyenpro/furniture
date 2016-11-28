@@ -248,7 +248,7 @@ function sort_data($json)
 function debug($parameter = "")
 {
     echo "<pre>";
-    print_r(session_get('token'));
+    print_r($parameter);
     echo "</pre>";
     exit();
 }
