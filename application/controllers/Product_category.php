@@ -122,7 +122,7 @@ class Product_category extends MY_Controller
         $data['category'] = $danhmuc;
 
         $this->load->model(array("module_model"));
-        $data['module'] = $this->module_model->run("product");
+        $data['module'] = $this->module_model->run("productcategory");
 
         $this->data = $data;
         $this->load->view(THEME . '/header');
@@ -155,7 +155,7 @@ class Product_category extends MY_Controller
 //        $data['footer'] = $footer;
 
         $this->load->model(array("module_model"));
-        $data['module'] = $this->module_model->run("product");
+        $data['module'] = $this->module_model->run("productcategory");
 
 //        $this->view->data = $data;
 //
@@ -207,7 +207,7 @@ class Product_category extends MY_Controller
 //            $data['footer'] = $header->loadfooter();
 
             $this->load->model(array("module_model"));
-            $data['module'] = $this->module_model->run("product");
+            $data['module'] = $this->module_model->run("productdetail");
 
             $this->data = $data;
 

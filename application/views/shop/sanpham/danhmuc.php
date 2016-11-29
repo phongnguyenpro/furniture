@@ -152,7 +152,7 @@ $phantrang = $this->data['phantrang'];
                            class="loading">
                             <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                  alt="<?= $value['product_name'] ?>"
-                                 data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
+                                 data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
                         </a>
                         <div class="quick-view">
                             <a title="Yêu thích" data-id="<?= $value['product_id'] ?>" class="heart yeuthich"></a>

@@ -58,18 +58,18 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <div class="product-image">
                     <div class="product-full">
                         <img id="product-zoom"
-                             src="<?= BASE_URL ?>public/upload/images/hinhsanpham/<?= $data['sanpham']['product_avatar'] ?>"
-                             data-zoom-image="<?= BASE_URL ?>public/upload/images/hinhsanpham/<?= $data['sanpham']['product_avatar'] ?>"/>
+                             src="<?= BASE_URL ?>public/upload/images/product/<?= $data['sanpham']['product_avatar'] ?>"
+                             data-zoom-image="<?= BASE_URL ?>public/upload/images/product/<?= $data['sanpham']['product_avatar'] ?>"/>
                     </div>
                     <div class="product-img-thumb" id="gallery_01">
                         <ul class="owl-carousel" data-items="3" data-nav="true" data-dots="false" data-margin="20"
                             data-loop="false">
                             <li>
                                 <a href="#" title="<?= $data['sanpham']['product_avatar'] ?>"
-                                   data-image="<?= BASE_URL ?>public/upload/images/hinhsanpham/<?= $data['sanpham']['product_avatar'] ?>"
-                                   data-zoom-image="<?= BASE_URL ?>public/upload/images/hinhsanpham/<?= $data['sanpham']['product_avatar'] ?>">
+                                   data-image="<?= BASE_URL ?>public/upload/images/product/<?= $data['sanpham']['product_avatar'] ?>"
+                                   data-zoom-image="<?= BASE_URL ?>public/upload/images/product/<?= $data['sanpham']['product_avatar'] ?>">
                                     <img id="product-zoom"
-                                         src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $data['sanpham']['product_avatar'] ?>"/>
+                                         src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $data['sanpham']['product_avatar'] ?>"/>
                                 </a>
                             </li>
                             <?php
@@ -78,10 +78,10 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                 ?>
                                 <li class="itemimg">
                                     <a title="<?= $value['product_images_name'] ?>" href="#"
-                                       data-image="<?= BASE_URL ?>public/upload/images/hinhsanpham/<?= $value['product_images_name'] ?>"
-                                       data-zoom-image="<?= BASE_URL ?>public/upload/images/hinhsanpham/<?= $value['product_images_name'] ?>">
+                                       data-image="<?= BASE_URL ?>public/upload/images/product/<?= $value['product_images_name'] ?>"
+                                       data-zoom-image="<?= BASE_URL ?>public/upload/images/product/<?= $value['product_images_name'] ?>">
                                         <img id="product-zoom"
-                                             src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_images_name'] ?>"/>
+                                             src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_images_name'] ?>"/>
                                     </a>
                                 </li>
                             <?php } ?>
@@ -207,7 +207,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <div class="form-action">
                     <div class="button-group">
                         <button class="btn-add-cart" <?= $data['sanpham']['product_total'] == 0 ? "disabled" : "" ?>
-                                data-hinhsanpham="<?= $data['sanpham']['product_avatar'] ?>"
+                                data-product="<?= $data['sanpham']['product_avatar'] ?>"
                                 data-soluongsanpham="<?= $data['sanpham']['product_total'] ?>"
                                 data-giamgia="<?= $data['sanpham']['product_sale'] ?>"
                                 data-tensanpham="<?= $data['sanpham']['product_name'] ?>"
@@ -325,7 +325,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                        class="loading">
                                         <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                              alt="<?= $value['product_name'] ?>"
-                                             data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
+                                             data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
                                     </a>
                                     <div class="quick-view">
                                         <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
@@ -401,7 +401,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                        class="loading">
                                         <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                              alt="<?= $value['product_name'] ?>"
-                                             data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
+                                             data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
                                     </a>
                                     <div class="quick-view">
                                         <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"

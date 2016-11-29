@@ -87,7 +87,7 @@
                                                        href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>">
                                                         <img title="<?= $value['product_name'] ?>"
                                                              alt="<?= $value['product_name'] ?>" class="img-responsive"
-                                                             src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
+                                                             src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
                                                     </a>
 
                                                     <div class="quick-view">

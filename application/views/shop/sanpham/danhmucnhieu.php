@@ -56,7 +56,7 @@ unset($data['bre']);
                                        class="loading">
                                         <img class="img-responsive " title="<?= $value['product_name'] ?>"
                                              alt="<?= $value['product_name'] ?>"
-                                             src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['product_avatar'] ?>"/>
+                                             src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
                                     </a>
                                     <div class="quick-view">
                                         <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
