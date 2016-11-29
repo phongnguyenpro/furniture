@@ -43,6 +43,7 @@ class Module extends MY_Controller {
     }
 
     function update() {
+
         $type = $_POST["module_type"];
         $data_update=$_POST;
         switch ($type) {
@@ -52,7 +53,7 @@ class Module extends MY_Controller {
                 break;
             case "banner":
                 $this->load->model("module/slider_model");
-                $data_update["module_config"]=$this->slider_model->update($data_update);
+                $this->slider_model->update($data_update);
                 break;
              case "product":
                 $this->load->model("module/product_model");

@@ -89,7 +89,7 @@ class Product_model extends MY_Model {
                 if (file_exists("public/upload/images/temp/" . $data["tmp_ava"]) && file_exists("public/upload/images/thumb_temp/" . $data["tmp_ava"])) {
                     if (copy("public/upload/images/temp/" . $data["tmp_ava"], "public/upload/images/product/" . slug($data['product_name']) . "-" . $data["tmp_ava"])) {
                         if (copy("public/upload/images/thumb_temp/" . $data["tmp_ava"], "public/upload/images/thumb_product/" . slug($data['product_name']) . "-" . $data["tmp_ava"]))
-                            $data["product_avatar"] = $data['product_name'] . "-" . $data["tmp_ava"];
+                            $data["product_avatar"] = slug($data['product_name']) . "-" . $data["tmp_ava"];
                     }
                     delete_image($data["tmp_ava"], "temp");
                 }

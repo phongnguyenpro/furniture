@@ -40,6 +40,8 @@ if (!isset($_SESSION['token']))
     <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/reset.css"); ?>"/>
     <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/css/responsive.css"); ?>"/>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    
     <script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery/jquery-1.11.2.min.js"); ?>"></script>
     <script type="text/javascript" src="<?= BASE_URL . "public/js/function.js"; ?>"></script>
     <script type="text/javascript"
@@ -67,8 +69,8 @@ if (!isset($_SESSION['token']))
     <div class="top-header">
         <div class="container">
             <div class="nav-top-links">
-                <a class="first-item"><?= SDT ?></a>
-                <a><?= EMAIL ?></a>
+                <a class="first-item"> <i class="fa fa-phone"></i> <?= SDT ?></a>
+                <a> <i class="fa fa-envelope" aria-hidden="true"></i> <?= EMAIL ?></a>
 
 
             </div>
@@ -89,7 +91,7 @@ if (!isset($_SESSION['token']))
                     </div>
                 <?php } else { ?>
                     <a href="" class="current-open" data-toggle="modal"
-                       data-target="#modal_dk_dn"><span>Login</span></a>
+                       data-target="#modal_dk_dn"><span> <i class="fa fa-user"></i> My Account</span></a>
                 <?php } ?>
                 <a href="<?= BASE_URL ?>sanpham/yeuthich" class="sanphamyeuthich">Yêu thích <i
                         class="fa fa-heart"></i><span><?= $yeuthich ?></span></a>
@@ -103,14 +105,14 @@ if (!isset($_SESSION['token']))
 <!-- MAIN HEADER -->
 <div class="container main-header">
     <div class="row">
-        <div class="col-xs-12 col-sm-3 logo">
-            <a href="<?= BASE_URL ?>"><img alt="<?= TENSHOP ?>" src="<?= LOGO ?>"/></a>
+        <div class="col-xs-12 col-sm-2 logo">
+            <a href="<?= BASE_URL ?>"><img alt="<?= TENSHOP ?>" src="<?= BASE_URL.LOGO ?>"/></a>
         </div>
-        <div class="col-xs-7 col-sm-7 header-search-box">
+        <div class="col-xs-8 col-sm-8 header-search-box">
             <form class="form-inline">
                 <div class="form-group form-category">
                     <select class="select-category" id="selectdanhmuc">
-                        <option value="-1">All</option>
+                        <option value="-1">All Categories</option>
                         <?php foreach ($danhmuc['parent'][0] as $value) { ?>
 
                             <option
@@ -136,9 +138,10 @@ if (!isset($_SESSION['token']))
         </div>
         <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
             <a class="cart-link" href="<?= BASE_URL . "sanpham/checkout" ?>">
-                <span class="title">Giỏ hàng</span>
+                <div class="info">
+                <span class="title">Giỏ hàng</span><br>
                 <span class="total"><?= $total = count($giohang) ?> sản phẩm</span>
-                <span class="notify notify-left "><?= $total ?></span>
+                </div>
             </a>
             <div class="cart-block">
 
@@ -210,8 +213,8 @@ function submenu_sanpham($danhmuc, $cha)
                 <div class="col-sm-3" id="box-vertical-megamenus">
                     <div class="box-vertical-megamenus">
                         <h4 class="title">
-                            <span class="title-menu">DANH MỤC SẢN PHẨM</span>
-                            <span class="btn-open-mobile pull-right home-page"><i class="fa fa-bars"></i></span>
+                            <span class="title-menu"> <i class="fa fa-th-list" aria-hidden="true"></i> DANH MỤC SẢN PHẨM</span>
+                            <span class="btn-open-mobile pull-right home-page"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
                         </h4>
                         <div class="vertical-menu-content is-home">
                             <ul class="vertical-menu-list">

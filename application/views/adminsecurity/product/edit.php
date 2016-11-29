@@ -185,6 +185,17 @@ function buiding_menu($parent, $menuData, $data) {
                                            id="product_edit_name_control" name="product_price" value='<?= $product["product"]["product_price"] ?>'/>
                                 </div>
                             </div>
+                             <div class="uk-form-row">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon">
+                                        <i class="uk-icon-edit"></i>
+                                    </span>
+                                    <label for="product_edit_name_control">Giảm giá</label>
+                                    <input required="" type="number" min='0' max='100' class="md-input input_price"
+                                           id="product_edit_name_control" name="product_sale" value='<?= $product["product"]["product_sale"] ?>'/>
+                                </div>
+                            </div>
+
                             <div class="uk-form-row">
                                 <div class="uk-input-group">
                                     <span class="uk-input-group-addon">
