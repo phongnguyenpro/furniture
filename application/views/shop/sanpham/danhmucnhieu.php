@@ -1,7 +1,10 @@
 <?php
-$data = $this->data['data'];
-$bre = $this->data['bre'];
-unset($data['bre']);
+if (isset($this->data['data'])) {
+    $data = $this->data['data'];
+    $bre = $this->data['bre'];
+    if (isset($data['bre']))
+        unset($data['bre']);
+}
 ?>
 
 <!-- breadcrumb -->
@@ -24,90 +27,96 @@ unset($data['bre']);
 
     <div id="view-product-list" class="view-product-list">
 
-        <?php foreach ($data as $danhmuc) {
-            ?>
+        <?php
+        if (isset($data)) {
+            foreach ($data as $danhmuc) {
+                ?>
 
-            <h2 class="page-heading">
+                <h2 class="page-heading">
                         <span class="page-heading-title">
                             <a href="<?= BASE_URL . "Product_category/category/" . $danhmuc['thongtin']['productcategory_id'] . "/" . $danhmuc['thongtin']['productcategory_slug'] ?>"><?= $danhmuc['thongtin']['productcategory_name'] ?>
                                 <span class="fa fa-angle-right"> xem nhiều hơn</span></a></span>
 
-            </h2>
+                </h2>
 
-            <?php if (isset($danhmuc['data'])) { ?>
-                <ul class="danhmucnhieu danhsachsanpham product-list  owl-carousel" data-items="4" data-nav="true"
-                    data-dots="false" data-margin="20" data-loop="false"
-                    data-responsive='{"0":{"items":2},"600":{"items":2},"800":{"items":2},"1200":{"items":3}}'>
+                <?php if (isset($danhmuc['data'])) { ?>
+                    <ul class="danhmucnhieu danhsachsanpham product-list  owl-carousel" data-items="4" data-nav="true"
+                        data-dots="false" data-margin="20" data-loop="false"
+                        data-responsive='{"0":{"items":2},"600":{"items":2},"800":{"items":2},"1200":{"items":3}}'>
 
-                    <?php
+                        <?php
 
-                    foreach ($danhmuc['data'] as $value) { ?>
+                        foreach ($danhmuc['data'] as $value) { ?>
 
-                        <li>
-                            <?php
-                            if ($value['product_feature'] == 1) {
-                                ?>
-                                <div class="featured-text"><span></span></div>
-                            <?php } ?>
-                            <div class="">
-                                <div class="left-block">
-                                    <a title="<?= $value['product_name'] ?>"
-                                       href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
-                                       class="loading">
-                                        <img class="img-responsive " title="<?= $value['product_name'] ?>"
-                                             alt="<?= $value['product_name'] ?>"
-                                             src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
-                                    </a>
-                                    <div class="quick-view">
-                                        <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
-                                           class="heart yeuthich"></a>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <?php if (kiemtranull($value['product_description'])) { ?>
-                                            <a> <?= neods($value['product_description'], 120) ?></a>
-                                        <?php } else {
-                                        } ?>
-                                    </div>
-                                    <?php
-                                    if ($value['product_sale'] > 0) {
-                                        ?>
-                                        <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
+                            <li>
+                                <?php
+                                if ($value['product_feature'] == 1) {
+                                    ?>
+                                    <div class="featured-text"><span></span></div>
+                                <?php } ?>
+                                <div class="">
+                                    <div class="left-block">
+                                        <a title="<?= $value['product_name'] ?>"
+                                           href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
+                                           class="loading">
+                                            <img class="img-responsive " title="<?= $value['product_name'] ?>"
+                                                 alt="<?= $value['product_name'] ?>"
+                                                 src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
+                                        </a>
+                                        <div class="quick-view">
+                                            <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
+                                               class="heart yeuthich"></a>
                                         </div>
-                                    <?php } ?>
-                                    <div class="group-price">
+                                        <div class="add-to-cart">
+                                            <?php if (kiemtranull($value['product_description'])) { ?>
+                                                <a> <?= neods($value['product_description'], 120) ?></a>
+                                            <?php } else {
+                                            } ?>
+                                        </div>
                                         <?php
-                                        if ($value['product_new'] == 1) {
+                                        if ($value['product_sale'] > 0) {
                                             ?>
-                                            <span class="product-new">New</span>
+                                            <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
+                                            </div>
                                         <?php } ?>
+                                        <div class="group-price">
+                                            <?php
+                                            if ($value['product_new'] == 1) {
+                                                ?>
+                                                <span class="product-new">New</span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="right-block">
+                                        <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
+                                                                    href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
+
+                                        </h5>
+
+                                        <div class="content_price">
+                                            <?php if ($value['product_price'] != $value['product_price_new']) { ?>
+                                                <span
+                                                    class="price product-price"><?= tien($value['product_price_new']) ?>
+                                                    &nbsp;₫</span>
+                                                <span
+                                                    class="price old-price"><?= tien($value['product_price']) ?></span>
+                                            <?php } ELSE { ?>
+                                                <span class="price product-price"><?= tien($value['product_price']) ?>
+                                                    &nbsp;₫</span>
+                                            <?php } ?>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <div class="right-block">
-                                    <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
-
-                                    </h5>
-
-                                    <div class="content_price">
-                                        <?php if ($value['product_price'] != $value['product_price_new']) { ?>
-                                            <span class="price product-price"><?= tien($value['product_price_new']) ?>
-                                                &nbsp;₫</span>
-                                            <span class="price old-price"><?= tien($value['product_price']) ?></span>
-                                        <?php } ELSE { ?>
-                                            <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
-                                        <?php } ?>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
+                            </li>
+                        <?php } ?>
+                    </ul>
 
 
-            <?php }
-            echo '
+                <?php }
+                echo '
                     <hr>';
+            }
         } ?>
 
 
