@@ -39,7 +39,7 @@ ol,ul
 }
 
 .quantity input {
-    background: #FF0000;
+    background: #f4a137;
     border: none;
     color: #fff;
     width: 56px
@@ -3654,10 +3654,10 @@ span.notify-right{
   text-align: center;
 }
 .btn-add-cart{
-    height: 35px;
+    height: 50px;
     width: auto;
-    line-height: 35px;
-    font-size: 14px;
+    line-height: 50px;
+    font-size: 16px;
     color: #fff;
     display: inline-block;
     margin: 0px auto;
@@ -3665,8 +3665,9 @@ span.notify-right{
     clear: both;
     padding-left: 15px;
     padding-right: 15px;
-    background: #F36;
+    background: #f4a137;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .btn-add-cart:hover{
@@ -4280,7 +4281,10 @@ span.notify-right{
   line-height: inherit;
 }
 #product .pb-right-column .product-name{
-  font-size: 24px;
+      font-size: 20px;
+    font-weight: bold;
+    color: #444444;
+    margin-bottom: 15px;
 }
 #product .pb-right-column .product-comments .product-star,
 #product .pb-right-column .product-comments .comments-advices{
@@ -4484,24 +4488,27 @@ span.notify-right{
 .product-tab{
   margin-top: 30px;
 }
+.product-tab-detail
+{
+  border: 1px solid #dddddd;
+    margin-bottom: 40px
+}
 .product-tab .nav-tab{
-  width: 100%;
-  overflow: hidden;
-  z-index: 100;
-  position: relative;
+    width: 17%;
+    float: left;
+    border: 0;
 }
 .product-tab .nav-tab>li{
-  height: 50px;
-  line-height: 50px;
-  float: left;
-  display: inline;
-  background: #e2e2e2;
-  border: 1px solid #e2e2e2;
-  color: #333333;
-  text-transform: uppercase;
-  text-align: center;
-  margin-right: 8px;
-  font-weight: bold;
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    display: block;
+    border: 1px solid #e2e2e2;
+    color: #333333;
+    text-transform: uppercase;
+    text-align: center;
+    margin-right: 8px;
+    font-weight: bold;
 }
 .product-tab .nav-tab>li:last-child{
   margin-right: 0;
@@ -4509,18 +4516,20 @@ span.notify-right{
 .product-tab .nav-tab>li>a{
   color: #333333;
   padding: 0 26px;
-  height: 50px;
-  float: left;
+  display: block;
 }
 .product-tab .nav-tab>li:hover>a,
 .product-tab .nav-tab>li.active>a{
-  background: #fff;
+  border-left: 4px solid #f4a137;
+  color: #f4a137;
+  font-weight: bold;
 }
 .product-tab .tab-container{
-    padding: 20px;
-    border: 1px solid #e2e2e2;
-    margin-top: -1px;
-    z-index: 1;
+    float: left;
+    width: 83%;
+    border-left: 1px solid #dddddd;
+    min-height: 200px;
+    padding: 30px;
 }
 .product-tab .tab-container p{
   margin: 0 0 10px;
@@ -5735,6 +5744,37 @@ span.notify-right{
   color: #fff;
   opacity: 0.8;
 }
+.navigation_page
+{
+      border-top: 1px solid #f4a137;
+    border-bottom: 1px solid #f4a137;
+    border-left: 0;
+    border-right: 0;
+    margin-right: 4px;
+    position: relative;
+    line-height: 22px;
+    padding: 1px 15px;
+}
+.navigation_page:after
+{
+      position: absolute;
+    content: "";
+    top: -1px;
+    right: -10px;
+    background: url(../images/breadcrumbs-right.png) no-repeat;
+    width: 10px;
+    height: 24px;
+}
+.navigation_page:before
+{
+    position: absolute;
+    content: "";
+    top: -1px;
+    left: 1px;
+    background: url(../images/breadcrumbs-right.png) no-repeat;
+    width: 10px;
+    height: 24px;
+}
 // radio
 
 .check-box-list input[type="radio"] + label span.button {
@@ -5773,7 +5813,7 @@ td img
 }
 .loading 
 {
-    background: white url('../image/load.gif') center center no-repeat;
+    background: white url('../images/load.gif') center center no-repeat;
 }
 .boxquytrinhhoadon
 {

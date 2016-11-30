@@ -29,26 +29,9 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 <div class="row">
 
     <!-- Left colunm -->
-    <div class="column col-xs-12 col-sm-3" id="left_column">
-        <?php $this->load->view(THEME . "/left") ?>
-        <?php if (!empty($data['tag'])) { ?>
-            <div class="block left-module">
-                <p class="title_block">Tags</p>
-                <div class="block_content">
-                    <div class="tags">
-                        <?php foreach ($data['tag'] as $value) { ?>
-                            <a href="<?= BASE_URL ?>sanpham/tag/<?= $value['id_tag'] . "/" . $value['slugtag'] ?>"><span
-                                    class="level2"><?= $value['tentag'] ?></span></a>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-    </div>
-</div>
 <!-- ./left colunm -->
 <!-- Center colunm-->
-<div class="center_column col-xs-12 col-sm-9" id="center_column">
+<div class="center_column col-xs-12 col-sm-12" id="center_column">
     <!-- Product -->
 
     <div id="product">
@@ -95,9 +78,13 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
             <div class="pb-right-column col-xs-12 col-sm-6">
                 <h1 class="product-name"><?= $data['sanpham']['product_name'] ?></h1>
 
-
+                     <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> 
+                      <?= $data['sanpham']['product_like'] ?></a>
+   
+   <a class="btn-view-product"><i class="fa fa-eye"></i>
+                      <?= $data['sanpham']['product_view'] ?></a>
                 <?php if (kiemtranull($data['sanpham']['product_code'])) { ?>
-                    <p>Mã SP: <?= $data['sanpham']['product_code'] ?></p>
+                    <p>Mã sản phẩm: <?= $data['sanpham']['product_code'] ?></p>
                 <?php } ?>
 
 
@@ -215,22 +202,8 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                 data-id="<?= $data['sanpham']['product_id'] ?>"
                                 data-giasanpham="<?= $data['sanpham']['product_price'] ?>"
                                 data-masanpham="<?= $data['sanpham']['product_code'] ?>"><?= $data['sanpham']['product_total'] == 0 ? "Tạm hết hàng" : "Thêm vào giỏ hàng" ?></button>
-                        <br> <i>Đặt để giữ sản phẩm tại shop, không mua không sao</i>
                     </div>
 
-                </div>
-
-                <div class="form-action">
-                    <div class="button-group">
-                        <a class="wishlist"><i data-id="<?= $data['sanpham']['product_id'] ?>"
-                                               class="fa fa-heart-o  yeuthich"></i>
-                            <br> <span class="totalyeuthich"
-                                       data-yeuthich="<?= $data['sanpham']['product_like'] ?>"><?= $data['sanpham']['product_like'] ?></span>
-                            Yêu thích</a>
-                        <a class="compare"><i class="fa fa-eye"></i>
-                            <br>
-                            <?= $data['sanpham']['product_view'] ?> Đã xem</a>
-                    </div>
                 </div>
                 <div class="form-share">
                     <div class="share">
@@ -254,7 +227,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
         </div>
 
         <!-- tab product -->
-        <div class="product-tab">
+        <div class="product-tab product-tab-detail clearfix">
             <ul class="nav-tab">
                 <li class="active">
                     <a aria-expanded="false" data-toggle="tab" href="#product-detail">Miêu tả</a>
@@ -307,69 +280,61 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <h3 class="heading">Sản phẩm liên quan</h3>
                 <ul class="product-list danhsachsanpham owl-carousel" data-dots="false" data-loop="false"
                     data-nav="true" data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true"
-                    data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>
+                    data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
 
 
                     <?php foreach ($this->data['sanphamlienquan'] as $value) { ?>
 
-                        <li>
-                            <?php
-                            if ($value['product_feature'] == 1) {
-                                ?>
-                                <div class="featured-text"><span></span></div>
-                            <?php } ?>
-                            <div class="">
-                                <div class="left-block">
-                                    <a title="<?= $value['product_name'] ?>"
-                                       href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"
-                                       class="loading">
-                                        <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
-                                             alt="<?= $value['product_name'] ?>"
-                                             data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
-                                    </a>
-                                    <div class="quick-view">
-                                        <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
-                                           class="heart yeuthich"></a>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <?php if (kiemtranull($value['product_description'])) { ?>
-                                            <a> <?= neods($value['product_description'], 120) ?></a>
-                                        <?php } else {
-                                        } ?>
-                                    </div>
-                                    <?php
-                                    if ($value['product_sale'] > 0) {
-                                        ?>
-                                        <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
-                                        </div>
-                                    <?php } ?>
-                                    <div class="group-price">
-                                        <?php
-                                        if ($value['product_new'] == 1) {
-                                            ?>
-                                            <span class="product-new">New</span>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <div class="right-block">
-                                    <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
+                                                                <li>
+                                            <div class="">
+                                                <div class="left-block">
+                                                    <a title="<?= $value['product_name'] ?>"
+                                                       href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"
+                                                       class="loading">
+                                                        <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
+                                                             alt="<?= $value['product_name'] ?>"
+                                                             data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
+                                                    </a>
+                                                  
+                                                    <div class="add-to-cart">
+                                                        <?php if (kiemtranull($value['product_description'])) { ?>
+                                                            <a> <?= neods($value['product_description'], 120) ?></a>
+                                                    <?php } else {
+                                                        
+                                                    }
+                                                    ?>
+                                                    </div>
+                                                    <?php
+                                                    if ($value['product_sale'] > 0) {
+                                                        ?>
+                                                        <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
+                                                        </div>
+                                                        <?php } ?>
+                                                </div>
+                                                <div class="right-block">
+                                                    <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
+                                                                                href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
-                                    </h5>
+                                                    </h5>
 
-                                    <div class="content_price">
-                                        <?php if ($value['product_price'] != $value['product_price_new']) { ?>
-                                            <span class="price product-price"><?= tien($value['product_price_new']) ?>
-                                                &nbsp;₫</span>
-                                            <span class="price old-price"><?= tien($value['product_price']) ?></span>
-                                        <?php } ELSE { ?>
-                                            <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
-                                        <?php } ?>
-                                    </div>
+                                                    <div class="content_price">
+                                                        <?php if ($value['product_price'] != $value['product_price_new']) { ?>
+                                                            <span class="price product-price"><?= tien($value['product_price_new']) ?>
+                                                                &nbsp;₫</span>
+                                                            <span class="price old-price"><?= tien($value['product_price']) ?></span>
+        <?php } ELSE { ?>
+                                                            <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
+        <?php } ?>
+                                                    </div>
+                                                    <div class="info-bottom">
+                                                      <a class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                                     <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
-                                </div>
-                            </div>
-                        </li>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </li>
                     <?php } ?>
 
 

@@ -93,8 +93,9 @@ $('.zoomContainer').remove();
                 scrollZoom: "true"
             }); 
         }
-        $("#gallery_01").bind("click", function(e) {  
-  var ez =   $('#gallery_01').data('elevateZoom'); 
+
+        $("#product-zoom").bind("click", function(e) {  
+  var ez =   $('#product-zoom').data('elevateZoom'); 
     $.fancybox(ez.getGalleryList());
   return false;
 });

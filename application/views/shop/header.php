@@ -475,8 +475,9 @@ function submenu_sanpham($danhmuc, $cha)
     <div class="container" id="columns">
 
         <div class="breadcrumb clearfix">
-            <a class="home" href="<?= BASE_URL ?>" title="Return to Home">Home</a>
-            <span class="navigation-pipe">&nbsp;</span>
+            <span class="home navigation_page"  title="Return to Home">
+           <a href="<?= BASE_URL ?>"> Home</a>
+            </span>
             <?php
             for ($i = count($this->data["bre"]['info']) - 1; $i >= 0; $i--) {
                 ?>
@@ -489,7 +490,6 @@ function submenu_sanpham($danhmuc, $cha)
    <?= $this->data['bre']['info'][$i]['ten'] ?>
                  </a>
              </span>
-                <?php if ($i > 0) { ?> <span class="navigation-pipe">&nbsp;</span> <?php } ?>
             <?php } ?>
         </div>
 <?php } ?>
