@@ -85,7 +85,6 @@ $('.zoomContainer').remove();
             
        if($('#product-zoom').length >0){
             $('#product-zoom').elevateZoom({
-                zoomType: "inner",
                 cursor: "crosshair",
                 zoomWindowFadeIn: 500,
                 zoomWindowFadeOut: 750,
@@ -94,6 +93,11 @@ $('.zoomContainer').remove();
                 scrollZoom: "true"
             }); 
         }
+        $("#gallery_01").bind("click", function(e) {  
+  var ez =   $('#gallery_01').data('elevateZoom'); 
+    $.fancybox(ez.getGalleryList());
+  return false;
+});
         /* Popup sizechart */
         if($('#size_chart').length >0){
             $('#size_chart').fancybox();

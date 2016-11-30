@@ -10,7 +10,7 @@
             <div id="introduce-box" class="row">
                 <div class="col-md-3">
                     <div id="address-box">
-                        <a ><img src="<?= LOGO ?>" alt="" /></a>
+                        <a ><img src="<?= BASE_URL.LOGO ?>" alt="" /></a>
                         <div id="address-list">
                             <div class="tit-name">Địa chỉ:</div>
                             <div class="tit-contain"><?=  DIACHI ?></div>
@@ -92,7 +92,7 @@
             
 </div>
 <a  class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
-<script type="text/javascript" src="<?= BASE_URL.'public/lib/validate/jquery.validate.js' ?>"></script>
+<script type="text/javascript" src="<?= load_frontend_view("assets/js/jquery.validate.js") ?>"></script>
 <script type="text/javascript" src="<?= load_frontend_view("sanpham/js/giohang.js") ?>"></script>
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/owl.carousel/owl.carousel.css")?>" />
 <script type="text/javascript" src="<?= load_frontend_view("assets/lib/bootstrap/js/bootstrap.min.js") ?>"></script>

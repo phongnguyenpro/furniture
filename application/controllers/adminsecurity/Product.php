@@ -58,7 +58,7 @@ class Product extends MY_Controller {
         $image = $this->image;
         $config = load_config();
         $width = intval($config["width"]);
-        $width_thumb = intval($config["width"]);
+        $width_thumb = intval($config["widththumb"]);
         $height = intval($config["height"]);
         $height_thumb = intval($config["heightthumb"]);
         $type_crop = $config["typeimage"];
