@@ -37,7 +37,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <div class="block_content">
                     <div class="tags">
                         <?php foreach ($data['tag'] as $value) { ?>
-                            <a href="<?= URL ?>sanpham/tag/<?= $value['id_tag'] . "/" . $value['slugtag'] ?>"><span
+                            <a href="<?= BASE_URL ?>sanpham/tag/<?= $value['id_tag'] . "/" . $value['slugtag'] ?>"><span
                                     class="level2"><?= $value['tentag'] ?></span></a>
                         <?php } ?>
                     </div>

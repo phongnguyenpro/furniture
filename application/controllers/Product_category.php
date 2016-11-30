@@ -210,10 +210,12 @@ class Product_category extends MY_Controller
             $data['module'] = $this->module_model->run("productdetail");
 
             $this->data = $data;
-
-            $this->load->view(THEME . '/header');
-            $this->load->view(THEME . '/sanpham/chitiet');
-            $this->load->view(THEME . '/footer');
+            if(isset($this->data['sanpham'])) {
+                $this->load->view(THEME . '/header');
+                $this->load->view(THEME . '/sanpham/chitiet');
+                $this->load->view(THEME . '/footer');
+            }else
+                $this->error();
         } else
             $this->error();
     }
