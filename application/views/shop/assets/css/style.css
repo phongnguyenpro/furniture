@@ -2479,7 +2479,9 @@ span.notify-right{
 }
 .btn-view-product
 {
-  background-image: none;
+
+
+    background-image: none;
     background-position: center;
     background-color: #ffffff;
     -webkit-border-radius: 0;
