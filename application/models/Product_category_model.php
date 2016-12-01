@@ -704,10 +704,8 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         if (!empty($kq)) {
             $data['thongtintag'] = $kq[0];
             $this->mydb->update("tag", array("tag_view" => $data['thongtintag']['tag_view'] + 1), "tag_id=:tag_id", array("tag_id" => $id_tag));
-        } else {
-            $data['bre']['info'][] = array("ten" => "Error", "slug" => "");
-            return $data;
-        }
+        } else
+            $this->error();
         $data['bre']['info'][] = array("ten" => $kq[0]['tag_name'], "slug" => "");
         $data['bre']['info'][] = array("ten" => "Tag", "slug" => "");
         return $data;
@@ -748,9 +746,5 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
             $data['sanpham'] = array();
             return $data;
         }
-    }
-
-    public function error()
-    {
     }
 }

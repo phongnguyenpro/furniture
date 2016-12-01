@@ -7,4 +7,9 @@ class MY_Model extends CI_Model {
        
     }
 
+    public function error(){
+        Header("Location:" . BASE_URL . "error");
+        die();
+    }
+
 }

@@ -425,26 +425,15 @@ class Product_category extends MY_Controller
         $data['module'] = $this->module_model->run("productcategory");
 
         $meta = array();
+        $meta['title'] = $data['thongtintag']['tag_name'];
+        $meta['description'] = "Bạn đang tìm kiếm " . $data['thongtintag']['tag_name'];
         $meta['image'] = LOGO;
-
-        if(isset($data['thongtintag'])) {
-            $meta['description'] = "Bạn đang tìm kiếm " . $data['thongtintag']['tag_name'];
-            $meta['title'] = $data['thongtintag']['tag_name'];
-        }else{
-            $meta['description'] = TENSHOP;
-            $meta['title'] = TENSHOP;
-        }
-
         $data['meta'] = $meta;
-        $this->data = $data;
 
-        if(!isset($data['thongtintag'])) {
-            $this->error();
-        }else {
-            $this->load->view(THEME . '/header');
-            $this->load->view(THEME . '/sanpham/tag');
-            $this->load->view(THEME . '/footer');
-        }
+        $this->data = $data;
+        $this->load->view(THEME . '/header');
+        $this->load->view(THEME . '/sanpham/tag');
+        $this->load->view(THEME . '/footer');
     }
 
     function product_like()
@@ -466,6 +455,7 @@ class Product_category extends MY_Controller
         $data['meta'] = $meta;
         $this->data = $data;
 
+
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/yeuthich');
         $this->load->view(THEME . '/footer');
@@ -473,8 +463,5 @@ class Product_category extends MY_Controller
 
     public function error()
     {
-        $this->load->view(THEME . '/header');
-        $this->load->view(THEME . '/error/index');
-        $this->load->view(THEME . '/footer');
     }
 }
