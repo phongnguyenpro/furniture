@@ -124,7 +124,7 @@ order by product_index desc limit $limit ) as t
         if (!check_url(array(), $id_danhmuc))
             $this->error();
         // kiem tra orderby
-        $sapxep = array("stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
+        $sapxep = array("product_index" => array("ten" => "STT"),"stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
         if (!key_exists($orderby, $sapxep))
             $this->error();
 // kiem tra filter
