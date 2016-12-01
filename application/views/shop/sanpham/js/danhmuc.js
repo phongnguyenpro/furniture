@@ -229,7 +229,7 @@ $(document).ready(function () {
             o.sanpham.forEach(function (value) {
                 html += '<li class="col-xs-6 col-sm-4"><div class="product-container"><div class="left-block">';
                 html += '<a href="' + BASE_URL + 'Product_category/product/' + value.product_id + "/" + value.product_slug + '">';
-                html += '<img class="img-responsive" alt="product" src="' + BASE_URL + 'public/upload/images/thumb_hinhsanpham/' + value.product_avatar + '" /></a>';
+                html += '<img class="img-responsive" alt="product" src="' + BASE_URL + 'public/upload/images/thumb_product/' + value.product_avatar + '" /></a>';
                 html += ' <div class="quick-view"><a data-id="' + value.product_id + '" title="Yêu thích" class="heart yeuthich"></a></div>';
                 if (value.product_description != null && value.product_description != '') {
                     ngangon = neods(value.product_description, 200) + "..."
