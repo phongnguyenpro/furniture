@@ -687,6 +687,67 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         return $data;
     }
 
+    function tag($id_tag, $page)
+    {
+        // tinh phan trang
+        $kq = $this->mydb->select("select count(*) as row from product_tag where tag_id=:tag_id", array("tag_id" => $id_tag));
+        $limit = LIMITDANHMUCIT;
+        $totalRow = $kq[0]['row'];
+        $total_page = $totalRow == 0 ? 1 : ceil($totalRow / $limit);
+        $start = $page == 1 ? 0 : ($page - 1) * $limit;
+        $data['phantrang']['totalpage'] = $total_page;
+        $data['phantrang']['currentpage'] = $page;
+        $kq = $this->mydb->select("select product.product_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description  from product,product_tag where product_show=1 and product_date_create<now() and product.product_id=product_tag.product_id and tag_id=:tag_id order by product_index limit $start,$limit", array("tag_id" => $id_tag));
+        $data['sanpham'] = $kq;
+
+        $kq = $this->mydb->select("select tag_name,tag_id,tag_slug,tag_view from tag where tag_id=:tag_id", array("tag_id" => $id_tag));
+        if (!empty($kq)) {
+            $data['thongtintag'] = $kq[0];
+            $this->mydb->update("tag", array("tag_view" => $data['thongtintag']['tag_view'] + 1), "tag_id=:tag_id", array("tag_id" => $id_tag));
+        } else
+            $this->error();
+        $data['bre']['info'][] = array("ten" => $kq[0]['tag_name'], "slug" => "");
+        $data['bre']['info'][] = array("ten" => "Tag", "slug" => "");
+        return $data;
+    }
+
+    function product_like()
+    {
+        if (isset($_COOKIE['yeuthich'])) {
+            $data['sanpham'] = array();
+            $yeuthich = unserialize($_COOKIE['yeuthich']);
+            $soyeuthich = count($yeuthich);
+
+            foreach ($yeuthich as $value) {
+                if ($value == '' || !is_numeric($value)) {
+                    delete_cook("yeuthich");
+                    $yeuthich = array();
+                }
+            }
+
+            if (!empty($yeuthich)) {
+                $sqlwhere = "product_id=" . implode(" or product_id=", $yeuthich);
+                $data['sanpham'] = $this->mydb->select("select product_name,product_id,product_slug,product_avatar,product_price,product_code from product where ($sqlwhere)", array());
+                $sosanpham = count($data['sanpham']);
+                if ($sosanpham != $soyeuthich) {
+                    $listid = array();
+                    foreach ($data['sanpham'] as $value) {
+                        $listid[] = $value['product_id'];
+                    }
+                    create_cook("yeuthich", serialize($listid));
+                }
+                return $data;
+            } else {
+                $data['sanpham'] = array();
+                delete_cook("yeuthich");
+                return $data;
+            }
+        } else {
+            $data['sanpham'] = array();
+            return $data;
+        }
+    }
+
     public function error()
     {
     }

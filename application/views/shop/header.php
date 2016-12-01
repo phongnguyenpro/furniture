@@ -93,7 +93,7 @@ if (!isset($_SESSION['token']))
                     <a href="" class="current-open" data-toggle="modal"
                        data-target="#modal_dk_dn"><span> <i class="fa fa-user"></i> My Account</span></a>
                 <?php } ?>
-                <a href="<?= BASE_URL ?>sanpham/yeuthich" class="sanphamyeuthich">Yêu thích <i
+                <a href="<?= BASE_URL ?>yeu-thich" class="sanphamyeuthich">Yêu thích <i
                         class="fa fa-heart"></i><span><?= $yeuthich ?></span></a>
 
             </div>

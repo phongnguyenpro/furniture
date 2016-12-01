@@ -91,15 +91,15 @@ if (!empty($this->data['phivanchuyen'])) {
 
                         <tr>
                             <td class="cart_product">
-                                <a href="<?= BASE_URL . "Product_category/product/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>">
+                                <a href="<?= BASE_URL . "san-pham/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>">
                                     <img class="img-responsive"
-                                         src="<?= BASE_URL . "public/upload/images/thumb_hinhsanpham/" . $value['hinhsanpham'] ?>"
+                                         src="<?= BASE_URL . "public/upload/images/thumb_product/" . $value['hinhsanpham'] ?>"
                                          alt="p10">
                                 </a>
                             </td>
                             <td class="cart_description">
                                 <p class="product-name"><a
-                                        href="<?= BASE_URL . "Product_category/product/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?> </a>
+                                        href="<?= BASE_URL . "san-pham/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?> </a>
                                 </p>
                                 <?php if (kiemtranull($value['masanpham'])) { ?>
                                     <small class="cart_ref">Mã SP : <?= $value['masanpham'] ?></small><br><?php } ?>
@@ -300,7 +300,7 @@ if (!empty($this->data['phivanchuyen'])) {
                                    class="loading">
                                     <img class="img-responsive b-lazy" title="<?= $value['tensanpham'] ?>"
                                          alt="<?= $value['tensanpham'] ?>"
-                                         data-src="<?= BASE_URL ?>public/upload/images/thumb_hinhsanpham/<?= $value['hinhdaidien'] ?>"/>
+                                         data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['hinhdaidien'] ?>"/>
                                 </a>
                                 <div class="quick-view">
                                     <a title="Yêu thích" data-id="<?= $value['id_sanpham'] ?>"

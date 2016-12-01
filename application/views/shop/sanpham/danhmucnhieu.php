@@ -34,7 +34,7 @@ if (isset($this->data['data'])) {
 
                 <h2 class="page-heading">
                         <span class="page-heading-title">
-                            <a href="<?= BASE_URL . "Product_category/category/" . $danhmuc['thongtin']['productcategory_id'] . "/" . $danhmuc['thongtin']['productcategory_slug'] ?>"><?= $danhmuc['thongtin']['productcategory_name'] ?>
+                            <a href="<?= BASE_URL . "danh-muc/" . $danhmuc['thongtin']['productcategory_id'] . "/" . $danhmuc['thongtin']['productcategory_slug'] ?>"><?= $danhmuc['thongtin']['productcategory_name'] ?>
                                 <span class="fa fa-angle-right"> xem nhiều hơn</span></a></span>
 
                 </h2>
@@ -57,7 +57,7 @@ if (isset($this->data['data'])) {
                                 <div class="">
                                     <div class="left-block">
                                         <a title="<?= $value['product_name'] ?>"
-                                           href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
+                                           href="<?= BASE_URL . 'san-pham/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
                                            class="loading">
                                             <img class="img-responsive " title="<?= $value['product_name'] ?>"
                                                  alt="<?= $value['product_name'] ?>"
@@ -89,7 +89,7 @@ if (isset($this->data['data'])) {
                                     </div>
                                     <div class="right-block">
                                         <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                    href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
+                                                                    href="<?= BASE_URL . 'san-pham/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
                                         </h5>
 

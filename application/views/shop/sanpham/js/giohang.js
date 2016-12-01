@@ -259,7 +259,7 @@ $(document).ready(function () {
             total++;
             html += '<li class="product-info">';
             html += '<div class="p-left">  <a data-id="' + key + '" class="remove_link xoasanpham"></a>  <a >';
-            html += '<img class="img-responsive" src="' + BASE_URL + 'public/upload/images/thumb_hinhsanpham/' + obj.hinhsanpham + '" alt="p10"> </a> </div>';
+            html += '<img class="img-responsive" src="' + BASE_URL + 'public/upload/images/thumb_product/' + obj.hinhsanpham + '" alt="p10"> </a> </div>';
             html += '<div class="p-right">';
             html += '<p class="p-name">' + obj.tensanpham + '</p>';
             if (obj.tengiatri != '')

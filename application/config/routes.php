@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['san-pham/(:any)/(:any)'] = 'product_category/product/$1';
+$route['tag/(:any)/(:any)'] = 'product_category/tag/$1';
+$route['yeu-thich'] = 'product_category/product_like';
 $route['danh-muc/(:any)/(:any)'] = 'product_category/category/$1';
 $route['default_controller'] = 'index/home';
 $route['adminsecurity'] = 'adminsecurity/main';

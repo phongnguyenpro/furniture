@@ -91,7 +91,9 @@
             </div>
             
 </div>
-<a  class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
+<a class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
+
+<script type="text/javascript" src="<?= load_public("js/like.js") ?>"></script>
 <script type="text/javascript" src="<?= load_frontend_view("assets/js/jquery.validate.js") ?>"></script>
 <script type="text/javascript" src="<?= load_frontend_view("sanpham/js/giohang.js") ?>"></script>
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/owl.carousel/owl.carousel.css")?>" />

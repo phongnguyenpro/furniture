@@ -163,7 +163,7 @@ $phantrang = $this->data['phantrang'];
                 <div class="product-container">
                     <div class="left-block">
                         <a title="<?= $value['product_name'] ?>"
-                           href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
+                           href="<?= BASE_URL . 'san-pham/' . $value['product_id'] . '/' . $value['product_slug'] ?>"
                            class="loading">
                             <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                  alt="<?= $value['product_name'] ?>"
@@ -201,7 +201,7 @@ $phantrang = $this->data['phantrang'];
                     </div>
                     <div class="right-block">
                         <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                    href=<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
+                                                    href=<?= BASE_URL . 'san-pham/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
 
                             </h5>
 

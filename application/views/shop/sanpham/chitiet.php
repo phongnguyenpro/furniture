@@ -37,7 +37,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <div class="block_content">
                     <div class="tags">
                         <?php foreach ($data['tag'] as $value) { ?>
-                            <a href="<?= BASE_URL ?>sanpham/tag/<?= $value['tag_id'] . "/" . $value['tag_slug'] ?>"><span
+                            <a href="<?= BASE_URL ?>tag/<?= $value['tag_id'] . "/" . $value['tag_slug'] ?>"><span
                                     class="level2"><?= $value['tag_name'] ?></span></a>
                         <?php } ?>
                     </div>
@@ -120,7 +120,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 </div>
                 <div class="form-option">
 
-                    <p class="form-option-title"> Thông tinn sản phẩm:</p>
+                    <p class="form-option-title"> Thông tin sản phẩm:</p>
                     <br>
                     <?php
                     //                           Duyệt thuộc tính chọn
@@ -223,7 +223,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <div class="form-action">
                     <div class="button-group">
                         <a class="wishlist"><i data-id="<?= $data['sanpham']['product_id'] ?>"
-                                               class="fa fa-heart-o  yeuthich"></i>
+                                               class="fa fa-heart-o yeuthich"></i>
                             <br> <span class="totalyeuthich"
                                        data-yeuthich="<?= $data['sanpham']['product_like'] ?>"><?= $data['sanpham']['product_like'] ?></span>
                             Yêu thích</a>

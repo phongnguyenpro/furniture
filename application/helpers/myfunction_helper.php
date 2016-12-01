@@ -369,6 +369,27 @@ function phantrangajax($page_count, $cur_page, $link)
         return $previous_page . $first_page . implode(' ', $pages) . $last_page . $next_page;
 }
 
+function phantrang($page_count, $cur_page, $link)
+{
+
+    $current_range = array(($cur_page - 2 < 1 ? 1 : $cur_page - 2), ($cur_page + 2 > $page_count ? $page_count : $cur_page + 2));
+
+    // First and Last pages
+    $first_page = $cur_page > 3 ? '<li><a   href="' . sprintf($link, '1') . '">1</a></li>' . ($cur_page < 5 ? ', ' : '<li> <a>...</a> <li>') : null;
+    $last_page = $cur_page < $page_count - 2 ? ($cur_page > $page_count - 4 ? ', ' : ' <li> <a>...</a> <li> ') . '<li><a href="' . sprintf($link, $page_count) . '">' . $page_count . '</a></li>' : null;
+
+    // Previous and next page
+    $previous_page = $cur_page > 1 ? '<li><a href="' . sprintf($link, ($cur_page - 1)) . '">Previous</a></li> ' : null;
+    $next_page = $cur_page < $page_count ? ' <li > <a href="' . sprintf($link, ($cur_page + 1)) . '">Next</a></li>' : null;
+
+    // Display pages that are in range
+    for ($x = $current_range[0]; $x <= $current_range[1]; ++$x)
+        $pages[] = '<li class="page ' . ($x == $cur_page ? "active" : NULL) . '"><a href="' . sprintf($link, $x) . '">' . ($x == $cur_page ? '<strong>' . $x . '</strong>' : $x) . '</a></li>';
+
+    if ($page_count > 1)
+        return $previous_page . $first_page . implode(' ', $pages) . $last_page . $next_page;
+}
+
 function kiemtranull($data)
 {
     if (is_array($data) || $data === NULL) {

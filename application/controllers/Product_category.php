@@ -210,11 +210,11 @@ class Product_category extends MY_Controller
             $data['module'] = $this->module_model->run("productdetail");
 
             $this->data = $data;
-            if(isset($this->data['sanpham'])) {
+            if (isset($this->data['sanpham'])) {
                 $this->load->view(THEME . '/header');
                 $this->load->view(THEME . '/sanpham/chitiet');
                 $this->load->view(THEME . '/footer');
-            }else
+            } else
                 $this->error();
         } else
             $this->error();
@@ -405,6 +405,59 @@ class Product_category extends MY_Controller
             } else echo json_encode(array("status" => 0)); // checksum
         } else echo json_encode(array("status" => 0)); // kiem tra post
 
+    }
+
+    function tag($id_tag)
+    {
+        if (isset($_GET['page'])) {
+            $page = string_input($_GET['page']);
+        } else
+            $page = 1;
+
+        $data = $this->model->tag($id_tag, $page);
+        $this->load->model(array("module_model"));
+        $data['category'] = $this->module_model->category();
+        $data['menu'] = $this->module_model->menu();
+//        $data['footer'] = $header->loadfooter();
+
+        $this->load->model(array("module_model"));
+        $data['module'] = $this->module_model->run("productcategory");
+
+        $meta = array();
+        $meta['title'] = $data['thongtintag']['tag_name'];
+        $meta['description'] = "Bạn đang tìm kiếm " . $data['thongtintag']['tag_name'];
+        $meta['image'] = LOGO;
+        $data['meta'] = $meta;
+
+        $this->data = $data;
+        $this->load->view(THEME . '/header');
+        $this->load->view(THEME . '/sanpham/tag');
+        $this->load->view(THEME . '/footer');
+    }
+
+    function product_like()
+    {
+        $data = $this->model->product_like();
+        $data['bre'] = array("item" => "");
+
+        $this->load->model(array("module_model"));
+        $data['category'] = $this->module_model->category();
+        $data['menu'] = $this->module_model->menu();
+//        $data['footer'] = $header->loadfooter();
+
+        $data["bre"]['info'][] = array("ten" => "Sản phẩm yêu thích", "slug" => "#");
+
+        $meta = array();
+        $meta['title'] = TENSHOP;
+        $meta['description'] = MIEUTA;
+        $meta['image'] = LOGO;
+        $data['meta'] = $meta;
+        $this->data = $data;
+
+
+        $this->load->view(THEME . '/header');
+        $this->load->view(THEME . '/sanpham/yeuthich');
+        $this->load->view(THEME . '/footer');
     }
 
     public function error()
