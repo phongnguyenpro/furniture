@@ -704,8 +704,10 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         if (!empty($kq)) {
             $data['thongtintag'] = $kq[0];
             $this->mydb->update("tag", array("tag_view" => $data['thongtintag']['tag_view'] + 1), "tag_id=:tag_id", array("tag_id" => $id_tag));
-        } else
-            $this->error();
+        } else {
+            $data['bre']['info'][] = array("ten" => "Error", "slug" => "");
+            return $data;
+        }
         $data['bre']['info'][] = array("ten" => $kq[0]['tag_name'], "slug" => "");
         $data['bre']['info'][] = array("ten" => "Tag", "slug" => "");
         return $data;

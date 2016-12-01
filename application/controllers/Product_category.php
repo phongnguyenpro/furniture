@@ -415,6 +415,7 @@ class Product_category extends MY_Controller
             $page = 1;
 
         $data = $this->model->tag($id_tag, $page);
+
         $this->load->model(array("module_model"));
         $data['category'] = $this->module_model->category();
         $data['menu'] = $this->module_model->menu();
@@ -424,15 +425,26 @@ class Product_category extends MY_Controller
         $data['module'] = $this->module_model->run("productcategory");
 
         $meta = array();
-        $meta['title'] = $data['thongtintag']['tag_name'];
-        $meta['description'] = "Bạn đang tìm kiếm " . $data['thongtintag']['tag_name'];
         $meta['image'] = LOGO;
-        $data['meta'] = $meta;
 
+        if(isset($data['thongtintag'])) {
+            $meta['description'] = "Bạn đang tìm kiếm " . $data['thongtintag']['tag_name'];
+            $meta['title'] = $data['thongtintag']['tag_name'];
+        }else{
+            $meta['description'] = TENSHOP;
+            $meta['title'] = TENSHOP;
+        }
+
+        $data['meta'] = $meta;
         $this->data = $data;
-        $this->load->view(THEME . '/header');
-        $this->load->view(THEME . '/sanpham/tag');
-        $this->load->view(THEME . '/footer');
+
+        if(!isset($data['thongtintag'])) {
+            $this->error();
+        }else {
+            $this->load->view(THEME . '/header');
+            $this->load->view(THEME . '/sanpham/tag');
+            $this->load->view(THEME . '/footer');
+        }
     }
 
     function product_like()
@@ -454,7 +466,6 @@ class Product_category extends MY_Controller
         $data['meta'] = $meta;
         $this->data = $data;
 
-
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/yeuthich');
         $this->load->view(THEME . '/footer');
@@ -462,5 +473,8 @@ class Product_category extends MY_Controller
 
     public function error()
     {
+        $this->load->view(THEME . '/header');
+        $this->load->view(THEME . '/error/index');
+        $this->load->view(THEME . '/footer');
     }
 }
