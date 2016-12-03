@@ -80,14 +80,7 @@
 <div class="dangload">
    
             <div class="boxdangload">
-                <p> Vui lòng đợi! </p><br>
-          
-           <div class="load">
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        </div> 
+                <img src="<?= BASE_URL."application/views/shop/assets/images/load.gif" ?>"  >
             </div>
             
 </div>

@@ -321,3 +321,9 @@ return str;
          http.send(formdata);
     }
 
+$(document).ready(function(){
+
+  $("input.input-price").keyup(function(){
+
+  })
+})

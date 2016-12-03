@@ -11,8 +11,9 @@ class Module_model extends MY_Model
     function run($page)
     {
         $data = array();
+        $is_home = $page!="home"?"or module_detail_page=-1" : "";
         $result = $this->mydb->select("select module.module_id,module_name,module_location,module_index,module_type,module_config from module,module_detail "
-            . "where module.module_id = module_detail.module_id and (module_detail_page=:module_detail_page or module_detail_page=-1)", array("module_detail_page" => $page));
+            . "where module.module_id = module_detail.module_id and (module_detail_page=:module_detail_page $is_home )", array("module_detail_page" => $page));
         $data = array();
         foreach ($result as $k => $v) {
             $data[$v["module_type"]][$v["module_location"]][$v["module_index"]] = array();

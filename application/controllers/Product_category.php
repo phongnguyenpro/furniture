@@ -60,7 +60,12 @@ class Product_category extends MY_Controller
                         $type = string_input($_GET['type']);
                     else
                         $type = "desc";
-                    $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer);
+                    // price
+                    if (isset($_GET['price']))
+                        $price = string_input($_GET['price']);
+                    else
+                        $price = -1;
+                    $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer,$price);
                 }
             } else {
                 // ORDER BY
@@ -101,7 +106,12 @@ class Product_category extends MY_Controller
                     $type = string_input($_GET['type']);
                 else
                     $type = "desc";
-                $this->category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
+                 // price
+                    if (isset($_GET['price']))
+                        $price = string_input($_GET['price']);
+                    else
+                        $price = -1;
+                $this->category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type,$price);
             }
         } else
             $this->error();
@@ -130,7 +140,7 @@ class Product_category extends MY_Controller
         $this->load->view(THEME . '/footer');
     }
 
-    public function category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer)
+    public function category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer,$price)
     {
         // load sap xep
         $sapxep = array("stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
@@ -142,7 +152,7 @@ class Product_category extends MY_Controller
         }
 
         // end load sap xep
-        $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type);
+        $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type,$price);
 
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
@@ -161,14 +171,15 @@ class Product_category extends MY_Controller
 //
         $this->sapxep = $sapxep;
         $this->data = $data;
+
         $this->load->view(THEME . "/header");
         $this->load->view(THEME . "/sanpham/danhmuc");
         $this->load->view(THEME . "/footer");
     }
 
-    public function category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type)
+    public function category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page,$type,$price)
     {
-        echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, true));
+        echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type,$price, true));
     }
 
     public function product($id_sanpham, $i = false)

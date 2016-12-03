@@ -100,22 +100,22 @@ class Product extends MY_Controller {
         $image = $this->image;
         $config = load_config();
         $width = intval($config["width"]);
-        $width_thumb = intval($config["width"]);
+        $width_thumb = intval($config["widththumb"]);
         $height = intval($config["height"]);
         $height_thumb = intval($config["heightthumb"]);
         $type_crop = $config["typeimage"];
         $type_add_logo = $config["kieuchen"];
         $product_id = $_POST['id_sanpham'];
 
-        if ($height > $width) {
-            $tyle = $height / $width;
-            $width_thumb = 100;
-            $height_thumb = $width_thumb * $tyle;
-        } else {
-            $tyle = $width / $height;
-            $height_thumb = 100;
-            $width_thumb = $height_thumb * $tyle;
-        }
+//        if ($height > $width) {
+//            $tyle = $height / $width;
+//            $width_thumb = 100;
+//            $height_thumb = $width_thumb * $tyle;
+//        } else {
+//            $tyle = $width / $height;
+//            $height_thumb = 100;
+//            $width_thumb = $height_thumb * $tyle;
+//        }
 
         if ($_POST['id_sanpham'] != "") {
             $id_sanpham = $_POST['id_sanpham'];
@@ -171,8 +171,11 @@ class Product extends MY_Controller {
 
         echo json_encode($this->model->update($_POST));
     }
-
-    function add_product_detail() {
+    function delete()
+    {
+         echo json_encode($this->model->delete_product($_POST["id_product"]));
+    }
+            function add_product_detail() {
         echo json_encode($this->model->add_product_detail($_POST));
     }
 

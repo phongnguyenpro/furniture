@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Adminsecurity
 {
+    public $controller="";
+    public $action="";
+    
     public function __construct()
     {
         // tham so truyen kieu mang
@@ -12,6 +15,7 @@ class Adminsecurity
 //        //  $this->url =$this->CI->uri->rsegments;
 //        $this->mydb =$this->CI->mydb;
 
+   
     }
 
     public $list_controller = array(
@@ -98,7 +102,7 @@ class Adminsecurity
             "attr"=>"",
             "controller"=>
                 array(
-                    "Module"=>array(
+                    "module"=>array(
                         "attr"=>array("label"=>"Quản lý"),
                         "action"=>array(
                             "index"
@@ -111,11 +115,10 @@ class Adminsecurity
     public function menu_item()
     {
         $menu = array();
-
         foreach ($this->list_controller as $k => $v) {
             $menu[$k]["attr"] = $v["attr"];
             foreach ($v["controller"] as $k_item => $v_item) {
-                $menu[$k]["item"][] = array("controller" => $k_item, "label" => $v_item["attr"]["label"]);
+                $menu[$k]["item"][] = array("controller" => $k_item, "label" => $v_item["attr"]["label"],"active"=>$k_item==$this->controller?1:0);
             }
         }
         return $menu;
@@ -146,8 +149,10 @@ class Adminsecurity
         return $this->myrole;
     }
 
-    public function checkrole($controler = "", $actione = "")
+    public function checkrole($controler = "", $action = "")
     {
+        $this->controller=  string_lower($controler);
+        $this->action=  string_lower($action);
 
     }
 }

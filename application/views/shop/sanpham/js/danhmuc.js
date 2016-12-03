@@ -10,12 +10,11 @@ $(document).ready(function () {
                 $(this).addClass("sortbyactive");
             }
 
-
+            _geturl();
         })
 
     })
-    $('.btnlocsanpham').click(function () {
-
+    _geturl = function () {
         urlsend = "";
         type = '';
         if ($('i.sortbyactive').attr("data-type") == "asc")
@@ -68,51 +67,36 @@ $(document).ready(function () {
             noibat = '';
         }
 // end tất cả
-
+        // princr
+        var min_price = $("input#price-min").val();
+        var max_price = $("input#price-max").val();
+        var price = "";
+        if ((parseFloat(min_price) || parseFloat(max_price)))
+            price = "price=" + ((parseFloat(min_price) && min_price > 0) ? min_price : 0) + "," + ((parseFloat(max_price) && max_price > 0) ? max_price : "") + "&";
 // page
 //currentpage=$('.page,.active').attr('data-page');
 // end page
 
-        urlsend = URLNOW + "?" + strfilter + strorderby + noibat + giamgia + type + "page=1";
-
-
+        urlsend = URLNOW + "?" + strfilter + strorderby + noibat + giamgia + type + price + "page=1";
         if (urlsend != window.location) {
-
             window.history.pushState('page2', 'page2', urlsend);
             load(urlsend);
         }
+    }
+    $('.btnlocsanpham').click(function () {
+        _geturl();
+    })
+    $("select[name=sapxep],.input-price,.filter").change(function () {
+        _geturl();
 
     })
-
 // Tuy chon san pham
     $('.tuychonsanpham').click(function () {
         $('.tuychonsanpham').each(function () {
             $(this).removeClass("current-categorie");
         })
         $(this).addClass("current-categorie");
-        urlsend = URLNOW;
-        tuychon = $(this).attr('data-tuychon');
-
-        if (tuychon != 'tatca') {
-            type = '';
-            if ($('i.sortbyactive').attr("data-type") == "asc")
-                type = "type=" + $('i.sortbyactive').attr("data-type") + "&";
-
-            // Lay orderby
-            if ($(".orderby option:selected").val() != 'stt') {
-                strorderby = "orderby=" + $(".orderby option:selected").val() + '&';
-
-            }
-            else
-                strorderby = '';
-            urlsend = URLNOW + "?" + strorderby + type + tuychon + "=1";
-        }
-
-        if (urlsend != window.location) {
-            window.history.pushState('page2', 'page2', urlsend);
-            load(urlsend);
-        }
-
+        _geturl();
     })
 //$(window).on("navigate", function (event, data) {
 //  var direction = data.state.direction;
@@ -242,14 +226,6 @@ $(document).ready(function () {
                 if (value.product_sale > 0) {
                     html += ' <div class="price-percent-reduction2">-' + value.product_sale + '%<br>SAFE</div>';
                 }
-                if (value.product_feature == 1) {
-                    html += '  <div class="featured-text"><span></span></div>';
-                }
-                if (value.product_new == 1) {
-                    html += '  <div class="group-price"> <span class="product-new">New</span></div>';
-                }
-
-
                 html += "</div>";
                 html += '<div class="right-block">';
                 html += '<h5 class="product-name"><a href="' + BASE_URL + 'san-pham/' + value.product_id + "/" + value.product_slug + '" >' + value.product_name + '</a>';
@@ -262,8 +238,11 @@ $(document).ready(function () {
                     html += ' <span class="price product-price">$' + tien(value.product_price) + ' &#8363;</span>';
                 html += '  <div class="info-orther">';
                 html += ' <div class="product-desc">' + ngangon + '</div>';
-                html += '</div></div></div></li>'
-
+                html += '</div> ';
+                html += '  <div class="info-bottom"> ';
+                html += '  <a class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>';
+                html += '  <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>  </div>';
+                html += '</div></div></li>'
             })
             $('.filter').each(function () {
 
@@ -272,6 +251,11 @@ $(document).ready(function () {
                 else
                     $(this).prop("checked", false);
             })
+            if (o.price != undefined)
+            {
+                $("input#price-min").val(o.price[0]);
+                $("input#price-max").val(o.price[1]);
+            }
             $('.orderby option[value=' + o.orderby + ']').prop("selected", true);
 
             $(".sortby").find("i").each(function () {
@@ -301,11 +285,12 @@ $(document).ready(function () {
 
             $('.dangload').hide();
             $('.pagination').html(htmlpage);
-            $('.dulieusanpham').html(html);
-            setTimeout(function () {
-                setheightitem();
-            }, 500);
-            cuon($(".current-categorie"), 0);
+            $('.dulieusanpham').html(html).promise().done(function () {
+                setTimeout(function () {
+                    setheightitem();
+                }, 500);
+          //  cuon($(".current-categorie"), 0);
+        })
         }, "JSON")
 
     }
@@ -346,7 +331,8 @@ $(document).ready(function () {
     });
     $(window).resize(function () {
         $(".dulieusanpham").find("li").children().css("height", "auto");
-        if (this.resizeTO) clearTimeout(this.resizeTO);
+        if (this.resizeTO)
+            clearTimeout(this.resizeTO);
         this.resizeTO = setTimeout(function () {
             $(this).trigger('resizeEnd');
         }, 500);

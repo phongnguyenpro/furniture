@@ -114,9 +114,9 @@ order by product_index desc limit $limit ) as t
         return $data;
     }
 
-    public function data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat = '', $giamgia = '', $page = 1, $type = "desc", $ajax = false)// trang danh muc it
+    public function data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat = '', $giamgia = '', $page = 1, $type = "desc",$price,$ajax = false)// trang danh muc it
     {
-        //$xuly = new Xulydulieu();
+        
         $id_danhmuc = string_input($id_danhmuc);
         $orderby = string_input($orderby);
         $filter = string_input($filter);
@@ -160,6 +160,19 @@ order by product_index desc limit $limit ) as t
         else if (strtolower($orderby) == "yeuthich")
             $orderby = "product_like";
         // end tạo order by
+
+        // Kiểm tra  price
+        $arr_price = array();
+        if($price!=-1)
+        {
+            $arr_price = explode(",", $price);
+           for($i=0;$i<=1;$i++)
+            {
+            if( !isset($arr_price[$i]) || !is_numeric($arr_price[$i]) || $arr_price[$i] < 0 )
+                $arr_price[$i]="";
+            }
+           
+        }
         // Tạo các str lộc
         $limit = LIMITDANHMUCIT;
         $filter = explode(",", $filter);
@@ -177,6 +190,8 @@ order by product_index desc limit $limit ) as t
                     $table['where'][$v['productattr_id']] = "t" . $v['productattr_id'] . ".product_id ";
                 }
             }
+            if(isset($table))
+            {
             $where .= "product.product_id=productcategory_detail.product_id and ";
             $where .= "product.product_id=" . implode(" and product.product_id=", $table['where']);
             $i = 0;
@@ -185,7 +200,9 @@ order by product_index desc limit $limit ) as t
                 $i = 1;
             }
             $from = "productattr_detail " . implode(", productattr_detail ", $table['from']);
+            }
             // end trinh xu ly
+            
         }
 // end tạo các str lọc
         $data['tuychonsanpham'] = 'tatca';
@@ -201,13 +218,24 @@ order by product_index desc limit $limit ) as t
             $data['tuychonsanpham'] = 'giamgia';
         }
         // end tao giam gia
-        if (!empty($filter[0]) != '') {
+        
+        // tao price
+        $sqlprice="";
+        if(!empty($arr_price))
+        {
+            $min_price = ( isset($arr_price[0]) && is_numeric($arr_price[0]) )? $arr_price[0]:"";
+            $max_price = ( isset($arr_price[1]) && is_numeric($arr_price[1]) )? $arr_price[1]:"";
+            $sqlprice = ($min_price!=-""?" and product_price >= $min_price ":"").($max_price!=""?" and product_price <= $max_price  ":"" );
+            $data["price"]=$arr_price;
+        }
+        if (!empty($filter[0]) != '' && isset($table)) {
+         
             // Tính phân trang tại đây
 //            $sql="select  count(DISTINCT(danhmucsanphamchitiet.product_id)) as row
 //from thuoctinhchonchitiet,danhmucsanphamchitiet,sanpham
 //where sanpham.product_id=danhmucsanphamchitiet.product_id and thuoctinhchonchitiet.product_id=danhmucsanphamchitiet.product_id and  danhmucsanphamchitiet.productcategory_id=:productcategory_id and hienthi=1  and ngaytao<now()  $giamgia $noibat  $sqlwherefilter ";
 //
-            $sql = "select count(DISTINCT( product.product_id)) as row  from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create<now()  $giamgia $noibat";
+            $sql = "select count(DISTINCT( product.product_id)) as row  from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat";
             $kq = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
             if (!empty($kq))
                 $totalRow = $kq[0]['row'];
@@ -219,13 +247,13 @@ order by product_index desc limit $limit ) as t
             $data['phantrang'] = array("totalpage" => $total_page, "nowpage" => $nowpage, "currentpage" => $page);
 
             $sql = "select  product.product_id,product_date_sale,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description"
-                . " from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create<now()  $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit";
+                . " from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit"; ;  
             $data['sanpham'] = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
         } else {
             // Tính phân trang tại đây
             $sql = "select  count(DISTINCT( product.product_id)) as row  
 from productcategory_detail,product
-where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create<now()  $giamgia $noibat  ";
+where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat  ";
             $kq = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
             if (!empty($kq))
                 $totalRow = $kq[0]['row'];
@@ -238,9 +266,10 @@ where product.product_id=productcategory_detail.product_id  and  productcategory
 // end phan trang
             $sql = "select product.product_id,product_date_sale,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description
 from productcategory_detail,product
-where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create<now() $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit";
+where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit";
             $data['sanpham'] = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
-        }
+
+            }
         //  Load trinh loc
         if (!$ajax) {
             $id_nganhnghe = $this->danhmucsanpham['item'][$id_danhmuc]['career_id'];

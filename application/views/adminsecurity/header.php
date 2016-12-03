@@ -105,7 +105,7 @@
                                 <?php
                                 foreach ($v_group["item"] as $k_item => $v_item) {
                                     ?>
-                                    <li><a href="<?= ADMIN_URL . $v_item["controller"] ?>"><?= $v_item["label"]; ?></a></li>   
+                                    <li class="<?= $v_item["active"]==1?"act_item":"" ?>"><a href="<?= ADMIN_URL . $v_item["controller"] ?>"><?= $v_item["label"]; ?></a></li>   
 
 
                                 <?php } ?>  

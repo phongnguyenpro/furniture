@@ -15,11 +15,12 @@ class MY_Controller extends CI_Controller
             if (file_exists($file_path = APPPATH . "models/adminsecurity/" . $name_controller . '_model.php')) {
                 $this->load->model("adminsecurity/" . $name_controller . '_model', 'model');
             }
+            $this->url = $this->uri->rsegments;
             $this->load->helper(array("mydata_helper"));
             // kiểm tra quyền user theo controller và function
             $this->load->library("adminsecurity");
             $this->adminsecurity->mydb = $this->mydb;
-            $this->adminsecurity->checkrole();
+            $this->adminsecurity->checkrole($this->url[1],$this->url[2]);
             $this->data["menu_item"] = $this->adminsecurity->menu_item();
 
             load_config(array("CACHE", "URLANHCHEN", "LOGO"));
