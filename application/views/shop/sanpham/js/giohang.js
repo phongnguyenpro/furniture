@@ -278,7 +278,7 @@ $(document).ready(function () {
         html += '</ul></div>';
         html += ' <div class="toal-cart"> <span>Tổng cộng:</span>';
         html += '  <span class="toal-price pull-right">$' + format1(tongtien, '') + '&#8363;</span> </div>'
-        html += '<div class="cart-buttons">  <a href="' + BASE_URL + 'sanpham/checkout" class="btn-check-out">Lập hóa đơn</a>  </div></div>';
+        html += '<div class="cart-buttons">  <a href="' + BASE_URL + 'checkout" class="btn-check-out">Lập hóa đơn</a>  </div></div>';
 
         $('html, body').animate({
             scrollTop: ($(".cart-link").offset().top) - 100

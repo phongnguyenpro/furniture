@@ -35,7 +35,7 @@ if (isset($this->data['data'])) {
                 <h2 class="page-heading">
                         <span class="page-heading-title">
                             <a href="<?= BASE_URL . "danh-muc/" . $danhmuc['thongtin']['productcategory_id'] . "/" . $danhmuc['thongtin']['productcategory_slug'] ?>"><?= $danhmuc['thongtin']['productcategory_name'] ?>
-                                <span class="fa fa-angle-right"> xem nhiều hơn</span></a></span>
+                                <span class="fa fa-angle-right"> xem tất cả</span></a></span>
 
                 </h2>
 
