@@ -109,6 +109,18 @@ class Adminsecurity
                         )
                     )
                 )
+        ),
+          "Extension"=>array(
+            "attr"=>"",
+            "controller"=>
+                array(
+                    "Media"=>array(
+                        "attr"=>array("label"=>"Quản lý Media"),
+                        "action"=>array(
+                            "index"
+                        )
+                    )
+                )
         )
     );
 

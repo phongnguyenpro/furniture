@@ -272,7 +272,7 @@ class Ssp_product {
             else
                 $where = $where . " and ";
             // Main query to actually get the data
-            $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS DISTINCT(product_id),product_price,product_code,product_name,product.product_id,product_index,product_show,product_feature,product_avatar,product_date_create
+            $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS DISTINCT(product.product_id),product_price,product_code,product_name,product.product_id,product_index,product_show,product_feature,product_avatar,product_date_create
 			 FROM product,productcategory_detail
 			$where  product.product_id=productcategory_detail.product_id and ( $sqlwhere )
 			 $order

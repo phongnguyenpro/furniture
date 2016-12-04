@@ -2442,7 +2442,7 @@ span.notify-right{
 
 }
 .product-list li .add-to-cart:hover{
-  background-color: rgba(255,51,102,0.5);
+  background-color: rgba(244, 161, 55, 0.84);
 }
 .product-list li .add-to-cart a{
 /*    background: url("../images/add-cart.png") no-repeat left center;
@@ -2789,7 +2789,7 @@ span.notify-right{
 [11.1.2 Product featured]
 */
 .product-featured{
-  margin-top: 10px;
+//  margin-top: 10px;
   background: #fff;
 }
 .product-featured .product-featured-content{

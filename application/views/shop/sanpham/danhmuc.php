@@ -151,7 +151,7 @@ $phantrang = $this->data['phantrang'];
             class="fa fa-sort-alpha-desc <?= $this->data['sortby'] == "desc" ? "sortbyactive" : "" ?>"></i>
         </div>
 
-        <span class="label-filter">Tìm giá</span>
+        <span class="label-filter">Lọc giá</span>
         <input id="price-min"  value="<?= isset($this->data["price"][0])?$this->data["price"][0]:""  ?>" class="price input-price" placeholder="Min Price">
         <input id="price-max" value="<?= isset($this->data["price"][1])?$this->data["price"][1]:""  ?>" class="price input-price" placeholder="Max Price">
 

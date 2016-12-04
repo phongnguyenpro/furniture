@@ -224,7 +224,7 @@ class Product_model extends MY_Model {
         if ($data['category_id'] != -1) {
             $this->load->model(array("adminsecurity/productcategory_model"));
             $category_id = $data['category_id'];
-            $list_child = search_all_schild($this->productcategory_model->load_category_condition(), $category_id, array());
+            $list_child = search_all_child($this->productcategory_model->load_category_condition(), $category_id, array());
             if (empty($list_child))
                 $sqlwhere = " productcategory_id=$category_id";
             else
@@ -273,21 +273,20 @@ class Product_model extends MY_Model {
 
     function sort_product($data) {
 
-        $sort = json_decode($data);
+     //   $sort = json_decode($data);
         $stt = 1;
         $i = 0;
 
         $datastt = array();
 
-        foreach ($sort as $key => $item) {
+        foreach ($data as $key => $item) {
 
-            $id = $item->id;
-            $stt = $item->stt;
+            $id = $item["id"];
+            $stt = $item["stt"];
             $datasapxep[$id] = $stt;
             $datatemp[$i] = $stt;
             $i++;
         }
-
         asort($datatemp);
 
         foreach ($datatemp as $value) {
@@ -534,8 +533,8 @@ class Product_model extends MY_Model {
         // delete images
         $kq = $this->mydb->select("select product_images_name from product_images where product_id=:product_id", array("product_id" => $product_id));
         foreach ($kq as $value) {
-            $linkfile = "public/upload/images/hinhsanpham/" . $value['product_images_name'];
-            $linkthumb = "public/upload/images/thumb_hinhsanpham/" . $value['product_images_name'];
+            $linkfile = "public/upload/images/product/" . $value['product_images_name'];
+            $linkthumb = "public/upload/images/thumb_product/" . $value['product_images_name'];
             if (file_exists($linkfile))
                 unlink($linkfile);
             if (file_exists($linkthumb))
@@ -543,10 +542,10 @@ class Product_model extends MY_Model {
         }
         $this->mydb->deleteall("product_images", "product_id=:product_id", array("product_id" => $product_id));
         // delete avatar
-        $kq = $this->select("select product_avatar from product where product_id=:product_id", array("product_id" => $product_id));
+        $kq = $this->mydb->select("select product_avatar from product where product_id=:product_id", array("product_id" => $product_id));
         if ($kq[0]['product_avatar'] != '') {
-            $linkfile = "public/upload/images/hinhsanpham/" . $kq[0]['product_avatar'];
-            $linkthumb = "public/upload/images/thumb_hinhsanpham/" . $kq[0]['product_avatar'];
+            $linkfile = "public/upload/images/product/" . $kq[0]['product_avatar'];
+            $linkthumb = "public/upload/images/thumb_product/" . $kq[0]['product_avatar'];
             if (file_exists($linkfile))
                 unlink($linkfile);
             if (file_exists($linkthumb))
@@ -574,7 +573,7 @@ class Product_model extends MY_Model {
 //            $this->mydb->delete("sanphamtemp", "product_id=:product_id", array("product_id" => $product_id));
 //        }
 
-        echo json_encode(array("status" => 1));
+       return array("status" => 1);
     }
 
     function add_product_detail($data) {

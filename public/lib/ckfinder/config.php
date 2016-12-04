@@ -188,14 +188,14 @@ Example: 'maxSize' => "8M",
 */
 $config['DefaultResourceTypes'] = '';
 
-$config['ResourceType'][] = Array(
-		'name' => 'Files',				// Single quotes not allowed
-		'url' => $baseUrl . 'files',
-		'directory' => $baseDir . 'files',
-		'maxSize' => 0,
-		'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
-		'deniedExtensions' => '');
-
+//$config['ResourceType'][] = Array(
+//		'name' => 'Files',				// Single quotes not allowed
+//		'url' => $baseUrl . 'files',
+//		'directory' => $baseDir . 'files',
+//		'maxSize' => 0,
+//		'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
+//		'deniedExtensions' => '');
+//
 $config['ResourceType'][] = Array(
 		'name' => 'Images',
 		'url' => $baseUrl . 'images',
@@ -204,45 +204,45 @@ $config['ResourceType'][] = Array(
 		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
 		'deniedExtensions' => '');
 		
-$config['ResourceType'][] = Array(
-		'name' => 'Logo',
-		'url' => $baseUrl . 'logo',
-		'directory' => $baseDir . 'logo',
-		'maxSize' => "16M",
-		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
-		'deniedExtensions' => '');
-
-$config['ResourceType'][] = Array(
-    'name' => 'Danhmuc',
-    'url' => $baseUrl . 'danhmuc',
-    'directory' => $baseDir . 'danhmuc',
-    'maxSize' => "16M",
-    'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
-    'deniedExtensions' => '');
-		
-$config['ResourceType'][] = Array(
-		'name' => 'Slide',
-		'url' => $baseUrl . 'slide',
-		'directory' => $baseDir . 'slide',
-		'maxSize' => "16M",
-		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
-		'deniedExtensions' => '');
-
-$config['ResourceType'][] = Array(
-		'name' => 'Banner',
-		'url' => $baseUrl . 'banner',
-		'directory' => $baseDir . 'banner',
-		'maxSize' => "16M",
-		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
-		'deniedExtensions' => '');
-
-$config['ResourceType'][] = Array(
-		'name' => 'Flash',
-		'url' => $baseUrl . 'flash',
-		'directory' => $baseDir . 'flash',
-		'maxSize' => 0,
-		'allowedExtensions' => 'swf,flv',
-		'deniedExtensions' => '');
+//$config['ResourceType'][] = Array(
+//		'name' => 'Logo',
+//		'url' => $baseUrl . 'logo',
+//		'directory' => $baseDir . 'logo',
+//		'maxSize' => "16M",
+//		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
+//		'deniedExtensions' => '');
+//
+//$config['ResourceType'][] = Array(
+//    'name' => 'Danhmuc',
+//    'url' => $baseUrl . 'danhmuc',
+//    'directory' => $baseDir . 'danhmuc',
+//    'maxSize' => "16M",
+//    'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
+//    'deniedExtensions' => '');
+//		
+//$config['ResourceType'][] = Array(
+//		'name' => 'Slide',
+//		'url' => $baseUrl . 'slide',
+//		'directory' => $baseDir . 'slide',
+//		'maxSize' => "16M",
+//		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
+//		'deniedExtensions' => '');
+//
+//$config['ResourceType'][] = Array(
+//		'name' => 'Banner',
+//		'url' => $baseUrl . 'banner',
+//		'directory' => $baseDir . 'banner',
+//		'maxSize' => "16M",
+//		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,avi,iso,mp3',
+//		'deniedExtensions' => '');
+//
+//$config['ResourceType'][] = Array(
+//		'name' => 'Flash',
+//		'url' => $baseUrl . 'flash',
+//		'directory' => $baseDir . 'flash',
+//		'maxSize' => 0,
+//		'allowedExtensions' => 'swf,flv',
+//		'deniedExtensions' => '');
 
 /*
  Due to security issues with Apache modules, it is recommended to leave the

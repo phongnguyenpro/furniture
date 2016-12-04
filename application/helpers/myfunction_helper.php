@@ -287,7 +287,7 @@ function search_all_child($data, $id_danhmuc, $list_child)
     if (isset($data['parent'][$id_danhmuc])) {
         foreach ($data['parent'][$id_danhmuc] as $value) {
             $list_child[] = $value;
-            $list_child = search_all_schild($data, $value, $list_child);
+            $list_child = search_all_child($data, $value, $list_child);
         }
     }
     return $list_child;

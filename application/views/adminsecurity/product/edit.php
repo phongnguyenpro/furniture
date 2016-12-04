@@ -480,7 +480,7 @@ function buiding_menu($parent, $menuData, $data) {
                     <div class="md-card-content">
     <?php foreach ($product_prop as $key => $value) { ?>
                             <div class="uk-form-row">
-                                <label for="product_edit_sn_control"><?= $value['product_prop_id'] ?></label>
+                                <label for="product_edit_sn_control"><?= $value['product_prop_name'] ?></label>
                                 <input type="text" class="md-input" id="product_edit_sn_control"
                                        name="property[<?= $value['product_prop_id'] ?>]" 
                                        value='<?= isset($product["product_prop_detail"][$value['product_prop_id']]) == true ? $product["product_prop_detail"][$value['product_prop_id']] : "" ?>' />

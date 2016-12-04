@@ -122,7 +122,7 @@
                                             <i class="uk-icon-edit"></i>
                                         </span>
                                         <label for="product_edit_name_control">Giá</label>
-                                        <input required="" type="text" class="md-input"
+                                        <input required="" type="text" class="md-input input-price"
                                                id="product_edit_name_control" name="product_price" value=""/>
                                     </div>
                                 </div>
@@ -269,7 +269,7 @@
                         <div class="md-card-content">
                             <?php foreach ($product_prop as $key => $value) { ?>
                                 <div class="uk-form-row">
-                                    <label for="product_edit_sn_control"><?= $value['product_prop_id'] ?></label>
+                                    <label for="product_edit_sn_control"><?= $value['product_prop_name'] ?></label>
                                     <input type="text" class="md-input" id="product_edit_sn_control"
                                            name="property[<?= $value['product_prop_id'] ?>]" value=""/>
                                 </div>

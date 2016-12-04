@@ -188,7 +188,7 @@
                           <div class="content-page">
                             <div class="container">
                                 <!-- featured category fashion -->
-                                <?php $i=0;$quangcao=4; foreach ($this->data['product']['home_productcategory_data'] as $sanpham){ ?>
+                                <?php $i=0;$quangcao=0; foreach ($this->data['product']['home_productcategory_data'] as $sanpham){ ?>
                                 <div class="category-featured">
                                     <nav class="navbar nav-menu nav-menu-red show-brand">
                                       <div class="container">
@@ -219,11 +219,11 @@
                 </div>
             </div>-->
             <div class="product-featured clearfix">
-             <?php $left=0;$item=5; if(isset($this->data['module']['quangcao']['data']['main'][$quangcao])){ ?>
+             <?php $left=0;$item=5; if(isset($this->data['module']['banner']['main'][2]["data"][$quangcao])){ ?>
              <div class="banner-featured">
                 <!--                    <div class="featured-text"><span>featured</span></div>-->
                 <div class="banner-img">
-                    <a   ><img alt="Quang Cao" src="<?= $this->data['module']['quangcao']['data']['main'][$quangcao]["linkimage"] ?>" /></a>
+                    <a  href="<?= $this->data['module']['banner']['main'][2]["data"][$quangcao]["module_link"]  ?>" ><img alt="Quang Cao" src="<?= $this->data['module']['banner']['main'][2]["data"][$quangcao]["module_image"] ?>" /></a>
                 </div>
             </div>
             <?php $left="234";$item=4; } ?>

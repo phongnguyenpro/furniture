@@ -9,7 +9,7 @@ $(document).ready(function (e) {
     var table = $('#dt_tableTools1').DataTable({
         "dom": 'T<"clear">lfrtip',
         "tableTools": {
-            "sSwfPath": URL + "view/administrator/public/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf",
+            "sSwfPath": BASE_URL + "application/views/adminsecurity/public/bower_components/datatables-tabletools/swf/copy_csv_xls_pdf.swf",
             "aButtons": ["copy", "xls", "print"]},
         "lengthMenu": [[5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, -1], [5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, "All"]],
         "language": {
@@ -80,9 +80,9 @@ $(document).ready(function (e) {
     $('#capnhatthutu').click(function () {
 
         var data = $(".uk-sortable").data("sortable").serialize();
-        datamenu = JSON.stringify(data); // lấy giá trị 
+      //  datamenu = JSON.stringify(data); // lấy giá trị 
         $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang cập nhật</div>')
-        $.post(ADMIN_URL + "product/sort_product", {'product': datamenu}, function (o) {
+        $.post(ADMIN_URL + "product/sort_product", {'product': data}, function (o) {
             if (o.status == 1)
             {
                 $('#thongbaoupdate').html('<div class="uk-alert uk-alert-success">Cập nhật thành công</div>')
@@ -134,8 +134,8 @@ $(document).ready(function (e) {
         $('.btnxoa').prop("disabled", true);
         $('#thongbaoxoa').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang xóa sản phẩm</div>');
         id_sanpham = $(this).val();
-        $.post(ADMIN_URL + "product/xoasanpham", {"id_sanpham": id_sanpham}, function (o) {
-            if (o.tinhtrang == 1)
+        $.post(ADMIN_URL + "product/delete", {"id_product": id_sanpham}, function (o) {
+            if (o.status == 1)
                 modalxoa.hide();
             $('tr[id=' + id_sanpham + ']').fadeOut("slow", function () {
                 $(this).remove();
