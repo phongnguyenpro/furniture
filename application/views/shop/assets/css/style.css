@@ -155,10 +155,8 @@ ol,ul
 #footer::before
 {
   content: "";
-  border-top: 1px solid #CFD3D6;
   display: block;
   height: 3px;
-  background-color: white;
 }
 .entry_title
 {
@@ -1469,6 +1467,9 @@ span.notify-right{
   line-height: 36px;
   display: block;
 }
+.box-vertical-megamenus .vertical-menu-list>li>a>img{
+ vertical-align: baseline;   
+}
 .box-vertical-megamenus .vertical-menu-content ul>li>a.parent:before {
   display: inline-block;
   background: url(../images/ico-menu-parent.png) no-repeat;
@@ -1635,6 +1636,7 @@ span.notify-right{
   border: none;
   margin: 0;
   background: none;
+  z-index: 10000;
 }
 #main-menu .navbar-collapse{
   padding: 0;
@@ -2026,6 +2028,7 @@ span.notify-right{
   visibility: inherit;
   width: 30px;
   height: 52px;;
+  z-index: 0;
 
 }
 .header-top-right .homeslider .bx-controls-direction .bx-prev{
@@ -3086,7 +3089,7 @@ span.notify-right{
 [14. footer]
 */
 #footer {
-  background: #eee;
+  background: #dddddd;
 }
 
 /** add-box **/
@@ -3230,7 +3233,7 @@ span.notify-right{
 
 /** #footer-menu-box **/
 #footer{
-  background: #eaeaea;
+  background: #dddddd;
 }
 #footer-menu-box {
   border-top: 1px solid #E1E1E1;

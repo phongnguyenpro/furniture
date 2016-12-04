@@ -40,7 +40,7 @@ function get_module_location()
 
 function get_product_type()
 {
-    return array("hot" => "Sản phẩm nổi bật", "selling" => "Sản phẩm bán chạy");
+    return array("hot" => "Sản phẩm nổi bật", "selling" => "Sản phẩm bán chạy","sale"=>"Sản phẩm giảm giá","new"=>"Sản phẩm mới");
 }
 
 function get_checkout_type()

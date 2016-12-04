@@ -84,10 +84,10 @@
 
             <div class="sidebar_main_header">
                 <div class="sidebar_logo">
-                    <a href="<?= BASE_URL ?>administrator247/" class="sSidebar_hide"><img
+                    <a href="<?= ADMIN_URL ?>" class="sSidebar_hide"><img
                             src="<?= BASE_URL.LOGO ?>" alt="" height="15"
                             width="71"/></a>
-                    <a href="<?= BASE_URL ?>administrator247/" class="sSidebar_show"><img
+                    <a href="<?= ADMIN_URL ?>" class="sSidebar_show"><img
                             src="<?= BASE_URL.LOGO ?>" alt="" height="32"
                             width="32"/></a>
                 </div>

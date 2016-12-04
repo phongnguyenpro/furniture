@@ -102,7 +102,7 @@ $(document).ready(function (e) {
                 if (ketqua.status == 1) {
 
                     id_sanpham = ketqua.product_id;
-                    $('.ketqua').html('<div class="uk-alert uk-alert-success">Sản phẩm đã thêm thành công <a href="' + URL + 'administrator247/dashboard/themsanpham?nganh=' + ketqua.nganh + '" class="btn btn-default"> <i class="uk-icon-plus"></i> Tiếp tục thêm </a> <a href="' + URL + 'administrator247/dashboard/editsanpham/' + ketqua.id_sanpham + '" class="btn btn-default"> <i class="uk-icon-edit"></i> Cập nhật sản phẩm </a></div>');
+                    $('.ketqua').html('<div class="uk-alert uk-alert-success">Sản phẩm đã thêm thành công <a href="' + ADMIN_URL + 'product/create?nganh=' + ketqua.nganh + '" class="btn btn-default"> <i class="uk-icon-plus"></i> Tiếp tục thêm </a> <a href="' + ADMIN_URL + 'product/edit/' + ketqua.product_id + '" class="btn btn-default"> <i class="uk-icon-edit"></i> Cập nhật sản phẩm </a></div>');
                     return false;
                 }
             }

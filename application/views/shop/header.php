@@ -106,7 +106,7 @@ if (!isset($_SESSION['token']))
         <div class="col-xs-12 col-sm-2 logo">
             <a href="<?= BASE_URL ?>"><img alt="<?= TENSHOP ?>" src="<?= BASE_URL.LOGO ?>"/></a>
         </div>
-        <div class="col-xs-8 col-sm-8 header-search-box">
+        <div class="col-xs-10 col-sm-8 header-search-box">
             <form class="form-inline">
                 <div class="form-group form-category">
                     <select class="select-category" id="selectdanhmuc">
@@ -134,7 +134,7 @@ if (!isset($_SESSION['token']))
                 </div>
             </form>
         </div>
-        <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
+        <div id="cart-block" class="col-xs-2 col-sm-2 shopping-cart-box">
             <a class="cart-link" href="<?= BASE_URL . "checkout" ?>">
                 <div class="info">
                 <span class="title">Giỏ hàng</span><br>
@@ -335,7 +335,7 @@ function submenu_sanpham($danhmuc, $cha)
             <!-- IN MENU -->
             <div id="main-menu" class="col-sm-9 main-menu">
                 <nav class="navbar navbar-default">
-                    <div class="container-fluid">
+                    <div class="container">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                                     data-target="#navbar" aria-expanded="false" aria-controls="navbar">
