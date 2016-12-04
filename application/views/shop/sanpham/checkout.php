@@ -40,10 +40,6 @@ if (!empty($this->data['phivanchuyen'])) {
 }
 ?>
 
-<?php if (!check_login_user(array(1, 2, 3, 4))) { ?>
-    <div class="alert alert-info">LÀM ƠN giúp Phong lấy thông tin (tuổi và ng.sinh) của bạn để chạy Datamining<a
-            data-toggle="modal" data-target="#modal_dk_dn"> <b>ĐĂNG NHẬP</b></a></div><?php } ?>
-
 <!-- page heading-->
 <div class="boxquytrinhhoadon">
     <ul class="quytrinhhoadon" style=" border-bottom: 1px solid #e60a29;">

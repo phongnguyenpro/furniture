@@ -25,6 +25,7 @@ class MY_Controller extends CI_Controller
 
             load_config(array("CACHE", "URLANHCHEN", "LOGO"));
         } else {
+       
             if (file_exists($file_path = APPPATH . "models/" . $name_controller . '_model.php')) {
                 $this->load->model($name_controller . '_model', 'model');
             }

@@ -281,7 +281,7 @@ $(document).ready(function () {
         html += '<div class="cart-buttons">  <a href="' + BASE_URL + 'sanpham/checkout" class="btn-check-out">Lập hóa đơn</a>  </div></div>';
 
         $('html, body').animate({
-            scrollTop: ($(".notify-left").offset().top) - 100
+            scrollTop: ($(".cart-link").offset().top) - 100
         }, 1000, function () {
 
             $('.cart-block').html(html);

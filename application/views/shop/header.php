@@ -44,8 +44,6 @@ if (!isset($_SESSION['token']))
     
     <script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery/jquery-1.11.2.min.js"); ?>"></script>
     <script type="text/javascript" src="<?= BASE_URL . "public/js/function.js"; ?>"></script>
-    <script type="text/javascript"
-            src="<?= load_frontend_view("assets/lib/jquery.bxslider/jquery.bxslider.min.js") ?>"></script>
     <!-- Trình chiếu -->
     <script type="text/javascript" src="<?= load_frontend_view("assets/js/jquery.actual.min.js"); ?>"></script>
     <script type="text/javascript" src="<?= BASE_URL . "public/js/lazyload.js" ?> "></script>
@@ -137,7 +135,7 @@ if (!isset($_SESSION['token']))
             </form>
         </div>
         <div id="cart-block" class="col-xs-5 col-sm-2 shopping-cart-box">
-            <a class="cart-link" href="<?= BASE_URL . "sanpham/checkout" ?>">
+            <a class="cart-link" href="<?= BASE_URL . "checkout" ?>">
                 <div class="info">
                 <span class="title">Giỏ hàng</span><br>
                 <span class="total"><?= $total = count($giohang) ?> sản phẩm</span>
