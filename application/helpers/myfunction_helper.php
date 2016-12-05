@@ -348,6 +348,18 @@ function check_url($arr, $id)
     return true;
 }
 
+function get_user_info($key)
+{
+    if (kiemtradangnhapuser(array(1, 2, 3, 4, 5))) {
+        $taikhoan = unserialize($_COOKIE['taikhoan']);
+        if (isset($taikhoan[$key]))
+            return $taikhoan[$key];
+        else
+            return '';
+    } else
+        return '';
+}
+
 // ============== ******====================//
 function phantrangajax($page_count, $cur_page, $link)
 {

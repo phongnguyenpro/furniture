@@ -114,9 +114,9 @@ order by product_index desc limit $limit ) as t
         return $data;
     }
 
-    public function data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat = '', $giamgia = '', $page = 1, $type = "desc",$price,$ajax = false)// trang danh muc it
+    public function data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat = '', $giamgia = '', $page = 1, $type = "desc", $price, $ajax = false)// trang danh muc it
     {
-        
+
         $id_danhmuc = string_input($id_danhmuc);
         $orderby = string_input($orderby);
         $filter = string_input($filter);
@@ -124,7 +124,7 @@ order by product_index desc limit $limit ) as t
         if (!check_url(array(), $id_danhmuc))
             $this->error();
         // kiem tra orderby
-        $sapxep = array("product_index" => array("ten" => "STT"),"stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
+        $sapxep = array("product_index" => array("ten" => "STT"), "stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
         if (!key_exists($orderby, $sapxep))
             $this->error();
 // kiem tra filter
@@ -163,15 +163,13 @@ order by product_index desc limit $limit ) as t
 
         // Kiểm tra  price
         $arr_price = array();
-        if($price!=-1)
-        {
+        if ($price != -1) {
             $arr_price = explode(",", $price);
-           for($i=0;$i<=1;$i++)
-            {
-            if( !isset($arr_price[$i]) || !is_numeric($arr_price[$i]) || $arr_price[$i] < 0 )
-                $arr_price[$i]="";
+            for ($i = 0; $i <= 1; $i++) {
+                if (!isset($arr_price[$i]) || !is_numeric($arr_price[$i]) || $arr_price[$i] < 0)
+                    $arr_price[$i] = "";
             }
-           
+
         }
         // Tạo các str lộc
         $limit = LIMITDANHMUCIT;
@@ -190,19 +188,18 @@ order by product_index desc limit $limit ) as t
                     $table['where'][$v['productattr_id']] = "t" . $v['productattr_id'] . ".product_id ";
                 }
             }
-            if(isset($table))
-            {
-            $where .= "product.product_id=productcategory_detail.product_id and ";
-            $where .= "product.product_id=" . implode(" and product.product_id=", $table['where']);
-            $i = 0;
-            foreach ($arrfilter as $k => $v) {
-                $where .= " and  t" . $k . ".attr_val_id IN (" . implode(",", $v) . ") ";
-                $i = 1;
-            }
-            $from = "productattr_detail " . implode(", productattr_detail ", $table['from']);
+            if (isset($table)) {
+                $where .= "product.product_id=productcategory_detail.product_id and ";
+                $where .= "product.product_id=" . implode(" and product.product_id=", $table['where']);
+                $i = 0;
+                foreach ($arrfilter as $k => $v) {
+                    $where .= " and  t" . $k . ".attr_val_id IN (" . implode(",", $v) . ") ";
+                    $i = 1;
+                }
+                $from = "productattr_detail " . implode(", productattr_detail ", $table['from']);
             }
             // end trinh xu ly
-            
+
         }
 // end tạo các str lọc
         $data['tuychonsanpham'] = 'tatca';
@@ -218,24 +215,23 @@ order by product_index desc limit $limit ) as t
             $data['tuychonsanpham'] = 'giamgia';
         }
         // end tao giam gia
-        
+
         // tao price
-        $sqlprice="";
-        if(!empty($arr_price))
-        {
-            $min_price = ( isset($arr_price[0]) && is_numeric($arr_price[0]) )? $arr_price[0]:"";
-            $max_price = ( isset($arr_price[1]) && is_numeric($arr_price[1]) )? $arr_price[1]:"";
-            $sqlprice = ($min_price!=-""?" and product_price >= $min_price ":"").($max_price!=""?" and product_price <= $max_price  ":"" );
-            $data["price"]=$arr_price;
+        $sqlprice = "";
+        if (!empty($arr_price)) {
+            $min_price = (isset($arr_price[0]) && is_numeric($arr_price[0])) ? $arr_price[0] : "";
+            $max_price = (isset($arr_price[1]) && is_numeric($arr_price[1])) ? $arr_price[1] : "";
+            $sqlprice = ($min_price != -"" ? " and product_price >= $min_price " : "") . ($max_price != "" ? " and product_price <= $max_price  " : "");
+            $data["price"] = $arr_price;
         }
         if (!empty($filter[0]) != '' && isset($table)) {
-         
+
             // Tính phân trang tại đây
 //            $sql="select  count(DISTINCT(danhmucsanphamchitiet.product_id)) as row
 //from thuoctinhchonchitiet,danhmucsanphamchitiet,sanpham
 //where sanpham.product_id=danhmucsanphamchitiet.product_id and thuoctinhchonchitiet.product_id=danhmucsanphamchitiet.product_id and  danhmucsanphamchitiet.productcategory_id=:productcategory_id and hienthi=1  and ngaytao<now()  $giamgia $noibat  $sqlwherefilter ";
 //
-            $sql = "select count(DISTINCT( product.product_id)) as row  from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat";
+            $sql = "select count(DISTINCT( product.product_id)) as row  from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " . $sqlprice . " $giamgia $noibat";
             $kq = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
             if (!empty($kq))
                 $totalRow = $kq[0]['row'];
@@ -247,13 +243,13 @@ order by product_index desc limit $limit ) as t
             $data['phantrang'] = array("totalpage" => $total_page, "nowpage" => $nowpage, "currentpage" => $page);
 
             $sql = "select  product.product_id,product_date_sale,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description"
-                . " from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit"; ;  
+                . " from product,productcategory_detail, " . $from . " where " . $where . " and productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " . $sqlprice . " $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit";;
             $data['sanpham'] = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
         } else {
             // Tính phân trang tại đây
             $sql = "select  count(DISTINCT( product.product_id)) as row  
 from productcategory_detail,product
-where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat  ";
+where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " . $sqlprice . " $giamgia $noibat  ";
             $kq = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
             if (!empty($kq))
                 $totalRow = $kq[0]['row'];
@@ -266,10 +262,10 @@ where product.product_id=productcategory_detail.product_id  and  productcategory
 // end phan trang
             $sql = "select product.product_id,product_date_sale,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description
 from productcategory_detail,product
-where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " .$sqlprice." $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit";
+where product.product_id=productcategory_detail.product_id  and  productcategory_detail.productcategory_id=:productcategory_id and product_show=1  and product_date_create < now() " . $sqlprice . " $giamgia $noibat  group by  product.product_id  order by $orderby $type limit $start,$limit";
             $data['sanpham'] = $this->mydb->select($sql, array("productcategory_id" => $id_danhmuc));
 
-            }
+        }
         //  Load trinh loc
         if (!$ajax) {
             $id_nganhnghe = $this->danhmucsanpham['item'][$id_danhmuc]['career_id'];
@@ -774,6 +770,148 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         } else {
             $data['sanpham'] = array();
             return $data;
+        }
+    }
+
+    public function create_invoice($post)
+    {
+// kiem tra du lieu
+        $tongtien = 0;
+        $sotienphatsinh = 0;
+        $error = array();
+//        $giaidoan = new \lib\table\giaidoan();
+//        $id_giaidoan = $giaidoan->giaidoanhientai()["id_giaidoan"];
+        $kq = $this->load_cart();
+        $data = $kq['giohang'];
+        $set = $kq["set"];
+        if ($set || empty($data)) {
+            return array("tinhtrang" => 0, "tinnhan" => "reload");
+        }
+
+        foreach ($data as $value) {
+            if ($value['soluongthem'] <= $value['soluongsanpham']) {
+                $tongtiensanpham = $value['giasanpham'] * $value['soluongthem'];
+                $tiengiamgia = ($value['giasanpham'] * $value['soluongthem']) * ($value['giamgia'] / 100);
+                $tien = $tongtiensanpham - $tiengiamgia;
+                $tongtien = $tongtien + $tien;
+            } else {
+                $error[] = " Sản phẩm " . $value['tensanpham'] . "-" . $value['tengiatri'] . " chỉ còn " . $value['soluongsanpham'] . " sản phẩm";
+            }
+        }
+        // end kiem tra du lieu
+
+        // Lập hóa đơn
+
+        if (empty($error)) {
+//            $mail = new sendmail();
+            $kq = $this->mydb->select("select max(invoice_id) as max from invoice", array());
+            $id_hoadon = $kq[0]["max"] + 1;
+
+            $hoadon['invoice_code'] = "HD" . $id_hoadon;
+            $hoadon['invoice_amout'] = $tongtien;
+            $hoadon['invoice_total_discount'] = 0;
+            $hoadon['invoice_status'] = 1;
+            $hoadon['invoice_shipping_status'] = 2;
+//            $hoadon['invoice_discount_value'] = CHIETKHAU;
+//            $hoadon['distance_id'] = $id_giaidoan;
+            if (check_login_user(array(1, 2, 3, 4, 5)))
+                $hoadon['user_id'] = get_user_info("user_id");
+            $hoadon['invoice_date_create'] = today();
+
+            foreach ($post as $key => $value) {
+                if (in_array($key, array("user_name", "user_address", "user_phone", "user_email", "invoice_note", "invoice_type_pay", "diadiemgiaohang")))
+                    $hoadon[$key] = string_input($value);
+            }
+            // tinh phi giao hang
+            if (isset($hoadon['diadiemgiaohang'])) {
+                $id_phivanchuyen = $hoadon['diadiemgiaohang'];
+                unset($hoadon['diadiemgiaohang']);
+                $kq = $this->mydb->select("select * from fee_shipping where fee_shipping_id=:fee_shipping_id", array("fee_shipping_id" => $id_phivanchuyen));
+                if (!empty($kq)) {
+                    $sotienphatsinh = $kq[0]['fee_shipping_value'];
+                    $ghichuphatsinh = "Hóa đơn được cộng thêm " . $sotienphatsinh . " phí vận chuyển";
+                    if ($sotienphatsinh > 0 && $sotienphatsinh != '') {
+                        $hoadon['invoice_money_plus'] = $sotienphatsinh;
+                        $hoadon['invoice_note_money_plus'] = $ghichuphatsinh;
+                        $hoadon['invoice_amout'] = $hoadon['invoice_amout'] + $sotienphatsinh;
+                    }
+                }
+            }
+            // xu ly hinh thuc giao hang
+            if (isset($hoadon['invoice_type_pay'])) {
+                $hinhthucthanhtoan = get_checkout_type();
+                if (!isset($hinhthucthanhtoan[$hoadon['invoice_type_pay']]))
+                    $hoadon['invoice_type_pay'] = 1;
+            } else
+                $hoadon['invoice_type_pay'] = 1;
+
+
+            foreach ($hoadon as $key => $value) {
+                $hoadon[$key] = string_input($value);
+            }
+            // ma bao ve
+            $hoadon['invoice_protect_code'] = generate_password();
+            $row = $this->mydb->insert("invoice", $hoadon);
+            // send mail admin
+
+            $id_hoadon = $row['id'];
+            $i = 0;
+
+//            if (MATKHAUMAIL != '' && MATKHAUMAIL != NULL && strlen(MATKHAUMAIL) > 0) {
+//                $noidung['noidung'] = "Bạn nhận được một hóa đơn mới <br>Link: " . URL . "administrator247/hoadon/xem/" . $id_hoadon;
+//                $noidung['tieude'] = "Hóa đơn mới-" . Xulydulieu::ngayhientai();
+//                $diachi[0] = array("diachi" => EMAIL, "ten" => TENSHOP);
+//                $diachi1[0] = array("diachi" => "infoweb5916@gmail.com", "ten" => TENSHOP);
+//                $mail->sendmailoopmvclalala($diachi, $noidung);
+//                $mail->sendmailoopmvclalala($diachi1, $noidung);
+//                if ($hoadon['email'] != '') {
+//                    $noidung['noidung'] = "Cảm ơn bạn đã đặt hàng tại " . TENSHOP . "<br>Mã hóa đơn của bạn là " . $hoadon['mahoadon'] . "<br> Link: " . URL . "/hoadon?mahoadon=" . $hoadon['mahoadon'] . "&token=" . $hoadon['mabaove'];
+//                    $noidung['tieude'] = "Hóa đơn mới từ " . TENSHOP . "-" . Xulydulieu::ngayhientai();
+//                    $diachi[0] = array("diachi" => $hoadon['email'], "ten" => $hoadon['tenkhachhang']);
+//                    $mail->sendmailoopmvclalala($diachi, $noidung);
+//                }
+//            }
+
+            // lay thong tin chia se
+            if (isset($_COOKIE['chiase'])) {
+                $chiase = unserialize($_COOKIE['chiase']);
+                delete_cook("chiase");
+            }
+
+            // end send mail
+            foreach ($data as $value) {
+                $hoadonchitiet = array();
+                $hoadonchitiet['invoice_id'] = $id_hoadon;
+                $hoadonchitiet['product_id'] = string_input($value['id_sanpham']);
+                // $hoadonchitiet['tensanpham']=string_input($value['tensanpham']);
+                //$hoadonchitiet['masanpham']=string_input($value['masanpham']);
+                $hoadonchitiet['quantity'] = string_input($value['soluongthem']);
+                $hoadonchitiet['invoice_detail_discount'] = string_input($value['giamgia']);
+                $hoadonchitiet['product_price'] = string_input($value['giasanpham']);
+                $hoadonchitiet['product_avatar'] = string_input($value['hinhsanpham']);
+//                $hoadonchitiet['loinhuan'] = string_input($value['loinhuan']);
+
+                if (isset($chiase[$value['id_sanpham']])) {
+                    $hoadonchitiet['user_id_agency'] = $chiase[$value['id_sanpham']];
+                }
+                if (isset($value['id_sanphamchitiet'])) {
+                    $hoadonchitiet['product_detail_id'] = string_input($value['id_sanphamchitiet']);
+                }
+
+                $hoadonchitiet['attr_val_ids'] = string_input($value['giatri']);
+                $hoadonchitiet['attr_val_labels'] = string_input($value['tengiatri']);
+
+                $hoadonchitiet['invoice_detail_id'] = $id_hoadon . time() . $i;
+                $i++;
+                $this->mydb->insert("invoice_detail", $hoadonchitiet);
+//            $soluong=$data['soluong'];
+//            $sql="update sanpham set soluong=soluong-$soluong where id_sanpham=$id_sanpham";
+//            $this->exec($sql);
+            }
+            delete_cook("giohang");
+            return array("status" => 1, "mahoadon" => $hoadon['invoice_code'], "token" => $hoadon['invoice_protect_code']);
+        } else {
+            return array("status" => 0, "tinnhan" => $error);
         }
     }
 }

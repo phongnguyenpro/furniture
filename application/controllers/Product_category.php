@@ -65,7 +65,7 @@ class Product_category extends MY_Controller
                         $price = string_input($_GET['price']);
                     else
                         $price = -1;
-                    $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer,$price);
+                    $this->category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer, $price);
                 }
             } else {
                 // ORDER BY
@@ -106,12 +106,12 @@ class Product_category extends MY_Controller
                     $type = string_input($_GET['type']);
                 else
                     $type = "desc";
-                 // price
-                    if (isset($_GET['price']))
-                        $price = string_input($_GET['price']);
-                    else
-                        $price = -1;
-                $this->category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type,$price);
+                // price
+                if (isset($_GET['price']))
+                    $price = string_input($_GET['price']);
+                else
+                    $price = -1;
+                $this->category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $price);
             }
         } else
             $this->error();
@@ -140,7 +140,7 @@ class Product_category extends MY_Controller
         $this->load->view(THEME . '/footer');
     }
 
-    public function category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer,$price)
+    public function category_one($id_danhmuc, $menu, $danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $footer, $price)
     {
         // load sap xep
         $sapxep = array("stt" => array("ten" => "STT"), "gia" => array("ten" => "Giá"), "ngaytao" => array("ten" => "Ngày"), "daxem" => array("ten" => "Lượt Xem"), "yeuthich" => array("ten" => "Yêu Thích"));
@@ -152,7 +152,7 @@ class Product_category extends MY_Controller
         }
 
         // end load sap xep
-        $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type,$price);
+        $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $price);
 
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
@@ -177,9 +177,9 @@ class Product_category extends MY_Controller
         $this->load->view(THEME . "/footer");
     }
 
-    public function category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page,$type,$price)
+    public function category_one_ajax($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $price)
     {
-        echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type,$price, true));
+        echo json_encode($this->data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $price, true));
     }
 
     public function product($id_sanpham, $i = false)
@@ -295,7 +295,7 @@ class Product_category extends MY_Controller
                         create_cook("giohang", serialize($data));
                     }
 
-                    $data = $this->model->loadgiohang($data)['giohang'];
+                    $data = $this->model->load_cart($data)['giohang'];
                     echo json_encode(array("status" => 1, 'data' => $data));
                 }
             } else        $this->error(); // checksum
@@ -470,6 +470,20 @@ class Product_category extends MY_Controller
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/yeuthich');
         $this->load->view(THEME . '/footer');
+    }
+
+    public function create_invoice()
+    {
+        if (check_post($_POST, array("user_name", "user_address", "user_phone", "user_email", "invoice_note", "checksum"))) {
+            if (checksum($_POST)) {
+                if (isset($_COOKIE['giohang'])) {
+                    echo json_encode($this->model->create_invoice($_POST));
+                } else
+                    $this->error();
+            } else
+                $this->error();
+        } else
+            $this->error();
     }
 
     public function error()

@@ -41,11 +41,11 @@ $(document).ready(function () {
                             var checksum = ketqua.checksum;
                             formdata.append("checksum", checksum);
                             http = new XMLHttpRequest();
-                            http.open("POST", BASE_URL + "sanpham/laphoadon", true);
+                            http.open("POST", BASE_URL + "Product_category/create_invoice", true);
                             http.onreadystatechange = function (event) {
                                 if (http.readyState == 4 && http.status == 200) {
                                     var o = JSON.parse(http.responseText);
-                                    if (o.tinhtrang == 1) {
+                                    if (o.status == 1) {
                                         // Lập hóa đơn thành công
                                         url = BASE_URL + "hoadon?mahoadon=" + o.mahoadon + "&token=" + o.token;
                                         $('.thongbao').html("Hóa đơn đã được tạo thành công! <br> Chúng tôi sẽ gọi lại cho bạn \n\

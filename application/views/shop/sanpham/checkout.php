@@ -182,7 +182,7 @@ if (!empty($this->data['phivanchuyen'])) {
 
                                     <div class="form-selector">
                                         <label>Ghi chú</label>
-                                        <textarea class="form-control input-sm" rows="10" name="note"></textarea>
+                                        <textarea class="form-control input-sm" rows="10" name="invoice_note"></textarea>
                                     </div>
 
                                 </div>
@@ -225,7 +225,7 @@ if (!empty($this->data['phivanchuyen'])) {
                                         <hr>
                                         <?php foreach ($this->data['hinhthucthanhtoan'] as $key => $value) { ?>
                                             <div class="col-md-4">
-                                                <input required="" name="hinhthucthanhtoan" type="radio"
+                                                <input required="" name="invoice_type_pay" type="radio"
                                                        id="tt<?= $key ?>" value="<?= $key ?>">
                                                 <label for="tt<?= $key ?>"><?= $value ?></label>
                                             </div>
