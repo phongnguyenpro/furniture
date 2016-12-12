@@ -58,4 +58,7 @@ $route['default_controller'] = 'index/home';
 $route['adminsecurity'] = 'adminsecurity/main';
 $route['404_override'] = '';
 $route['(:any)-(:any).html'] = 'product_category/product/$2/$1';
+
+// admin 
+$route['quantri/(:any)'] = 'adminsecurity/$1';
 $route['translate_uri_dashes'] = FALSE;

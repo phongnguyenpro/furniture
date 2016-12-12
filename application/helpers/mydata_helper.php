@@ -7,10 +7,6 @@ function getrole()
             "label" => "Quản trị tối cao",
             "rank" => 1
         ),
-        "admin" => array(
-            "label" => "Quản trị viên",
-            "rank" => 2
-        ),
         "user" => array(
             "label" => "Người dùng",
             "rank" => 3

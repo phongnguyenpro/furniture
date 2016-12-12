@@ -1,0 +1,18 @@
+﻿2 user group mặc định là administrator và user
+
++ administator : là có toàn quyền
++ user là không có quyền gì cả
+
+- group user là để phân tạo quyền cho user
+- chỉ admin 
+
+
+--------
+
+lưu cookie 
+
+id_user 
+passwork user
+user_group
+hash: ---
+

@@ -1636,7 +1636,7 @@ span.notify-right{
   border: none;
   margin: 0;
   background: none;
-  z-index: 10000;
+  z-index: 999;
 }
 #main-menu .navbar-collapse{
   padding: 0;
