@@ -90,6 +90,12 @@ class Adminsecurity
                             "index", "v_create", "insert", "delete", "update"
                         ),
                     ),
+                    "usergroup" => array(
+                        "attr" => array("label" => "Nhóm tài khoản"),
+                        "action" => array(
+                            "index", "create", "insert", "delete", "update"
+                        ),
+                    ),
                     "role" => array(
                         "attr" => array("label" => "Phân quyền"),
                         "action" => array(
