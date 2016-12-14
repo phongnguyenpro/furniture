@@ -773,8 +773,26 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         }
     }
 
+    public function check_product_exists($product_id)
+    {
+        $kq = $this->mydb->select("select count(product_id) as countPro from product WHERE product_id=$product_id", array());
+        return $kq[0]['countPro'];
+    }
+
+    public function check_product_total($product_id)
+    {
+        $kq = $this->mydb->select("select product_total from product where product_id=$product_id", array());
+        return $kq[0]['product_total'];
+    }
+
     public function create_invoice($post)
     {
+        if (!isset($post['g-recaptcha-response'])) {
+            return array("tinhtrang" => 0, "tinnhan" => array("Vui lòng xác thực với Captcha."));
+        }
+        if (!check_captcha_google($post['g-recaptcha-response'])) {
+            return array("tinhtrang" => 0, "tinnhan" => array("Xác thực captcha chưa đúng. Vui lòng xác thực lại."));
+        }
 // kiem tra du lieu
         $tongtien = 0;
         $sotienphatsinh = 0;
@@ -787,9 +805,12 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
         if ($set || empty($data)) {
             return array("tinhtrang" => 0, "tinnhan" => "reload");
         }
-
         foreach ($data as $value) {
-            if ($value['soluongthem'] <= $value['soluongsanpham']) {
+            if ($this->check_product_exists($value['id_sanpham']) < 1) {
+                $error[] = " Không tồn tại sản phẩm '" . $value['tensanpham'] . "'";
+                continue;
+            }
+            if ($value['soluongthem'] <= $value['soluongsanpham'] && $this->check_product_total($value['id_sanpham']) >= $value['soluongthem']) {
                 $tongtiensanpham = $value['giasanpham'] * $value['soluongthem'];
                 $tiengiamgia = ($value['giasanpham'] * $value['soluongthem']) * ($value['giamgia'] / 100);
                 $tien = $tongtiensanpham - $tiengiamgia;

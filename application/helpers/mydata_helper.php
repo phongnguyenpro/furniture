@@ -36,10 +36,15 @@ function get_module_location()
 
 function get_product_type()
 {
-    return array("hot" => "Sản phẩm nổi bật", "selling" => "Sản phẩm bán chạy","sale"=>"Sản phẩm giảm giá","new"=>"Sản phẩm mới");
+    return array("hot" => "Sản phẩm nổi bật", "selling" => "Sản phẩm bán chạy", "sale" => "Sản phẩm giảm giá", "new" => "Sản phẩm mới");
 }
 
 function get_checkout_type()
 {
     return array('1' => "Khi nhận được hàng", '2' => "Chuyển khoản ngân hàng", '3' => "Ví Bảo Kim / Thẻ Nội Địa / Visa");
+}
+
+function get_invoice_state()
+{
+    return array('1' => "Đang chờ xét duyệt", '2' => "Chưa thanh toán", "3" => "Đã thanh toán");
 }

@@ -1,26 +1,23 @@
 <?php
 
-namespace lib;
 
-use PDO;
-use lib\Datapublic;
-use lib\Xulydulieu;
-
-class SSPTable {
+class SSPTable
+{
 
     /**
      * Create the data output array for the DataTables rows
      *
-     *  @param  array $columns Column information array
-     *  @param  array $data    Data from the SQL get
-     *  @return array          Formatted data in a row based format
+     * @param  array $columns Column information array
+     * @param  array $data Data from the SQL get
+     * @return array          Formatted data in a row based format
      */
     public $stt = null;
     public $litmit = true;
     public $name = '';
 
-    public function data_output($columns, $data) {
-        $tinhtrang = (new Datapublic())->getTinhtrang();
+    public function data_output($columns, $data)
+    {
+        $tinhtrang = get_invoice_state();
         $out = array();
         for ($i = 0, $ien = count($data); $i < $ien; $i++) {
             $row = array();
@@ -30,8 +27,6 @@ class SSPTable {
                 if (isset($column['formatter'])) {
                     $row[$column['dt']] = $column['formatter']($data[$i][$column['db']], $data[$i]);
                 } else {
-
-
                     switch ($this->name) {
                         case "khachhang":
                             switch ($columns[$j]['dt']) {
@@ -122,21 +117,38 @@ class SSPTable {
                             break;
 
                         case "quanly_hoadon":
-                            switch ($columns[$j]['db']) {
-                                case "trangthai":
-                                    $loai = '';
-                                    if ($data[$i][$columns[$j]['db']] == "chuaduyet")
-                                        $loai = '<label><i class="uk-icon uk-icon-check-circle" aria-hidden="true"></i></label>';
-                                    if ($data[$i][$columns[$j]['db']] == "daduyet")
-                                        $loai = '<label><i class="uk-icon uk-icon-check-circle green" aria-hidden="true"></i></label>';
-                                    $row[$column['dt']] = $loai;
+                            $row[9] = '<a href=' . ADMIN_URL . 'invoice/view/' . $data[$i]['invoice_id'] . ' class="label label-info">Xem</a>';
+// --------------------------- check quyền xóa hóa đơn tại đây --------------------------------------------
+                            if (check_login_user(array(1)) && $data[$i][$columns[7]['db']] != 3) {
+                                $row[9] .= ' <a  data-id=' . $data[$i]['invoice_id'] . ' class="label label-danger xoa">Xóa</a>';
+                                1 == 1;
+                            }
+                            switch ($columns[$j]['dt']) {
+                                case 7:
+                                    switch ($data[$i][$columns[$j]['db']]) {
+                                        case 1:
+                                            $row[$column['dt']] = '<span class="label label-default">' . $tinhtrang[$data[$i][$columns[$j]['db']]] . '</span>';
+                                            break;
+                                        case 2:
+                                            $row[$column['dt']] = '<span class="label label-info">' . $tinhtrang[$data[$i][$columns[$j]['db']]] . '</span>';
+                                            break;
+                                        case 3:
+                                            $row[$column['dt']] = '<span class="label label-success">' . $tinhtrang[$data[$i][$columns[$j]['db']]] . '</span>';
+                                            break;
+                                    }
                                     break;
-
-                                case "id_hoadon":
-
-                                    $id_hoadon = $data[$i][$columns[$j]['db']];
-                                    $url = URL . "quanly/hoadon/xemhoadon/" . $id_hoadon;
-                                    $row[$column['dt']] = "<a class='md-btn md-btn-primary' href='$url'>Xem</a>";
+                                case 6:
+                                    $row[$column['dt']] = "$" . tien($data[$i][$columns[$j]['db']]) . "VND";
+                                    break;
+                                case 8:
+                                    switch ($data[$i][$columns[$j]['db']]) {
+                                        case 1:
+                                            $row[$column['dt']] = '<span class="label label-success">' . "Đã giao hàng" . '</span>';
+                                            break;
+                                        case 2:
+                                            $row[$column['dt']] = '<span class="label label-default">' . "Chưa giao hàng" . '</span>';
+                                            break;
+                                    }
                                     break;
                                 default :
                                     $row[$column['dt']] = $data[$i][$columns[$j]['db']];
@@ -189,30 +201,27 @@ class SSPTable {
                             break;
                         case "luong":
                             switch ($columns[$j]['dt']) {
-                                
-                              case 6:
-                                 
-                                  $url=URL."administrator247/luong/luongchitiet/".$data[$i]['id_taikhoan']."/".$data[$i]['id_giaidoan'];
-                      
-                                  $row[$column['dt']] ='<a target="_blank" href="'. $url.'">Chi tiết</a>';
-                                  if($data[$i]['ngaynhan']=='' || $data[$i]['ngaynhan']==null)
-                                  {
-                                      $row[$column['dt']].='<a class="danhanluong" data-id='.$data[$i]['id_luong'].' title="Xác nhận đã nhận lương" target="_blank">   <label><i class="uk-icon uk-icon-check-circle" aria-hidden="true"></i></label></a>';
 
-                                  }
-                                  else 
-                                  {
-                                 $row[$column['dt']].='<a title="Đã nhận lương" target="_blank"><label><i class="uk-icon uk-icon-check-circle green" aria-hidden="true"></i></label></a>';
+                                case 6:
 
-                                  }
+                                    $url = URL . "administrator247/luong/luongchitiet/" . $data[$i]['id_taikhoan'] . "/" . $data[$i]['id_giaidoan'];
+
+                                    $row[$column['dt']] = '<a target="_blank" href="' . $url . '">Chi tiết</a>';
+                                    if ($data[$i]['ngaynhan'] == '' || $data[$i]['ngaynhan'] == null) {
+                                        $row[$column['dt']] .= '<a class="danhanluong" data-id=' . $data[$i]['id_luong'] . ' title="Xác nhận đã nhận lương" target="_blank">   <label><i class="uk-icon uk-icon-check-circle" aria-hidden="true"></i></label></a>';
+
+                                    } else {
+                                        $row[$column['dt']] .= '<a title="Đã nhận lương" target="_blank"><label><i class="uk-icon uk-icon-check-circle green" aria-hidden="true"></i></label></a>';
+
+                                    }
                                     break;
-                                    
+
                                 default :
                                     $row[$column['dt']] = $data[$i][$columns[$j]['db']];
                                     break;
                             }
                             break;
-                             case "nhansu":
+                        case "nhansu":
                             switch ($columns[$j]['dt']) {
                                 case 5:
                                     if ($data[$i][$columns[$j]['db']] == "nhanvien")
@@ -220,22 +229,21 @@ class SSPTable {
                                     else
                                         $row[$column['dt']] = "Quản lý";
                                     break;
-                                      case 6:
-                                    $id_nhanvien=$data[$i][ $columns[$j]['db'] ];
-                                        	$quyensd=$data[$i][5];
-                                            if($quyensd=="quanly"){
-                                            	$row[ $column['dt'] ]="<a class='md-btn md-btn-primary' href='".URL."admin/nhansu/chitietquanly/$id_nhanvien'>Xem</a>";
-                                            }
-                                            else{
-                                            	$row[ $column['dt'] ]="<a class='md-btn md-btn-primary' href='".URL."admin/nhanvien1/chitiet/$id_nhanvien'>Xem</a>";
-                                            }
-                                          break;
-                                      default :
+                                case 6:
+                                    $id_nhanvien = $data[$i][$columns[$j]['db']];
+                                    $quyensd = $data[$i][5];
+                                    if ($quyensd == "quanly") {
+                                        $row[$column['dt']] = "<a class='md-btn md-btn-primary' href='" . URL . "admin/nhansu/chitietquanly/$id_nhanvien'>Xem</a>";
+                                    } else {
+                                        $row[$column['dt']] = "<a class='md-btn md-btn-primary' href='" . URL . "admin/nhanvien1/chitiet/$id_nhanvien'>Xem</a>";
+                                    }
+                                    break;
+                                default :
                                     $row[$column['dt']] = $data[$i][$columns[$j]['db']];
                                     break;
-                                    
+
                             }
-                                    break;
+                            break;
                         default :
                             $row[$column['dt']] = $data[$i][$columns[$j]['db']];
                             break;
@@ -253,15 +261,16 @@ class SSPTable {
      *
      * Obtain an PHP PDO connection from a connection details array
      *
-     *  @param  array $conn SQL connection details. The array should have
+     * @param  array $conn SQL connection details. The array should have
      *    the following properties
      *     * host - host name
      *     * db   - database name
      *     * user - user name
      *     * pass - user password
-     *  @return resource PDO connection
+     * @return resource PDO connection
      */
-    public function db($conn) {
+    public function db($conn)
+    {
         if (is_array($conn)) {
             return self::sql_connect($conn);
         }
@@ -273,11 +282,12 @@ class SSPTable {
      *
      * Construct the LIMIT clause for server-side processing SQL query
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @return string SQL limit clause
+     * @param  array $request Data sent to server by DataTables
+     * @param  array $columns Column information array
+     * @return string SQL limit clause
      */
-    public function limit($request, $columns) {
+    public function limit($request, $columns)
+    {
         $limit = '';
         if (isset($request['start']) && $request['length'] != -1) {
             $limit = "LIMIT " . intval($request['start']) . ", " . intval($request['length']);
@@ -296,11 +306,12 @@ class SSPTable {
      *
      * Construct the ORDER BY clause for server-side processing SQL query
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @return string SQL order by clause
+     * @param  array $request Data sent to server by DataTables
+     * @param  array $columns Column information array
+     * @return string SQL order by clause
      */
-    public function order($request, $columns) {
+    public function order($request, $columns)
+    {
         $order = '';
         if (isset($request['order']) && count($request['order'])) {
             $orderBy = array();
@@ -313,8 +324,8 @@ class SSPTable {
                 $column = $columns[$columnIdx];
                 if ($requestColumn['orderable'] == 'true') {
                     $dir = $request['order'][$i]['dir'] === 'asc' ?
-                            'ASC' :
-                            'DESC';
+                        'ASC' :
+                        'DESC';
                     $orderBy[] = '`' . $column['db'] . '` ' . $dir;
                 }
             }
@@ -332,13 +343,14 @@ class SSPTable {
      * word by word on any field. It's possible to do here performance on large
      * databases would be very poor
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @param  array $bindings Array of values for PDO bindings, used in the
+     * @param  array $request Data sent to server by DataTables
+     * @param  array $columns Column information array
+     * @param  array $bindings Array of values for PDO bindings, used in the
      *    sql_exec() function
-     *  @return string SQL where clause
+     * @return string SQL where clause
      */
-    public function filter($request, $columns, &$bindings) {
+    public function filter($request, $columns, &$bindings)
+    {
         $globalSearch = array();
         $columnSearch = array();
         $dtColumns = self::pluck($columns, 'dt');
@@ -349,25 +361,29 @@ class SSPTable {
                 $columnIdx = array_search($requestColumn['data'], $dtColumns);
                 $column = $columns[$columnIdx];
                 if ($requestColumn['searchable'] == 'true') {
+                    if ($this->name == "quanly_hoadon")
+                        if ($i == 4 || $i == 5)
+                            $str = loaibodau($str);
                     $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
                     $globalSearch[] = "`" . $column['db'] . "` LIKE " . $binding;
                 }
             }
         }
         // Individual column filtering
- 	if ( isset( $request['columns'] ) ) {
-			for ( $i=0, $ien=count($request['columns']) ; $i<$ien ; $i++ ) {
-				$requestColumn = $request['columns'][$i];
-				$columnIdx = array_search( $requestColumn['data'], $dtColumns );
-				$column = $columns[ $columnIdx ];
-				$str = $requestColumn['search']['value'];
-				if ( $requestColumn['searchable'] == 'true' &&
-				 $str != '' ) {
-					$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
-					$columnSearch[] = "`".$column['db']."` LIKE ".$binding;
-				}
-			}
-		}
+        if (isset($request['columns'])) {
+            for ($i = 0, $ien = count($request['columns']); $i < $ien; $i++) {
+                $requestColumn = $request['columns'][$i];
+                $columnIdx = array_search($requestColumn['data'], $dtColumns);
+                $column = $columns[$columnIdx];
+                $str = $requestColumn['search']['value'];
+                if ($requestColumn['searchable'] == 'true' &&
+                    $str != ''
+                ) {
+                    $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
+                    $columnSearch[] = "`" . $column['db'] . "` LIKE " . $binding;
+                }
+            }
+        }
         // Combine the filters into a single string
         $where = '';
         if (count($globalSearch)) {
@@ -375,8 +391,8 @@ class SSPTable {
         }
         if (count($columnSearch)) {
             $where = $where === '' ?
-                    implode(' AND ', $columnSearch) :
-                    $where . ' AND ' . implode(' AND ', $columnSearch);
+                implode(' AND ', $columnSearch) :
+                $where . ' AND ' . implode(' AND ', $columnSearch);
         }
         if ($where !== '') {
             $where = 'WHERE ' . $where;
@@ -391,14 +407,15 @@ class SSPTable {
      * in response to an SSP request, or can be modified if needed before
      * sending back to the client.
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array|PDO $conn PDO connection resource or connection parameters array
-     *  @param  string $table SQL table to query
-     *  @param  string $primaryKey Primary key of the table
-     *  @param  array $columns Column information array
-     *  @return array          Server-side processing response array
+     * @param  array $request Data sent to server by DataTables
+     * @param  array|PDO $conn PDO connection resource or connection parameters array
+     * @param  string $table SQL table to query
+     * @param  string $primaryKey Primary key of the table
+     * @param  array $columns Column information array
+     * @return array          Server-side processing response array
      */
-    public function simple($request, $conn, $table, $primaryKey, $columns, $sqlwhere, $name = '') {
+    public function simple($request, $conn, $table, $primaryKey, $columns, $sqlwhere, $name = '')
+    {
         $this->name = $name;
         $bindings = array();
         $db = self::db($conn);
@@ -409,13 +426,10 @@ class SSPTable {
         if ($where == '') {
             if ($sqlwhere != '')
                 $where = " where " . $sqlwhere;
-        }
-        else {
+        } else {
             if ($sqlwhere != '')
-                $where.=" and " . $sqlwhere;
+                $where .= " and " . $sqlwhere;
         }
-
-
 
 
         // Main query to actually get the data
@@ -441,8 +455,8 @@ class SSPTable {
          */
         return array(
             "draw" => isset($request['draw']) ?
-                    intval($request['draw']) :
-                    0,
+                intval($request['draw']) :
+                0,
             "recordsTotal" => intval($recordsTotal),
             "recordsFiltered" => intval($recordsFiltered),
             "data" => self::data_output($columns, $data)
@@ -463,16 +477,17 @@ class SSPTable {
      *   used in conditions where you don't want the user to ever have access to
      *   particular records (for example, restricting by a login id).
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array|PDO $conn PDO connection resource or connection parameters array
-     *  @param  string $table SQL table to query
-     *  @param  string $primaryKey Primary key of the table
-     *  @param  array $columns Column information array
-     *  @param  string $whereResult WHERE condition to apply to the result set
-     *  @param  string $whereAll WHERE condition to apply to all queries
-     *  @return array          Server-side processing response array
+     * @param  array $request Data sent to server by DataTables
+     * @param  array|PDO $conn PDO connection resource or connection parameters array
+     * @param  string $table SQL table to query
+     * @param  string $primaryKey Primary key of the table
+     * @param  array $columns Column information array
+     * @param  string $whereResult WHERE condition to apply to the result set
+     * @param  string $whereAll WHERE condition to apply to all queries
+     * @return array          Server-side processing response array
      */
-    public function complex($request, $conn, $table, $primaryKey, $columns, $whereResult = null, $whereAll = null) {
+    public function complex($request, $conn, $table, $primaryKey, $columns, $whereResult = null, $whereAll = null)
+    {
         $bindings = array();
         $db = self::db($conn);
         $localWhereResult = array();
@@ -486,13 +501,13 @@ class SSPTable {
         $whereAll = self::_flatten($whereAll);
         if ($whereResult) {
             $where = $where ?
-                    $where . ' AND ' . $whereResult :
-                    'WHERE ' . $whereResult;
+                $where . ' AND ' . $whereResult :
+                'WHERE ' . $whereResult;
         }
         if ($whereAll) {
             $where = $where ?
-                    $where . ' AND ' . $whereAll :
-                    'WHERE ' . $whereAll;
+                $where . ' AND ' . $whereAll :
+                'WHERE ' . $whereAll;
             $whereAllSql = 'WHERE ' . $whereAll;
         }
         // Main query to actually get the data
@@ -509,7 +524,7 @@ class SSPTable {
         // Total data set length
         $resTotalLength = self::sql_exec($db, $bindings, "SELECT COUNT(`{$primaryKey}`)
 			 FROM   `$table` " .
-                        $whereAllSql
+            $whereAllSql
         );
         $recordsTotal = $resTotalLength[0][0];
         /*
@@ -517,8 +532,8 @@ class SSPTable {
          */
         return array(
             "draw" => isset($request['draw']) ?
-                    intval($request['draw']) :
-                    0,
+                intval($request['draw']) :
+                0,
             "recordsTotal" => intval($recordsTotal),
             "recordsFiltered" => intval($recordsFiltered),
             "data" => self::data_output($columns, $data)
@@ -536,18 +551,16 @@ class SSPTable {
      *     * pass - user password
      * @return resource Database connection handle
      */
-    public function sql_connect($sql_details) {
+    public function sql_connect($sql_details)
+    {
         try {
             $db = @new PDO(
-                    "mysql:host={$sql_details['host']};dbname={$sql_details['db']}", $sql_details['user'], $sql_details['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
-                    )
-
-
-            ;
+                "mysql:host={$sql_details['host']};dbname={$sql_details['db']}", $sql_details['user'], $sql_details['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+            );
         } catch (PDOException $e) {
             self::fatal(
-                    "An error occurred while connecting to the database. " .
-                    "The error reported by the server was: " . $e->getMessage()
+                "An error occurred while connecting to the database. " .
+                "The error reported by the server was: " . $e->getMessage()
             );
         }
         return $db;
@@ -556,14 +569,15 @@ class SSPTable {
     /**
      * Execute an SQL query on the database
      *
-     * @param  resource $db  Database handler
-     * @param  array    $bindings Array of PDO binding values from bind() to be
+     * @param  resource $db Database handler
+     * @param  array $bindings Array of PDO binding values from bind() to be
      *   used for safely escaping strings. Note that this can be given as the
      *   SQL query string if no bindings are required.
-     * @param  string   $sql SQL query to execute.
+     * @param  string $sql SQL query to execute.
      * @return array         Result from the query (all rows)
      */
-    public function sql_exec($db, $bindings, $sql = null) {
+    public function sql_exec($db, $bindings, $sql = null)
+    {
 
         // Argument shifting
         if ($sql === null) {
@@ -600,7 +614,8 @@ class SSPTable {
      *
      * @param  string $msg Message to send to the client
      */
-    public function fatal($msg) {
+    public function fatal($msg)
+    {
         echo json_encode(array(
             "error" => $msg
         ));
@@ -611,13 +626,14 @@ class SSPTable {
      * Create a PDO binding key which can be used for escaping variables safely
      * when executing a query with sql_exec()
      *
-     * @param  array &$a    Array of bindings
+     * @param  array &$a Array of bindings
      * @param  *      $val  Value to bind
-     * @param  int    $type PDO field type
+     * @param  int $type PDO field type
      * @return string       Bound key to be used in the SQL where this parameter
      *   would be used.
      */
-    public function bind(&$a, $val, $type) {
+    public function bind(&$a, $val, $type)
+    {
         $key = ':binding_' . count($a);
         $a[] = array(
             'key' => $key,
@@ -628,14 +644,15 @@ class SSPTable {
     }
 
     /**
-     * Pull a particular property from each assoc. array in a numeric array, 
+     * Pull a particular property from each assoc. array in a numeric array,
      * returning and array of the property values from each item.
      *
-     *  @param  array  $a    Array to get data from
-     *  @param  string $prop Property to read
-     *  @return array        Array of property values
+     * @param  array $a Array to get data from
+     * @param  string $prop Property to read
+     * @return array        Array of property values
      */
-    public function pluck($a, $prop) {
+    public function pluck($a, $prop)
+    {
         $out = array();
         for ($i = 0, $len = count($a); $i < $len; $i++) {
             $out[] = $a[$i][$prop];
@@ -650,7 +667,8 @@ class SSPTable {
      * @param  string $join Glue for the concatenation
      * @return string Joined string
      */
-    public function _flatten($a, $join = ' AND ') {
+    public function _flatten($a, $join = ' AND ')
+    {
         if (!$a) {
             return '';
         } else if ($a && is_array($a)) {

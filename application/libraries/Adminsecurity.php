@@ -5,7 +5,7 @@ class Adminsecurity
 {
     public $controller="";
     public $action="";
-    
+
     public function __construct()
     {
         // tham so truyen kieu mang
@@ -15,7 +15,7 @@ class Adminsecurity
 //        //  $this->url =$this->CI->uri->rsegments;
 //        $this->mydb =$this->CI->mydb;
 
-   
+
     }
 
     public $list_controller = array(
@@ -74,6 +74,19 @@ class Adminsecurity
                     "attr" => array("label" => "Sản phẩm"),
                     "action" => array(
                         "index", "insert", "delete", "update", "create", "sort_product", "edit", "avatar", "upload_image", "sort_images"
+                    )
+
+                )
+
+            )
+        ),
+        "Hóa đơn" => array(
+            "attr" => "",
+            "controller" => array(
+                "invoice" => array(
+                    "attr" => array("label" => "Tất cả hóa đơn"),
+                    "action" => array(
+                        "index", "insert", "delete", "update"
                     )
 
                 )

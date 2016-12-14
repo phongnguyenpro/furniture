@@ -1,3 +1,6 @@
+<?php
+//debug($this->data);
+?>
 <!doctype html>
 <!--[if lte IE 9]>
 <html class="lte-ie9" lang="en"> <![endif]-->

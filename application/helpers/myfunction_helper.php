@@ -360,6 +360,37 @@ function get_user_info($key)
         return '';
 }
 
+// ============== Google captcha ===========//
+
+function check_captcha_google($recaptcha_response)
+{
+    $api_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $site_key = '6LeXfg4UAAAAAO0Ioz6bzRRrylr1la5aggjA1HBB';
+    $secret_key = '6LeXfg4UAAAAABi5B-f5tAT40Px-qMRHsIPVp0BB';
+    //lấy IP của khach
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $remoteip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $remoteip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+    }
+    //tạo link kết nối
+    $api_url = $api_url . '?secret=' . $secret_key . '&response=' . $recaptcha_response . '&remoteip=' . $remoteip;
+    //lấy kết quả trả về từ google
+    $response = file_get_contents($api_url);
+    //dữ liệu trả về dạng json
+    $response = json_decode($response);
+    if (!isset($response->success)) {
+        return false;
+    }
+    if ($response->success == true) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // ============== ******====================//
 function phantrangajax($page_count, $cur_page, $link)
 {

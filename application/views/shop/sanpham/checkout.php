@@ -1,5 +1,22 @@
 <script type="text/javascript" src="<?= BASE_URL ?>public/lib/icheck/js/icheck.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?hl=vi"></script>
+<script>
+    var imNotARobot = function () {
+        $('.btn-laphoadon').removeProp('disabled');
+        $('.btn-laphoadon').removeProp('style');
+    };
+    var expCallback = function() {
+        $('.btn-laphoadon').attr('disabled');
+        $('.btn-laphoadon').css('cursor','no-drop');
+    };
+</script>
 <link href="<?= BASE_URL ?>public/lib/icheck/skins/flat/red.css" rel="stylesheet">
+<style>
+    .g-recaptcha div {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 <?php
 if (isset($this->data['giohang']))
     $giohang = $this->data['giohang'];
@@ -95,7 +112,7 @@ if (!empty($this->data['phivanchuyen'])) {
                             </td>
                             <td class="cart_description">
                                 <p class="product-name"><a
-                                        href="<?= BASE_URL . "san-pham/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?> </a>
+                                            href="<?= BASE_URL . "san-pham/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?> </a>
                                 </p>
                                 <?php if (kiemtranull($value['masanpham'])) { ?>
                                     <small class="cart_ref">Mã SP : <?= $value['masanpham'] ?></small><br><?php } ?>
@@ -158,31 +175,33 @@ if (!empty($this->data['phivanchuyen'])) {
                                     <div class="form-selector has-feedback">
                                         <label>Tên của bạn</label>
                                         <input
-                                            value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_name'] : "" ?>'
-                                            required="" type="text" class="form-control input-sm" name="user_name">
+                                                value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_name'] : "" ?>'
+                                                required="" type="text" class="form-control input-sm" name="user_name">
                                     </div>
                                     <div class="form-selector has-feedback">
                                         <label>SDT</label>
                                         <input
-                                            value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_phone'] : "" ?>'
-                                            required="" type="text" class="form-control input-sm" name="user_phone">
+                                                value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_phone'] : "" ?>'
+                                                required="" type="text" class="form-control input-sm" name="user_phone">
                                     </div>
                                     <div class="form-selector has-feedback">
                                         <label>Địa chỉ</label>
                                         <input
-                                            value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_address'] : "" ?>'
-                                            required="" type="text" class="form-control input-sm" name="user_address">
+                                                value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_address'] : "" ?>'
+                                                required="" type="text" class="form-control input-sm"
+                                                name="user_address">
                                     </div>
                                     <div class="form-selector">
                                         <label>Email</label>
                                         <input
-                                            value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_email'] : "" ?>'
-                                            type="email" class="form-control input-sm" name="user_email">
+                                                value='<?= kiemtranull($thongtintaikhoan) == true ? $thongtintaikhoan['user_email'] : "" ?>'
+                                                type="email" class="form-control input-sm" name="user_email">
                                     </div>
 
                                     <div class="form-selector">
                                         <label>Ghi chú</label>
-                                        <textarea class="form-control input-sm" rows="10" name="invoice_note"></textarea>
+                                        <textarea class="form-control input-sm" rows="10"
+                                                  name="invoice_note"></textarea>
                                     </div>
 
                                 </div>
@@ -257,7 +276,12 @@ if (!empty($this->data['phivanchuyen'])) {
                     </div>
                     <div class="col-md-12 text-center">
                         <div class="form-selector">
-                            <button class="btn-laphoadon animated swing" type="submit">Tạo hóa đơn</button>
+                            <div class="g-recaptcha" data-callback="imNotARobot" data-expired-callback="expCallback"
+                                 data-sitekey="6LeXfg4UAAAAAO0Ioz6bzRRrylr1la5aggjA1HBB"></div>
+                            <br/>
+                            <button disabled style="cursor: no-drop;" class="btn-laphoadon animated swing"
+                                    type="submit">Tạo hóa đơn
+                            </button>
                         </div>
 
 

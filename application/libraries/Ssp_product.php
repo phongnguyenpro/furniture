@@ -1,16 +1,18 @@
 <?php
 
 
-class Ssp_product {
+class Ssp_product
+{
 
     /**
      * Create the data output array for the DataTables rows
      *
-     *  @param  array $columns Column information array
-     *  @param  array $data    Data from the SQL get
-     *  @return array          Formatted data in a row based format
+     * @param  array $columns Column information array
+     * @param  array $data Data from the SQL get
+     * @return array          Formatted data in a row based format
      */
-    static function data_output($columns, $data) {
+    static function data_output($columns, $data)
+    {
 
         $out = array();
         for ($i = 0, $ien = count($data); $i < $ien; $i++) {
@@ -36,17 +38,17 @@ class Ssp_product {
                             $row[$column['dt']] = "<img width='50' height='60' src='" . BASE_URL . "public/upload/images/thumb_product/" . $data[$i][$columns[$j]['db']] . "' >";
                             break;
                         case 7:
-                            $check=$data[$i][$columns[$j]['db']]==1?"checked":"";
-                            $row[$column['dt']]='<input data-id='.$data[$i]['product_id'].' name="noibat" class="noibat" type="checkbox" data-switchery data-switchery-color="#d32f2f" '.$check.' id="switch_demo_danger" />';  
+                            $check = $data[$i][$columns[$j]['db']] == 1 ? "checked" : "";
+                            $row[$column['dt']] = '<input data-id=' . $data[$i]['product_id'] . ' name="noibat" class="noibat" type="checkbox" data-switchery data-switchery-color="#d32f2f" ' . $check . ' id="switch_demo_danger" />';
                             break;
-                         case 8:
-                            $check=$data[$i][$columns[$j]['db']]==1?"checked":"";
-                            $row[$column['dt']]='<input data-id='.$data[$i]['product_id'].' name="noibat" class="hienthi" type="checkbox"  data-switchery data-switchery-color="#1e88e5" '.$check.' id="switch_demo_danger" />';  
+                        case 8:
+                            $check = $data[$i][$columns[$j]['db']] == 1 ? "checked" : "";
+                            $row[$column['dt']] = '<input data-id=' . $data[$i]['product_id'] . ' name="noibat" class="hienthi" type="checkbox"  data-switchery data-switchery-color="#1e88e5" ' . $check . ' id="switch_demo_danger" />';
                             break;
                         case 9:
-                           
-                            $row[$column['dt']]='<a href='.ADMIN_URL.'product/edit/'.$data[$i]['product_id'].' class="label label-warning">Sửa</a>';  
-                            $row[$column['dt']].=' <a  data-id='.$data[$i]['product_id'].' class="label label-danger xoa">Xóa</a>';  
+
+                            $row[$column['dt']] = '<a href=' . ADMIN_URL . 'product/edit/' . $data[$i]['product_id'] . ' class="label label-warning">Sửa</a>';
+                            $row[$column['dt']] .= ' <a  data-id=' . $data[$i]['product_id'] . ' class="label label-danger xoa">Xóa</a>';
 
                             break;
                         default :
@@ -61,7 +63,7 @@ class Ssp_product {
 //                echo "<pre>";
 //                print_r($out);
 //                echo "</pre>";
-    
+
         return $out;
 //                foreach ($data as $value)
 //                {
@@ -75,15 +77,16 @@ class Ssp_product {
      *
      * Obtain an PHP PDO connection from a connection details array
      *
-     *  @param  array $conn SQL connection details. The array should have
+     * @param  array $conn SQL connection details. The array should have
      *    the following properties
      *     * host - host name
      *     * db   - database name
      *     * user - user name
      *     * pass - user password
-     *  @return resource PDO connection
+     * @return resource PDO connection
      */
-    static function db($conn) {
+    static function db($conn)
+    {
         if (is_array($conn)) {
 
             return self::sql_connect($conn);
@@ -96,11 +99,12 @@ class Ssp_product {
      *
      * Construct the LIMIT clause for server-side processing SQL query
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @return string SQL limit clause
+     * @param  array $request Data sent to server by DataTables
+     * @param  array $columns Column information array
+     * @return string SQL limit clause
      */
-    static function limit($request, $columns) {
+    static function limit($request, $columns)
+    {
         $limit = '';
         if (isset($request['start']) && $request['length'] != -1) {
             $limit = "LIMIT " . intval($request['start']) . ", " . intval($request['length']);
@@ -113,11 +117,12 @@ class Ssp_product {
      *
      * Construct the ORDER BY clause for server-side processing SQL query
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @return string SQL order by clause
+     * @param  array $request Data sent to server by DataTables
+     * @param  array $columns Column information array
+     * @return string SQL order by clause
      */
-    static function order($request, $columns) {
+    static function order($request, $columns)
+    {
         $order = '';
         if (isset($request['order']) && count($request['order'])) {
             $orderBy = array();
@@ -130,8 +135,8 @@ class Ssp_product {
                 $column = $columns[$columnIdx];
                 if ($requestColumn['orderable'] == 'true') {
                     $dir = $request['order'][$i]['dir'] === 'asc' ?
-                            'ASC' :
-                            'DESC';
+                        'ASC' :
+                        'DESC';
                     $orderBy[] = '`' . $column['db'] . '` ' . $dir;
                 }
             }
@@ -149,14 +154,15 @@ class Ssp_product {
      * word by word on any field. It's possible to do here performance on large
      * databases would be very poor
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array $columns Column information array
-     *  @param  array $bindings Array of values for PDO bindings, used in the
+     * @param  array $request Data sent to server by DataTables
+     * @param  array $columns Column information array
+     * @param  array $bindings Array of values for PDO bindings, used in the
      *    sql_exec() function
-     *  @return string SQL where clause
+     * @return string SQL where clause
      */
-    static function filter($request, $columns, &$bindings) {
-        
+    static function filter($request, $columns, &$bindings)
+    {
+
         $globalSearch = array();
         $columnSearch = array();
         $dtColumns = self::pluck($columns, 'dt');
@@ -167,19 +173,17 @@ class Ssp_product {
                 $columnIdx = array_search($requestColumn['data'], $dtColumns);
                 $column = $columns[$columnIdx];
                 if ($requestColumn['searchable'] == 'true') {
-                     if($i==6)
-                     $str= loaibodau($str);
-                     
-                         $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
-                         if($i==0)
-                     {
-                      $column['db']=  str_replace ($column['db'],"sanpham.".$column['db'],$column['db']);
-                      $globalSearch[] = "" . $column['db'] . " LIKE " . $binding;
-                         
-                     }
-                     else
-                         $globalSearch[] = "`" . $column['db'] . "` LIKE " . $binding;
-                        
+                    if ($i == 6)
+                        $str = loaibodau($str);
+
+                    $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
+                    if ($i == 0) {
+                        $column['db'] = str_replace($column['db'], "sanpham." . $column['db'], $column['db']);
+                        $globalSearch[] = "" . $column['db'] . " LIKE " . $binding;
+
+                    } else
+                        $globalSearch[] = "`" . $column['db'] . "` LIKE " . $binding;
+
                 }
             }
         }
@@ -191,7 +195,8 @@ class Ssp_product {
                 $column = $columns[$columnIdx];
                 $str = $requestColumn['search']['value'];
                 if ($requestColumn['searchable'] == 'true' &&
-                        $str != '') {
+                    $str != ''
+                ) {
                     $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
                     $columnSearch[] = "`" . $column['db'] . "` LIKE " . $binding;
                 }
@@ -204,8 +209,8 @@ class Ssp_product {
         }
         if (count($columnSearch)) {
             $where = $where === '' ?
-                    implode(' AND ', $columnSearch) :
-                    $where . ' AND ' . implode(' AND ', $columnSearch);
+                implode(' AND ', $columnSearch) :
+                $where . ' AND ' . implode(' AND ', $columnSearch);
         }
         if ($where !== '') {
             $where = 'WHERE ' . $where;
@@ -220,14 +225,15 @@ class Ssp_product {
      * in response to an SSP request, or can be modified if needed before
      * sending back to the client.
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array|PDO $conn PDO connection resource or connection parameters array
-     *  @param  string $table SQL table to query
-     *  @param  string $primaryKey Primary key of the table
-     *  @param  array $columns Column information array
-     *  @return array          Server-side processing response array
+     * @param  array $request Data sent to server by DataTables
+     * @param  array|PDO $conn PDO connection resource or connection parameters array
+     * @param  string $table SQL table to query
+     * @param  string $primaryKey Primary key of the table
+     * @param  array $columns Column information array
+     * @return array          Server-side processing response array
      */
-    static function simple($request, $conn, $table, $primaryKey, $columns) {
+    static function simple($request, $conn, $table, $primaryKey, $columns)
+    {
         $id_danhmuc = $request['category_id'];
         $sqlwhere = $request['sqlwhere'];
         $bindings = array();
@@ -236,11 +242,11 @@ class Ssp_product {
         $limit = self::limit($request, $columns);
         $order = self::order($request, $columns);
         $where = self::filter($request, $columns, $bindings);
-           
 
-     if($order=='')
-         $order=" order by product_index desc";
-  
+
+        if ($order == '')
+            $order = " order by product_index desc";
+
         if ($request['category_id'] == -1) {
             // THAY ĐỔI
             // Main query to actually get the data
@@ -299,8 +305,8 @@ class Ssp_product {
          */
         return array(
             "draw" => isset($request['draw']) ?
-                    intval($request['draw']) :
-                    0,
+                intval($request['draw']) :
+                0,
             "recordsTotal" => intval($recordsTotal),
             "recordsFiltered" => intval($recordsFiltered),
             "data" => self::data_output($columns, $data)
@@ -321,16 +327,17 @@ class Ssp_product {
      *   used in conditions where you don't want the user to ever have access to
      *   particular records (for example, restricting by a login id).
      *
-     *  @param  array $request Data sent to server by DataTables
-     *  @param  array|PDO $conn PDO connection resource or connection parameters array
-     *  @param  string $table SQL table to query
-     *  @param  string $primaryKey Primary key of the table
-     *  @param  array $columns Column information array
-     *  @param  string $whereResult WHERE condition to apply to the result set
-     *  @param  string $whereAll WHERE condition to apply to all queries
-     *  @return array          Server-side processing response array
+     * @param  array $request Data sent to server by DataTables
+     * @param  array|PDO $conn PDO connection resource or connection parameters array
+     * @param  string $table SQL table to query
+     * @param  string $primaryKey Primary key of the table
+     * @param  array $columns Column information array
+     * @param  string $whereResult WHERE condition to apply to the result set
+     * @param  string $whereAll WHERE condition to apply to all queries
+     * @return array          Server-side processing response array
      */
-    static function complex($request, $conn, $table, $primaryKey, $columns, $whereResult = null, $whereAll = null) {
+    static function complex($request, $conn, $table, $primaryKey, $columns, $whereResult = null, $whereAll = null)
+    {
         $bindings = array();
         $db = self::db($conn);
         $localWhereResult = array();
@@ -341,17 +348,17 @@ class Ssp_product {
         $order = self::order($request, $columns);
         $where = self::filter($request, $columns, $bindings);
         $whereResult = self::_flatten($whereResult);
- 
+
         $whereAll = self::_flatten($whereAll);
         if ($whereResult) {
             $where = $where ?
-                    $where . ' AND ' . $whereResult :
-                    'WHERE ' . $whereResult;
+                $where . ' AND ' . $whereResult :
+                'WHERE ' . $whereResult;
         }
         if ($whereAll) {
             $where = $where ?
-                    $where . ' AND ' . $whereAll :
-                    'WHERE ' . $whereAll;
+                $where . ' AND ' . $whereAll :
+                'WHERE ' . $whereAll;
             $whereAllSql = 'WHERE ' . $whereAll;
         }
         // Main query to actually get the data
@@ -368,7 +375,7 @@ class Ssp_product {
         // Total data set length
         $resTotalLength = self::sql_exec($db, $bindings, "SELECT COUNT(`{$primaryKey}`)
 			 FROM   `$table` " .
-                        $whereAllSql
+            $whereAllSql
         );
         $recordsTotal = $resTotalLength[0][0];
         /*
@@ -376,8 +383,8 @@ class Ssp_product {
          */
         return array(
             "draw" => isset($request['draw']) ?
-                    intval($request['draw']) :
-                    0,
+                intval($request['draw']) :
+                0,
             "recordsTotal" => intval($recordsTotal),
             "recordsFiltered" => intval($recordsFiltered),
             "data" => self::data_output($columns, $data)
@@ -395,16 +402,17 @@ class Ssp_product {
      *     * pass - user password
      * @return resource Database connection handle
      */
-    static function sql_connect($sql_details) {
+    static function sql_connect($sql_details)
+    {
         try {
 
             $db = @new PDO(
-                    "mysql:host={$sql_details['host']};dbname={$sql_details['db']}", $sql_details['user'], $sql_details['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+                "mysql:host={$sql_details['host']};dbname={$sql_details['db']}", $sql_details['user'], $sql_details['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
         } catch (PDOException $e) {
             self::fatal(
-                    "An error occurred while connecting to the database. " .
-                    "The error reported by the server was: " . $e->getMessage()
+                "An error occurred while connecting to the database. " .
+                "The error reported by the server was: " . $e->getMessage()
             );
         }
         return $db;
@@ -413,14 +421,15 @@ class Ssp_product {
     /**
      * Execute an SQL query on the database
      *
-     * @param  resource $db  Database handler
-     * @param  array    $bindings Array of PDO binding values from bind() to be
+     * @param  resource $db Database handler
+     * @param  array $bindings Array of PDO binding values from bind() to be
      *   used for safely escaping strings. Note that this can be given as the
      *   SQL query string if no bindings are required.
-     * @param  string   $sql SQL query to execute.
+     * @param  string $sql SQL query to execute.
      * @return array         Result from the query (all rows)
      */
-    static function sql_exec($db, $bindings, $sql = null) {
+    static function sql_exec($db, $bindings, $sql = null)
+    {
         // Argument shifting
         if ($sql === null) {
             $sql = $bindings;
@@ -456,7 +465,8 @@ class Ssp_product {
      *
      * @param  string $msg Message to send to the client
      */
-    static function fatal($msg) {
+    static function fatal($msg)
+    {
         echo json_encode(array(
             "error" => $msg
         ));
@@ -467,13 +477,14 @@ class Ssp_product {
      * Create a PDO binding key which can be used for escaping variables safely
      * when executing a query with sql_exec()
      *
-     * @param  array &$a    Array of bindings
+     * @param  array &$a Array of bindings
      * @param  *      $val  Value to bind
-     * @param  int    $type PDO field type
+     * @param  int $type PDO field type
      * @return string       Bound key to be used in the SQL where this parameter
      *   would be used.
      */
-    static function bind(&$a, $val, $type) {
+    static function bind(&$a, $val, $type)
+    {
         $key = ':binding_' . count($a);
         $a[] = array(
             'key' => $key,
@@ -484,14 +495,15 @@ class Ssp_product {
     }
 
     /**
-     * Pull a particular property from each assoc. array in a numeric array, 
+     * Pull a particular property from each assoc. array in a numeric array,
      * returning and array of the property values from each item.
      *
-     *  @param  array  $a    Array to get data from
-     *  @param  string $prop Property to read
-     *  @return array        Array of property values
+     * @param  array $a Array to get data from
+     * @param  string $prop Property to read
+     * @return array        Array of property values
      */
-    static function pluck($a, $prop) {
+    static function pluck($a, $prop)
+    {
         $out = array();
         for ($i = 0, $len = count($a); $i < $len; $i++) {
             $out[] = $a[$i][$prop];
@@ -506,7 +518,8 @@ class Ssp_product {
      * @param  string $join Glue for the concatenation
      * @return string Joined string
      */
-    static function _flatten($a, $join = ' AND ') {
+    static function _flatten($a, $join = ' AND ')
+    {
         if (!$a) {
             return '';
         } else if ($a && is_array($a)) {
