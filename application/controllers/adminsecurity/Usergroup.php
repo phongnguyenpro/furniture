@@ -3,10 +3,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //$CI = &get_instance();
-class UserGroup extends MY_Controller {
+class Usergroup extends MY_Controller {
 
     public function __construct() {
-        parent::__construct("UserGroup", "admin");
+        parent::__construct("Usergroup", "admin");
     }
 
     function index() {
@@ -17,7 +17,7 @@ class UserGroup extends MY_Controller {
     }
 
     function insert() {
-        $data = array("menu_parent" => 0);
+        $data = array("usergroup_parent" => 0);
         foreach ($_POST['data'] as $key => $value) {
 
             $data[$value['name']] = $value['value'];
@@ -35,13 +35,13 @@ class UserGroup extends MY_Controller {
         echo json_encode($this->model->delete($id));
     }
 
-    function load_menu_edit() {
+    function load_usergroup_edit() {
         $id = $_POST['id'];
-        echo json_encode($this->model->load_menu_edit($id));
+        echo json_encode($this->model->load_usergroup_edit($id));
     }
 
-    function sort_menu() {
-        $this->model->menu_update_sort($_POST["menu"]);
+    function usergroup_sort() {
+        $this->model->usergroup_update_sort($_POST["menu"]);
     }
 
 }

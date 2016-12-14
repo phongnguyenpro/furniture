@@ -1,17 +1,8 @@
 <?php
 
-class UserGroup_model extends MY_Model {
+class Usergroup_model extends MY_Model {
 
-    public $menu_id;
-    public $menu_name;
-    public $menu_parent;
-    public $menu_index;
-    public $menu_type;
-    public $menu_format; // dạng link hoặc danh mục sản phẩm
-    public $menu_date_update;
-    public $menu_user_update;
-    public $_index;
-
+    public $_index=0;
     function index() {
         
     }
@@ -28,17 +19,15 @@ class UserGroup_model extends MY_Model {
     }
 
     function insert($data) {
-
-        $count = $this->mydb->select("select max(menu_index) as max from menu", array());
+        $count = $this->mydb->select("select max(usergroup_index) as max from usergroup", array());
         $index = $count[0]['max'] + 1;
-        $data['menu_index'] = $index;
-        $data["menu_type"] = 1;
-        $insert = $this->mydb->insert("menu", $data);
-        return array('status' => 1, 'id' => $insert['id'], 'name' => $data['menu_name']);
+        $data['usergroup_index'] = $index;
+        $insert = $this->mydb->insert("usergroup", $data);
+        return array('status' => 1, 'id' => $insert['id'], 'name' => $data['usergroup_name']);
     }
     function update($data)
     {
-    $this->mydb->update("menu",$data,"menu_id=:menu_id",array('menu_id'=>$data['menu_id']));
+    $this->mydb->update("usergroup",$data,"usergroup_id=:usergroup_id",array('usergroup_id'=>$data['usergroup_id']));
     return array('status'=>1);
     }
 
@@ -62,16 +51,16 @@ class UserGroup_model extends MY_Model {
         return $html;
     }
 
-    function menu_update_sort($data) {
+    function usergroup_update_sort($data) {
         $obj = $data;
         $sort = json_decode($obj);
         $keys = 0;
         foreach ($sort as $key => $item) {
 
             if ($item->id != '') {
-                $menu[$item->id]['menu_id'] = $item->id;
-                $menu[$item->id]['menu_index'] = $this->_index;
-                $menu[$item->id]['menu_parent'] = 0;
+                $menu[$item->id]['usergroup_id'] = $item->id;
+                $menu[$item->id]['usergroup_index'] = $this->_index;
+                $menu[$item->id]['usergroup_parent'] = 0;
                 $this->_index++;
                 $keys++;
                 $cha = $item->id;
@@ -80,7 +69,6 @@ class UserGroup_model extends MY_Model {
                 }
             }
         }
-
         if ($this->model->updatesort($menu))
             echo json_encode(array('status' => 1));
     }
@@ -88,9 +76,9 @@ class UserGroup_model extends MY_Model {
     function sort_menu($menu, $obj, $cha, $stt) {
         foreach ($obj as $key => $item) {
 
-            $menu[$item->id]['menu_id'] = $item->id;
-            $menu[$item->id]['menu_index'] = $this->_index;
-            $menu[$item->id]['menu_parent'] = $cha;
+            $menu[$item->id]['usergroup_id'] = $item->id;
+            $menu[$item->id]['usergroup_index'] = $this->_index;
+            $menu[$item->id]['usergroup_parent'] = $cha;
             $this->_index++;
 
             if (!empty($item->children)) {
@@ -102,56 +90,37 @@ class UserGroup_model extends MY_Model {
     }
 
     function updatesort($menu) {
+   
         foreach ($menu as $value) {
-            $data['menu_id'] = $value['menu_id'];
-            $data['menu_parent'] = $value['menu_parent'];
-            $data['menu_index'] = $value['menu_index'];
+            $data['usergroup_id'] = $value['usergroup_id'];
+            $data['usergroup_index'] = $value['usergroup_index'];
+            $data['usergroup_parent'] = $value['usergroup_parent'];
 
-            $this->mydb->update("menu", $data, "menu_id=:menu_id", array('menu_id' => $value['menu_id']));
+            $this->mydb->update("usergroup", $data, "usergroup_id=:usergroup_id", array('usergroup_id' => $value['usergroup_id']));
         }
         return true;
     }
 
-    function load_menu_edit($menu_id) {
-        $result = $this->mydb->select("select * from menu where menu_id=:menu_id", array('menu_id' => $menu_id));
+    function load_usergroup_edit($menu_id) {
+        $result = $this->mydb->select("select * from usergroup where usergroup_id=:usergroup_id", array('usergroup_id' => $menu_id));
         $this->load->helper("mydata");
         $result = $result[0];
-        $name = $result['menu_name'];
-        $slug = $result['menu_slug'];
-        $id = $result['menu_id'];
-        $type = $result['menu_format'];
-        $htmlselect = "<select class='form-control' name='menu_format' style=' padding: 0px;'>";
-        foreach (get_format_menu() as $key => $value) {
-            $htmlselect.="<option " . ($type == $key ? "selected" : "") . " value=" . $key . " >" . $value . "</option>";
-        }
-        $htmlselect.="</select>";
+        $name = $result['usergroup_name'];
+        $id = $result['usergroup_id'];
+        
         $html = <<<ABC
         <form class="form-horizontal" id="savemenu" style="text-align: center">
-
-   
         <div class="uk-form-row">  
-        <input hidden="" name="menu_id" type="text" value="{$id}" placeholder="">
+        <input hidden="" name="usergroup_id" type="text" value="{$id}" placeholder="">
         </div>
         
       <div class="form-group">  
           <label class="col-md-3" >Tên: </label>
        <div class="col-md-9">
-    <input class="form-control" name="menu_name" type="text" value="{$name}" placeholder="">
+    <input class="form-control" name="usergroup_name" type="text" value="{$name}" placeholder="">
         </div>
      </div>
-     <div class="form-group">  
-          <label class="col-md-3" >Địa chỉ liên kết: </label>
-       <div class="col-md-9">
-        <input class="form-control" name="menu_slug" type="text" value="{$slug}" placeholder="">
-        </div>
-          </div>
-</div>
-     <div class="form-group">  
-          <label class="col-md-3" >Loại: </label>
-       <div class="col-md-9">       
-    {$htmlselect}
-</div>
-        </div>
+     
         <div class="uk-form-row">  
         <button class="uk-button">LƯU</button>
         </div>
@@ -176,22 +145,22 @@ ABC;
     function delete($id)
     {
                      
-        $result= $this->mydb->select("select * from menu ORDER by menu_index ",array());
+        $result= $this->mydb->select("select * from usergroup ORDER by usergroup_index ",array());
         
     
     foreach($result as $value){
-        $menuData['items'][$value['menu_id']]=$value;
-        $menuData['parent'][$value['menu_parent']][]=$value['menu_id'];
+        $menuData['items'][$value['usergroup_id']]=$value;
+        $menuData['parent'][$value['usergroup_parent']][]=$value['usergroup_id'];
     }
    $dataxoa=$this->buiding_deletemenu(array(),$id,$menuData);
   
    if(!empty($dataxoa))
    {
-      $strxoa="menu_id=".implode($dataxoa,' or menu_id=');
-      $this->mydb->deleteall("menu",$strxoa,array());
+      $strxoa="usergroup_id=".implode($dataxoa,' or usergroup_id=');
+      $this->mydb->deleteall("usergroup",$strxoa,array());
      
    }
-   $this->mydb->delete("menu","menu_id=:menu_id",array('menu_id'=>$id));     
+   $this->mydb->delete("usergroup","usergroup_id=:usergroup_id",array('usergroup_id'=>$id));     
             
           return array("id"=>$id,"status"=>1);
     }
