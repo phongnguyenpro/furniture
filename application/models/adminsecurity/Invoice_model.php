@@ -36,7 +36,7 @@ class Invoice_model extends MY_Model
         );
         $this->load->library("ssptable");
         echo json_encode(
-            $this->ssptable->simple($_POST, $sql_details, $table, $primaryKey, $columns, '', 'quanly_hoadon')
+            $this->ssptable->simple($_POST, $sql_details, $table,'', $primaryKey, $columns, '', 'quanly_hoadon')
         );
     }
 

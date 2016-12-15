@@ -155,6 +155,7 @@ class SSPTable
                                     break;
                             }
                             break;
+
                         case "nhanvien_hoadon":
                             switch ($columns[$j]['db']) {
                                 case "trangthai":
@@ -193,6 +194,27 @@ class SSPTable
                                     $id_hoadon = $data[$i][$columns[$j]['db']];
                                     $url = URL . "nhanvien/hoadon/xemhoadon/" . $id_hoadon;
                                     $row[$column['dt']] = "<a class='md-btn md-btn-primary' href='$url'>Xem</a>";
+                                    break;
+                                default :
+                                    $row[$column['dt']] = $data[$i][$columns[$j]['db']];
+                                    break;
+                            }
+                            break;
+//----------- Bai viet index -------------------------
+                        case "quanly_baiviet":
+                            $row[7] = '<a href=' . ADMIN_URL . 'articles/edit_articles/' . $data[$i]['articles_id'] . ' class="label label-warning">Sửa</a>';
+                            $row[7] .= ' <a  data-id=' . $data[$i]['articles_id'] . ' class="label label-danger xoa">Xóa</a>';
+                            switch ($columns[$j]['dt']) {
+                                case 2:
+                                    $row[$column['dt']] = "<img width='50' height='60' src='" . BASE_URL . "public/upload/images/thumb_articles/" . $data[$i][$columns[$j]['db']] . "' >";
+                                    break;
+                                case 5:
+                                    $check = $data[$i][$columns[$j]['db']] == 1 ? "checked" : "";
+                                    $row[$column['dt']] = '<input data-id=' . $data[$i]['articles_id'] . ' name="noibat" class="noibat" type="checkbox" data-switchery data-switchery-color="#d32f2f" ' . $check . ' id="switch_demo_danger" />';
+                                    break;
+                                case 6:
+                                    $check = $data[$i][$columns[$j]['db']] == 1 ? "checked" : "";
+                                    $row[$column['dt']] = '<input data-id=' . $data[$i]['articles_id'] . ' name="noibat" class="hienthi" type="checkbox"  data-switchery data-switchery-color="#1e88e5" ' . $check . ' id="switch_demo_danger" />';
                                     break;
                                 default :
                                     $row[$column['dt']] = $data[$i][$columns[$j]['db']];
@@ -414,8 +436,12 @@ class SSPTable
      * @param  array $columns Column information array
      * @return array          Server-side processing response array
      */
-    public function simple($request, $conn, $table, $primaryKey, $columns, $sqlwhere, $name = '')
+    public function simple($request, $conn, $table, $tableJoin, $primaryKey, $columns, $sqlwhere, $name = '')
     {
+        if (isset($request['articlescategory_id']))
+            $id_danhmuc = $request['articlescategory_id'];
+        else
+            $id_danhmuc = -1;
         $this->name = $name;
         $bindings = array();
         $db = self::db($conn);
@@ -423,33 +449,49 @@ class SSPTable
         $limit = self::limit($request, $columns);
         $order = self::order($request, $columns);
         $where = self::filter($request, $columns, $bindings);
-        if ($where == '') {
-            if ($sqlwhere != '')
-                $where = " where " . $sqlwhere;
-        } else {
-            if ($sqlwhere != '')
-                $where .= " and " . $sqlwhere;
-        }
-
-
-        // Main query to actually get the data
-        $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS `" . implode("`, `", self::pluck($columns, 'db')) . "`
+        if ($id_danhmuc == -1) {
+            $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS `" . implode("`, `", self::pluck($columns, 'db')) . "`
 			 FROM `$table`
 			 $where 
 			 $order
 			 $limit"
-        );
-        // Data set length after filtering
-        $resFilterLength = self::sql_exec($db, "SELECT FOUND_ROWS()"
-        );
-        $recordsFiltered = $resFilterLength[0][0];
-        // Total data set length
+            );
+            // Data set length after filtering
+            $resFilterLength = self::sql_exec($db, "SELECT FOUND_ROWS()"
+            );
+            $recordsFiltered = $resFilterLength[0][0];
+            // Total data set length
 //		$resTotalLength = self::sql_exec( $db,
 //			"SELECT COUNT(`{$primaryKey}`)
 //			 FROM   `$table`"
 //		);
 
-        $recordsTotal = 1;
+            $recordsTotal = 1;
+        } else {
+            if ($where == '')
+                $where = " where ";
+            else
+                $where = $where . " and ";
+            // Main query to actually get the data
+
+            $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS " . implode(", ", self::pluck($columns, 'db', $table)) . "
+			 FROM $table, $tableJoin
+			 $where $table.$primaryKey=$tableJoin.$primaryKey and $sqlwhere
+			 $order
+			 $limit"
+            );
+            // Data set length after filtering
+            $resFilterLength = self::sql_exec($db, "SELECT FOUND_ROWS()"
+            );
+            $recordsFiltered = $resFilterLength[0][0];
+            // Total data set length
+//		$resTotalLength = self::sql_exec( $db,
+//			"SELECT COUNT(`{$primaryKey}`)
+//			 FROM   `$table`"
+//		);
+
+            $recordsTotal = 1;
+        }
         /*
          * Output
          */
@@ -651,11 +693,14 @@ class SSPTable
      * @param  string $prop Property to read
      * @return array        Array of property values
      */
-    public function pluck($a, $prop)
+    public function pluck($a, $prop, $table = '')
     {
         $out = array();
         for ($i = 0, $len = count($a); $i < $len; $i++) {
-            $out[] = $a[$i][$prop];
+            if ($table != '')
+                $out[] = $table . '.' . $a[$i][$prop];
+            else
+                $out[] = $a[$i][$prop];
         }
         return $out;
     }

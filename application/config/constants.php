@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
 // MY CONSTANTS
         
-define("THEME","shop"); 
+define("THEME","shop");
+define("FILESIZE", 3000000);
 /*
  * 
 

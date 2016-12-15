@@ -13,7 +13,6 @@ function getrole()
         ),
     );
 }
-
 function get_format_menu()
 {
     return array("link" => "Liên kết", "productcategory" => "Danh mục sản phẩm");

@@ -9,7 +9,6 @@ class Invoice extends MY_Controller
 
     function index()
     {
-        $this->current = 'hoadon_index';
         $this->load->view("adminsecurity/header");
         $this->load->view("adminsecurity/invoice/index");
     }
@@ -21,7 +20,6 @@ class Invoice extends MY_Controller
 
     function view($invoice_id)
     {
-        $this->curren = 'hoadon_view';
         $this->data_invoice = $this->model->load_invoice($invoice_id);
         $this->load->view("adminsecurity/header");
         $this->load->view("adminsecurity/invoice/view");

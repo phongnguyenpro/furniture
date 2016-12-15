@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Adminsecurity
 {
-    public $controller="";
-    public $action="";
+    public $controller = "";
+    public $action = "";
 
     public function __construct()
     {
@@ -93,6 +93,24 @@ class Adminsecurity
 
             )
         ),
+        "Bài viết" => array(
+            "attr" => "",
+            "controller" => array(
+                "articlescategory" => array(
+                    "attr" => array("label" => "Danh mục bài viết"),
+                    "action" => array(
+                        "index", "insert", "delete", "update"
+                    )
+                ),
+                "articles" => array(
+                    "attr" => array("label" => "Bài viết"),
+                    "action" => array(
+                        "index", "insert", "delete", "update", "avatar", "sort_articles"
+                    )
+
+                )
+            )
+        ),
         "User" => array(
             "attr" => "",
             "controller" =>
@@ -117,25 +135,25 @@ class Adminsecurity
                     )
                 )
         ),
-        "Module"=>array(
-            "attr"=>"",
-            "controller"=>
+        "Module" => array(
+            "attr" => "",
+            "controller" =>
                 array(
-                    "module"=>array(
-                        "attr"=>array("label"=>"Quản lý"),
-                        "action"=>array(
+                    "module" => array(
+                        "attr" => array("label" => "Quản lý"),
+                        "action" => array(
                             "index"
                         )
                     )
                 )
         ),
-          "Extension"=>array(
-            "attr"=>"",
-            "controller"=>
+        "Extension" => array(
+            "attr" => "",
+            "controller" =>
                 array(
-                    "Media"=>array(
-                        "attr"=>array("label"=>"Quản lý Media"),
-                        "action"=>array(
+                    "Media" => array(
+                        "attr" => array("label" => "Quản lý Media"),
+                        "action" => array(
                             "index"
                         )
                     )
@@ -149,7 +167,7 @@ class Adminsecurity
         foreach ($this->list_controller as $k => $v) {
             $menu[$k]["attr"] = $v["attr"];
             foreach ($v["controller"] as $k_item => $v_item) {
-                $menu[$k]["item"][] = array("controller" => $k_item, "label" => $v_item["attr"]["label"],"active"=>$k_item==$this->controller?1:0);
+                $menu[$k]["item"][] = array("controller" => $k_item, "label" => $v_item["attr"]["label"], "active" => $k_item == $this->controller ? 1 : 0);
             }
         }
         return $menu;
@@ -182,8 +200,8 @@ class Adminsecurity
 
     public function checkrole($controler = "", $action = "")
     {
-        $this->controller=  string_lower($controler);
-        $this->action=  string_lower($action);
+        $this->controller = string_lower($controler);
+        $this->action = string_lower($action);
 
     }
 }
