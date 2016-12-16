@@ -37,8 +37,7 @@ function buiding_menu($parent, $menuData)
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-modal-close md-btn md-btn-flat">Cancel</button>
 
-                    <form class="hidden" id="xoathuoctinh"
-                          action="<?= URL ?>administrator247/editthuoctinhsanpham/deletethuoctinhchon">
+                    <form class="hidden" id="xoathuoctinh">
 
 
                         <input name="idxoa" class="hidden" id="idxoa" type="text" placeholder="">

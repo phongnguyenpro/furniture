@@ -473,10 +473,9 @@ class SSPTable
             else
                 $where = $where . " and ";
             // Main query to actually get the data
-
-            $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS " . implode(", ", self::pluck($columns, 'db', $table)) . "
-			 FROM $table, $tableJoin
-			 $where $table.$primaryKey=$tableJoin.$primaryKey and $sqlwhere
+            $data = self::sql_exec($db, $bindings, "SELECT SQL_CALC_FOUND_ROWS `$table`.`" . implode("`, `$table`.`", self::pluck($columns, 'db')) . "`
+			 FROM `$table`, `$tableJoin`
+			 $where `$table`.`$primaryKey`=`$tableJoin`.`$primaryKey` and $sqlwhere
 			 $order
 			 $limit"
             );
@@ -693,14 +692,11 @@ class SSPTable
      * @param  string $prop Property to read
      * @return array        Array of property values
      */
-    public function pluck($a, $prop, $table = '')
+    public function pluck($a, $prop)
     {
         $out = array();
         for ($i = 0, $len = count($a); $i < $len; $i++) {
-            if ($table != '')
-                $out[] = $table . '.' . $a[$i][$prop];
-            else
-                $out[] = $a[$i][$prop];
+            $out[] = $a[$i][$prop];
         }
         return $out;
     }

@@ -47,7 +47,8 @@ $(document).ready(function (e) {
         ],
 
         "createdRow": function (row, data, dataIndex) {
-            $(row).attr('data-id', data[0] + '.' + data[1]);
+            $(row).attr('data-id', data[0]);
+            $(row).attr('data-stt', data[1]);
             $(row).attr('id', data[0]);
         },
 
@@ -88,8 +89,8 @@ $(document).ready(function (e) {
         var data = $(".uk-sortable").data("sortable").serialize();
         datamenu = JSON.stringify(data); // lấy giá trị
         $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang cập nhật</div>')
-        $.post(URL + "administrator247/baiviet/sortbaiviet", {'baiviet': datamenu}, function (o) {
-            if (o.tinhtrang == 1) {
+        $.post(ADMIN_URL + "articles/sort_articles", {'baiviet': datamenu}, function (o) {
+            if (o.status == 1) {
                 $('#thongbaoupdate').html('<div class="uk-alert uk-alert-success">Cập nhật thành công</div>')
                 table.ajax.reload(null, false);
 
@@ -106,12 +107,12 @@ $(document).ready(function (e) {
         else
             giatri = 0;
         thongbaoload();
-        $.post(URL + "administrator247/baiviet/hienthi", {
+        $.post(ADMIN_URL + "articles/show", {
             "hienthi": true,
             'id_baiviet': id_baiviet,
             "giatri": giatri
         }, function (o) {
-            if (o.tinhtrang == 1)
+            if (o.status == 1)
                 thongbaothanhcong();
         }, "JSON")
 
@@ -125,8 +126,8 @@ $(document).ready(function (e) {
         else
             giatri = 0;
         thongbaoload();
-        $.post(URL + "administrator247/baiviet/hienthi", {'id_baiviet': id_baiviet, "giatri": giatri}, function (o) {
-            if (o.tinhtrang == 1)
+        $.post(ADMIN_URL + "articles/show", {'id_baiviet': id_baiviet, "giatri": giatri}, function (o) {
+            if (o.status == 1)
                 thongbaothanhcong();
         }, "JSON")
 
@@ -139,13 +140,11 @@ $(document).ready(function (e) {
     })
 
     $('.btnxoa').click(function () {
-
-
         $('.btnxoa').prop("disabled", true);
         $('#thongbaoxoa').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang xóa bài viết</div>');
         id_baiviet = $(this).val();
-        $.post(URL + "administrator247/baiviet/xoabaiviet", {"id_baiviet": id_baiviet}, function (o) {
-            if (o.tinhtrang == 1)
+        $.post(ADMIN_URL + "articles/delete_articles", {"id_baiviet": id_baiviet}, function (o) {
+            if (o.status == 1)
                 modalxoa.hide();
             $('tr[id=' + id_sanpham + ']').fadeOut("slow", function () {
                 $(this).remove();
