@@ -207,7 +207,7 @@ function today($format = "datetime")
 
 function date_input($date, $format = "d/m/Y")
 {
-    if ($date) {
+    if ($date!='') {
         $datetime = DateTime::createFromFormat($format, $date)->format("Y-m-d");
         return date('Y-m-d', strtotime($datetime));
     } else

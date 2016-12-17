@@ -13,6 +13,7 @@ function getrole()
         ),
     );
 }
+
 function get_format_menu()
 {
     return array("link" => "Liên kết", "productcategory" => "Danh mục sản phẩm");
@@ -20,12 +21,12 @@ function get_format_menu()
 
 function get_page()
 {
-    return array("-1" => "Tất cả", "home" => "Home", "productcategory" => "ProductCategory", "productdetail" => "ProductDetail");
+    return array("-1" => "Tất cả", "home" => "Home", "productcategory" => "ProductCategory", "productdetail" => "ProductDetail", "articlescategory" => "Danh mục bài viết", "articles" => "Bài viết chi tiết");
 }
 
 function get_module_type()
 {
-    return array("slider" => "Trình chiếu ảnh", "banner" => "Quảng cáo", "product" => "Sản phẩm");
+    return array("slider" => "Trình chiếu ảnh", "banner" => "Quảng cáo", "product" => "Sản phẩm", "articles" => "Bài viết");
 }
 
 function get_module_location()
@@ -36,6 +37,11 @@ function get_module_location()
 function get_product_type()
 {
     return array("hot" => "Sản phẩm nổi bật", "selling" => "Sản phẩm bán chạy", "sale" => "Sản phẩm giảm giá", "new" => "Sản phẩm mới");
+}
+
+function get_articles_type()
+{
+    return array("hot" => "Bài viết nổi bật", "view" => "Bài viết xem nhiều");
 }
 
 function get_checkout_type()

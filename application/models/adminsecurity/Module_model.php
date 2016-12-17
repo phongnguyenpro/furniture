@@ -10,7 +10,7 @@ class Module_model extends MY_Model
 
     function detail($page)
     {
-        $is_home = $page!="home"?"or module_detail_page=-1" : "";
+        $is_home = $page != "home" ? "or module_detail_page=-1" : "";
         $result = $this->mydb->select("select * from module,module_detail "
             . "where module.module_id = module_detail.module_id and (module_detail_page=:module_detail_page $is_home)", array("module_detail_page" => $page));
         $data = array();

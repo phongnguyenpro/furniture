@@ -83,7 +83,7 @@ function buiding_menu($parent, $menuData)
         <div class="md-card">
             <div class="md-card-toolbar">
                 <h3 class="md-card-toolbar-heading-text">
-                    Danh sách sản phẩm
+                    Danh sách bài viết <a href="<?= ADMIN_URL ?>articles/create"><button class="btn btn-success">Tạo bài viết</button></a>
                 </h3>
             </div>
             <div class="md-card uk-margin-medium-bottom">

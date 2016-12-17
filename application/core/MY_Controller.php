@@ -32,7 +32,7 @@ class MY_Controller extends CI_Controller
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
             load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "LIMITSANPHAMLIENQUAN",
                 "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI","MIEUTA","THONGTINCHUYENKHOAN",
-                "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE"));
+                "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE","LIMITBAIVIET"));
         }
     }
 

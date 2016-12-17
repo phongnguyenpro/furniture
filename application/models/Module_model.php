@@ -32,6 +32,12 @@ class Module_model extends MY_Model
                         $this->load->model("module/product_model");
                     $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["data"] = $this->product_model->load_product(unserialize($v["module_config"]));
                     break;
+                case "articles":
+                    $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["name"] = $v["module_name"];
+                    if (!isset($this->articles_model))
+                        $this->load->model("module/articles_model");
+                    $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["data"] = $this->articles_model->load_articles(unserialize($v["module_config"]));
+                    break;
             }
         }
         return $data;
@@ -49,6 +55,19 @@ class Module_model extends MY_Model
         if (!$category = $this->cache->get('sql/category')) {
             $this->load->model("module/header_model");
             $category = $this->header_model->category();
+            // Save into the cache for 5 minutes
+            CACHE == 1 ? $this->cache->save('sql/category', $category, 300) : null;
+        }
+
+        return $category;
+    }
+
+    function articles_category()
+    {
+        $category = array();
+        if (!$category = $this->cache->get('sql/category')) {
+            $this->load->model("module/header_model");
+            $category = $this->header_model->articles_category();
             // Save into the cache for 5 minutes
             CACHE == 1 ? $this->cache->save('sql/category', $category, 300) : null;
         }

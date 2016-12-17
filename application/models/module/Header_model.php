@@ -22,6 +22,20 @@ class Header_model extends MY_Model
         return $menuData;
     }
 
+    function articles_category()
+    {
+        // lấy danh mục sản phẩm
+        $menuData = array();
+        $sql = "select * from articlescategory order by articlescategory_index";
+        $kq = $this->mydb->select($sql, array());
+
+        foreach ($kq as $value) {
+            $menuData['item'][$value['articlescategory_id']] = $value; //Lưu dữ liệu các biến có id khác nh
+            $menuData['parent'][$value['articlescategory_parent']][] = $value['articlescategory_id'];
+        }
+        return $menuData;
+    }
+
     function menu()
     {
         $menuData = array();
