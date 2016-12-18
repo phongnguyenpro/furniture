@@ -1,6 +1,6 @@
 <?php
 
-class Articles_model extends MY_Model
+class ArticlesModule_model extends MY_Model
 {
     function update(&$data)
     {

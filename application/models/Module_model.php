@@ -33,10 +33,11 @@ class Module_model extends MY_Model
                     $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["data"] = $this->product_model->load_product(unserialize($v["module_config"]));
                     break;
                 case "articles":
+                    //debug($result);
                     $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["name"] = $v["module_name"];
-                    if (!isset($this->articles_model))
-                        $this->load->model("module/articles_model");
-                    $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["data"] = $this->articles_model->load_articles(unserialize($v["module_config"]));
+                    //if (!isset($this->articles_model))
+                        $this->load->model("module/articlesmodule_model");
+                    $data[$v["module_type"]][$v["module_location"]][$v["module_index"]]["data"] = $this->articlesmodule_model->load_articles(unserialize($v["module_config"]));
                     break;
             }
         }

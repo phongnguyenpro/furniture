@@ -69,8 +69,8 @@ class Module extends MY_Controller
                 $this->product_model->update($data_update);
                 break;
             case "articles":
-                $this->load->model("module/articles_model");
-                $this->articles_model->update($data_update);
+                $this->load->model("module/articlesmodule_model");
+                $this->articlesmodule_model->update($data_update);
                 break;
         }
         $this->model->update($data_update);
