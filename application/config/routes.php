@@ -53,6 +53,7 @@ $route['san-pham/(:any)/(:any)'] = 'product_category/product/$1';
 $route['tag/(:any)/(:any)'] = 'product_category/tag/$1';
 $route['baiviet/tag/(:any)/(:any)'] = 'articles/tag/$1';
 $route['yeu-thich'] = 'product_category/product_like';
+$route['hoadon'] = 'Invoice';
 $route['danh-muc/(:any)/(:any)'] = 'product_category/category/$1';
 $route['danh-muc-bai-viet/(:any)/(:any)'] = 'articles/category/$1/$2';
 $route['bai-viet/(:any)/(:any)'] = 'articles/details/$1';

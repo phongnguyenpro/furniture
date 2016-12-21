@@ -52,6 +52,11 @@
     width: 250px;
     float: left;
 }
+.col-3
+{
+    width: 289px;
+    float: left;
+}
 .tongtien
 {
         background-color: #777A7D;
