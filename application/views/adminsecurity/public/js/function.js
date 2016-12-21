@@ -45,8 +45,8 @@ $(document).ready(function (e) {
          $('.check_page[data-edit]').prop("checked",false);
  })
   $(document).on("change",".check_page[data-edit=1]",function(){
-     if($(this).prop("checked"))
-         $('.check_all[data-edit]').prop("checked",false);
+     //if($(this).prop("checked"))
+       //  $('.check_all[data-edit]').prop("checked",false);
  })
  
     _confirm_link  =function(url)

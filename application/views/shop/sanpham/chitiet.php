@@ -29,11 +29,13 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 <div class="row">
 
     <!-- Left colunm -->
+    <div class="column col-xs-12 col-sm-3" id="left_column">
+
+    </div>
     <!-- ./left colunm -->
     <!-- Center colunm-->
-    <div class="center_column col-xs-12 col-sm-12" id="center_column">
+    <div class="center_column col-xs-12 col-sm-9" id="center_column">
         <!-- Product -->
-
         <div id="product">
             <div class="primary-box row">
                 <div class="pb-left-column col-xs-12 col-sm-6">
@@ -100,13 +102,9 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 
                     </div>
 
-                    <div class="product-desc">
-                        <?= $data['sanpham']['product_description'] ?>
-
-                    </div>
                     <div class="form-option">
 
-                        <p class="form-option-title"> Thông tinn sản phẩm:</p>
+                        <p class="form-option-title"> Thông tin sản phẩm:</p>
                         <br>
                         <?php
                         //                           Duyệt thuộc tính chọn
@@ -115,8 +113,8 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                             switch ($key) {
                                 case "Màu sắc": {
                                         ?>
-                                        <div class="layered_subtitle thuoctinhmau"><?= $key ?></div>
-                                        <div class="layered-content filter-color">
+                                        <div class="layered_subtitle thuoctinhmau" ><?= $key ?></div>
+                                        <div class="layered-content filter-color" style="float: left;">
                                             <div class="check-box-list listgiatri" data-label="<?= $key ?>">
                                                 <?php foreach ($value as $value2) { ?>
 
@@ -137,14 +135,14 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                     }
                                     ?>
 
-        <?php default : { ?>
+                                <?php default : { ?>
 
                                         <div class="attributes">
                                             <div class="attribute-label"><?= $key ?></div>
                                             <div class="attribute-list">
                                                 <div class="layered-content filter-size">
                                                     <div class="check-box-list listgiatri" data-label="<?= $key ?>">
-                <?php foreach ($value as $value2) { ?>
+                                                        <?php foreach ($value as $value2) { ?>
                                                             <input class="filter giatrithuoctinhchon"
                                                                    data-name="<?= $value2['attr_val_value'] ?>" data-label="<?= $key ?>"
                                                                    value="<?= $value2['attr_val_id'] ?>" type="radio"
@@ -153,7 +151,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                                                     class="button"></span><span><?= $value2['attr_val_value'] ?></span></label>
 
 
-                <?php } ?>
+                                                        <?php } ?>
                                                     </div>
                                                 </div>
 
@@ -165,7 +163,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                     ?>
 
 
-                            <?php
+                                <?php
                             }
                         }
                         ?>
@@ -235,55 +233,42 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
             </div>
 
             <!-- tab product -->
-            <div class="product-tab product-tab-detail clearfix">
-                <ul class="nav-tab">
-                    <li class="active">
-                        <a aria-expanded="false" data-toggle="tab" href="#product-detail">Miêu tả</a>
-                    </li>
-                    <?php if (!empty($data['sanpham']['thuoctinhchitiet'])) { ?>
-                        <li>
-                            <a aria-expanded="true" data-toggle="tab" href="#information">Thông số chi tiết</a>
-                        </li>
-<?php } ?>
-                    <li>
-                        <a data-toggle="tab" href="#reviews">Bình luận</a>
-                    </li>
+            <div class="product-content clearfix">
 
-                </ul>
-                <div class="tab-container">
-                    <div id="product-detail" class="tab-panel active">
-                            <?= $data['sanpham']['product_content'] ?>
+
+                <div id="product-detail" >
+                    <?= $data['sanpham']['product_content'] ?>
+                </div>
+                <hr>
+                <div id="information">
+                    <table class="table table-bordered">
+                        <?php
+                        foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
+                            ?>
+
+                            <tr>
+                                <td width="200"><?= $data['val']['thuoctinh'][$value['product_prop_id']] ?></td>
+                                <td><?= $value['product_prop_detail_value'] ?></td>
+                            </tr>
+                        <?php } ?>
+
+
+                    </table>
+                </div>
+
+                <div id="reviews" >
+                    <div class="product-comments-block-tab">
+
+                        <div class="fb-comments fb-like" data-href="<?= $url ?>"
+                             data-colorscheme="light" data-numposts="5" data-width="100%"></div>
                     </div>
-                    <div id="information" class="tab-panel">
-                        <table class="table table-bordered">
-<?php
-foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
-    ?>
-
-                                <tr>
-                                    <td width="200"><?= $data['val']['thuoctinh'][$value['product_prop_id']] ?></td>
-                                    <td><?= $value['product_prop_detail_value'] ?></td>
-                                </tr>
-<?php } ?>
-
-
-                        </table>
-                    </div>
-                    <div id="reviews" class="tab-panel">
-                        <div class="product-comments-block-tab">
-
-                            <div class="fb-comments fb-like" data-href="<?= $url ?>"
-                                 data-colorscheme="light" data-numposts="5" data-width="100%"></div>
-                        </div>
-
-                    </div>
-
 
                 </div>
             </div>
+
             <!-- ./tab product -->
             <!-- box product -->
-<?php if (!empty($this->data['sanphamlienquan'])) { ?>
+            <?php if (!empty($this->data['sanphamlienquan'])) { ?>
                 <div class="page-product-box">
                     <h3 class="heading">Sản phẩm liên quan</h3>
                     <ul class="product-list danhsachsanpham owl-carousel" data-dots="false" data-loop="false"
@@ -291,7 +276,7 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                         data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
 
 
-    <?php foreach ($this->data['sanphamlienquan'] as $value) { ?>
+                        <?php foreach ($this->data['sanphamlienquan'] as $value) { ?>
 
                             <li>
                                 <div class="left-block">
@@ -306,7 +291,7 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                     <div class="add-to-cart">
                                         <?php if (kiemtranull($value['product_description'])) { ?>
                                             <a> <?= neods($value['product_description'], 120) ?></a>
-                                        <?php
+                                            <?php
                                         } else {
                                             
                                         }
@@ -317,7 +302,7 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                         ?>
                                         <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
                                         </div>
-        <?php } ?>
+                                    <?php } ?>
                                 </div>
                                 <div class="right-block">
                                     <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
@@ -330,9 +315,9 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                             <span class="price product-price"><?= tien($value['product_price_new']) ?>
                                                 &nbsp;₫</span>
                                             <span class="price old-price"><?= tien($value['product_price']) ?></span>
-        <?php } ELSE { ?>
+                                        <?php } ELSE { ?>
                                             <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
-        <?php } ?>
+                                        <?php } ?>
                                     </div>
                                     <div class="info-bottom">
                                         <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
@@ -341,15 +326,15 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                     </div>
                                 </div>
                             </li>   
-                <?php } ?>
+                        <?php } ?>
 
 
                     </ul>
                 </div>
-<?php } ?>
+            <?php } ?>
             <!-- ./box product -->
             <!-- box product -->
-<?php if (!empty($this->data['apriori'])) { ?>
+            <?php if (!empty($this->data['apriori'])) { ?>
                 <div class="page-product-box">
                     <h3 class="heading">Có thể bạn sẽ thích</h3>
                     <ul class="product-list danhsachsanpham owl-carousel" data-dots="false" data-loop="false"
@@ -357,9 +342,9 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                         data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>
 
 
-    <?php foreach ($this->data['apriori'] as $value) { ?>
+                        <?php foreach ($this->data['apriori'] as $value) { ?>
 
-                              <li>
+                            <li>
 
                                 <div class="left-block">
                                     <a title="<?= $value['product_name'] ?>"
@@ -373,7 +358,7 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                     <div class="add-to-cart">
                                         <?php if (kiemtranull($value['product_description'])) { ?>
                                             <a> <?= neods($value['product_description'], 120) ?></a>
-                                        <?php
+                                            <?php
                                         } else {
                                             
                                         }
@@ -384,7 +369,7 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                         ?>
                                         <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
                                         </div>
-        <?php } ?>
+                                    <?php } ?>
                                 </div>
                                 <div class="right-block">
                                     <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
@@ -397,9 +382,9 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                             <span class="price product-price"><?= tien($value['product_price_new']) ?>
                                                 &nbsp;₫</span>
                                             <span class="price old-price"><?= tien($value['product_price']) ?></span>
-        <?php } ELSE { ?>
+                                        <?php } ELSE { ?>
                                             <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
-        <?php } ?>
+                                        <?php } ?>
                                     </div>
                                     <div class="info-bottom">
                                         <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
@@ -409,12 +394,12 @@ foreach ($data['sanpham']['thuoctinhchitiet'] as $value) {
                                 </div>
                             </li>
 
-                <?php } ?>
+                        <?php } ?>
 
 
                     </ul>
                 </div>
-<?php } ?>
+            <?php } ?>
             <!-- ./box product -->
         </div>
         <!-- Product -->

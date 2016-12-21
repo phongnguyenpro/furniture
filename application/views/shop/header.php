@@ -87,9 +87,6 @@ if (!isset($_SESSION['token']))
 
                         </ul>
                     </div>
-                <?php } else { ?>
-                    <a href="" class="current-open" data-toggle="modal"
-                       data-target="#modal_dk_dn"><span> <i class="fa fa-user"></i> My Account</span></a>
                 <?php } ?>
                 <a href="<?= BASE_URL ?>yeu-thich" class="sanphamyeuthich">Yêu thích <i
                         class="fa fa-heart"></i><span><?= $yeuthich ?></span></a>
@@ -109,14 +106,8 @@ if (!isset($_SESSION['token']))
         <div class="col-xs-10 col-sm-8 header-search-box">
             <form class="form-inline">
                 <div class="form-group form-category">
-                    <select class="select-category" id="selectdanhmuc">
-                        <option value="-1">All Categories</option>
-                        <?php foreach ($danhmuc['parent'][0] as $value) { ?>
-
-                            <option
-                                value="<?= $danhmuc['item'][$value]['productcategory_id'] ?>"><?= $danhmuc['item'][$value]['productcategory_name'] ?></option>
-
-                        <?php } ?>
+                    <select class="select-category" id="selectdanhmuc" disabled="">
+                        <option value="-1">Tìm kiếm sản phẩm</option>
                     </select>
                 </div>
                 <div class="form-group input-serach">

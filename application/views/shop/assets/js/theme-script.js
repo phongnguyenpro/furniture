@@ -90,7 +90,9 @@ $('.zoomContainer').remove();
                 zoomWindowFadeOut: 750,
                 gallery:'gallery_01',
                 loadingIcon: "http://img1.targetimg1.com/tff/bm-2-tff_20160105.1/images/spinner-small.gif",
-                scrollZoom: "true"
+                scrollZoom: "true",
+                borderSize : 2,
+                borderColour: "#dddddd"
             }); 
         }
 

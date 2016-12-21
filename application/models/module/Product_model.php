@@ -21,7 +21,7 @@ class Product_model extends MY_Model
             $limit = $config["module_product_limit"];
         else
             $limit = LIMITMODULE;
-        $select = "product.product_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description";
+        $select = "product.product_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,INSERT(SUBSTRING(product.product_name,1,26), LENGTH(SUBSTRING(product.product_name,1,26)),1,  '...') as product_name,product_slug,product_avatar,product_code,product_description";
         $data = array();
 
         switch ($product_type) {

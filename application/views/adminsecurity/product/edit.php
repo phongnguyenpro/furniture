@@ -159,7 +159,7 @@ function buiding_menu($parent, $menuData, $data) {
                                         <i class="uk-icon-edit"></i>
                                     </span>
                                     <label for="product_edit_name_control">Tên sản phẩm</label>
-                                    <input required="" type="text" class="md-input"
+                                    <input maxlength="160" required="" type="text" class="md-input"
                                            id="product_edit_name_control" name="product_name" value='<?= $product["product"]["product_name"] ?>' />
                                 </div>
                             </div>

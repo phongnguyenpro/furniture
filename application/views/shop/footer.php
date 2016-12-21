@@ -21,82 +21,67 @@
                     </div>
                 </div> 
             </div>
+            <div class="col-md-12">
+                <div id="map"></div>
+                <script>
+                    // This example adds a search box to a map, using the Google Place Autocomplete
+                    // feature. People can enter geographical searches. The search box will return a
+                    // pick list containing a mix of places and predicted search terms.
 
-            <div class="col-md-3">
-                <div class="introduce-title">About Market</div>
-                <ul id="introduce-company" class="introduce-list">
-                    <li><a>About</a></li>
-                    <li><a>Market Reviews</a></li>
-                    <li><a>Terms of Use</a></li>
-                    <li><a>Privacy Policy</a></li>
-                    <li><a>Site Map</a></li>
+                    function initAutocomplete() {
+                        var pos;
+                        var haightAshbury = new google.maps.LatLng(<?= MAPLAT ?>);
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            Center: haightAshbury,
+                            zoom: 16,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            mapTypeControl: true,
+                            mapTypeControlOptions: {
+                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                                position: google.maps.ControlPosition.RIGHT
+                            },
+                        });
+                        marker = new google.maps.Marker({
+                            map: map,
+                            animation: google.maps.Animation.DROP,
+                            position: haightAshbury,
+                        });
+                        var contentString = '<div id="content">' + "<b><?= TENSHOP ?></b><br><?= DIACHI ?>" + '</div>';
+                        var infowindow = new google.maps.InfoWindow({
+                            content: contentString
+                        });
+                        infowindow.open(map, marker);
 
-                </ul>
-            </div>
-             <div class="col-md-3">
-                <div class="introduce-title">Customer Service</div>
-                <ul id="introduce-company" class="introduce-list">
-                    <li><a>Shipping Policy</a></li>
-                    <li><a>Compensation First</a></li>
-                    <li><a>My Account</a></li>
-                    <li><a>Return Policy</a></li>
-                    <li><a>Contact</a></li>
+                        // [END region_getplaces]
+                    }
 
-                </ul>
-            </div>
-             <div class="col-md-3">
-                <div class="introduce-title">Payment & Shipping</div>
-                <ul id="introduce-company" class="introduce-list">
-                    <li><a>Terms of Use</a></li>
-                    <li><a>Payment Methods</a></li>
-                    <li><a>Shipping Guide</a></li>
-                    <li><a>Locations We Ship To</a></li>
-                    <li><a>Estimated Delivery Time</a></li>
 
-                </ul>
+                </script>
+
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyAqqZi_6QMYAiT5WeDPrVo4JTTJEDpvBzM">
+                </script>
             </div>
         </div><!-- /#introduce-box -->
 
         <!-- #trademark-box -->
-        <div id="trademark-box" class="row">
-            <div class="col-sm-12">
-                <ul id="trademark-list">
-                    <li id="payment-methods">Hình thức thanh toán</li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-ups.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-qiwi.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-wu.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-cn.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-visa.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-mc.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-ems.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-dhl.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-fe.jpg"  alt="ups"/></a>
-                    </li>
-                    <li>
-                        <a ><img src="<?= BASE_URL . "application/views/" . THEME ?>/assets/data/trademark-wm.jpg"  alt="ups"/></a>
-                    </li>
-                </ul> 
-            </div>
-        </div> <!-- /#trademark-box -->
+        <?php
+        if (isset($this->data["module"]["banner"]["footer"][1])) {
+            ?>
+            <div id="trademark-box" class="row">
+                <div class="col-sm-12">
+                    <ul id="trademark-list">
+                        <li id="payment-methods"><?= $this->data["module"]["banner"]["footer"][1]["name"] ?></li>
+                        <?php foreach ($this->data["module"]["banner"]["footer"][1]["data"] as $k => $v) { ?>
+                            <li>
+                                <a  href="<?= $v["module_link"] ?>"><img src="<?= BASE_URL . $v["module_image"] ?>" /></a>
+                            </li>
+                        <?php } ?>
+                    </ul> 
+                </div>
+            </div> <!-- /#trademark-box -->
 
-
+        <?php } ?>
 
     </div> 
 </footer>
