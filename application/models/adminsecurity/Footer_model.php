@@ -1,6 +1,6 @@
 <?php
 
-class Menu_model extends MY_Model
+class Footer_model extends MY_Model
 {
 
     public $menu_id;
@@ -18,23 +18,23 @@ class Menu_model extends MY_Model
 
     }
 
-    public function loadmenu()
+    public function load_footer()
     {
         $menuData = array();
-        $result = $this->mydb->select("select * from menu WHERE menu_type=1 ORDER by menu_index ", array());
+        $result = $this->mydb->select("select * from menu WHERE menu_type=2 ORDER by menu_index ", array());
         foreach ($result as $value) {
             $menuData['items'][$value['menu_id']] = $value; //Lưu dữ liệu các biến có id khác nh
             $menuData['parent'][$value['menu_parent']][] = $value['menu_id'];
         }
-        return $menu = $this->buiding_menu(0, $menuData);
+        return $menu = $this->buiding_footer(0, $menuData);
     }
 
     function insert($data)
     {
-        $count = $this->mydb->select("select max(menu_index) as max from menu", array());
+        $count = $this->mydb->select("select max(menu_index) as max from menu WHERE menu_type=2", array());
         $index = $count[0]['max'] + 1;
         $data['menu_index'] = $index;
-        $data["menu_type"] = 1;
+        $data["menu_type"] = 2;
         $insert = $this->mydb->insert("menu", $data);
         return array('status' => 1, 'id' => $insert['id'], 'name' => $data['menu_name']);
     }
@@ -45,7 +45,7 @@ class Menu_model extends MY_Model
         return array('status' => 1);
     }
 
-    public function buiding_menu($parent, $menuData)
+    public function buiding_footer($parent, $menuData)
     {
         $html = "";
         if (isset($menuData['parent'][$parent])) {
@@ -57,7 +57,7 @@ class Menu_model extends MY_Model
                     . "<div class='uk-nestable-toggle' data-nestable-action='toggle'></div><span>" . $menuData['items'][$value]['menu_name'] . "</span> <a data-ten='" . $menuData['items'][$value]['menu_name'] . "' data-slug='" . $menuData['items'][$value]['menu_slug'] . "' class='itemedit uk-badge'><i class='uk-icon-pencil-square-o'></i> Chỉnh sửa</a>  ";
                 $html .= " --- <a class='deletemenu uk-badge uk-badge-danger' ref='" . $menuData['items'][$value]['menu_id'] . "'><i class='uk-icon-times'></i>Xóa</a>";
                 $html .= "</div>";
-                $html .= $this->buiding_menu($value, $menuData);
+                $html .= $this->buiding_footer($value, $menuData);
                 $html .= "</li>";
             }
             if ($parent != 0)
@@ -66,7 +66,7 @@ class Menu_model extends MY_Model
         return $html;
     }
 
-    function menu_update_sort($data)
+    function footer_update_sort($data)
     {
         $obj = $data;
         $sort = json_decode($obj);
@@ -119,7 +119,7 @@ class Menu_model extends MY_Model
         return true;
     }
 
-    function load_menu_edit($menu_id)
+    function load_footer_edit($menu_id)
     {
         $result = $this->mydb->select("select * from menu where menu_id=:menu_id", array('menu_id' => $menu_id));
         $this->load->helper("mydata");
@@ -134,7 +134,7 @@ class Menu_model extends MY_Model
         }
         $htmlselect .= "</select>";
         $html = <<<ABC
-        <form class="form-horizontal" id="savemenu" style="text-align: center">
+        <form class="form-horizontal" id="savefooter" style="text-align: center">
 
    
         <div class="uk-form-row">  

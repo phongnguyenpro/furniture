@@ -30,6 +30,12 @@ class Adminsecurity
                             "index", "insert", "delete", "update", "load_menu_edit", "sort_menu"
                         ),
                     ),
+                    "footer" => array(
+                        "attr" => array("label" => "Footer"),
+                        "action" => array(
+                            "index", "insert", "delete", "update", "load_footer_edit", "sort_footer"
+                        ),
+                    ),
                     "config" => array(
                         "attr" => array("label" => "Cấu hình chung"),
                         "action" => array(
@@ -151,6 +157,12 @@ class Adminsecurity
             "attr" => "",
             "controller" =>
                 array(
+                    "Tag" => array(
+                        "attr" => array("label" => "Tag"),
+                        "action" => array(
+                            "index", "insert", "delete", "update", "load_tag_edit", "sort_tag"
+                        ),
+                    ),
                     "Media" => array(
                         "attr" => array("label" => "Quản lý Media"),
                         "action" => array(

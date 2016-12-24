@@ -65,15 +65,15 @@ class Module_model extends MY_Model
 
     function articles_category()
     {
-        $category = array();
-        if (!$category = $this->cache->get('sql/category')) {
+        $articles_category = array();
+        if (!$category = $this->cache->get('sql/articles_category')) {
             $this->load->model("module/header_model");
-            $category = $this->header_model->articles_category();
+            $articles_category = $this->header_model->articles_category();
             // Save into the cache for 5 minutes
-            CACHE == 1 ? $this->cache->save('sql/category', $category, 300) : null;
+            CACHE == 1 ? $this->cache->save('sql/articles_category', $articles_category, 300) : null;
         }
 
-        return $category;
+        return $articles_category;
     }
 
     function menu()
@@ -87,6 +87,19 @@ class Module_model extends MY_Model
             CACHE == 1 ? $this->cache->save('sql/menu', $menu, 300) : NULL;
         }
         return $menu;
+    }
+
+    function footer()
+    {
+        $footer = array();
+
+        if (!$footer = $this->cache->get('sql/footer')) {
+            $this->load->model("module/header_model");
+            $footer = $this->header_model->footer();
+            // Save into the cache for 5 minutes
+            CACHE == 1 ? $this->cache->save('sql/footer', $footer, 300) : NULL;
+        }
+        return $footer;
     }
 
 }

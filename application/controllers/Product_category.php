@@ -128,11 +128,12 @@ class Product_category extends MY_Controller
         $data['meta'] = $meta;
 
         $data['menu'] = $menu;
-//        $data['footer'] = $footer;
         $data['category'] = $danhmuc;
 
         $this->load->model(array("module_model"));
         $data['module'] = $this->module_model->run("productcategory");
+
+        $data['footer'] = $this->module_model->footer();
 
         $this->data = $data;
         $this->load->view(THEME . '/header');
@@ -162,13 +163,12 @@ class Product_category extends MY_Controller
 
         $data['menu'] = $menu;
         $data['category'] = $danhmuc;
-//        $data['footer'] = $footer;
 
         $this->load->model(array("module_model"));
         $data['module'] = $this->module_model->run("productcategory");
 
-//        $this->view->data = $data;
-//
+        $data['footer'] = $this->module_model->footer();
+
         $this->sapxep = $sapxep;
         $this->data = $data;
 
@@ -215,10 +215,11 @@ class Product_category extends MY_Controller
             $data['meta'] = $meta;
             $data['menu'] = $this->module_model->menu();
             $data['category'] = $danhmuc;
-//            $data['footer'] = $header->loadfooter();
 
             $this->load->model(array("module_model"));
             $data['module'] = $this->module_model->run("productdetail");
+
+            $data['footer'] = $this->module_model->footer();
 
             $this->data = $data;
             if (isset($this->data['sanpham'])) {
@@ -360,7 +361,8 @@ class Product_category extends MY_Controller
         $this->load->model(array("module_model"));
         $data['category'] = $this->module_model->category();
         $data['menu'] = $this->module_model->menu();
-//        $data['footer'] = $header->loadfooter();
+
+        $data['footer'] = $this->module_model->footer();
 
 //        $this->load->model(array("module_model"));
 //        $data['module'] = $this->module_model->run("product");
@@ -430,7 +432,8 @@ class Product_category extends MY_Controller
         $this->load->model(array("module_model"));
         $data['category'] = $this->module_model->category();
         $data['menu'] = $this->module_model->menu();
-//        $data['footer'] = $header->loadfooter();
+
+        $data['footer'] = $this->module_model->footer();
 
         $this->load->model(array("module_model"));
         $data['module'] = $this->module_model->run("productcategory");
@@ -455,7 +458,8 @@ class Product_category extends MY_Controller
         $this->load->model(array("module_model"));
         $data['category'] = $this->module_model->category();
         $data['menu'] = $this->module_model->menu();
-//        $data['footer'] = $header->loadfooter();
+
+        $data['footer'] = $this->module_model->footer();
 
         $data["bre"]['info'][] = array("ten" => "Sản phẩm yêu thích", "slug" => "#");
 

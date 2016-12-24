@@ -39,13 +39,27 @@ class Header_model extends MY_Model
     function menu()
     {
         $menuData = array();
-        $sql = "select * from menu  order by menu_index";
+        $sql = "select * from menu WHERE menu_type=1 order by menu_index";
         $kq = $this->mydb->select($sql);
 
         foreach ($kq as $value) {
             $menuData['item'][$value['menu_id']] = $value; //Lưu dữ liệu các biến có id khác nh
             $menuData['parent'][$value['menu_parent']][] = $value['menu_id'];
 
+        }
+
+        return $menuData;
+    }
+
+    function footer()
+    {
+        $menuData = array();
+        $sql = "select * from menu where menu_type=2 order by menu_index";
+        $kq = $this->mydb->select($sql, array());
+
+        foreach ($kq as $value) {
+            $menuData['item'][$value['menu_id']] = $value;//Lưu dữ liệu các biến có id khác nh
+            $menuData['parent'][$value['menu_parent']][] = $value['menu_id'];
         }
 
         return $menuData;

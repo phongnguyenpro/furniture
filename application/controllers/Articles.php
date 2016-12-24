@@ -31,7 +31,7 @@ class Articles extends MY_Controller
             $data['module'] = $this->module_model->run("articlescategory");
 
 
-//            $data['footer'] = $header->loadfooter();
+            $data['footer'] = $this->module_model->footer();
 
             $data['bre'] = $this->model->load_bre($id_danhmuc);
 
@@ -64,7 +64,7 @@ class Articles extends MY_Controller
             $data['module'] = $this->module_model->run("articles");
 
 
-//            $data['footer'] = $header->loadfooter();
+            $data['footer'] = $this->module_model->footer();
             $meta['title'] = $data['baiviet']['articles_name'];
             $meta['description'] = neods($data['baiviet']['articles_description'], 120);
             $meta['image'] = BASE_URL . "public/upload/images/thumb_articles/" . $data['baiviet']['articles_avatar'];
@@ -91,7 +91,7 @@ class Articles extends MY_Controller
 
         $data['menu'] = $this->module_model->menu();
         $data['category'] = $this->module_model->category();
-//        $data['footer'] = $header->loadfooter();
+        $data['footer'] = $this->module_model->footer();
 
         $this->load->model(array("module_model"));
         $data['module'] = $this->module_model->run("articlescategory");
