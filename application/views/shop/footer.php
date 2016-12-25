@@ -1,8 +1,4 @@
-
-
-
 <!-- Footer -->
-
 
 <footer id="footer">
     <div class="container">
@@ -10,7 +6,7 @@
         <div id="introduce-box" class="row">
             <div class="col-md-3">
                 <div id="address-box">
-                    <a ><img src="<?= BASE_URL . LOGO ?>" alt="" /></a>
+                    <a><img src="<?= BASE_URL . LOGO ?>" alt=""/></a>
                     <div id="address-list">
                         <div class="tit-name">Địa chỉ:</div>
                         <div class="tit-contain"><?= DIACHI ?></div>
@@ -19,7 +15,7 @@
                         <div class="tit-name">Email:</div>
                         <div class="tit-contain"><?= EMAIL ?></div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="col-md-12">
                 <div id="map"></div>
@@ -52,6 +48,29 @@
                         });
                         infowindow.open(map, marker);
 
+                        <?php
+                        if(URL_NOW == BASE_URL . "lien-he"){
+                        ?>
+
+                        var map2 = new google.maps.Map(document.getElementById('map2'), {
+                            Center: haightAshbury,
+                            zoom: 16,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            mapTypeControl: true,
+                            mapTypeControlOptions: {
+                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                                position: google.maps.ControlPosition.RIGHT
+                            },
+                        });
+                        marker2 = new google.maps.Marker({
+                            map: map2,
+                            animation: google.maps.Animation.DROP,
+                            position: haightAshbury,
+                        });
+                        infowindow.open(map2, marker2);
+                        <?php
+                        }
+                        ?>
                         // [END region_getplaces]
                     }
 
@@ -74,21 +93,21 @@
                         <li id="payment-methods"><?= $this->data["module"]["banner"]["footer"][1]["name"] ?></li>
                         <?php foreach ($this->data["module"]["banner"]["footer"][1]["data"] as $k => $v) { ?>
                             <li>
-                                <a  href="<?= $v["module_link"] ?>"><img src="<?= BASE_URL . $v["module_image"] ?>" /></a>
+                                <a href="<?= $v["module_link"] ?>"><img src="<?= BASE_URL . $v["module_image"] ?>"/></a>
                             </li>
                         <?php } ?>
-                    </ul> 
+                    </ul>
                 </div>
             </div> <!-- /#trademark-box -->
 
         <?php } ?>
 
-    </div> 
+    </div>
 </footer>
 <div class="dangload">
 
     <div class="boxdangload">
-        <img src="<?= BASE_URL . "application/views/shop/assets/images/load.gif" ?>"  >
+        <img src="<?= BASE_URL . "application/views/shop/assets/images/load.gif" ?>">
     </div>
 
 </div>
@@ -97,9 +116,9 @@
 <script type="text/javascript" src="<?= load_public("js/like.js") ?>"></script>
 <script type="text/javascript" src="<?= load_frontend_view("assets/js/jquery.validate.js") ?>"></script>
 <script type="text/javascript" src="<?= load_frontend_view("sanpham/js/giohang.js") ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/owl.carousel/owl.carousel.css") ?>" />
+<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/owl.carousel/owl.carousel.css") ?>"/>
 
-<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/fancyBox/jquery.fancybox.css") ?>" />
+<link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/fancyBox/jquery.fancybox.css") ?>"/>
 <script type="text/javascript" src="<?= load_frontend_view("assets/lib/fancyBox/jquery.fancybox.js") ?>"></script>
 
 <script type="text/javascript" src="<?= load_frontend_view("assets/lib/bootstrap/js/bootstrap.min.js") ?>"></script>
