@@ -11,7 +11,12 @@ class User extends MY_Controller
 
     function index()
     {
-        Header("Location:" . ADMIN_URL . "user/v_create");
+        $this->load->view("adminsecurity/header");
+        $this->load->view("adminsecurity/user/index");
+    }  
+      function load_data_ssp()
+    {
+        $this->model->load_data_ssp($_POST);
     }
 
     function v_create()

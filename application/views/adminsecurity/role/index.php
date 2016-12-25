@@ -65,15 +65,22 @@
                                                     <td>
                                                         <?php foreach ($list_action as $k_action => $v_action) { ?>
                                                         <div class="col-md-3" style="border: 1px solid #dcd9d4;margin-top: 2px">
-                                                                <input
+                                                            <label>  <input
                                                                 <?php
                                                                 if (isset($this->data["get_role"][$controller]) &&
-                                                                        in_array($v_action, $this->data["get_role"][$controller])
+                                                                        in_array($v_action["value"], $this->data["get_role"][$controller])
                                                                 )
                                                                     echo 'checked';
                                                                 ?>
-                                                                    type="checkbox" value="<?= $v_action; ?>" name="<?= $controller ?>[]">
-                                                                    <?= $v_action; ?>
+                                                                    type="checkbox" value="<?= $v_action["value"] ?>" name="<?= $controller ?>[]">
+                                                               <?php
+                                                                       if(isset($v_action["label"]))
+                                                                        echo $v_action["label"];
+                                                                       else 
+                                                                           $v_action;
+                                                                    ?>
+                                                            </label>
+                                                                    
                                                             </div>
                                                         <?php } ?>
                                                     </td>

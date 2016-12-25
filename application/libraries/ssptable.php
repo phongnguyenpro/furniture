@@ -1,8 +1,6 @@
 <?php
 
-
-class SSPTable
-{
+class SSPTable {
 
     /**
      * Create the data output array for the DataTables rows
@@ -15,8 +13,7 @@ class SSPTable
     public $litmit = true;
     public $name = '';
 
-    public function data_output($columns, $data)
-    {
+    public function data_output($columns, $data) {
         $tinhtrang = get_invoice_state();
         $out = array();
         for ($i = 0, $ien = count($data); $i < $ien; $i++) {
@@ -231,10 +228,8 @@ class SSPTable
                                     $row[$column['dt']] = '<a target="_blank" href="' . $url . '">Chi tiết</a>';
                                     if ($data[$i]['ngaynhan'] == '' || $data[$i]['ngaynhan'] == null) {
                                         $row[$column['dt']] .= '<a class="danhanluong" data-id=' . $data[$i]['id_luong'] . ' title="Xác nhận đã nhận lương" target="_blank">   <label><i class="uk-icon uk-icon-check-circle" aria-hidden="true"></i></label></a>';
-
                                     } else {
                                         $row[$column['dt']] .= '<a title="Đã nhận lương" target="_blank"><label><i class="uk-icon uk-icon-check-circle green" aria-hidden="true"></i></label></a>';
-
                                     }
                                     break;
 
@@ -263,7 +258,28 @@ class SSPTable
                                 default :
                                     $row[$column['dt']] = $data[$i][$columns[$j]['db']];
                                     break;
-
+                            }
+                            break;
+                        case "user":
+                            switch ($columns[$j]['dt']) {
+                              case 3:
+                                  if($data[$i][$columns[$j]['db']] !="")
+                                         $row[$column['dt']] = "<img width='50' height='60' src='" . BASE_URL . "public/upload/images/user_profile/" . $data[$i][$columns[$j]['db']] . "' >";
+                                  else    $row[$column['dt']]="no image";
+                                  break;
+                                case 4:
+                                    $check = $data[$i][$columns[$j]['db']] == 1 ? "checked" : "";
+                                    $row[$column['dt']] = '<input data-id=' . $data[$i][$columns[$j]['db']]. ' name="noibat" class="noibat" type="checkbox" data-switchery data-switchery-color="#d32f2f" ' . $check . ' id="switch_demo_danger" />';
+                                    break;
+                                case 5:
+                                    $user_id = $data[$i][$columns[$j]['db']];
+                                    $row[$column['dt']] = "<a class='md-btn md-btn-primary btn-sm' href='" .BASE_URL. "admin/nhanvien1/chitiet/$user_id'>Xem</a>";
+                                    $row[$column['dt']] .= "<a class='md-btn md-btn-danger btn-sm' href='" .BASE_URL. "admin/nhanvien1/chitiet/$user_id'>Xóa</a>";
+    
+                                    break;
+                                default :
+                                    $row[$column['dt']] = $data[$i][$columns[$j]['db']];
+                                    break;
                             }
                             break;
                         default :
@@ -291,8 +307,7 @@ class SSPTable
      *     * pass - user password
      * @return resource PDO connection
      */
-    public function db($conn)
-    {
+    public function db($conn) {
         if (is_array($conn)) {
             return self::sql_connect($conn);
         }
@@ -308,8 +323,7 @@ class SSPTable
      * @param  array $columns Column information array
      * @return string SQL limit clause
      */
-    public function limit($request, $columns)
-    {
+    public function limit($request, $columns) {
         $limit = '';
         if (isset($request['start']) && $request['length'] != -1) {
             $limit = "LIMIT " . intval($request['start']) . ", " . intval($request['length']);
@@ -332,8 +346,7 @@ class SSPTable
      * @param  array $columns Column information array
      * @return string SQL order by clause
      */
-    public function order($request, $columns)
-    {
+    public function order($request, $columns) {
         $order = '';
         if (isset($request['order']) && count($request['order'])) {
             $orderBy = array();
@@ -346,8 +359,8 @@ class SSPTable
                 $column = $columns[$columnIdx];
                 if ($requestColumn['orderable'] == 'true') {
                     $dir = $request['order'][$i]['dir'] === 'asc' ?
-                        'ASC' :
-                        'DESC';
+                            'ASC' :
+                            'DESC';
                     $orderBy[] = '`' . $column['db'] . '` ' . $dir;
                 }
             }
@@ -371,8 +384,7 @@ class SSPTable
      *    sql_exec() function
      * @return string SQL where clause
      */
-    public function filter($request, $columns, &$bindings)
-    {
+    public function filter($request, $columns, &$bindings) {
         $globalSearch = array();
         $columnSearch = array();
         $dtColumns = self::pluck($columns, 'dt');
@@ -399,7 +411,7 @@ class SSPTable
                 $column = $columns[$columnIdx];
                 $str = $requestColumn['search']['value'];
                 if ($requestColumn['searchable'] == 'true' &&
-                    $str != ''
+                        $str != ''
                 ) {
                     $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
                     $columnSearch[] = "`" . $column['db'] . "` LIKE " . $binding;
@@ -413,8 +425,8 @@ class SSPTable
         }
         if (count($columnSearch)) {
             $where = $where === '' ?
-                implode(' AND ', $columnSearch) :
-                $where . ' AND ' . implode(' AND ', $columnSearch);
+                    implode(' AND ', $columnSearch) :
+                    $where . ' AND ' . implode(' AND ', $columnSearch);
         }
         if ($where !== '') {
             $where = 'WHERE ' . $where;
@@ -436,8 +448,7 @@ class SSPTable
      * @param  array $columns Column information array
      * @return array          Server-side processing response array
      */
-    public function simple($request, $conn, $table, $tableJoin, $primaryKey, $columns, $sqlwhere, $name = '')
-    {
+    public function simple($request, $conn, $table, $tableJoin, $primaryKey, $columns, $sqlwhere, $name = '') {
         if (isset($request['articlescategory_id']))
             $id_danhmuc = $request['articlescategory_id'];
         else
@@ -496,8 +507,8 @@ class SSPTable
          */
         return array(
             "draw" => isset($request['draw']) ?
-                intval($request['draw']) :
-                0,
+                    intval($request['draw']) :
+                    0,
             "recordsTotal" => intval($recordsTotal),
             "recordsFiltered" => intval($recordsFiltered),
             "data" => self::data_output($columns, $data)
@@ -527,8 +538,7 @@ class SSPTable
      * @param  string $whereAll WHERE condition to apply to all queries
      * @return array          Server-side processing response array
      */
-    public function complex($request, $conn, $table, $primaryKey, $columns, $whereResult = null, $whereAll = null)
-    {
+    public function complex($request, $conn, $table, $primaryKey, $columns, $whereResult = null, $whereAll = null) {
         $bindings = array();
         $db = self::db($conn);
         $localWhereResult = array();
@@ -542,13 +552,13 @@ class SSPTable
         $whereAll = self::_flatten($whereAll);
         if ($whereResult) {
             $where = $where ?
-                $where . ' AND ' . $whereResult :
-                'WHERE ' . $whereResult;
+                    $where . ' AND ' . $whereResult :
+                    'WHERE ' . $whereResult;
         }
         if ($whereAll) {
             $where = $where ?
-                $where . ' AND ' . $whereAll :
-                'WHERE ' . $whereAll;
+                    $where . ' AND ' . $whereAll :
+                    'WHERE ' . $whereAll;
             $whereAllSql = 'WHERE ' . $whereAll;
         }
         // Main query to actually get the data
@@ -565,7 +575,7 @@ class SSPTable
         // Total data set length
         $resTotalLength = self::sql_exec($db, $bindings, "SELECT COUNT(`{$primaryKey}`)
 			 FROM   `$table` " .
-            $whereAllSql
+                        $whereAllSql
         );
         $recordsTotal = $resTotalLength[0][0];
         /*
@@ -573,8 +583,8 @@ class SSPTable
          */
         return array(
             "draw" => isset($request['draw']) ?
-                intval($request['draw']) :
-                0,
+                    intval($request['draw']) :
+                    0,
             "recordsTotal" => intval($recordsTotal),
             "recordsFiltered" => intval($recordsFiltered),
             "data" => self::data_output($columns, $data)
@@ -592,16 +602,15 @@ class SSPTable
      *     * pass - user password
      * @return resource Database connection handle
      */
-    public function sql_connect($sql_details)
-    {
+    public function sql_connect($sql_details) {
         try {
             $db = @new PDO(
-                "mysql:host={$sql_details['host']};dbname={$sql_details['db']}", $sql_details['user'], $sql_details['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+                    "mysql:host={$sql_details['host']};dbname={$sql_details['db']}", $sql_details['user'], $sql_details['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'', PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
         } catch (PDOException $e) {
             self::fatal(
-                "An error occurred while connecting to the database. " .
-                "The error reported by the server was: " . $e->getMessage()
+                    "An error occurred while connecting to the database. " .
+                    "The error reported by the server was: " . $e->getMessage()
             );
         }
         return $db;
@@ -617,8 +626,7 @@ class SSPTable
      * @param  string $sql SQL query to execute.
      * @return array         Result from the query (all rows)
      */
-    public function sql_exec($db, $bindings, $sql = null)
-    {
+    public function sql_exec($db, $bindings, $sql = null) {
 
         // Argument shifting
         if ($sql === null) {
@@ -655,8 +663,7 @@ class SSPTable
      *
      * @param  string $msg Message to send to the client
      */
-    public function fatal($msg)
-    {
+    public function fatal($msg) {
         echo json_encode(array(
             "error" => $msg
         ));
@@ -673,8 +680,7 @@ class SSPTable
      * @return string       Bound key to be used in the SQL where this parameter
      *   would be used.
      */
-    public function bind(&$a, $val, $type)
-    {
+    public function bind(&$a, $val, $type) {
         $key = ':binding_' . count($a);
         $a[] = array(
             'key' => $key,
@@ -692,8 +698,7 @@ class SSPTable
      * @param  string $prop Property to read
      * @return array        Array of property values
      */
-    public function pluck($a, $prop)
-    {
+    public function pluck($a, $prop) {
         $out = array();
         for ($i = 0, $len = count($a); $i < $len; $i++) {
             $out[] = $a[$i][$prop];
@@ -708,8 +713,7 @@ class SSPTable
      * @param  string $join Glue for the concatenation
      * @return string Joined string
      */
-    public function _flatten($a, $join = ' AND ')
-    {
+    public function _flatten($a, $join = ' AND ') {
         if (!$a) {
             return '';
         } else if ($a && is_array($a)) {

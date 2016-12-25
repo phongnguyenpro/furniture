@@ -166,7 +166,7 @@ $user =$this->data["user"];
                                     <img class="img-responsive" id="imgavatar" src="">
 
                                     <a class="changeavatar">
-                                        <input id="input_avatar" type="file" class="form-control" name="avatar">
+                                        <input id="input_avatar" type="file" class="form-control" name="user_avatar">
                                         <i class="glyphicon glyphicon-camera"></i> 
                                         Cập nhật ảnh đại diện  
                                     </a>

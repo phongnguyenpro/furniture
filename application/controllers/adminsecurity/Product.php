@@ -175,7 +175,7 @@ class Product extends MY_Controller {
     {
          echo json_encode($this->model->delete_product($_POST["id_product"]));
     }
-            function add_product_detail() {
+   function add_product_detail() {
         echo json_encode($this->model->add_product_detail($_POST));
     }
 
