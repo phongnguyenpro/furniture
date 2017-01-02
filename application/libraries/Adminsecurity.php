@@ -86,7 +86,7 @@ class Adminsecurity {
                     );
                     if (empty($result)) {
                         if ($this->isajax) {
-                            echo json_encode(array("status" => 0, "message" => "Bạn không có quyền truy cập"));
+                            echo json_encode(array("status" => 2, "message" => "Bạn không có quyền truy cập"));
                             exit();
                         } else {
                             if ($this->controller != "access")
