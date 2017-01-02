@@ -325,7 +325,7 @@ ol, ul {
 
 /* ----------------
      [1. Common styles]
-    */
+*/
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
@@ -799,7 +799,7 @@ img.alignright {
 
 /* ----------------
      [2. Top banner]
-    */
+*/
 .top-banner {
     height: 150px;
     background: url('../images/bg-top-banner.jpg') no-repeat top center;
@@ -850,10 +850,10 @@ img.alignright {
 
 /* ----------------
      [3. Header]
-    */
+*/
 /*-----------------
     [ 3.1 Nav on top]
-    */
+*/
 .nav-ontop {
     position: fixed;
     top: 0px;
@@ -1082,7 +1082,7 @@ img.alignright {
 
 /*-----------------
      [ 3.2 Top header]
-    */
+*/
 .top-header {
     background: #f6f6f6;
 }
@@ -1191,7 +1191,7 @@ img.alignright {
 
 /*-----------------
      [ 3.3 Main header]
-    */
+*/
 .main-header {
     padding: 35px 0 25px 0;
 }
@@ -1353,7 +1353,7 @@ img.alignright {
     box-shadow: 0px 4px 7px 0px rgba(50, 50, 50, 0.2);
 
     -webkit-transition: opacity 0.5s,
-    -webkit-transform 0.5s;
+        -webkit-transform 0.5s;
     transition: opacity 0.5s, transform 0.5s;
     -webkit-transform: translate(0, 40px);
     -moz-transform: translate(0, 40px);
@@ -1526,14 +1526,14 @@ span.notify-right {
 
 /*-----------------
      [ 3.4 Main menu]
-    */
+*/
 .nav-top-menu {
     background: #666666;
 }
 
 /*-----------------
      [ 3.4.1 Vertical megamenus]
-    */
+*/
 .box-vertical-megamenus {
     position: absolute;
     left: 10px;
@@ -1780,7 +1780,7 @@ span.notify-right {
 
 /*-----------------
      [ 3.4.2 Main menu]
-    */
+*/
 #main-menu {
     padding: 0;
     margin-left: -15px;
@@ -1929,7 +1929,7 @@ span.notify-right {
 
 /*---------------
     [4. Nav menu]
-    */
+*/
 .nav-menu {
     border: none;
 }
@@ -2186,7 +2186,7 @@ span.notify-right {
 
 /*----------------
     [5. Home slide]
-    */
+*/
 .header-top-right {
     margin-left: -15px;
     padding: 0;
@@ -2306,14 +2306,14 @@ span.notify-right {
 
 /*---------------
     [6. Page top]
-    */
+*/
 .page-top {
     margin-top: 30px;
 }
 
 /*------------------
     [6.1 Latest deals]
-    */
+*/
 .latest-deals {
 }
 
@@ -2445,7 +2445,7 @@ span.notify-right {
 
 /*-------------------
     [6.2. Popular tabs]
-    */
+*/
 .popular-tabs .owl-controls .owl-next {
     top: -46px;
 }
@@ -2521,7 +2521,7 @@ span.notify-right {
 
 /*--------------------
     [7. Services]
-    */
+*/
 .service {
     background: #f6f6f6;
     border: 1px solid #eaeaea;
@@ -2565,7 +2565,7 @@ span.notify-right {
 
 /*----------------
     [8. Product]
-    */
+*/
 .product-list li {
     /*padding-left: 5px;*/
     /*padding-right: 5px;*/
@@ -2899,7 +2899,7 @@ span.notify-right {
 
 /*------------------
     [9. Owl carousel]
-    */
+*/
 .owl-controls {
 
 }
@@ -2945,7 +2945,7 @@ span.notify-right {
 
 /*-----------------
     [10. Banner advertisement]
-    */
+*/
 .banner a {
     width: 100%;
     overflow: hidden;
@@ -3031,7 +3031,7 @@ span.notify-right {
 
 /*-----------------
     [11. Page content]
-    */
+*/
 .content-page {
     background: #eaeaea;
     margin-top: 30px;
@@ -3040,14 +3040,14 @@ span.notify-right {
 
 /*------------------
     [11.1 Category featured]
-    */
+*/
 .category-featured {
     margin-top: 30px;
 }
 
 /*------------------
     [11.1.1 Banner featured]
-    */
+*/
 .category-banner {
     overflow: hidden;
 }
@@ -3089,7 +3089,7 @@ span.notify-right {
 
 /*------------------
     [11.1.2 Product featured]
-    */
+*/
 .product-featured {
     /*margin-top: 10 px;*/
     background: #fff;
@@ -3155,7 +3155,7 @@ span.notify-right {
 
 /*
     [11.2 Banner bootom]
-    */
+*/
 .banner-bottom {
     margin-top: 30px;
 }
@@ -3166,7 +3166,7 @@ span.notify-right {
 
 /*----------------
     [12. Brand showcase]
-    */
+*/
 .brand-showcase {
     margin-top: 30px;
 }
@@ -3331,7 +3331,7 @@ span.notify-right {
 
 /*------------------
     [12. Hot categories]
-    */
+*/
 #hot-categories {
     margin-top: 30px
 }
@@ -3429,7 +3429,7 @@ span.notify-right {
 
 /*
     [14. footer]
-    */
+*/
 #footer {
     background: #dddddd;
 }
@@ -3663,7 +3663,7 @@ span.notify-right {
 
 /*------------------
     [15. Breadcrumb]
-    */
+*/
 .breadcrumb {
     background: none;
     padding: 0;
@@ -3685,7 +3685,7 @@ span.notify-right {
 
 /*------------------
     [16. Columns]
-    */
+*/
 #columns {
     padding-top: 16px;
     padding-bottom: 30px;
@@ -3693,7 +3693,7 @@ span.notify-right {
 
 /*--------------
     16.1 Left column
-    */
+*/
 #left_column .left-module {
     margin-bottom: 30px;
     overflow: hidden;
@@ -3889,8 +3889,7 @@ span.notify-right {
     color: #f4a137;
 }
 
-/
-/
+
 radio
 .check-box-list input[type="radio"] {
     display: none;
@@ -3915,9 +3914,6 @@ radio
     color: #f4a137;
 }
 
-/
-/
-end radio
 .check-box-list label span.count {
     color: #a4a4a4;
     margin-left: 2px;
@@ -3948,7 +3944,7 @@ end radio
     padding-top: 6px;
     padding-left: 6px;
     float: left;
-    margin-left: 0px;
+    margin-left: 5px;
     margin-top: 5px;
 }
 
@@ -4184,7 +4180,7 @@ end radio
 
 /*--------------------
     [16.2 Center column]
-    */
+*/
 
 .category-slider .owl-controls .owl-prev,
 .category-slider .owl-controls .owl-next {
@@ -4635,7 +4631,7 @@ end radio
 
 /*----------------------
     [17. Order page]
-    */
+*/
 .page-content {
     margin-top: 30px;
 }
@@ -4822,7 +4818,7 @@ end radio
 
 /*
     [18. Product page]
-    */
+*/
 #product .pb-right-column {
     line-height: 30px;
 }
@@ -5199,7 +5195,7 @@ end radio
 
 /* ----------------
      [19. Contact page]
-    */
+*/
 #contact {
     margin-top: 20px;
 }
@@ -5298,7 +5294,7 @@ end radio
 
 /* ----------------
      [20. Bolog page]
-    */
+*/
 .blog-posts {
     line-height: 24px;
     margin-top: 20px;
@@ -5597,7 +5593,7 @@ end radio
 
 /* ----------------
      [21. Login page]
-    */
+*/
 .box-authentication {
     border: 1px solid #eaeaea;
     padding: 30px;
@@ -5912,7 +5908,7 @@ end radio
 
 /*----------------
     [7. Blogs]
-    */
+*/
 .blog-list {
     margin-top: 30px;
 }
@@ -6324,7 +6320,7 @@ end radio
 
 /*---------------
     [25. Box product]
-    */
+*/
 /** box-products**/
 .box-products {
     margin-top: 30px;
@@ -6609,8 +6605,6 @@ end radio
     height: 24px;
 }
 
-/
-/
 radio
 .check-box-list input[type="radio"] + label span.button {
     display: inline-block;
@@ -6647,56 +6641,19 @@ radio
     margin-bottom: 9px;
     line-height: normal;
 }
-
-/
-/
-end radio
-
-/
-/
-icheck
-
-/
-/
-icheck
-
-/
-/
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-css public
-
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
-=
+.number_contect
+{
+    border: 1px solid rgb(234, 234, 234);
+    border-style: dashed;
+    text-align: center;
+}
+.number_contect b
+{
+        color: #6b181b;
+    font-size: 30px;
+    padding: 5px;
+    background-color: rgba(132, 132, 132, 0);
+}
 .select2-container--default .select2-results__option[aria-disabled=true] {
     color: #120461;
 }
@@ -6958,7 +6915,7 @@ a {
     -moz-box-shadow: 0px 4px 7px 0px rgba(50, 50, 50, 0.2);
     box-shadow: 0px 4px 7px 0px rgba(50, 50, 50, 0.2);
     -webkit-transition: opacity 0.5s,
-    -webkit-transform 0.5s;
+        -webkit-transform 0.5s;
     transition: opacity 0.5s, transform 0.5s;
     -webkit-transform: translate(0, 40px);
     -moz-transform: translate(0, 40px);
@@ -7059,18 +7016,6 @@ a {
     margin: auto;
     position: absolute;
     top: 45%;
-}
-
-#address-box {
-    position: absolute;
-    z-index: 99;
-    background-color: white;
-    padding: 10px;
-}
-
-#map {
-    height: 300px;
-    width: 100%;
 }
 
 /* ----------------

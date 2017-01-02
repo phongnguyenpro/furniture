@@ -557,7 +557,7 @@ class Adminsecurity {
                 )
             )
         ),
-        "Extension" => array(
+        "Mở rộng" => array(
             "attr" => "",
             "controller" =>
             array(

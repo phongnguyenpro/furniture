@@ -114,7 +114,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                 case "Màu sắc": {
                                         ?>
                                         <div class="layered_subtitle thuoctinhmau" ><?= $key ?></div>
-                                        <div class="layered-content filter-color" style="float: left;">
+                                        <div class="layered-content filter-color" style="float: left;width: 76%;">
                                             <div class="check-box-list listgiatri" data-label="<?= $key ?>">
                                                 <?php foreach ($value as $value2) { ?>
 
@@ -197,7 +197,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                         </form>
                     </div>
 
-                    <div class="form-action">
+                    <div class="form-action text-center">
                         <div class="button-group">
                             <button class="btn-add-cart" <?= $data['sanpham']['product_total'] == 0 ? "disabled" : "" ?>
                                     data-product="<?= $data['sanpham']['product_avatar'] ?>"
@@ -209,7 +209,9 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                     data-giasanpham="<?= $data['sanpham']['product_price'] ?>"
                                     data-masanpham="<?= $data['sanpham']['product_code'] ?>"><?= $data['sanpham']['product_total'] == 0 ? "Tạm hết hàng" : "Thêm vào giỏ hàng" ?></button>
                         </div>
-
+                        <div class="number_contect">
+                            <b><?= SDT ?></b>
+                        </div>
                     </div>
                     <div class="form-share">
                         <div class="share">
@@ -273,9 +275,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                     <h3 class="heading">Sản phẩm liên quan</h3>
                     <ul class="product-list danhsachsanpham owl-carousel" data-dots="false" data-loop="false"
                         data-nav="true" data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true"
-                        data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":5}}'>
-
-
+                        data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":4}}'>
                         <?php foreach ($this->data['sanphamlienquan'] as $value) { ?>
 
                             <li>

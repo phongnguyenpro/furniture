@@ -57,7 +57,7 @@ class Module_model extends MY_Model
             $this->load->model("module/header_model");
             $category = $this->header_model->category();
             // Save into the cache for 5 minutes
-            CACHE == 1 ? $this->cache->save('sql/category', $category, 300) : null;
+            CACHE == 1 ? $this->cache->save('sql/category', $category, 86400) : null;
         }
 
         return $category;
@@ -70,7 +70,7 @@ class Module_model extends MY_Model
             $this->load->model("module/header_model");
             $articles_category = $this->header_model->articles_category();
             // Save into the cache for 5 minutes
-            CACHE == 1 ? $this->cache->save('sql/articles_category', $articles_category, 300) : null;
+            CACHE == 1 ? $this->cache->save('sql/articles_category', $articles_category, 86400) : null;
         }
 
         return $articles_category;
@@ -84,7 +84,7 @@ class Module_model extends MY_Model
             $this->load->model("module/header_model");
             $menu = $this->header_model->menu();
             // Save into the cache for 5 minutes
-            CACHE == 1 ? $this->cache->save('sql/menu', $menu, 300) : NULL;
+            CACHE == 1 ? $this->cache->save('sql/menu', $menu, 86400) : NULL;
         }
         return $menu;
     }
@@ -97,7 +97,7 @@ class Module_model extends MY_Model
             $this->load->model("module/header_model");
             $footer = $this->header_model->footer();
             // Save into the cache for 5 minutes
-            CACHE == 1 ? $this->cache->save('sql/footer', $footer, 300) : NULL;
+            CACHE == 1 ? $this->cache->save('sql/footer', $footer, 86400) : NULL;
         }
         return $footer;
     }

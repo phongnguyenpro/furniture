@@ -178,7 +178,7 @@ class Ssp_product
 
                     $binding = self::bind($bindings, '%' . $str . '%', PDO::PARAM_STR);
                     if ($i == 0) {
-                        $column['db'] = str_replace($column['db'], "sanpham." . $column['db'], $column['db']);
+                        $column['db'] = str_replace($column['db'], "product." . $column['db'], $column['db']);
                         $globalSearch[] = "" . $column['db'] . " LIKE " . $binding;
 
                     } else

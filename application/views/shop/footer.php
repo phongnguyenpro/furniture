@@ -17,90 +17,60 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div id="map"></div>
-                <script>
-                    // This example adds a search box to a map, using the Google Place Autocomplete
-                    // feature. People can enter geographical searches. The search box will return a
-                    // pick list containing a mix of places and predicted search terms.
+            <div class="col-md-6">
+                <div class="row">
 
-                    function initAutocomplete() {
-                        var pos;
-                        var haightAshbury = new google.maps.LatLng(<?= MAPLAT ?>);
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            Center: haightAshbury,
-                            zoom: 16,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            mapTypeControl: true,
-                            mapTypeControlOptions: {
-                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                                position: google.maps.ControlPosition.RIGHT
-                            },
-                        });
-                        marker = new google.maps.Marker({
-                            map: map,
-                            animation: google.maps.Animation.DROP,
-                            position: haightAshbury,
-                        });
-                        var contentString = '<div id="content">' + "<b><?= TENSHOP ?></b><br><?= DIACHI ?>" + '</div>';
-                        var infowindow = new google.maps.InfoWindow({
-                            content: contentString
-                        });
-                        infowindow.open(map, marker);
+                    <?php
+                    if (!$cache_category = cache_view_start("category")) {
 
-                        <?php
-                        if(URL_NOW == BASE_URL . "lien-he"){
-                        ?>
+                        if (isset($this->data['footer']['parent'][0])) {
+                            foreach ($this->data['footer']['parent'][0] as $value) {
+                                ?>
+                                <div class="col-sm-4">
+                                    <div class="introduce-title"><?= $this->data['footer']['item'][$value]['menu_name'] ?></div>
+                                    <ul id="introduce-company"  class="introduce-list">
+                                        <?php
+                                        if (isset($this->data['footer']['parent'][$value])) {
+                                            foreach ($this->data['footer']['parent'][$value] as $value2) {
+                                                ?>
+                                        <li><a href="<?= $this->data['footer']['item'][$value2]['menu_slug'] ?>"><?= $this->data['footer']['item'][$value2]['menu_name'] ?></a></li>
 
-                        var map2 = new google.maps.Map(document.getElementById('map2'), {
-                            Center: haightAshbury,
-                            zoom: 16,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            mapTypeControl: true,
-                            mapTypeControlOptions: {
-                                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                                position: google.maps.ControlPosition.RIGHT
-                            },
-                        });
-                        marker2 = new google.maps.Marker({
-                            map: map2,
-                            animation: google.maps.Animation.DROP,
-                            position: haightAshbury,
-                        });
-                        infowindow.open(map2, marker2);
-                        <?php
+                                            <?php }
+                                        } ?>
+                                    </ul>
+                                </div>
+                            <?php
+                            }
                         }
+                        cache_view_end("footer");
+                    } else
+                        echo $cache_category
                         ?>
-                        // [END region_getplaces]
-                    }
 
 
-                </script>
-
-                <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyAqqZi_6QMYAiT5WeDPrVo4JTTJEDpvBzM">
-                </script>
+                </div>
             </div>
+
         </div><!-- /#introduce-box -->
 
         <!-- #trademark-box -->
-        <?php
-        if (isset($this->data["module"]["banner"]["footer"][1])) {
-            ?>
+<?php
+if (isset($this->data["module"]["banner"]["footer"][1])) {
+    ?>
             <div id="trademark-box" class="row">
                 <div class="col-sm-12">
                     <ul id="trademark-list">
                         <li id="payment-methods"><?= $this->data["module"]["banner"]["footer"][1]["name"] ?></li>
-                        <?php foreach ($this->data["module"]["banner"]["footer"][1]["data"] as $k => $v) { ?>
+    <?php foreach ($this->data["module"]["banner"]["footer"][1]["data"] as $k => $v) { ?>
                             <li>
                                 <a href="<?= $v["module_link"] ?>"><img src="<?= BASE_URL . $v["module_image"] ?>"/></a>
                             </li>
-                        <?php } ?>
+            <?php } ?>
                     </ul>
                 </div>
             </div> <!-- /#trademark-box -->
 
-        <?php } ?>
+<?php } ?>
 
     </div>
 </footer>

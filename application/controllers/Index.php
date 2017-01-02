@@ -14,6 +14,7 @@ class Index extends MY_Controller {
         $this->load->model(array("module_model"));
         $this->data["category"] = $this->module_model->category();
         $this->data["menu"] = $this->module_model->menu();
+        $this->data["footer"] = $this->module_model->footer();
         $this->data["module"] = $this->module_model->run("home");
         $this->data["meta"] =array("title"=>TENSHOP,"description"=>MIEUTA,"image"=>BASE_URL.LOGO);
         $this->data["home"]=true;

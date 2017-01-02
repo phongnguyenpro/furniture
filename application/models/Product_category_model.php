@@ -873,7 +873,7 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
             // ma bao ve
             $hoadon['invoice_protect_code'] = generate_password();
             $row = $this->mydb->insert("invoice", $hoadon);
-            // send mail admin
+            // send mail
 
             $id_hoadon = $row['id'];
             $i = 0;
