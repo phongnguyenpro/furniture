@@ -4,35 +4,31 @@
 <script src="<?= load_admin_public("bower_components/ionrangeslider/js/ion.rangeSlider.min.js") ?>"></script>
 <script src="<?= load_admin_public("assets/js/pages/forms_advanced.min.js") ?>"></script>
 
-    <div id='xoa' class="uk-modal">
-        <div class="uk-modal-dialog">
+   <div id='xoa' class="uk-modal">
+            <div class="uk-modal-dialog">
+                <div class="uk-modal-header">Cảnh báo</div>
+
+                <div class="uk-margin uk-modal-content"><span id="thongbaoxoa">Bạn có chắc muốn xóa tài khoản này?</span></div>
+                <div class="uk-modal-footer uk-text-right"> 
+                    <button class="uk-modal-close md-btn md-btn-flat">Cancel</button>
+
+                    <form class="hidden" id="xoathuoctinh" action="<?= ADMIN_URL ?>" >
 
 
-            <div class="uk-modal-header">Cảnh báo</div>
+                        <input name="idxoa" class="hidden" id="idxoa" type="text" placeholder="">
 
-            <div class="uk-margin uk-modal-content"><span id="thongbaoxoa">Bạn có chắc muốn xóa hóa đơn này?</span>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-modal-close md-btn md-btn-flat">Cancel</button>
-
-                <form class="hidden" id="xoathuoctinh"
-                      action="<?= BASE_URL ?>administrator247/editthuoctinhsanpham/deletethuoctinhchon">
+                    </form>
+                    <button  class="js-modal-confirm md-btn-danger md-btn btnxoa">Ok</button>
 
 
-                    <input name="idxoa" class="hidden" id="idxoa" type="text" placeholder="">
-
-                </form>
-                <button class="js-modal-confirm md-btn-danger md-btn btnxoa">Ok</button>
-
+                </div>
 
             </div>
-
         </div>
-    </div>
     <div class="md-card">
         <div class="md-card-toolbar">
             <h3 class="md-card-toolbar-heading-text">
-                Danh sách tài khoản  <a href="<?= ADMIN_URL."user/v_create"; ?>"><button class="btn btn-success"> Thêm mới</button></a>
+                Danh sách tài khoản  <a href="<?= ADMIN_URL."user/insert"; ?>"><button class="btn btn-success"> Thêm mới</button></a>
             </h3>
         </div>
 

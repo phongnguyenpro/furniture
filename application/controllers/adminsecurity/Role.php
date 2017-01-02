@@ -23,10 +23,9 @@ class Role extends MY_Controller
         $this->load->helper(array("mydata"));
         $this->data["get_role"] = $this->adminsecurity->get_role($role_current);
         $this->data["list_role"] = $this->adminsecurity->list_role();
-
         $this->data["role_current"] = $role_current;
-
-
+        $this->load->model("adminsecurity/user_model");
+        $this->data["user_group"] = $this->user_model->list_role($role_current);
         $this->load->view('adminsecurity/header');
         $this->load->view('adminsecurity/role/index');
         $this->load->view('adminsecurity/footer');

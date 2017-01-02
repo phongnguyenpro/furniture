@@ -33,12 +33,10 @@ $(document).ready(function (e) {
             null,
             null,
         ],
-
         "createdRow": function (row, data, dataIndex) {
-            $(row).attr('data-id', data[0] + '.' + data[1]);
-            $(row).attr('id', data[1]);
+            $(row).attr('data-id', data[0]);
+            $(row).attr('id', data[0]);
         },
-
         "fnInitComplete": function () {
             $(function () {
                 altair_forms.init()
@@ -58,21 +56,19 @@ $(document).ready(function (e) {
 
 
     var modalxoa = UIkit.modal("#xoa");
-    $(document).on('click', '.xoa', function () {
+    $(document).on('click', '.btn_deleteuser', function () {
         modalxoa.show();
-        id_sanpham = $(this).attr('data-id');
-        $('.btnxoa').prop('value', id_sanpham);
+        user_id = $(this).attr('data-id');
+        $('.btnxoa').prop('value', user_id);
     })
-
     $('.btnxoa').click(function () {
-
         $('.btnxoa').prop("disabled", true);
         $('#thongbaoxoa').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang xóa hóa đơn</div>');
-        id_hoadon = $(this).val();
-        $.post(URL + "administrator247/hoadon/xoahoadon", {"id_hoadon": id_hoadon}, function (o) {
+        user_id = $(this).val();
+        $.post(ADMIN_URL + "user/delete", {"user_id": user_id}, function (o) {
             if (o.status == 1)
                 modalxoa.hide();
-            $('tr[id=' + id_hoadon + ']').fadeOut("slow", function () {
+            $('tr[id=' + user_id + ']').fadeOut("slow", function () {
                 $(this).remove();
             });
             $('.btnxoa').prop("disabled", false);

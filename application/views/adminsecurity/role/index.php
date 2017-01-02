@@ -20,12 +20,9 @@
                         </div>
                         <div class="md-card-content large-padding">
                             <div class="uk-grid uk-grid-divider uk-grid-medium" data-uk-grid-margin>
-                                <div class="uk-width-large-1-5">
+                                <div class="uk-width-large-1-3">
                                     <select class="basic" id="change_role" name="role_current">
-                                        <?php foreach (getrole() as $k => $v) { ?>
-                                            <option <?= $this->data["role_current"] == $k ? "selected" : "" ?> value="<?= $k ?>"><?= $v["label"] ?></option>
-                                        <?php } ?>
-
+                                       <?= $this->data["user_group"] ?>
                                     </select>
 
                                 </div>
@@ -61,9 +58,12 @@
                                             <?php foreach ($this->data["list_role"] as $controller => $list_action) { ?>
 
                                                 <tr>
-                                                    <td><b><?= $controller; ?></b></td>
                                                     <td>
-                                                        <?php foreach ($list_action as $k_action => $v_action) { ?>
+                                                        <b><?= $list_action["label"]; ?></b><br>
+                                                        <input data-status='0' class="checkall" type="checkbox">
+                                                    </td>
+                                                    <td>
+                                                        <?php foreach ($list_action["data"] as $k_action => $v_action) { ?>
                                                         <div class="col-md-3" style="border: 1px solid #dcd9d4;margin-top: 2px">
                                                             <label>  <input
                                                                 <?php

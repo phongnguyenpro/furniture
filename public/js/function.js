@@ -293,9 +293,9 @@ return str;
                         if (http.readyState == 4 && http.status == 200)
                         {
                             var result = JSON.parse(http.responseText);
-                            if (result.tinhtrang == 1)
+                            if (result.status == 1)
                             {
-                                callback();
+                                callback(result);
                             }
                             else
                             {

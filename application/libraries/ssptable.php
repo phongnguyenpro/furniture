@@ -12,7 +12,6 @@ class SSPTable {
     public $stt = null;
     public $litmit = true;
     public $name = '';
-
     public function data_output($columns, $data) {
         $tinhtrang = get_invoice_state();
         $out = array();
@@ -268,14 +267,12 @@ class SSPTable {
                                   else    $row[$column['dt']]="no image";
                                   break;
                                 case 4:
-                                    $check = $data[$i][$columns[$j]['db']] == 1 ? "checked" : "";
-                                    $row[$column['dt']] = '<input data-id=' . $data[$i][$columns[$j]['db']]. ' name="noibat" class="noibat" type="checkbox" data-switchery data-switchery-color="#d32f2f" ' . $check . ' id="switch_demo_danger" />';
+                                    $row[$column['dt']]  = $data[$i][$columns[$j]['db']] == 1 ? "Hoạt động" : "Không hoạt động";
                                     break;
                                 case 5:
                                     $user_id = $data[$i][$columns[$j]['db']];
-                                    $row[$column['dt']] = "<a class='md-btn md-btn-primary btn-sm' href='" .BASE_URL. "admin/nhanvien1/chitiet/$user_id'>Xem</a>";
-                                    $row[$column['dt']] .= "<a class='md-btn md-btn-danger btn-sm' href='" .BASE_URL. "admin/nhanvien1/chitiet/$user_id'>Xóa</a>";
-    
+                                    $row[$column['dt']] = "<a class='md-btn md-btn-primary btn-sm' href='" .ADMIN_URL. "user/update/$user_id'>Xem</a>";
+                                    $row[$column['dt']] .= "<a data-id='".$user_id."' class='md-btn md-btn-danger btn-sm btn_deleteuser' href='#'>Xóa</a>";
                                     break;
                                 default :
                                     $row[$column['dt']] = $data[$i][$columns[$j]['db']];

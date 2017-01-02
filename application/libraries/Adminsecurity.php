@@ -7,6 +7,9 @@ class Adminsecurity {
     public $controller = "";
     public $action = "";
     public $isajax = false;
+    public $user = array();
+    public $mydb;
+    public $list_role_user = array();
 
     public function __construct() {
         // tham so truyen kieu mang
@@ -26,8 +29,10 @@ class Adminsecurity {
         $menu = array();
         foreach ($this->list_controller as $k => $v) {
             $menu[$k]["attr"] = $v["attr"];
+            $menu[$k]["item"] = array();
             foreach ($v["controller"] as $k_item => $v_item) {
-                $menu[$k]["item"][] = array("controller" => $k_item, "label" => $v_item["attr"]["label"], "active" => $k_item == $this->controller ? 1 : 0);
+                if (isset($this->list_role_user[$k_item]))
+                    $menu[$k]["item"][] = array("controller" => $k_item, "label" => $v_item["attr"]["label"], "active" => $k_item == $this->controller ? 1 : 0);
             }
         }
         return $menu;
@@ -38,9 +43,10 @@ class Adminsecurity {
         $list_role = array();
         foreach ($this->list_controller as $k => $v) {
             foreach ($v["controller"] as $k_item => $v_item) {
-                $list_role[$v_item["attr"]["label"]] = array();
+                $list_role[$k_item] = array();
+                $list_role[$k_item]["label"] = $v_item["attr"]["label"];
                 foreach ($v_item["action"] as $k_action => $val_action) {
-                    $list_role[$v_item["attr"]["label"]][] = $val_action;
+                    $list_role[$k_item]["data"][] = $val_action;
                 }
             }
         }
@@ -59,9 +65,58 @@ class Adminsecurity {
     public function checkrole($controler = "", $action = "") {
         $this->controller = string_lower($controler);
         $this->action = string_lower($action);
+        if (isset($_COOKIE["user"])) {
+            $user = GetUserLogin();
+            $result = $this->mydb->select("select user_id,user_name,user_email,user_avatar,user_password,user_role,user_role_name from user where user_email=:user_email and user_password=:user_password", array("user_email" => $user["user_email"], "user_password" => $user["user_password"]));
+            if (!empty($result)) {
+                $this->user = $result[0];
+                SetUserLogin($result[0]);
+                $result = $this->mydb->select("select role_role,role_controller,role_action from role where role_role=:role_role and role_action='index'", array("role_role" => $this->user["user_role"]));
+                foreach ($result as $k => $v) {
+                    $this->list_role_user[$v["role_controller"]][] = $v["role_action"];
+                }
+                if (!($this->user["user_role"] == "administrator")) {
+                    // check role
+                    $result = $this->mydb->select("select role_id from role where  role_role=:role_role "
+                            . "and role_controller=:role_controller "
+                            . "and role_action=:role_action", array("role_role" => $this->user["user_role"],
+                        "role_controller" => $this->controller,
+                        "role_action" => $this->action,
+                            )
+                    );
+                    if (empty($result)) {
+                        if ($this->isajax) {
+                            echo json_encode(array("status" => 0, "message" => "Bạn không có quyền truy cập"));
+                            exit();
+                        } else {
+                            if ($this->controller != "access")
+                                Header("Location:" . ADMIN_URL . "access/notaccess");
+                        }
+                    }
+                }
+            }
+        } else {
+            if ($this->controller != "login")
+                Header("Location:" . ADMIN_URL . "login/logout"); // chuyen huong neu sai thong tin
+        }
     }
 
     public $list_controller = array(
+        "Trang chủ" => array(
+            "attr" => "",
+            "controller" =>
+            array(
+                "main" => array(
+                    "attr" => array("label" => "Thông tin chung"),
+                    "action" => array(
+                        array(
+                            "label" => "Hiển thị thông tin",
+                            "value" => "index"
+                        ),
+                    )
+                )
+            )
+        ),
         "Cấu hình" => array(
             "attr" => "",
             "controller" =>
@@ -160,6 +215,10 @@ class Adminsecurity {
                         array(
                             "label" => "Cập nhật ngành nghề",
                             "value" => "update"
+                        ),
+                         array(
+                            "label" => "Sắp xếp ngành nghề",
+                            "value" => "sort_career"
                         ),
                     )
                 ),
@@ -416,11 +475,20 @@ class Adminsecurity {
                 "user" => array(
                     "attr" => array("label" => "Tài khoản"),
                     "action" => array(
-                        array("label" => "Hiển thị thêm tài khoản",
-                            "value" => "v_create"
+                        array("label" => "Danh sách tài khoản",
+                            "value" => "index"
+                        ),
+                        array("label" => "Lọc tài khoản",
+                            "value" => "load_data_ssp"
                         ),
                         array("label" => "Thêm tài khoản",
                             "value" => "insert"
+                        ),
+                        array("label" => "Cập nhật tài khoản",
+                            "value" => "update"
+                        ),
+                        array("label" => "Xóa tài khoản",
+                            "value" => "delete"
                         ),
                     ),
                 ),

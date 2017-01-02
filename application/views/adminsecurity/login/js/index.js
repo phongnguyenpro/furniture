@@ -12,7 +12,12 @@ $(document).ready(function (e) {
             formdata.append("pass", pass);
             formdata.append("token", TOKEN);
           
-            $_checksumajax(formdata,ADMIN_URL+"login/check_login",function(){alert("ok")});
+            $_checksumajax(formdata,ADMIN_URL+"login/check_login",function(data){
+                if(data.status==1)
+                    alert(data.message);
+                else if(data.status==2)
+                    window.location.reload();
+            });
 
         }
         else

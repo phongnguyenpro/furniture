@@ -35,6 +35,10 @@ function generate_password($length = 8)
 
     return $result;
 }
+function generate_key($str)
+{
+   return  hash_hmac("SHA1",$str, HASH_KEY);
+}
 
 //========================================== xử lý dữ liệu===========================
 function check_post($post, $array = array())
@@ -48,7 +52,6 @@ function check_post($post, $array = array())
     }
     return $check_isset;
 }
-
 function checksum($data = "")
 {
     if (isset($data['checksum'])) {
@@ -197,7 +200,20 @@ function delete_cook_time($key, $time, $value = false)
 {
     setcookie($key, $value, time() - $time, '/');
 }
-
+// =============== USER =============== //
+ function SetUserLogin($data)
+ {
+     $data = serialize($data);
+     create_cook_time("user",$data,864000);
+     
+ }
+  function GetUserLogin()
+ {
+      if(isset($_COOKIE["user"]))
+         return unserialize($_COOKIE["user"]);
+      else
+          return false;
+ }
 //========================= DATETIME ==============================
 function today($format = "datetime")
 {

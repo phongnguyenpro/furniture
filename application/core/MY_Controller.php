@@ -35,5 +35,9 @@ class MY_Controller extends CI_Controller
                 "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE","LIMITBAIVIET","MAPLAT"));
         }
     }
+      public function error(){
+        Header("Location:" . BASE_URL . "error");
+        die();
+    }
 
 }

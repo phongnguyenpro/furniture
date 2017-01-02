@@ -80,7 +80,7 @@ $(document).ready(function (e) {
     $('#capnhatthutu').click(function () {
 
         var data = $(".uk-sortable").data("sortable").serialize();
-      //  datamenu = JSON.stringify(data); // lấy giá trị 
+        //  datamenu = JSON.stringify(data); // lấy giá trị 
         $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang cập nhật</div>')
         $.post(ADMIN_URL + "product/sort_product", {'product': data}, function (o) {
             if (o.status == 1)
@@ -120,7 +120,6 @@ $(document).ready(function (e) {
             if (o.tinhtrang == 1)
                 thongbaothanhcong();
         }, "JSON")
-
     })
     var modalxoa = UIkit.modal("#xoa");
     $(document).on('click', '.xoa', function () {
@@ -136,12 +135,20 @@ $(document).ready(function (e) {
         id_sanpham = $(this).val();
         $.post(ADMIN_URL + "product/delete", {"id_product": id_sanpham}, function (o) {
             if (o.status == 1)
+            {
                 modalxoa.hide();
-            $('tr[id=' + id_sanpham + ']').fadeOut("slow", function () {
-                $(this).remove();
-            });
+                $('tr[id=' + id_sanpham + ']').fadeOut("slow", function () {
+                    $(this).remove();
+                    $('#thongbaoxoa').html("Bạn có muốn xóa sản phẩm này");
+                });
+            }
+            else
+            {
+                $('#thongbaoxoa').html(o.message);
+            }
             $('.btnxoa').prop("disabled", false);
-            $('#thongbaoxoa').html("Bạn có muốn xóa sản phẩm này");
+
+
         }, "JSON")
 
 

@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!-- Remove Tap Highlight on Windows Phone IE -->
         <title>Admin</title>
-          <script>
+        <script>
             ADMIN_URL = "<?= ADMIN_URL ?>";
             BASE_URL = "<?= BASE_URL ?>";
         </script>
@@ -30,7 +30,7 @@
         <script src="<?= load_admin_public("js/function.js") ?>"></script>
         <script src="<?= load_admin_public("js/select2.min.js") ?>"></script>
         <script src="<?= load_public("js/function.js") ?>"></script>
-      
+
     </head>
     <body class="sidebar_main_open sidebar_main_swipe" style="background-color: #ECECEC">
         <?php
@@ -53,17 +53,16 @@
                     <a href="#" id="sidebar_secondary_toggle" class="sSwitch sSwitch_right sidebar_secondary_check">
                         <span class="sSwitchIcon"></span>
                     </a>
+
                     <div class="uk-navbar-flip">
                         <ul class="uk-navbar-nav user_actions">
-
                             <li data-uk-dropdown="{mode:'click'}">
-
-                                <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
+                                <a href="#" class="user_action_image"><img class="md-user-image" src="<?= BASE_URL ?>public/upload/images/user_profile/<?php $info = GetUserLogin();
+        echo $info["user_avatar"] ?>" alt=""/></a>
+                                <div class="uk-dropdown  uk-dropdown-flip" style="right: 0px">
                                     <ul class="uk-nav js-uk-prevent">
-
-                                        <li><a></a></li>
-
-
+                                        <li><a>Bạn là <?= $info["user_role_name"] ?> </a></li>
+                                        <li><a href="<?= ADMIN_URL ?>login/logout">Logout</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -88,33 +87,37 @@
             <div class="sidebar_main_header">
                 <div class="sidebar_logo">
                     <a href="<?= ADMIN_URL ?>" class="sSidebar_hide"><img
-                            src="<?= BASE_URL.LOGO ?>" alt="" height="15"
+                            src="<?= BASE_URL . LOGO ?>" alt="" height="15"
                             width="71"/></a>
                     <a href="<?= ADMIN_URL ?>" class="sSidebar_show"><img
-                            src="<?= BASE_URL.LOGO ?>" alt="" height="32"
+                            src="<?= BASE_URL . LOGO ?>" alt="" height="32"
                             width="32"/></a>
                 </div>
 
             </div>
             <div class="menu_section">
                 <ul>
-                    <?php foreach ($this->data["menu_item"] as $k_group => $v_group) { ?>
-                        <li title="<?= $k_group; ?>">
-                            <a>
-                                <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
-                                <span class="menu_title"><?= $k_group ?></span>
-                            </a>
-                            <ul>
-                                <?php
-                                foreach ($v_group["item"] as $k_item => $v_item) {
-                                    ?>
-                                    <li class="<?= $v_item["active"]==1?"act_item":"" ?>"><a href="<?= ADMIN_URL . $v_item["controller"] ?>"><?= $v_item["label"]; ?></a></li>   
+                    <?php
+                    foreach ($this->data["menu_item"] as $k_group => $v_group) {
+                        if (!empty($v_group["item"])) {
+                            ?>
+                            <li title="<?= $k_group; ?>">
+                                <a>
+                                    <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
+                                    <span class="menu_title"><?= $k_group ?></span>
+                                </a>
+                                <ul>
+                                    <?php
+                                    foreach ($v_group["item"] as $k_item => $v_item) {
+                                        ?>
+                                        <li class="<?= $v_item["active"] == 1 ? "act_item" : "" ?>"><a href="<?= ADMIN_URL . $v_item["controller"] ?>"><?= $v_item["label"]; ?></a></li>   
 
 
-                                <?php } ?>  
-                            </ul>
-                        </li>
-                    <?php } ?>
+                            <?php } ?>  
+                                </ul>
+                            </li>
+    <?php }
+} ?>
 
 
 
@@ -128,12 +131,12 @@
                 if ($notify = session_get("notify")) {
                     session_delete("notify");
                     ?>
-                        <script>
-                            $(document).ready(function (e) {
-                                showNotify({
-                                       status: '<?=  $notify["type"] == 1 ? "info" : $notify["type"] == 2 ? "warning" : $notify["type"] == 3 ? "success" : "danger" ?>',
-                                       messager: '<?= $notify["messager"] ?>'
-                                        },null);
-                            })
-                        </script>
-                <?php  } ?>
+                    <script>
+          $(document).ready(function (e) {
+              showNotify({
+                  status: '<?= $notify["type"] == 1 ? "info" : $notify["type"] == 2 ? "warning" : $notify["type"] == 3 ? "success" : "danger"  ?>',
+                  messager: '<?= $notify["messager"] ?>'
+              }, null);
+          })
+                    </script>
+<?php } ?>
