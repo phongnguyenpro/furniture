@@ -38,9 +38,9 @@ class Adminsecurity {
         $list_role = array();
         foreach ($this->list_controller as $k => $v) {
             foreach ($v["controller"] as $k_item => $v_item) {
-                $list_role[$k_item] = array();
+                $list_role[$v_item["attr"]["label"]] = array();
                 foreach ($v_item["action"] as $k_action => $val_action) {
-                    $list_role[$k_item][] = $val_action;
+                    $list_role[$v_item["attr"]["label"]][] = $val_action;
                 }
             }
         }

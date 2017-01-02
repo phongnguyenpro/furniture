@@ -65,6 +65,7 @@ $route['404_override'] = '';
 $route['(:any)-(:any).html'] = 'product_category/product/$2/$1';
 
 // admin 
+$route['quantri'] = 'adminsecurity/main';
 $route['quantri/(:any)'] = 'adminsecurity/$1';
 $route['quantri/(:any)/(:any)'] = 'adminsecurity/$1/$2';
 $route['quantri/(:any)/(:any)/(:any)'] = 'adminsecurity/$1/$2/$3';
