@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2017-01-02 21:07:46
+Date: 2017-01-02 21:41:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -322,7 +322,7 @@ CREATE TABLE `product` (
 -- Records of product
 -- ----------------------------
 INSERT INTO `product` VALUES ('32', '1', ' NDT2810', 'Sofa da thật', '33333333', '100', '<h2>Mẫu sofa da thật cao cấp mới nhất 2016<br />\r\n{readmore}<br />\r\nC&aacute;c mẫu&nbsp;<a href=\"http://nhaxinhplaza.vn/tag/sofa-da-that.html\" style=\"font-size: 13px;\"><strong>ghế sofa da thật</strong></a><span style=\"font-size:13px\">&nbsp;thiết kế đẹp mắt, chất liệu sử dụng được lựa chọn cẩn thận, kiểu d&aacute;ng đặt linh hoạt th&iacute;ch hợp cho nhiều dạng kh&ocirc;ng gian nội thất &nbsp;kh&aacute;c nhau. Bộ&nbsp;Sofa da thật m&atilde; NDT2810 l&agrave; một trong những sản phẩm đ&aacute;p ứng rất nhiều ưu điểm quan trọng, gi&uacute;p bạn dễ d&agrave;ng đặt trong c&aacute;c gian ph&ograve;ng kh&aacute;ch, văn ph&ograve;ng c&ocirc;ng ty....</span></h2>\r\n', '<h2>Mẫu sofa da thật cao cấp mới nhất 2016<br />\r\n', 'bộ', null, '1', 'sofa-da-that', '2016-12-05 05:11:17', 'sofa-da-that-12721480889443.jpg', '0', null, '1', '2', '0', '2', '2', 'sofa da that 33333333', '2016-12-05 05:11:17', null, null);
-INSERT INTO `product` VALUES ('33', '1', 'NTX601', 'Sofa bán sẵn', '18500000', '200', 'Ghế sofa b&aacute;n tại Nội Thất Xinh lu&ocirc;n l&agrave; lựa chọn được ưu ti&ecirc;n mang đến cho kh&ocirc;ng gian nội thất trong căn nh&agrave; của bạn vẻ đẹp sang trọng v&agrave; gần gũ{readmore}<br />\r\nGhế sofa b&aacute;n tại Nội Thất Xinh lu&ocirc;n l&agrave; lựa chọn được ưu ti&ecirc;n mang đến cho kh&ocirc;ng gian nội thất trong căn nh&agrave; của bạn vẻ đẹp sang trọng v&agrave; gần gũi. Nếu bạn kh&ocirc;ng c&oacute; thời gian đặt mua sản phẩm sofa, h&atilde;y thử trải nghiệm với những&nbsp;<a href=\"http://nhaxinhplaza.vn/sofa-ban-san.html\">mẫu b&agrave;n ghế sofa b&aacute;n sẵn</a>&nbsp;tại showroom Nội Thất Xinh của ch&uacute;ng t&ocirc;i.\r\n\r\n<h2><strong>Mẫu sofa b&aacute;n sẵn NTX601 - Lựa chọn ho&agrave;n hảo cho kh&ocirc;ng gian tiện nghi</strong></h2>\r\n', 'Ghế sofa b&aacute;n tại Nội Thất Xinh lu&ocirc;n l&agrave; lựa chọn được ưu ti&ecirc;n mang đến cho kh&ocirc;ng gian nội thất trong căn nh&agrave; của bạn vẻ đẹp sang trọng v&agrave; gần gũ', 'bộ', null, '1', 'sofa-ban-san', '2016-12-05 00:00:00', 'sofa-ban-san-61821480889691.jpg', '0', null, '2', '2', '0', '1', '2', 'sofa b&aacute;n san 18500000', '2016-12-05 05:18:00', null, null);
+INSERT INTO `product` VALUES ('33', '1', 'NTX601', 'Sofa bán sẵn', '18500000', '200', 'Ghế sofa b&aacute;n tại Nội Thất Xinh lu&ocirc;n l&agrave; lựa chọn được ưu ti&ecirc;n mang đến cho kh&ocirc;ng gian nội thất trong căn nh&agrave; của bạn vẻ đẹp sang trọng v&agrave; gần gũ{readmore}<br />\r\nGhế sofa b&aacute;n tại Nội Thất Xinh lu&ocirc;n l&agrave; lựa chọn được ưu ti&ecirc;n mang đến cho kh&ocirc;ng gian nội thất trong căn nh&agrave; của bạn vẻ đẹp sang trọng v&agrave; gần gũi. Nếu bạn kh&ocirc;ng c&oacute; thời gian đặt mua sản phẩm sofa, h&atilde;y thử trải nghiệm với những&nbsp;<a href=\"http://nhaxinhplaza.vn/sofa-ban-san.html\">mẫu b&agrave;n ghế sofa b&aacute;n sẵn</a>&nbsp;tại showroom Nội Thất Xinh của ch&uacute;ng t&ocirc;i.\r\n\r\n<h2><strong>Mẫu sofa b&aacute;n sẵn NTX601 - Lựa chọn ho&agrave;n hảo cho kh&ocirc;ng gian tiện nghi</strong></h2>\r\n', 'Ghế sofa b&aacute;n tại Nội Thất Xinh lu&ocirc;n l&agrave; lựa chọn được ưu ti&ecirc;n mang đến cho kh&ocirc;ng gian nội thất trong căn nh&agrave; của bạn vẻ đẹp sang trọng v&agrave; gần gũ', 'bộ', null, '1', 'sofa-ban-san', '2016-12-05 00:00:00', 'sofa-ban-san-61821480889691.jpg', '0', null, '3', '2', '0', '1', '2', 'sofa b&aacute;n san 18500000', '2016-12-05 05:18:00', null, null);
 INSERT INTO `product` VALUES ('34', '1', 'G24', 'Sofa phòng ngủ mã G24 Sofa phòng ngủ mã G24 Sofa phòng ngủ', '10400000', '100', 'Kh&ocirc;ng giống như những bộ&nbsp;<a href=\"http://nhaxinhplaza.vn/sofa.html\"><strong>ghế sofa</strong></a>&nbsp;th&ocirc;ng thường, chiếc ghế sofa ph&ograve;ng ngủ m&atilde; G24 t&ocirc;ng m&agrave;u hồng nhạt&nbsp;{readmore}<br />\r\nCung cấp h&agrave;ng trăm mẫu sofa tr&ecirc;n thị trường, Nội thất xinh lu&ocirc;n khẳng định thương hiệu của m&igrave;nh tới kh&aacute;ch h&agrave;ng kh&ocirc;ng chỉ ở chất lượng, m&agrave; c&ograve;n mẫu m&atilde;, kiểu d&aacute;ng v&agrave; gi&aacute; cả v&ocirc; c&ugrave;ng hấp dẫn.<a href=\"http://nhaxinhplaza.vn/sofa-phong-ngu.html\"><strong>Sofa ph&ograve;ng ngủ</strong></a>&nbsp;b&aacute;n sẵn tại&nbsp;<strong>showroom Nội thất xinh 321 Trường Chinh</strong>&nbsp;l&agrave; một v&iacute; dụ điển h&igrave;nh\r\n<h2><strong>Nội thất xinh b&aacute;n&nbsp;Sofa ph&ograve;ng ngủ m&atilde; G24&nbsp;</strong></h2>\r\nKh&ocirc;ng giống như những bộ&nbsp;<a href=\"http://nhaxinhplaza.vn/sofa.html\"><strong>ghế sofa</strong></a>&nbsp;th&ocirc;ng thường, chiếc ghế sofa ph&ograve;ng ngủ m&atilde; G24 t&ocirc;ng m&agrave;u hồng nhạt được thiết kế th&ocirc;ng minh, mang đến sự mới lạ, độc đ&aacute;o v&agrave; hấp dẫn c&oacute; thể k&eacute;o ra th&agrave;nh giường một c&aacute;ch dễ d&agrave;ng, thuận tiện cho việc bạn ngồi tiếp kh&aacute;ch, đọc b&aacute;o, xem tivi, khi mệt mỏi bạn c&oacute; thể k&eacute;o ra ngay lập tức n&oacute; sẽ biến h&oacute;a th&agrave;nh chiếc giường ngủ &ecirc;m &aacute;i, dễ chịu.', 'Kh&ocirc;ng giống như những bộ&nbsp;<a href=\"http://nhaxinhplaza.vn/sofa.html\"><strong>ghế sofa</strong></a>&nbsp;th&ocirc;ng thường, chiếc ghế sofa ph&ograve;ng ngủ m&atilde; G24 t&ocirc;ng m&agrave;u hồng nhạt&nbsp;', 'bộ', null, '1', 'sofa-phong-ngu-ma-g24-sofa-phong-ngu-ma-g24-sofa-phong-ngu', '2016-12-05 00:00:00', 'sofa-phong-ngu-ma-g24-sofa-phong-ngu-ma-g24-sofa-phong-ngu-60561480890379.jpg', '20', null, '11', '1', '0', '1', '1', 'sofa ph&ograve;ng ngu m&atilde; g24 sofa ph&ograve;ng ngu m&atilde; g24 sofa ph&ograve;ng ngu 10400000', '2016-12-05 05:37:56', null, null);
 
 -- ----------------------------
@@ -548,113 +548,16 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `role_id` int(100) NOT NULL AUTO_INCREMENT,
   `role_role` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `role_controller` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `role_action` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role_controller` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role_action` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `role_date_update` datetime DEFAULT NULL,
   `role_user_update` int(100) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=621 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1142 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('391', 'administrator', 'main', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('392', 'administrator', 'menu', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('393', 'administrator', 'menu', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('394', 'administrator', 'menu', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('395', 'administrator', 'menu', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('396', 'administrator', 'menu', 'load_menu_edit', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('397', 'administrator', 'menu', 'sort_menu', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('398', 'administrator', 'footer', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('399', 'administrator', 'footer', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('400', 'administrator', 'footer', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('401', 'administrator', 'footer', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('402', 'administrator', 'footer', 'load_footer_edit', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('403', 'administrator', 'footer', 'sort_footer', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('404', 'administrator', 'config', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('405', 'administrator', 'config', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('406', 'administrator', 'career', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('407', 'administrator', 'career', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('408', 'administrator', 'career', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('409', 'administrator', 'career', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('410', 'administrator', 'productcategory', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('411', 'administrator', 'productcategory', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('412', 'administrator', 'productcategory', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('413', 'administrator', 'productcategory', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('414', 'administrator', 'productcategory', 'load_category_edit', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('415', 'administrator', 'productcategory', 'sort_category', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('416', 'administrator', 'productattr', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('417', 'administrator', 'productattr', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('418', 'administrator', 'productattr', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('419', 'administrator', 'productattr', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('420', 'administrator', 'productattr', 'sort_attr', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('421', 'administrator', 'productattr', 'v_attr_val', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('422', 'administrator', 'productattr', 'attr_val_insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('423', 'administrator', 'productattr', 'attr_val_delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('424', 'administrator', 'productattr', 'attr_val_delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('425', 'administrator', 'productattr', 'attr_val_sort', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('426', 'administrator', 'product_prop', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('427', 'administrator', 'product_prop', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('428', 'administrator', 'product_prop', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('429', 'administrator', 'product_prop', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('430', 'administrator', 'product_prop', 'product_prop_sort', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('431', 'administrator', 'product', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('432', 'administrator', 'product', 'load_data_ssp', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('433', 'administrator', 'product', 'create', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('434', 'administrator', 'product', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('435', 'administrator', 'product', 'edit', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('436', 'administrator', 'product', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('437', 'administrator', 'product', 'sort_product', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('438', 'administrator', 'product', 'avatar', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('439', 'administrator', 'product', 'upload_image', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('440', 'administrator', 'product', 'sort_image', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('441', 'administrator', 'product', 'delete_temp_forder', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('442', 'administrator', 'product', 'delete_image', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('443', 'administrator', 'product', 'add_product_detail', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('444', 'administrator', 'invoice', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('445', 'administrator', 'invoice', 'load_data_ssp', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('446', 'administrator', 'invoice', 'view', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('447', 'administrator', 'invoice', 'delete_invoice', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('448', 'administrator', 'invoice', 'update_invoice', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('449', 'administrator', 'invoice', 'update_quantity', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('450', 'administrator', 'invoice', 'invoice_payment', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('451', 'administrator', 'articlescategory', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('452', 'administrator', 'articlescategory', 'sort', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('453', 'administrator', 'articles', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('454', 'administrator', 'articles', 'articles_ajax', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('455', 'administrator', 'articles', 'create', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('456', 'administrator', 'articles', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('457', 'administrator', 'articles', 'show', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('458', 'administrator', 'articles', 'sort_articles', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('459', 'administrator', 'articles', 'delete_articles', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('460', 'administrator', 'articles', 'edit_articles', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('461', 'administrator', 'articles', 'update_articles', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('462', 'administrator', 'user', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('463', 'administrator', 'user', 'load_data_ssp', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('464', 'administrator', 'user', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('465', 'administrator', 'user', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('466', 'administrator', 'user', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('467', 'administrator', 'usergroup', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('468', 'administrator', 'usergroup', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('469', 'administrator', 'usergroup', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('470', 'administrator', 'usergroup', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('471', 'administrator', 'usergroup', 'load_usergroup_edit', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('472', 'administrator', 'usergroup', 'usergroup_sort', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('473', 'administrator', 'role', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('474', 'administrator', 'role', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('475', 'administrator', 'module', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('476', 'administrator', 'module', 'detail', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('477', 'administrator', 'module', 'insert', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('478', 'administrator', 'module', 'delete', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('479', 'administrator', 'module', 'config', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('480', 'administrator', 'module', 'update', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('481', 'administrator', 'tag', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('482', 'administrator', 'tag', 'create_tag', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('483', 'administrator', 'tag', 'delete_tag', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('484', 'administrator', 'tag', 'update_tag', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('485', 'administrator', 'tag', 'sort_tag', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('486', 'administrator', 'media', 'index', '2017-01-02 20:48:43', null);
-INSERT INTO `role` VALUES ('487', 'administrator', 'media', 'selectphoto', '2017-01-02 20:48:43', null);
 INSERT INTO `role` VALUES ('591', '19', 'menu', 'index', '2017-01-02 21:03:01', null);
 INSERT INTO `role` VALUES ('592', '19', 'menu', 'insert', '2017-01-02 21:03:01', null);
 INSERT INTO `role` VALUES ('593', '19', 'menu', 'delete', '2017-01-02 21:03:01', null);
@@ -685,6 +588,112 @@ INSERT INTO `role` VALUES ('617', '19', 'product', 'sort_image', '2017-01-02 21:
 INSERT INTO `role` VALUES ('618', '19', 'product', 'delete_temp_forder', '2017-01-02 21:03:01', null);
 INSERT INTO `role` VALUES ('619', '19', 'product', 'delete_image', '2017-01-02 21:03:01', null);
 INSERT INTO `role` VALUES ('620', '19', 'product', 'add_product_detail', '2017-01-02 21:03:01', null);
+INSERT INTO `role` VALUES ('1036', 'administrator', 'main', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1037', 'administrator', 'menu', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1038', 'administrator', 'menu', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1039', 'administrator', 'menu', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1040', 'administrator', 'menu', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1041', 'administrator', 'menu', 'load_menu_edit', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1042', 'administrator', 'menu', 'sort_menu', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1043', 'administrator', 'footer', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1044', 'administrator', 'footer', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1045', 'administrator', 'footer', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1046', 'administrator', 'footer', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1047', 'administrator', 'footer', 'load_footer_edit', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1048', 'administrator', 'footer', 'sort_footer', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1049', 'administrator', 'config', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1050', 'administrator', 'config', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1051', 'administrator', 'career', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1052', 'administrator', 'career', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1053', 'administrator', 'career', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1054', 'administrator', 'career', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1055', 'administrator', 'career', 'sort_career', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1056', 'administrator', 'productcategory', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1057', 'administrator', 'productcategory', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1058', 'administrator', 'productcategory', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1059', 'administrator', 'productcategory', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1060', 'administrator', 'productcategory', 'load_category_edit', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1061', 'administrator', 'productcategory', 'sort_category', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1062', 'administrator', 'productattr', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1063', 'administrator', 'productattr', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1064', 'administrator', 'productattr', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1065', 'administrator', 'productattr', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1066', 'administrator', 'productattr', 'sort_attr', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1067', 'administrator', 'productattr', 'v_attr_val', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1068', 'administrator', 'productattr', 'attr_val_insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1069', 'administrator', 'productattr', 'attr_val_delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1070', 'administrator', 'productattr', 'attr_val_delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1071', 'administrator', 'productattr', 'attr_val_sort', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1072', 'administrator', 'product_prop', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1073', 'administrator', 'product_prop', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1074', 'administrator', 'product_prop', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1075', 'administrator', 'product_prop', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1076', 'administrator', 'product_prop', 'product_prop_sort', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1077', 'administrator', 'product', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1078', 'administrator', 'product', 'load_data_ssp', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1079', 'administrator', 'product', 'create', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1080', 'administrator', 'product', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1081', 'administrator', 'product', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1082', 'administrator', 'product', 'edit', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1083', 'administrator', 'product', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1084', 'administrator', 'product', 'sort_product', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1085', 'administrator', 'product', 'avatar', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1086', 'administrator', 'product', 'upload_image', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1087', 'administrator', 'product', 'sort_image', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1088', 'administrator', 'product', 'delete_temp_forder', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1089', 'administrator', 'product', 'delete_image', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1090', 'administrator', 'product', 'add_product_detail', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1091', 'administrator', 'product', 'update_product_detail', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1092', 'administrator', 'product', 'delete_product_detail', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1093', 'administrator', 'product', 'delete_image_product_detail', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1094', 'administrator', 'invoice', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1095', 'administrator', 'invoice', 'load_data_ssp', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1096', 'administrator', 'invoice', 'view', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1097', 'administrator', 'invoice', 'delete_invoice', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1098', 'administrator', 'invoice', 'update_invoice', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1099', 'administrator', 'invoice', 'update_quantity', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1100', 'administrator', 'invoice', 'invoice_payment', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1101', 'administrator', 'articlescategory', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1102', 'administrator', 'articlescategory', 'create_articles_category', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1103', 'administrator', 'articlescategory', 'delete_articles_category', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1104', 'administrator', 'articlescategory', 'load_info_articles_category', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1105', 'administrator', 'articlescategory', 'update_info_articles_category', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1106', 'administrator', 'articlescategory', 'sort', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1107', 'administrator', 'articles', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1108', 'administrator', 'articles', 'articles_ajax', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1109', 'administrator', 'articles', 'create', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1110', 'administrator', 'articles', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1111', 'administrator', 'articles', 'show', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1112', 'administrator', 'articles', 'sort_articles', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1113', 'administrator', 'articles', 'delete_articles', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1114', 'administrator', 'articles', 'edit_articles', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1115', 'administrator', 'articles', 'update_articles', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1116', 'administrator', 'user', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1117', 'administrator', 'user', 'load_data_ssp', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1118', 'administrator', 'user', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1119', 'administrator', 'user', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1120', 'administrator', 'user', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1121', 'administrator', 'usergroup', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1122', 'administrator', 'usergroup', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1123', 'administrator', 'usergroup', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1124', 'administrator', 'usergroup', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1125', 'administrator', 'usergroup', 'load_usergroup_edit', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1126', 'administrator', 'usergroup', 'usergroup_sort', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1127', 'administrator', 'role', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1128', 'administrator', 'role', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1129', 'administrator', 'module', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1130', 'administrator', 'module', 'detail', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1131', 'administrator', 'module', 'insert', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1132', 'administrator', 'module', 'delete', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1133', 'administrator', 'module', 'config', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1134', 'administrator', 'module', 'update', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1135', 'administrator', 'tag', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1136', 'administrator', 'tag', 'create_tag', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1137', 'administrator', 'tag', 'delete_tag', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1138', 'administrator', 'tag', 'update_tag', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1139', 'administrator', 'tag', 'sort_tag', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1140', 'administrator', 'media', 'index', '2017-01-02 21:40:24', null);
+INSERT INTO `role` VALUES ('1141', 'administrator', 'media', 'selectphoto', '2017-01-02 21:40:24', null);
 
 -- ----------------------------
 -- Table structure for tag
