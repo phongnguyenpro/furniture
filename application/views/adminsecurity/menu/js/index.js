@@ -30,16 +30,18 @@ $(document).ready(function () {
     var modalcreate = UIkit.modal("#showcreate");
 
     $(document).on('click', '.itemedit', function () {
-        modal.show();
+      
 
         id = $(this).parents('li').attr('data-id');
 
         $.post(ADMIN_URL + 'menu/load_menu_edit', {"id": id}, function (o) {
             if (o.tinhtrang == 1)
             {
-
+                 modal.show();
                 $('#loadeditmenu').html(o.html);
             }
+            else
+                NotAccess();
 
         }, 'JSON')
     })

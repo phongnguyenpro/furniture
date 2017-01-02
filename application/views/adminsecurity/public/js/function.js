@@ -53,6 +53,11 @@ $(document).ready(function (e) {
  {
       UIkit.modal.confirm('Bạn có chắc muốn lưu?',function(){ window.location=url});
  }
+     NotAccess  = function(o)
+ {
+      UIkit.modal.alert("Bạn không có quyền truy cập");
+ }
+ 
 
 })
 function showNotify(option, t) {
