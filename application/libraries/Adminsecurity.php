@@ -88,8 +88,10 @@ class Adminsecurity {
                             echo json_encode(array("status" => 2, "message" => "Bạn không có quyền truy cập"));
                             exit();
                         } else {
-                            if ($this->controller != "access")
+                            if ($this->controller != "access") {
                                 Header("Location:" . ADMIN_URL . "access/notaccess");
+                                exit();
+                            }
                         }
                     }
                 }
@@ -215,7 +217,7 @@ class Adminsecurity {
                             "label" => "Cập nhật ngành nghề",
                             "value" => "update"
                         ),
-                         array(
+                        array(
                             "label" => "Sắp xếp ngành nghề",
                             "value" => "sort_career"
                         ),
