@@ -1,28 +1,26 @@
-$(document).ready(function(){
-    
-    $('.btntest').click(function(){
-        
-        curren=$(this);
+$(document).ready(function () {
+
+    $('.btntest').click(function () {
+
+        curren = $(this);
         btnlinkload(curren);
-        $.post(URL+"sendmail/testmail",function(o){
-           
-            if(o.tinhtrang==1)
-            {
+        $.post(URL + "sendmail/testmail", function (o) {
+
+            if (o.tinhtrang == 1) {
                 alert("Mail đã được gửi đi");
-                btnlinkthanhcong(curren,"Đã gửi thành công");
+                btnlinkthanhcong(curren, "Đã gửi thành công");
             }
-            else
-            {
+            else {
                 alert("Không thành công");
-                btnlinkthanhcong(curren,"Thử lại");
+                btnlinkthanhcong(curren, "Thử lại");
             }
-           
-        },"JSON")
-        
+
+        }, "JSON")
+
     })
-    $('#maucd').change(function(){
+    $('#maucd').change(function () {
         $('#mauchudao').val($('#maucd').val());
     });
-    
+
 })
 

@@ -167,7 +167,7 @@ class Footer_model extends MY_Model
 </form>
 ABC;
 
-        return array('html' => $html, 'tinhtrang' => 1);
+        return array('html' => $html, 'status' => 1);
     }
 
     function buiding_deletemenu($dataxoa, $parent, $menuData)

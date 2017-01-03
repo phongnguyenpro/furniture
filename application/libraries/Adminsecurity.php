@@ -18,7 +18,6 @@ class Adminsecurity {
 //
 //        //  $this->url =$this->CI->uri->rsegments;
 //        $this->mydb =$this->CI->mydb;
-
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $this->isajax = TRUE;
         }
@@ -188,7 +187,7 @@ class Adminsecurity {
                         ),
                         array(
                             "label" => "Cập nhật cấu hình",
-                            "value" => "update"
+                            "value" => "save"
                         ),
                     ),
                 )

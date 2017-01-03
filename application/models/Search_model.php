@@ -9,7 +9,7 @@ class Search_model extends MY_Model
     }
 
 
-  function index($str, $category_id = -1)
+    function index($str, $category_id = -1)
     {
         if (is_numeric($str)) {
             $sqlgia = " or (" . ($str) . " >= product_price )";
@@ -17,7 +17,7 @@ class Search_model extends MY_Model
 
         $sqltag = "or ( product.product_id in 
 (
-select product_id from product_tag,tag  where tag.tag_id=product_tag.tag_id and (tag_name like '%$str%' or tag_search   like '%$str%')
+select product_id from product_tag,tag  where tag.tag_id=product_tag.tag_id and (tag_name like '%$str%' or tag_search like '%$str%')
 )
 )";
 
@@ -42,5 +42,5 @@ GROUP by product.product_id limit 10";
         }
         return $data;
     }
-    
+
 }

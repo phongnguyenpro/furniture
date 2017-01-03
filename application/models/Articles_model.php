@@ -22,14 +22,14 @@ class Articles_model extends MY_Model
         array_push($listdanhmuc, $id_danhmuc);
         $sqlwhere = " articlescategory_id=" . implode(" or articlescategory_id=", $listdanhmuc);
         $limit = LIMITBAIVIET;
-        $kq = $this->mydb->select("select count( DISTINCT ( articles.articles_id)) as row from articles JOIN articlescategory_detail ON articles.articles_id=articlescategory_detail.articles_id where articles_show=1 and ($sqlwhere) ", array());
+        $kq = $this->mydb->select("select count( DISTINCT ( articles.articles_id)) as row from articles JOIN articlescategory_detail ON articles.articles_id=articlescategory_detail.articles_id and articles_show=1 and ($sqlwhere) ", array());
         $totalRow = $kq[0]['row'];
         $nowpage = 3;
         $total_page = $totalRow == 0 ? 1 : ceil($totalRow / $limit);
         $start = $page == 1 ? 0 : ($page - 1) * $limit;
         $data['phantrang']['totalpage'] = $total_page;
         $data['phantrang']['currentpage'] = $page;
-        $sql = "select articles.articles_id,articles_name,articles_slug,articles_date_create,articles_description,articles_avatar from articles JOIN articlescategory_detail ON articles.articles_id=articlescategory_detail.articles_id where articles_show=1 and ($sqlwhere) GROUP by articles.articles_id order by articles_index desc limit $start,$limit";
+        $sql = "select articles.articles_id,articles_name,articles_slug,articles_date_create,articles_description,articles_avatar from articles JOIN articlescategory_detail ON articles.articles_id=articlescategory_detail.articles_id and articles_show=1 and ($sqlwhere) GROUP by articles.articles_id order by articles_index desc limit $start,$limit";
         $data['data'] = $this->mydb->select($sql, array());
         if (!empty($data['data'])) {
             return $data;
@@ -104,7 +104,7 @@ class Articles_model extends MY_Model
             if (!empty($data['baiviet']['danhmuc'])) {
                 // Load bai viet lien quan
 
-                $sql = " articles_id in ( SELECT * FROM ( select DISTINCT (articles.articles_id) from articles JOIN articlescategory_detail ON articles.articles_id=articlescategory_detail.articles_id where articles.articles_id!=$id_baiviet and articles_show=1  and";
+                $sql = " articles_id in ( SELECT * FROM ( select DISTINCT (articles.articles_id) from articles JOIN articlescategory_detail ON articles.articles_id=articlescategory_detail.articles_id and articles.articles_id!=$id_baiviet and articles_show=1  and";
                 foreach ($data['baiviet']['danhmuc'] as $value) {
                     $listdanhmuc[] = $value['articlescategory_id'];
                 }
