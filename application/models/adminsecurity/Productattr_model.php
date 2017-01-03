@@ -19,7 +19,7 @@ class Productattr_model extends MY_Model
 
     function index()
     {
-        $result = $this->mydb->select("select * from productattr,career where  productattr.career_id=career.career_id order by career.career_index,productattr.productattr_index", array());
+        $result = $this->mydb->select("select * from productattr JOIN career ON productattr.career_id=career.career_id order by career.career_index,productattr.productattr_index", array());
         $data = array();
         foreach ($result as $key => $value) {
             $data[$value['career_name']][] = $value;

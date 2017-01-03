@@ -128,7 +128,7 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
     function check_invoice_detail($invoice_detail_id, $soluongthem = -1)
     {
         $error = array();
-        $kq = $this->mydb->select("select invoice_detail.*, product.product_id, product.product_name,product.product_code from invoice_detail,product where product.product_id=invoice_detail.product_id and invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $invoice_detail_id));
+        $kq = $this->mydb->select("select invoice_detail.*, product.product_id, product.product_name,product.product_code from invoice_detail JOIN product ON product.product_id=invoice_detail.product_id and invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $invoice_detail_id));
         $data = $kq[0];
         $id_sanphamchitiet = $data['product_detail_id'];
         $giatrithuoctinhchon = $data['attr_val_ids'];

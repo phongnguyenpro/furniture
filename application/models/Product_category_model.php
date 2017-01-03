@@ -53,13 +53,13 @@ class Product_category_model extends MY_Model
             $strdanhmuc .= $sqlwhere . " or ";
             $limit = LIMITDANHMUCNHIEU;
             $sql .= "( SELECT * FROM (
-select DISTINCT(product.product_id) from  product,productcategory_detail 
-where product.product_id=productcategory_detail.product_id and product_show=1 and product_date_create < now() and ( $sqlwhere )
+select DISTINCT(product.product_id) from  product JOIN productcategory_detail 
+ON product.product_id=productcategory_detail.product_id and product_show=1 and product_date_create < now() and ( $sqlwhere )
 order by product_index desc limit $limit ) as t
 ) or  product.product_id in ";
         }
 
-        $sql = " select product.product_id,productcategory_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description  from product,productcategory_detail where product.product_id=productcategory_detail.product_id and ( product.product_id in " . $sql . " (-1) ) order by product_index desc";
+        $sql = " select product.product_id,productcategory_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,product_name,product_slug,product_avatar,product_code,product_description  from product JOIN productcategory_detail ON product.product_id=productcategory_detail.product_id and ( product.product_id in " . $sql . " (-1) ) order by product_index desc";
 
         $kq = $this->mydb->select($sql, array());
 

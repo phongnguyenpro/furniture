@@ -308,7 +308,7 @@ class Product_model extends MY_Model {
 
         // load thuoc tinh chon chi tiet
         $kq = $this->mydb->select("select productattr_id,attr_val_id,product_detail.product_detail_id,product_detail_total,"
-                . "product_detail_price,product_detail_avatar from product_detail,productattr_detail where product_detail.product_detail_id=productattr_detail.product_detail_id   and  "
+                . "product_detail_price,product_detail_avatar from product_detail JOIN productattr_detail ON product_detail.product_detail_id=productattr_detail.product_detail_id   and  "
                 . " product_detail.product_id=:product_id order by product_detail_date_create", array("product_id" => $product_id));
         if (!empty($kq)) {
             $data['product_detail'] = array();
@@ -607,7 +607,7 @@ class Product_model extends MY_Model {
 select product_detail_id from productattr_detail where productattr_detail.attr_val_id=" . implode(" ) and  product_detail.product_detail_id IN
 (
 select product_detail_id from productattr_detail where productattr_detail.attr_val_id=", $list) . ")";
-                    $sql = "select  DISTINCT( product_detail.product_detail_id) from product_detail,productattr_detail where product_detail.product_detail_id=productattr_detail.product_detail_id
+                    $sql = "select  DISTINCT( product_detail.product_detail_id) from product_detail JOIN productattr_detail ON product_detail.product_detail_id=productattr_detail.product_detail_id
 and productattr_detail.product_id=:product_id and  product_detail.product_detail_id IN (" . $sqlwhere;
 
 
@@ -615,7 +615,7 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
 
                     if (empty($kq)) {
                         $sqlwhere = "attr_val.attr_val_id=" . implode(" or attr_val.attr_val_id= ", $data['thuoctinh']);
-                        $kq = $this->mydb->select("select productattr.productattr_id,attr_val_id,attr_val_value,attr_val_label  from productattr,attr_val where productattr.productattr_id=attr_val.productattr_id and ( $sqlwhere )", array());
+                        $kq = $this->mydb->select("select productattr.productattr_id,attr_val_id,attr_val_value,attr_val_label  from productattr JOIN attr_val ON productattr.productattr_id=attr_val.productattr_id and ( $sqlwhere )", array());
                         if (!empty($kq) && $data['soluong'] != '' && $data['sotien'] != '') {
 
                             $row = $this->mydb->insert("product_detail", $ar);
@@ -695,7 +695,7 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
 select product_detail_id from productattr_detail where productattr_detail.attr_val_id=" . implode(" ) and  product_detail.product_detail_id IN
 (
 select product_detail_id from productattr_detail where productattr_detail.attr_val_id=", $list) . ")";
-                    $sql = "select  DISTINCT( product_detail.product_detail_id) from product_detail,productattr_detail where product_detail.product_detail_id=productattr_detail.product_detail_id
+                    $sql = "select  DISTINCT( product_detail.product_detail_id) from product_detail JOIN productattr_detail ON product_detail.product_detail_id=productattr_detail.product_detail_id
 and productattr_detail.product_id=:product_id and  product_detail.product_detail_id IN (" . $sqlwhere;
 
                     $kq = $this->mydb->select($sql, array("product_id" => $ar['product_id']));
@@ -706,7 +706,7 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
                         $lastid = $id_sanphamchitiet;
                     if ($lastid == $id_sanphamchitiet) {
                         $sqlwhere = "attr_val.attr_val_id=" . implode(" or attr_val.attr_val_id= ", $data['thuoctinh']);
-                        $kq = $this->mydb->select("select productattr.productattr_id,attr_val_id,attr_val_value,attr_val_label  from productattr,attr_val where productattr.productattr_id=attr_val.productattr_id and ( $sqlwhere )", array());
+                        $kq = $this->mydb->select("select productattr.productattr_id,attr_val_id,attr_val_value,attr_val_label  from productattr JOIN attr_val ON productattr.productattr_id=attr_val.productattr_id and ( $sqlwhere )", array());
                         if (!empty($kq) && $data['soluong'] != '' && $data['sotien'] != '') {
 
                             $row = $this->mydb->update("product_detail", $ar, "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));

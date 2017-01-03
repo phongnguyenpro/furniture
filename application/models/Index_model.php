@@ -50,13 +50,13 @@ class Index_model extends MY_Model {
                 $strdanhmuc .= $sqlwhere . " or ";
                 $sql .= "( SELECT * FROM (
 select DISTINCT(product.product_id) from  product JOIN productcategory_detail ON product.product_id=productcategory_detail.product_id
-where product_show=1 and product_date_create < now() and ( $sqlwhere )
+and product_show=1 and product_date_create < now() and ( $sqlwhere )
 order by product_index desc limit $limit  ) as t
 ) or  product.product_id in ";
             }
             
                
-            $sql = "select product.product_id,productcategory_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,INSERT(SUBSTRING(product.product_name,1,26), LENGTH(SUBSTRING(product.product_name,1,26)),1,  '...') as product_name,product_slug,product_avatar,product_code,product_description from product JOIN productcategory_detail ON product.product_id=productcategory_detail.product_id where ( product.product_id in " . $sql . " (-1) ) GROUP by product.product_id order by product_index desc ";
+            $sql = "select product.product_id,productcategory_id,product_price,product_sale,product_feature,product_date_create,product_new, CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,INSERT(SUBSTRING(product.product_name,1,26), LENGTH(SUBSTRING(product.product_name,1,26)),1,  '...') as product_name,product_slug,product_avatar,product_code,product_description from product JOIN productcategory_detail ON product.product_id=productcategory_detail.product_id and ( product.product_id in " . $sql . " (-1) ) GROUP by product.product_id order by product_index desc ";
             $kq = $this->mydb->select($sql, array());
             $kq = $this->mydb->select($sql, array());
             $data['home_productcategory_data'] = array();

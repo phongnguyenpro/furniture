@@ -15,7 +15,7 @@ class Invoice_model extends MY_Model
         if (!empty($kq)) {
             $data['thongtin'] = $kq[0];
             $id_hoadon = $kq[0]['invoice_id'];
-            $kq = $this->mydb->select("select invoice_detail.*,product.product_name,product.product_code  from invoice_detail JOIN product ON invoice_detail.product_id=product.product_id where invoice_id=:invoice_id", array("invoice_id" => $id_hoadon));
+            $kq = $this->mydb->select("select invoice_detail.*,product.product_name,product.product_code  from invoice_detail JOIN product ON invoice_detail.product_id=product.product_id and invoice_id=:invoice_id", array("invoice_id" => $id_hoadon));
             $data['sanpham'] = $kq;
             // kiem tra hoa don
             $error = array();
@@ -41,7 +41,7 @@ class Invoice_model extends MY_Model
     function check_invoice_detail($id_hoadonchitiet, $soluongthem = -1)
     {
         $error = array();
-        $kq = $this->mydb->select("select invoice_detail.*,product.product_name,product.product_code from invoice_detail JOIN product ON product.product_id=invoice_detail.product_id where invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $id_hoadonchitiet));
+        $kq = $this->mydb->select("select invoice_detail.*,product.product_name,product.product_code from invoice_detail JOIN product ON product.product_id=invoice_detail.product_id and invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $id_hoadonchitiet));
         $data = $kq[0];
         $id_sanphamchitiet = $data['product_detail_id'];
         $giatrithuoctinhchon = $data['attr_val_ids'];

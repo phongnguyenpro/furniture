@@ -17,7 +17,7 @@ class Search_model extends MY_Model
 
         $sqltag = "or ( product.product_id in 
 (
-select product_id from product_tag,tag  where tag.tag_id=product_tag.tag_id and (tag_name like '%$str%' or tag_search like '%$str%')
+select product_id from product_tag JOIN tag ON tag.tag_id=product_tag.tag_id and (tag_name like '%$str%' or tag_search like '%$str%')
 )
 )";
 
@@ -31,7 +31,7 @@ select product_id from product_tag,tag  where tag.tag_id=product_tag.tag_id and 
             $danhsachcon = search_all_child($this->header_model->category(), $category_id, array($category_id));
             $sqlwhere = "productcategory_id=" . implode(" or category_id=", $danhsachcon);
             debug($sqlwhere);
-            $sql = "select product_avatar,product.product_id,product_code,product_name,product_slug,product_price,product_description  from product,productcategory_detail where product_show=1 and product.product_id=productcategory_detail.product_id  and ($sqlwhere) and ( product.product_id='$str' or product_name like '%$str%' or product_code like '%$str%' or product_price like '%$str%' or product_search like '%$str%' $sqlgia $sqltag)
+            $sql = "select product_avatar,product.product_id,product_code,product_name,product_slug,product_price,product_description  from product JOIN productcategory_detail ON product_show=1 and product.product_id=productcategory_detail.product_id  and ($sqlwhere) and ( product.product_id='$str' or product_name like '%$str%' or product_code like '%$str%' or product_price like '%$str%' or product_search like '%$str%' $sqlgia $sqltag)
 GROUP by product.product_id limit 10";
         }
         if (!empty($kq = $this->mydb->select($sql))) {

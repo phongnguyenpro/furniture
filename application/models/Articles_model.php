@@ -141,7 +141,7 @@ class Articles_model extends MY_Model
         $start = $page == 1 ? 0 : ($page - 1) * $limit;
         $data['phantrang']['totalpage'] = $total_page;
         $data['phantrang']['currentpage'] = $page;
-        $kq = $this->mydb->select("select articles.articles_id,articles_description,articles_avatar,articles_name,articles_slug,articles_date_create from articles JOIN articles_tag ON articles.articles_id=articles_tag.articles_id where articles_show=1 and tag_id=:tag_id order by articles_index limit $start,$limit", array("tag_id" => $tag_id));
+        $kq = $this->mydb->select("select articles.articles_id,articles_description,articles_avatar,articles_name,articles_slug,articles_date_create from articles JOIN articles_tag ON articles.articles_id=articles_tag.articles_id and articles_show=1 and tag_id=:tag_id order by articles_index limit $start,$limit", array("tag_id" => $tag_id));
         $data['baiviet'] = $kq;
 
         $kq = $this->mydb->select("select tag_name,tag_id,tag_slug,tag_view from tag where tag_id=:tag_id", array("tag_id" => $tag_id));
