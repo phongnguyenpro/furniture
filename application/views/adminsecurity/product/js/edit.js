@@ -77,6 +77,7 @@ $(document).ready(function (e) {
     $(document).on("click", ".xoahinhsanphamchitiet", function (e) {
         current = $(this);
         id_sanphamchitiet = $(this).attr('data-id_sanphamchitiet');
+        a = $(this);
         $(this).removeClass("xoahinhsanphamchitiet");
         $(this).attr('ref', '#');
         $(this).addClass("uk-icon-spin");
@@ -86,9 +87,12 @@ $(document).ready(function (e) {
                 current.next().children("img").remove();
                 current.removeClass("uk-icon-spin");
                 current.addClass("xoahinhsanphamchitiet");
-            }
-            else {
-
+            } else if (o.status == 2) {
+                a.addClass("xoahinhsanphamchitiet");
+                a.removeClass("uk-icon-spin");
+                modalhinhanh.hide();
+                NotAccess();
+            } else {
                 alert("Lỗi! Cập nhật");
                 modalhinhanh.hide();
             }
@@ -105,8 +109,9 @@ $(document).ready(function (e) {
             $.post(ADMIN_URL + "product/delete_product_detail", {"id_sanphamchitiet": id_sanphamchitiet}, function (o) {
                 if (o.status == 1) {
                     current.parent().parent().remove();
-                }
-                else {
+                } else if (o.status == 2) {
+                    NotAccess();
+                } else {
 
                 }
                 btnlinkthanhcong(current, "OK");
@@ -146,8 +151,11 @@ $(document).ready(function (e) {
             }, function (o) {
                 if (o.status == 1)
                     modalhinhanh.hide();
+                else if (o.status == 2) {
+                    modalhinhanh.hide();
+                    NotAccess();
+                }
                 else {
-
                     alert("Lỗi! Cập nhật");
                     modalhinhanh.hide();
                 }
@@ -171,18 +179,14 @@ $(document).ready(function (e) {
             giatri.each(function () {
                 id_giatri = $(this).attr("data-giatri");
                 if (id_giatri != -1) {
-
-
                     select.children().each(function () {
                         if ($(this).val() == id_giatri && id_giatri != -1) {
                             select.prop('value', id_giatri);
                         }
                     })
-
                 }
             })
-
-        })
+        });
 
         $("#giasanphamchitietedit").prop("value", giasanpham);
         $("#soluongsanphamchitietedit").prop("value", soluongsanpham);
@@ -217,6 +221,9 @@ $(document).ready(function (e) {
             if (o.status == 1) {
                 modal.hide();
                 tr.html(o.html);
+            } else if (o.status == 2) {
+                modal.hide();
+                NotAccess();
             }
             else {
                 alert(o.tinnhan);
@@ -236,8 +243,7 @@ $(document).ready(function (e) {
         $('.thuoctinhchon').each(function () {
             temp = $(this).val();
             thuoctinh.push(temp);
-
-        })
+        });
 
         $.post(ADMIN_URL + "product/add_product_detail", {
             "thuoctinh": thuoctinh,
@@ -249,20 +255,22 @@ $(document).ready(function (e) {
             if (o.status == 1) {
                 $('.listgiasanpham').append(o.html);
                 btnlinkthanhcong(current, "+");
-            }
-            else {
-
+            } else if (o.status == 2) {
+                btnlinkthanhcong(current, "+");
+                NotAccess();
+            } else {
                 btnlinkthanhcong(current, "+");
                 alert("Lỗi! " + o.tinnhan);
             }
         }, "JSON")
 
 
-    })
+    });
 
     $(document).on("click", '.xoacongthem', function () {
         $(this).parent().remove();
-    })
+    });
+
     $('#formcapnhatsanpham').keydown(function () {
 
         var x = event.keyCode;
@@ -270,7 +278,7 @@ $(document).ready(function (e) {
         if (x == 13) {
             return false;
         }
-    })
+    });
 
     dangcapnhat = false;
 
@@ -298,7 +306,7 @@ $(document).ready(function (e) {
                             window.location.reload();
                         }
                         return false;
-                    }else if (ketqua.status == 2) {
+                    } else if (ketqua.status == 2) {
                         dangcapnhat = false;
                         $('.ketqua').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại, tài khoản không có quyền cập nhật.</div>');
                         NotAccess();
@@ -344,6 +352,7 @@ $(document).ready(function (e) {
                     }, false);
 
                     request.open("POST", ADMIN_URL + "product/avatar", true);
+                    request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
                     request.send(Form);
                     avatar = false;
                     request.onreadystatechange = function (event) {
@@ -367,15 +376,21 @@ $(document).ready(function (e) {
                                 $('.phantramanhdaidien').css('width', 0);
                                 $('.phantramanhdaidien').html('');
 
-                            }
-                            else {
+                            } else if (ketqua.status == 2) {
                                 $('#doiavatar').prop('value', null);
                                 $('#imgavatar').prop('src', linkimg);
                                 $('.boxanhdaidien').removeClass('dangload');
                                 $(' .boxphantram').hide();
                                 $('.phantramanhdaidien').css('width', 0);
                                 $('.phantramanhdaidien').html('');
-
+                                NotAccess();
+                            } else {
+                                $('#doiavatar').prop('value', null);
+                                $('#imgavatar').prop('src', linkimg);
+                                $('.boxanhdaidien').removeClass('dangload');
+                                $(' .boxphantram').hide();
+                                $('.phantramanhdaidien').css('width', 0);
+                                $('.phantramanhdaidien').html('');
                             }
                         }
                     }
@@ -384,11 +399,10 @@ $(document).ready(function (e) {
                     inputfile.val(null)
                 }
             }
-
         }
         else
             alert('Đợi trong giây lát, quá trình đổi avatar đang diễn ra');
-    })
+    });
 
 
 // upload anh
@@ -419,15 +433,12 @@ $(document).ready(function (e) {
         }, false);
 
         request.open("POST", ADMIN_URL + "product/upload_image", true);
+        request.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         request.send(Form);
-
-
         request.onreadystatechange = function (event) {
             if (request.readyState == 4 && request.status == 200) {
-
                 var ketqua = JSON.parse(request.responseText);
                 if (ketqua.status == 1) {
-
                     progwith.remove();
                     html = '<a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>\n\
                         <div><img src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img_small"></div>';
@@ -436,58 +447,57 @@ $(document).ready(function (e) {
                     $('.listchonhinh').append(htmlchonhinh);
                     boxupload.attr("data-id", ketqua.id_hinh);
                     return true;
-                }
-                else {
+                } else if (ketqua.status == 2) {
+                    progwith.remove();
+                    NotAccess();
+                    return false;
+                } else {
                     curren.prop('value', null);
                     //  alert('Có lỗi xảy ra. Hãy thử lại')
                     imageitem.remove();
                     return false;
-
                 }
             }
-
         }
-
     }
 
 // end upload anh
     $('#chonfile').change(function () {
-
-
         file = $(this)[0].files;
         for (i = 0; i < file['length']; i++) {
-
             uploadanh(file[i]);
         }
+    });
 
-    })
     dangxoa = false;
     $(document).on("click", ".xoaanh", function () {
         if (!dangxoa) {
             var id_hinh = $(this).attr('ref');
             var tenhinh = $(this).attr('tenhinh');
-
+            a = $(this);
             $(this).removeClass("xoaanh");
             $(this).attr('ref', '#');
             $(this).addClass("uk-icon-spin");
             box = $(this).parent();
             dangxoa = true;
             $.post(ADMIN_URL + "product/delete_image", {'id_hinh': id_hinh, 'tenhinh': tenhinh}, function (o) {
-                if (o.status = 1) {
+                if (o.status == 1) {
                     box.remove();
                     $('.img-responsive[title="' + tenhinh + '"]').parent('li').remove();
                     $('.img-responsive[title="' + tenhinh + '"]').remove();
                     if ($("#inputproduct").val() == tenhinh)
                         $("#inputproduct").prop("value", "");
                     dangxoa = false;
+                } else if (o.status == 2) {
+                    a.addClass("xoaanh");
+                    a.removeClass("uk-icon-spin");
+                    NotAccess();
+                    dangxoa = false;
                 }
-
-            })
+            }, "JSON");
             return false;
-
         }
-
-    })
+    });
 
     var nestable = UIkit.sortable($(".uk-sortable"));
 
@@ -502,13 +512,13 @@ $(document).ready(function (e) {
             $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang cập nhật</div>')
 
             $.post(ADMIN_URL + "product/sort_image", {"list_images": list_images}, function (o) {
-                if (o.tinhtrang = 1) {
+                if (o.status == 1) {
                     $('#thongbaoupdate').html('<div class="uk-alert uk-alert-success">Cập nhật thành công</div>')
-
+                } else if (o.status == 2) {
+                    $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại, tài khoản không có quyền cập nhật.</div>')
+                    NotAccess();
                 }
-            })
-
-
+            }, "JSON")
         }
     });
-})
+});
