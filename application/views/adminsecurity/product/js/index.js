@@ -28,7 +28,13 @@ $(document).ready(function (e) {
         "serverSide": true,
         "ajax": {
             "url": ADMIN_URL + "product/load_data_ssp/" + $('.id_danhmuc:checked').val(),
-            "type": "POST"
+            "type": "POST",
+            "dataSrc": function (json) {
+                if (json.status == 2){
+                    NotAccess();
+                }else
+                    return json.data;
+            }
         },
         "columns": [
             null,
@@ -89,7 +95,6 @@ $(document).ready(function (e) {
             } else if (o.status == 2) {
                 $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại</div>');
                 NotAccess(o);
-                table.ajax.reload(null, false);
             }
         }, 'JSON')
     });
@@ -150,8 +155,10 @@ $(document).ready(function (e) {
                     $(this).remove();
                     $('#thongbaoxoa').html("Bạn có muốn xóa sản phẩm này");
                 });
-            }
-            else {
+            }else if (o.status == 2) {
+                modalxoa.hide();
+                NotAccess();
+            }else {
                 $('#thongbaoxoa').html(o.message);
             }
             $('.btnxoa').prop("disabled", false);

@@ -705,7 +705,7 @@ function buiding_menu($parent, $menuData, $data) {
     <br>
     <div class="text-center col-md-12">
 
-        <input type="submit" id="themsanpham" class="md-btn md-btn-primary btnlink" value="THÊM">
+        <input type="submit" id="themsanpham" class="md-btn md-btn-primary btnlink" value="CẬP NHẬT">
         <div class="ketqua"></div>
     </div>
 </form>

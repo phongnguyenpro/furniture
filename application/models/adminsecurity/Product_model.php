@@ -153,6 +153,7 @@ class Product_model extends MY_Model
 
         $kq = $this->mydb->select("select max(product_index) as max from product", array());
         $max = $kq[0]['max'] + 1;
+        $data['product_index'] = $max;
         $data['product_price'] = price_input($data['product_price']);
         $data['product_sale'] = 0;
         $data['product_search'] = loaibodau($data['product_name']) . " " . $data['product_price'];
@@ -279,17 +280,15 @@ class Product_model extends MY_Model
 
     function sort_product($data)
     {
-
-        //   $sort = json_decode($data);
+//        $sort = json_decode($data);
         $stt = 1;
         $i = 0;
 
         $datastt = array();
 
         foreach ($data as $key => $item) {
-
-            $id = $item["id"];
-            $stt = $item->stt;
+            $id = $item['id'];
+            $stt = $item['stt'];
             $datasapxep[$id] = $stt;
             $datatemp[$i] = $stt;
             $i++;

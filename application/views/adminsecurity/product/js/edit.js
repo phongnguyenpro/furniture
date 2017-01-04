@@ -125,7 +125,7 @@ $(document).ready(function (e) {
 
     $(".btnchonhinh").click(function () {
         if (kieuchonhinh == "add") {
-          
+
             name = $('.hinhdangchon').attr("data-name");
             url = BASE_URL + 'public/upload/images/product/' + name;
             $('#inputhinhsanpham').prop('value', name);
@@ -171,8 +171,8 @@ $(document).ready(function (e) {
             giatri.each(function () {
                 id_giatri = $(this).attr("data-giatri");
                 if (id_giatri != -1) {
-                            
-                       
+
+
                     select.children().each(function () {
                         if ($(this).val() == id_giatri && id_giatri != -1) {
                             select.prop('value', id_giatri);
@@ -195,7 +195,7 @@ $(document).ready(function (e) {
 
     $(document).on("click", ".btncapnhatsanphamchitiet", function () {
 
-         current = $(this);
+        current = $(this);
         btnlinkload(current);
         sotien = $("#giasanphamchitietedit").val();
         soluong = $("#soluongsanphamchitietedit").val();
@@ -283,9 +283,10 @@ $(document).ready(function (e) {
             Form = document.querySelector('#formcapnhatsanpham');
             var formData = new FormData(Form);
             formData.append("product_content", str);
-            formData.append("product_id",id_sanpham);
+            formData.append("product_id", id_sanpham);
             http = new XMLHttpRequest();
             http.open("POST", ADMIN_URL + "product/update", true);
+            http.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             http.send(formData);
             http.onreadystatechange = function (event) {
                 if (http.readyState == 4 && http.status == 200) {
@@ -296,6 +297,11 @@ $(document).ready(function (e) {
                         if (ketqua.reload == 1) {
                             window.location.reload();
                         }
+                        return false;
+                    }else if (ketqua.status == 2) {
+                        dangcapnhat = false;
+                        $('.ketqua').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại, tài khoản không có quyền cập nhật.</div>');
+                        NotAccess();
                         return false;
                     }
                     else
@@ -389,58 +395,58 @@ $(document).ready(function (e) {
 
 
     function uploadanh(file) {
-          html = '  <li data-id="-1" class="uk-grid-margin dangloadanh ">\n\
+        html = '  <li data-id="-1" class="uk-grid-margin dangloadanh ">\n\
           <div class="uk-progress uk-progress-striped uk-active phantramupload">\n\
          <div class="uk-progress-bar" style="width:0%;"></div> \n\
         </div></li>';
 
 
-            $('.uk-sortable').append(html);
-            var boxupload = $('.uk-sortable').children("li:last-child");
+        $('.uk-sortable').append(html);
+        var boxupload = $('.uk-sortable').children("li:last-child");
 
 
-            var progwith = boxupload.children('.uk-progress');
+        var progwith = boxupload.children('.uk-progress');
 
-            var Form = new FormData();
-            Form.append('hinhanh', file);
-            Form.append('id_sanpham',id_sanpham);
-            var request = new XMLHttpRequest();
-            // http_arr.push(request);
-            request.upload.addEventListener('progress', function (e) {
-                percent = Math.round((e.loaded / e.total) * 100);
-                progwith.children().css('width', percent + '%');
-                progwith.children().html(percent + '%');
-            }, false);
+        var Form = new FormData();
+        Form.append('hinhanh', file);
+        Form.append('id_sanpham', id_sanpham);
+        var request = new XMLHttpRequest();
+        // http_arr.push(request);
+        request.upload.addEventListener('progress', function (e) {
+            percent = Math.round((e.loaded / e.total) * 100);
+            progwith.children().css('width', percent + '%');
+            progwith.children().html(percent + '%');
+        }, false);
 
-            request.open("POST", ADMIN_URL + "product/upload_image", true);
-            request.send(Form);
+        request.open("POST", ADMIN_URL + "product/upload_image", true);
+        request.send(Form);
 
 
-            request.onreadystatechange = function (event) {
-                if (request.readyState == 4 && request.status == 200) {
+        request.onreadystatechange = function (event) {
+            if (request.readyState == 4 && request.status == 200) {
 
-                    var ketqua = JSON.parse(request.responseText);
-                    if (ketqua.status == 1) {
+                var ketqua = JSON.parse(request.responseText);
+                if (ketqua.status == 1) {
 
-                        progwith.remove();
-                        html = '<a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>\n\
+                    progwith.remove();
+                    html = '<a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>\n\
                         <div><img src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img_small"></div>';
-                        htmlchonhinh = '<li data-name="' + ketqua.tenhinh + '" class="uk-grid-margin itemhinhchon" ><img title="' + ketqua.tenhinh + '" src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img-responsive img_small"></li>';
-                        boxupload.append(html);
-                        $('.listchonhinh').append(htmlchonhinh);
-                        boxupload.attr("data-id", ketqua.id_hinh);
-                        return true;
-                    }
-                    else {
-                        curren.prop('value', null);
-                        //  alert('Có lỗi xảy ra. Hãy thử lại')
-                        imageitem.remove();
-                        return false;
-
-                    }
+                    htmlchonhinh = '<li data-name="' + ketqua.tenhinh + '" class="uk-grid-margin itemhinhchon" ><img title="' + ketqua.tenhinh + '" src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img-responsive img_small"></li>';
+                    boxupload.append(html);
+                    $('.listchonhinh').append(htmlchonhinh);
+                    boxupload.attr("data-id", ketqua.id_hinh);
+                    return true;
                 }
+                else {
+                    curren.prop('value', null);
+                    //  alert('Có lỗi xảy ra. Hãy thử lại')
+                    imageitem.remove();
+                    return false;
 
+                }
             }
+
+        }
 
     }
 
@@ -490,7 +496,7 @@ $(document).ready(function (e) {
         'stop.uk.sortable': function () {
 
             var list_images = $(".uk-sortable").data("sortable").serialize();
-          //  datamenu = JSON.stringify(data); // lấy giá trị
+            //  datamenu = JSON.stringify(data); // lấy giá trị
             //console.log(datamenu);
 
             $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang cập nhật</div>')
