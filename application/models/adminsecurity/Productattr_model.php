@@ -39,7 +39,6 @@ class Productattr_model extends MY_Model
 
     function sort_attr($data)
     {
-
         foreach ($data as $value) {
             $dataupdate['productattr_id'] = $value['id'];
             $dataupdate['productattr_index'] = $value['index'];

@@ -59,6 +59,13 @@ $(document).ready(function (e) {
 
 
 })
+function reload_delay(time) {
+    if (isNaN(time))
+        time = 0;
+    setTimeout(function () {
+        window.location.reload();
+    }, time);
+}
 function showNotify(option, t) {
     if (thisNotify = UIkit.notify({
             message: t != null ? t.data("message") ? t.data("message") : "" : option.messager,

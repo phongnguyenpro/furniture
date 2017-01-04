@@ -1,16 +1,20 @@
 <?php
 
-class Product_model extends MY_Model {
+class Product_model extends MY_Model
+{
 
-    function index() {
+    function index()
+    {
         return $this->mydb->select("select * from career order by career_index");
     }
 
-    function product_info($product_id) {
+    function product_info($product_id)
+    {
         return $this->mydb->select("select product_id,product_name from product where product_id=:product_id order by product_index", array("product_id" => $product_id));
     }
 
-    public function avatar($product_id, $name) {
+    public function avatar($product_id, $name)
+    {
         if ($product_id != "") {
             $kq = $this->mydb->select("select product_avatar from product where product_id=:product_id", array("product_id" => $product_id));
             if ($kq[0]['product_avatar'] != '') {
@@ -27,7 +31,8 @@ class Product_model extends MY_Model {
         }
     }
 
-    function delete_image($id_hinh, $tenhinh) {
+    function delete_image($id_hinh, $tenhinh)
+    {
         if ($id_hinh != -1) {
             $this->mydb->delete("product_images", "product_images_id=:product_images_id", array("product_images_id" => $id_hinh));
             delete_image($tenhinh, "product");
@@ -36,7 +41,8 @@ class Product_model extends MY_Model {
         return array('status' => 1);
     }
 
-    function upload_image($product_id, $name_image) {
+    function upload_image($product_id, $name_image)
+    {
         if ($product_id != "") {
             $kq = $this->mydb->select("select max(product_images_index) as max from product_images where product_id=:product_id", array("product_id" => $product_id));
             $max = $kq[0]['max'] + 1;
@@ -47,7 +53,8 @@ class Product_model extends MY_Model {
         }
     }
 
-    function sort_images($data) {
+    function sort_images($data)
+    {
 
         foreach ($data as $k => $value) {
             $dataupdate["product_images_index"] = $k;
@@ -56,7 +63,8 @@ class Product_model extends MY_Model {
         echo json_encode(array('status' => 1));
     }
 
-    function insert($data) {
+    function insert($data)
+    {
 
         // xu ly du lieu
         if (isset($data['product_feature']))
@@ -102,7 +110,7 @@ class Product_model extends MY_Model {
             unset($data["tmp_photo"]);
         }
         // xu ly mieu ta va readmore
-         $data['product_description'] = substr($data['product_content'], 0, 220);
+        $data['product_description'] = substr($data['product_content'], 0, 220);
         // Xu lý thuoc tinh san pham
         $hienthichitiet = array();
         if (isset($data['hienthichitiet'])) {
@@ -216,7 +224,8 @@ class Product_model extends MY_Model {
         return array('status' => 1, 'product_id' => $id, 'nganh' => $data['career_id']);
     }
 
-    function load_data_ssp($data) {
+    function load_data_ssp($data)
+    {
         $data['sqlwhere'] = '';
         if ($data['category_id'] != -1) {
             $this->load->model(array("adminsecurity/productcategory_model"));
@@ -264,13 +273,14 @@ class Product_model extends MY_Model {
          */
         $this->load->library("ssp_product");
         echo json_encode(
-                $this->ssp_product->simple($data, $sql_details, $table, $primaryKey, $columns)
+            $this->ssp_product->simple($data, $sql_details, $table, $primaryKey, $columns)
         );
     }
 
-    function sort_product($data) {
+    function sort_product($data)
+    {
 
-     //   $sort = json_decode($data);
+        //   $sort = json_decode($data);
         $stt = 1;
         $i = 0;
 
@@ -279,7 +289,7 @@ class Product_model extends MY_Model {
         foreach ($data as $key => $item) {
 
             $id = $item["id"];
-            $stt = $item["stt"];
+            $stt = $item->stt;
             $datasapxep[$id] = $stt;
             $datatemp[$i] = $stt;
             $i++;
@@ -300,7 +310,8 @@ class Product_model extends MY_Model {
         echo json_encode(array("status" => 1));
     }
 
-    function edit($product_id) {
+    function edit($product_id)
+    {
         $result = $this->mydb->select("select * from product where product_id=:product_id", array("product_id" => $product_id));
         $data['product'] = $result[0];
         $result = $this->mydb->select("select * from product_images where product_id=:product_id order by product_images_index", array("product_id" => $product_id));
@@ -308,8 +319,8 @@ class Product_model extends MY_Model {
 
         // load thuoc tinh chon chi tiet
         $kq = $this->mydb->select("select productattr_id,attr_val_id,product_detail.product_detail_id,product_detail_total,"
-                . "product_detail_price,product_detail_avatar from product_detail JOIN productattr_detail ON product_detail.product_detail_id=productattr_detail.product_detail_id   and  "
-                . " product_detail.product_id=:product_id order by product_detail_date_create", array("product_id" => $product_id));
+            . "product_detail_price,product_detail_avatar from product_detail JOIN productattr_detail ON product_detail.product_detail_id=productattr_detail.product_detail_id   and  "
+            . " product_detail.product_id=:product_id order by product_detail_date_create", array("product_id" => $product_id));
         if (!empty($kq)) {
             $data['product_detail'] = array();
             foreach ($kq as $value) {
@@ -379,7 +390,8 @@ class Product_model extends MY_Model {
         return $data;
     }
 
-    function update($data) {
+    function update($data)
+    {
 
         $product_id = $_POST["product_id"];
         // xu ly du lieu
@@ -405,7 +417,7 @@ class Product_model extends MY_Model {
 
         // xu ly mieu ta va readmore
         //$x = strpos($data['product_content'], "{readmore}");
-         $data['product_description'] = substr($data['product_content'], 0, 220);
+        $data['product_description'] = substr($data['product_content'], 0, 220);
         // Xu lý thuoc tinh chon
         $hienthichitiet = array();
         if (isset($data['hienthichitiet'])) {
@@ -452,7 +464,7 @@ class Product_model extends MY_Model {
         $data['product_search'] = loaibodau($data['product_name']) . " " . $data['product_price'];
         $data['product_date_update'] = today();
         $data['product_date_create'] = date_input($data['product_date_create']);
-        
+
         $this->mydb->update("product", $data, "product_id=:product_id", array("product_id" => $product_id));
 
 
@@ -524,7 +536,8 @@ class Product_model extends MY_Model {
         return array("status" => 1);
     }
 
-    function delete_product($product_id) {
+    function delete_product($product_id)
+    {
         // delete images
         $kq = $this->mydb->select("select product_images_name from product_images where product_id=:product_id", array("product_id" => $product_id));
         foreach ($kq as $value) {
@@ -568,10 +581,11 @@ class Product_model extends MY_Model {
 //            $this->mydb->delete("sanphamtemp", "product_id=:product_id", array("product_id" => $product_id));
 //        }
 
-       return array("status" => 1);
+        return array("status" => 1);
     }
 
-    function add_product_detail($data) {
+    function add_product_detail($data)
+    {
 
         $list = array();
         foreach ($data['thuoctinh'] as $value) {
@@ -660,7 +674,8 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
             return array("status" => 0, "tinnhan" => "Điền đầy đủ thông tin"); // thuoc tinh rỗng
     }
 
-    function update_product_detail($data) {
+    function update_product_detail($data)
+    {
         $list = array();
         foreach ($data['thuoctinh'] as $value) {
             if ($value != -1)
@@ -752,6 +767,7 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
         }
         return array("status" => 0, "tinnhan" => "Điền đầy đủ thông tin"); // thuoc tinh rỗng 
     }
+
     function delete_product_detail($data)
     {
         $id_sanphamchitiet = $data['id_sanphamchitiet'];
@@ -759,17 +775,25 @@ and productattr_detail.product_id=:product_id and  product_detail.product_detail
         $this->mydb->deleteall("productattr_detail", "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));
         return array("status" => 1);
     }
-            function update_image_product_detail($data) {
+
+    function update_image_product_detail($data)
+    {
         $id_sanphamchitiet = $data['id_sanphamchitiet'];
         $name = $_POST['name'];
         $this->mydb->update("product_detail", array("product_detail_avatar" => $name), "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));
         return array("status" => 1);
     }
 
-    function delete_image_product_detail($data) {
+    function delete_image_product_detail($data)
+    {
         $id_sanphamchitiet = $data['id_sanphamchitiet'];
         $this->mydb->update("product_detail", array("product_detail_avatar" => ''), "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));
         return array("status" => 1);
     }
 
+    function update_show_feature($col, $product_id, $giatri)
+    {
+        $this->mydb->update("product", array($col => $giatri), "product_id=:product_id", array("product_id" => $product_id));
+        return array("status" => 1);
+    }
 }

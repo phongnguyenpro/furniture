@@ -1,12 +1,15 @@
 <?php
 
-class Product extends MY_Controller {
+class Product extends MY_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct("Product", "admin");
     }
 
-    function index() {
+    function index()
+    {
         if (isset($_GET['id_danhmuc'])) {
             $id_danhmuc = $_GET['id_danhmuc'];
         }
@@ -16,12 +19,14 @@ class Product extends MY_Controller {
         $this->load->view("adminsecurity/product/index");
     }
 
-    function load_data_ssp($category_id = "") {
+    function load_data_ssp($category_id = "")
+    {
         $_POST['category_id'] = $category_id;
         $this->model->load_data_ssp($_POST);
     }
 
-    function create() {
+    function create()
+    {
         if (isset($_GET['career_id'])) {
             $this->load->model(array("adminsecurity/product_prop_model", "adminsecurity/productcategory_model", "adminsecurity/productattr_model", "adminsecurity/tag_model"));
             $career_id = $_GET['career_id'];
@@ -38,7 +43,8 @@ class Product extends MY_Controller {
         $this->load->view("adminsecurity/footer");
     }
 
-    function delete_temp_forder() {
+    function delete_temp_forder()
+    {
         $files1 = array();
         $files1 = scandir("public/upload/images/temp");
         foreach ($files1 as $img) {
@@ -47,13 +53,15 @@ class Product extends MY_Controller {
         echo json_encode(array("status" => 1));
     }
 
-    function delete_image() {
+    function delete_image()
+    {
         $id_hinh = $_POST['id_hinh'];
         $tenhinh = $_POST['tenhinh'];
         echo json_encode($this->model->delete_image($id_hinh, $tenhinh));
     }
 
-    function avatar() {
+    function avatar()
+    {
         $this->load->library("image");
         $image = $this->image;
         $config = load_config();
@@ -90,12 +98,14 @@ class Product extends MY_Controller {
         }
     }
 
-    function sort_image() {
+    function sort_image()
+    {
         $obj = $_POST['list_images'];
         $this->model->sort_images($obj);
     }
 
-    function upload_image() {
+    function upload_image()
+    {
         $this->load->library("image");
         $image = $this->image;
         $config = load_config();
@@ -143,16 +153,19 @@ class Product extends MY_Controller {
         }
     }
 
-    function insert() {
+    function insert()
+    {
         echo json_encode($this->model->insert($_POST));
     }
 
-    function sort_product() {
+    function sort_product()
+    {
         $obj = $_POST['product'];
         $this->model->sort_product($obj);
     }
 
-    function edit($product_id) {
+    function edit($product_id)
+    {
 
         $this->data["product"] = $this->model->edit($product_id);
         $career_id = $this->data["product"]["product"]["career_id"];
@@ -167,32 +180,50 @@ class Product extends MY_Controller {
         $this->load->view("adminsecurity/footer");
     }
 
-    function update() {
-
+    function update()
+    {
         echo json_encode($this->model->update($_POST));
     }
+
     function delete()
     {
-         echo json_encode($this->model->delete_product($_POST["id_product"]));
+        echo json_encode($this->model->delete_product($_POST["id_product"]));
     }
-   function add_product_detail() {
+
+    function add_product_detail()
+    {
         echo json_encode($this->model->add_product_detail($_POST));
     }
 
-    function update_product_detail() {
+    function update_product_detail()
+    {
         echo json_encode($this->model->update_product_detail($_POST));
     }
+
     function delete_product_detail()
     {
-         echo json_encode($this->model->delete_product_detail($_POST));
+        echo json_encode($this->model->delete_product_detail($_POST));
     }
-                function update_image_product_detail() 
+
+    function update_image_product_detail()
     {
-      echo json_encode($this->model->update_image_product_detail($_POST));    
+        echo json_encode($this->model->update_image_product_detail($_POST));
     }
-     function delete_image_product_detail() 
+
+    function delete_image_product_detail()
     {
-      echo json_encode($this->model->delete_image_product_detail($_POST));    
+        echo json_encode($this->model->delete_image_product_detail($_POST));
+    }
+
+    function update_show_feature()
+    {
+        if (isset($_POST['hienthi']))
+            $col = "product_show";
+        else
+            $col = "product_feature";
+        $giatri = $_POST['giatri'];
+        $id_sanpham = $_POST['id_sanpham'];
+        echo json_encode($this->model->update_show_feature($col, $id_sanpham, $giatri));
     }
 
 }

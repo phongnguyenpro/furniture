@@ -272,11 +272,11 @@ class Adminsecurity {
                             "value" => "update"
                         ),
                         array(
-                            "label" => "Sắp xếp danh mục sản phẩm",
+                            "label" => "Sắp xếp thuộc tính sản phẩm",
                             "value" => "sort_attr"
                         ),
                         array(
-                            "label" => "Xem Gg trị thuộc tính",
+                            "label" => "Xem giá trị thuộc tính",
                             "value" => "v_attr_val"
                         ),
                         array(
@@ -289,7 +289,7 @@ class Adminsecurity {
                         ),
                         array(
                             "label" => "Cập nhật giá trị thuộc tính",
-                            "value" => "attr_val_delete"
+                            "value" => "attr_val_update"
                         ),
                         array(
                             "label" => "Sắp xếp giá trị thuộc tính",
@@ -326,13 +326,16 @@ class Adminsecurity {
                         array("label" => "Lọc sản phẩm",
                             "value" => "load_data_ssp"
                         ),
+                        array("label" => "Cập nhật hiển thị, nổi bật",
+                            "value" => "update_show_feature"
+                        ),
                         array("label" => "Hiển thị thêm sản phẩm",
                             "value" => "create"
                         ),
                         array("label" => "Thêm sản phẩm",
                             "value" => "insert"
                         ),
-                        array("label" => " Xóa sản phẩm",
+                        array("label" => "Xóa sản phẩm",
                             "value" => "delete"
                         ),
                         array("label" => " Xem thông tin sản phẩm",

@@ -1,10 +1,7 @@
-
 $(document).ready(function (e) {
     var modal = UIkit.modal("#showedit");
     var modalxoa = UIkit.modal("#xoa");
     $('.sua').click(function () {
-
-
         modal.show();
         var ten = $(this).attr('data-ten');
         var id = $(this).attr('data-id');
@@ -17,7 +14,6 @@ $(document).ready(function (e) {
         modalxoa.show();
         id = $(this).attr('data-id');
         $('#idxoa').val(id);
-
     })
     $('.btnxoa').click(function () {
         $('#xoathuoctinh').submit();

@@ -2,6 +2,13 @@ function reloadtrang() {
 
     window.location.reload();
 }
+function reload_delay(time) {
+    if (isNaN(time))
+        time = 0;
+    setTimeout(function () {
+        window.location.reload();
+    }, time);
+}
 function ChangeToSlug(str) {
     // Chuyển hết sang chữ thường
     str = str.toLowerCase();

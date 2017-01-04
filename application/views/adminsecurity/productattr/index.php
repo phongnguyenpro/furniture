@@ -187,7 +187,10 @@ if (isset($_GET['career_id'])) {
                                                 if (o.status == 1)
                                                 {
                                                     $('#thongbaoupdate').html('<div class="uk-alert uk-alert-success">Cập nhật thành công</div>')
-
+                                                } else if (o.status == 2)
+                                                {
+                                                    $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại/div>');
+                                                    NotAccess(o);
                                                 }
                                             }, 'JSON')
 

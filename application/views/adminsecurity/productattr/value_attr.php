@@ -154,4 +154,4 @@ $attr_val = $this->data["attr_val"];
             </div>
 
         </div>
-<script src="<?= load_admin_view("productattr/js/index.js") ?>"></script>
+<script src="<?= load_admin_view("productattr/js/value.js") ?>"></script>
