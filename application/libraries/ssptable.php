@@ -115,9 +115,8 @@ class SSPTable {
                         case "quanly_hoadon":
                             $row[9] = '<a href=' . ADMIN_URL . 'invoice/view/' . $data[$i]['invoice_id'] . ' class="label label-info">Xem</a>';
 // --------------------------- check quyền xóa hóa đơn tại đây --------------------------------------------
-                            if (check_login_user(array(1)) && $data[$i][$columns[7]['db']] != 3) {
+                            if ($data[$i][$columns[7]['db']] != 3) {
                                 $row[9] .= ' <a  data-id=' . $data[$i]['invoice_id'] . ' class="label label-danger xoa">Xóa</a>';
-                                1 == 1;
                             }
                             switch ($columns[$j]['dt']) {
                                 case 7:

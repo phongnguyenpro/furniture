@@ -66,6 +66,13 @@ function reload_delay(time) {
         window.location.reload();
     }, time);
 }
+function redirect_page(page, time) {
+    if (isNaN(time))
+        time = 0;
+    setTimeout(function () {
+        window.location.href = page;
+    }, time);
+}
 function showNotify(option, t) {
     if (thisNotify = UIkit.notify({
             message: t != null ? t.data("message") ? t.data("message") : "" : option.messager,

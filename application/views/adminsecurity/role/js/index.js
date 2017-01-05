@@ -19,13 +19,11 @@ $(document).ready(function () {
         form.submit();
     })
     $(".checkall").click(function () {
-        if ($(this).attr("data-status") == 0)
-        {
+        if ($(this).attr("data-status") == 0) {
             $(this).attr("data-status", 1);
             $(this).parent().next().find("input[type=checkbox]").prop("checked", true);
         }
-        else
-        {
+        else {
             $(this).attr("data-status", 0);
             $(this).parent().next().find("input[type=checkbox]").prop("checked", false);
         }

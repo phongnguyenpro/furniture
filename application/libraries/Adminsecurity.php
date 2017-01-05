@@ -453,7 +453,7 @@ class Adminsecurity {
                         array("label" => "Thêm bài viết",
                             "value" => "insert"
                         ),
-                        array("label" => "Hiển thị bài viết",
+                        array("label" => "Cập nhật hiển thị, nổi bật",
                             "value" => "show"
                         ),
                         array("label" => "Sắp xếp bài viết",

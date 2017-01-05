@@ -48,7 +48,9 @@ $data = $this->data_invoice;
                         </a>
                     </td>
                     <td class="cart_description">
-                        <p class="product-name"><a href="<?= BASE_URL . $value['product_slug'] . '-' . $value['product_id'] . '.html' ?>"><?= $value['product_name'] ?> </a></p>
+                        <p class="product-name"><a
+                                    href="<?= BASE_URL . $value['product_slug'] . '-' . $value['product_id'] . '.html' ?>"><?= $value['product_name'] ?> </a>
+                        </p>
                         <small class="cart_ref">Mã SP : <?= $value['product_code'] ?></small>
                         <br>
                         <small>Thuộc tính: <?= $value['attr_val_labels'] ?></small>
@@ -62,7 +64,7 @@ $data = $this->data_invoice;
                     </td>
                     <td class="qty text-center">
                         <?php if ($data['thongtin']['invoice_status'] != 3) { ?>
-                            <input min="1" class="form-control input-sm" type="number"
+                            <input min="1" class="form-control input-sm" type="number" id="quantityInput"
                                    value="<?= $value['quantity'] ?>">
 
                             <a class="btn btn-default btn-capnhatsoluong"

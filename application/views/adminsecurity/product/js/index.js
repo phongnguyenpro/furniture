@@ -32,6 +32,7 @@ $(document).ready(function (e) {
             "dataSrc": function (json) {
                 if (json.status == 2){
                     NotAccess();
+                    redirect_page(ADMIN_URL,3000);
                 }else
                     return json.data;
             }

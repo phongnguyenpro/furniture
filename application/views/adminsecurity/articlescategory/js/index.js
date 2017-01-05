@@ -1,7 +1,6 @@
 $(document).ready(function () {
     var nestable = UIkit.nestable($(".uk-nestable"), {group: 'group-lists', maxDepth: 10});
 
-
     nestable.on({
         'stop.uk.nestable': function () {
 
@@ -10,14 +9,15 @@ $(document).ready(function () {
             $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang cập nhật</div>')
 
             $.post(ADMIN_URL + 'articlescategory/sort', {'danhmucbaiviet': datamenu}, function (o) {
-                if (o.status = 1) {
+                if (o.status == 1) {
                     $('#thongbaoupdate').html('<div class="uk-alert uk-alert-success">Cập nhật thành công</div>')
-
+                } else if (o.status == 2) {
+                    $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại, tài khoản không được cấp quyền.</div>')
+                    NotAccess();
                 }
-            })
+            }, 'JSON')
         }
     });
-
 
     var modal = UIkit.modal("#showedit");
 
@@ -42,10 +42,12 @@ $(document).ready(function () {
         $.post(ADMIN_URL + 'articlescategory/load_info_articles_category', {"id": id}, function (o) {
             if (o.status == 1) {
                 $('#loadeditmenu').html(o.html);
+            } else if (o.status == 2) {
+                NotAccess();
+                modal.hide();
             }
-
         }, 'JSON')
-    })
+    });
 
     $(document).on('submit', '#savemenu', function () {
 
@@ -59,6 +61,7 @@ $(document).ready(function () {
         $('#loadeditmenu').html('<div class="uk-modal-spinner"></div>');
         var http = new XMLHttpRequest();
         http.open("POST", ADMIN_URL + 'articlescategory/update_info_articles_category', true);
+        http.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         http.send(formdata);
         http.onreadystatechange = function (event) {
             if (http.readyState == 4 && http.status == 200) {
@@ -66,17 +69,19 @@ $(document).ready(function () {
                 if (ketqua.status == 1) {
                     $('li[data-id=' + id + ']').children().children().next('span').text(name);
                     modal.hide();
+                } else if (ketqua.status == 2) {
+                    NotAccess();
+                    modal.hide();
                 }
             }
-        }
+        };
         return false;
-
-    })
+    });
 
     $(':input[name=articlescategory_name]').keyup(function () {
         str = $(this).val();
         $(':input[name=articlescategory_slug]').prop('value', ChangeToSlug(str));
-    })
+    });
 
     $(document).on("keyup", ':input[id=tenedit]', function () {
         id = $(':input[id=idedit]').val();
@@ -84,14 +89,13 @@ $(document).ready(function () {
         strview = BASE_URL + "danh-muc-bai-viet/" + id + "/" + str;
         $(':input[id=slugedit]').prop('value', str);
         $(':input[id=slugview]').prop('value', strview);
+    });
 
-
-    })
     $(document).on("keyup", ':input[id=slugedit]', function () {
         id = $(':input[id=idedit]').val();
         strview = BASE_URL + "danh-muc-bai-viet/" + id + "/" + $(this).val();
         $(':input[id=slugview]').prop('value', strview);
-    })
+    });
 
     $('#createdanhmucbaiviet').submit(function () {
 
@@ -109,10 +113,13 @@ $(document).ready(function () {
                     '<div class="uk-nestable-panel"><div class="uk-nestable-toggle" data-nestable-action="toggle"></div>   <span>' + o.name + '</span>   <a  class="itemedit uk-badge"> <i class="uk-icon-pencil-square-o"></i> Chỉnh sửa</a>---<a class="deletemenu uk-badge uk-badge-danger" ref="' + o.id + '"><i class="uk-icon-times"></i>Xóa</a></div> </li>';
                 $(".uk-nestable").append(html);
                 modalcreate.hide();
+            } else if (o.status == 2) {
+                NotAccess();
+                modalcreate.hide();
             }
-        }, 'JSON')
+        }, 'JSON');
         return false;
-    })
+    });
 
     $(document).on('click', '.deletemenu', function () {
 
@@ -122,11 +129,10 @@ $(document).ready(function () {
             $.post(ADMIN_URL + 'articlescategory/delete_articles_category', {'id': id}, function (o) {
                 if (o.status == 1) {
                     $('li[data-id=' + id + ']').remove();
+                } else if (o.status == 2) {
+                    NotAccess();
                 }
             }, 'JSON')
-        } else {
-
         }
-
     })
 });

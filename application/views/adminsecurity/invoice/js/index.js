@@ -11,7 +11,7 @@ $(document).ready(function (e) {
             "zeroRecords": "Không có dữ liệu",
             "info": "Trang hiển thị _PAGE_ / _PAGES_",
             "infoEmpty": "Không có dữ liệu",
-            "infoFiltered": "(Lọc từ _MAX_ sản phẩm)",
+            "infoFiltered": "(Lọc từ _MAX_ sản phẩm)"
         },
         stateSave: true,
         "stateSaveParams": function (settings, data) {
@@ -23,6 +23,12 @@ $(document).ready(function (e) {
         "ajax": {
             "url": ADMIN_URL + "invoice/load_data_ssp/",
             "type": "POST",
+            "dataSrc": function (json) {
+                if (json.status == 2) {
+                    NotAccess();
+                } else
+                    return json.data;
+            }
         },
 
         "columns": [
@@ -35,7 +41,7 @@ $(document).ready(function (e) {
             null,
             null,
             {"searchable": false, "orderable": true},
-            {"searchable": false, "orderable": false},
+            {"searchable": false, "orderable": false}
         ],
 
         "createdRow": function (row, data, dataIndex) {
@@ -46,7 +52,7 @@ $(document).ready(function (e) {
         "fnInitComplete": function () {
             $(function () {
                 altair_forms.init()
-            })
+            });
             this.api().on('draw', function () {
                 $(function () {
                     altair_forms.init()
@@ -54,8 +60,7 @@ $(document).ready(function (e) {
 
             });
         }
-
-    })
+    });
     // table.order( [ 4, 'desc' ] ).draw();
 // table.column( 1 ).visible( false );
     //table.column( 0 ).visible( true );
@@ -66,25 +71,25 @@ $(document).ready(function (e) {
         modalxoa.show();
         id_sanpham = $(this).attr('data-id');
         $('.btnxoa').prop('value', id_sanpham);
-    })
+    });
 
     $('.btnxoa').click(function () {
 
         $('.btnxoa').prop("disabled", true);
         $('#thongbaoxoa').html('<div class="uk-alert uk-alert-danger"><span class="uk-icon-spinner uk-icon-spin"> </span>Đang xóa hóa đơn</div>');
         id_hoadon = $(this).val();
-        $.post(URL + "administrator247/hoadon/xoahoadon", {"id_hoadon": id_hoadon}, function (o) {
-            if (o.status == 1)
+        $.post(ADMIN_URL + "invoice/delete_invoice", {"id_hoadon": id_hoadon}, function (o) {
+            if (o.status == 1) {
                 modalxoa.hide();
-            $('tr[id=' + id_hoadon + ']').fadeOut("slow", function () {
-                $(this).remove();
-            });
+                $('tr[id=' + id_hoadon + ']').fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            }else if (o.status == 2) {
+                modalxoa.hide();
+                NotAccess();
+            }
             $('.btnxoa').prop("disabled", false);
             $('#thongbaoxoa').html("Bạn có muốn xóa hóa đơn này");
         }, "JSON")
-
-
     })
-
-
-})
+});

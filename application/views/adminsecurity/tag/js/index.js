@@ -2,7 +2,8 @@ $(document).ready(function () {
 
     $(":input[name=tag_name]").keyup(function () {
         $(":input[name=tag_slug]").prop("value", ChangeToSlug($(this).val()));
-    })
+    });
+
     var modaledittag = UIkit.modal("#edittag");
     $(".btn-edit").click(function () {
         ten = $(this).attr("data-ten");
@@ -13,14 +14,15 @@ $(document).ready(function () {
         $("#edittagslug").prop("value", slug);
 
         modaledittag.show();
-    })
+    });
+
     $(".xoatag").click(function () {
         if (confirm("Bạn có chắc muốn xóa!") == true) {
             return true;
         } else {
             return false;
         }
-    })
+    });
 
 
     var nestable = UIkit.sortable($(".uk-sortable"));
@@ -36,11 +38,11 @@ $(document).ready(function () {
             $.post(ADMIN_URL + 'tag/sort_tag', {'tag': datamenu}, function (o) {
                 if (o.status == 1) {
                     $('#thongbaoupdate').html('<div class="uk-alert uk-alert-success">Cập nhật thành công</div>')
-
+                } else if (o.status == 2) {
+                    $('#thongbaoupdate').html('<div class="uk-alert uk-alert-danger">Cập nhật thất bại, tài khoản không được cấp quyền.</div>');
+                    reload_delay(2000);
                 }
             }, 'JSON')
-
-
         }
     });
-})
+});

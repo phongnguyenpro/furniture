@@ -1,4 +1,3 @@
-
 <div id='showcreate' class="uk-modal">
     <div class="uk-modal-dialog">
 
