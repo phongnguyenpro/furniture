@@ -104,7 +104,7 @@ class Adminsecurity {
 
     public $list_controller = array(
         "Trang chủ" => array(
-            "attr" => "",
+            "attr" => "uk-icon-home",
             "controller" =>
             array(
                 "main" => array(
@@ -119,7 +119,7 @@ class Adminsecurity {
             )
         ),
         "Cấu hình" => array(
-            "attr" => "",
+            "attr" => "uk-icon-cog",
             "controller" =>
             array(
                 "menu" => array(
@@ -200,7 +200,7 @@ class Adminsecurity {
             )
         ),
         "Sản phẩm" => array(
-            "attr" => "",
+            "attr" => "uk-icon-shopping-cart",
             "controller" => array(
                 "career" => array(
                     "attr" => array("label" => "Ngành nghề"),
@@ -383,7 +383,7 @@ class Adminsecurity {
             )
         ),
         "Hóa đơn" => array(
-            "attr" => "",
+            "attr" => "uk-icon-building-o",
             "controller" => array(
                 "invoice" => array(
                     "attr" => array("label" => "Tất cả hóa đơn"),
@@ -417,7 +417,7 @@ class Adminsecurity {
             )
         ),
         "Bài viết" => array(
-            "attr" => "",
+            "attr" => "uk-icon-pencil-square-o",
             "controller" => array(
                 "articlescategory" => array(
                     "attr" => array("label" => "Danh mục bài viết"),
@@ -477,7 +477,7 @@ class Adminsecurity {
             )
         ),
         "User" => array(
-            "attr" => "",
+            "attr" => "uk-icon-users",
             "controller" =>
             array(
                 "user" => array(
@@ -534,7 +534,7 @@ class Adminsecurity {
             )
         ),
         "Module" => array(
-            "attr" => "",
+            "attr" => "uk-icon-cubes",
             "controller" =>
             array(
                 "module" => array(
@@ -563,7 +563,7 @@ class Adminsecurity {
             )
         ),
         "Mở rộng" => array(
-            "attr" => "",
+            "attr" => "uk-icon-key",
             "controller" =>
             array(
                 "tag" => array(

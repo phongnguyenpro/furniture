@@ -103,7 +103,7 @@
                             ?>
                             <li title="<?= $k_group; ?>">
                                 <a>
-                                    <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
+                                    <span class="menu_icon"><i class="<?= $v_group["attr"] ?>"></i></span>
                                     <span class="menu_title"><?= $k_group ?></span>
                                 </a>
                                 <ul>
