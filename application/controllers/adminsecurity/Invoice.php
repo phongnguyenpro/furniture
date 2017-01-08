@@ -28,7 +28,7 @@ class Invoice extends MY_Controller
     function delete_invoice()
     {
         $id_hoadon = string_input($_POST['id_hoadon']);
-        echo json_encode($this->model->xoahoadon($id_hoadon));
+        echo json_encode($this->model->delete_invoice($id_hoadon));
     }
 
     function update_quantity()

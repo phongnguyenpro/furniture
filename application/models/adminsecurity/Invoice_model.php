@@ -10,10 +10,8 @@ class Invoice_model extends MY_Model
     function load_data_ssp()
     {
         $table = 'invoice';
-
 // Table's primary key
         $primaryKey = 'invoice_id';
-
         $columns = array(
             array('db' => 'invoice_protect_code', 'dt' => 0),
             array('db' => 'invoice_id', 'dt' => 1),
@@ -24,8 +22,6 @@ class Invoice_model extends MY_Model
             array('db' => 'invoice_amout', 'dt' => 6),
             array('db' => 'invoice_status', 'dt' => 7),
             array('db' => 'invoice_shipping_status', 'dt' => 8)
-
-
         );
         $this->load->database();
         $sql_details = array(
@@ -36,7 +32,7 @@ class Invoice_model extends MY_Model
         );
         $this->load->library("ssptable");
         echo json_encode(
-            $this->ssptable->simple($_POST, $sql_details, $table,'', $primaryKey, $columns, '', 'quanly_hoadon')
+            $this->ssptable->simple($_POST, $sql_details, $table, '', $primaryKey, $columns, '', 'quanly_hoadon')
         );
     }
 
@@ -54,14 +50,13 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         if ($data['thongtin']['invoice_status'] == 1)
             $this->mydb->update("invoice", array("invoice_status" => 2), "invoice_id=:invoice_id", array("invoice_id" => $invoice_id));
         // thong tin nguoi gioi thieu
-
         return $data;
     }
 
     function delete_invoice($invoice_id)
     {
-        $this->deleteall("invoice_detail", "invoice_id=:invoice_id", array("invoice_id" => $invoice_id));
-        $this->delete("invoice", "invoice_id=:invoice_id", array("invoice_id" => $invoice_id));
+        $this->mydb->deleteall("invoice_detail", "invoice_id=:invoice_id", array("invoice_id" => $invoice_id));
+        $this->mydb->delete("invoice", "invoice_id=:invoice_id", array("invoice_id" => $invoice_id));
         return array("status" => 1);
     }
 
@@ -75,14 +70,11 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         $id_sanpham = $data['id_sanpham'];
         $tinhtrang = $data['tinhtrang'];
         $soluonghientai = $data['soluonghientai'];
-
-
         // kiem tra san pham nay co ton tai hay khong
         if ($tinhtrang == 3)
             $ketquakiemtra = $this->check_invoice_detail($id_hoadonchitiet, -1);
         else
             $ketquakiemtra = $this->check_invoice_detail($id_hoadonchitiet, $soluongthem);
-
         if ($ketquakiemtra['tinhtrang'] == TRUE) {
             if ($id_sanphamchitiet != '') {
                 $this->mydb->update("invoice_detail", array("quantity" => $soluongthem), "invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $id_hoadonchitiet));
@@ -99,11 +91,9 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
                 // load dữ liệu cộng tiền
                 $data = $this->update_data_invoice($id_hoadon);
                 $data['tonggiasanpham'] = $tonggiasanpham;
-
                 return array("status" => 1, "data" => $data);
             } else {
                 $this->mydb->update("invoice_detail", array("quantity" => $soluongthem), "invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $id_hoadonchitiet));
-
                 $datahoadonchitiet = $ketquakiemtra['data'];
                 $giamgia = $datahoadonchitiet['invoice_detail_discount'];
                 $dongia = $datahoadonchitiet['product_price'];
@@ -122,7 +112,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         } else {
             return array("status" => 0, "tinnhan" => $ketquakiemtra['tinnhan']);
         }
-
     }
 
     function check_invoice_detail($invoice_detail_id, $soluongthem = -1)
@@ -142,18 +131,14 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
             if (!empty($kq)) {
                 $soluongconlai = $kq[0]['product_detail_total'];
                 $thuoctinhss = explode(",", $giatrithuoctinhchon);
-
                 $sosanh = true;
                 // kiem tra thuoc tinh
                 $arrthuoctinh = $this->mydb->select("select attr_val_id from productattr_detail where product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));
-
                 foreach ($arrthuoctinh as $value) {
                     $giatrisosanh = $value['attr_val_id'];
-
                     if (!in_array($giatrisosanh, $thuoctinhss))
                         $sosanh = false;
                 }
-
                 // trường hợp ngoại lệ
                 $thuoctinhss = explode(",", $giatrithuoctinhchon);
                 $sqlwhere = "attr_val_id=" . implode(" or attr_val_id=", $thuoctinhss);
@@ -176,7 +161,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
                     }
                 } else {
                     $error[] = "Sản phẩm '" . $tensanpham . "-" . $tengiatrithuoctinhchon . "' không còn tồn tại";
-
                 }
             } else {
                 $error[] = "Sản phẩm '" . $tensanpham . "-" . $tengiatrithuoctinhchon . "' không còn tồn tại";
@@ -187,7 +171,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
             $kq = $this->mydb->select("select product_total from product where product_id=:product_id", array("product_id" => $id_sanpham));
             if (!empty($kq)) {
                 $soluongconlai = $kq[0]['product_total'];
-
                 $sosanh = true;
                 if (!empty($giatrithuoctinhchon)) {
                     // neu co chon thuoc tinh
@@ -232,14 +215,12 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         $tongtiensanpham = 0;
         $tongtienhoadon = 0;
         $kq = $this->mydb->select("select product_price,quantity,invoice_detail_discount from invoice_detail where invoice_id=:invoice_id", array("invoice_id" => $id_hoadon));
-
         foreach ($kq as $value) {
             $tien1 = $value['product_price'] * $value['quantity'];
             $tien2 = ($value['product_price'] * $value['quantity']) * ($value['invoice_detail_discount'] / 100);
             $tien = $tien1 - $tien2;
             $tongtiensanpham += (int)$tien;
         }
-
         $tien1 = $tongtiensanpham + $tiencong - $tientru;
         $tien2 = $tien1 * ($tonggiamgia / 100);
         $tongtienhoadon = $tien1 - $tien2;
@@ -253,7 +234,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         $id_hoadon = $data['id_hoadon'];
         $tinhtrang = $data['tinhtrang'];
         $kq = $this->mydb->select("select quantity,product_detail_id,product_id from invoice_detail where invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $id_hoadonchitiet));
-
         if ($tinhtrang == 3) {
             if ($kq[0]['product_detail_id'] != '') {
                 $id_sanphamchitiet = $kq[0]['product_detail_id'];
@@ -263,10 +243,8 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
                 $id_sanpham = $kq[0]['product_id'];
                 $soluongupdate = $kq[0]['quantity'];
                 $this->mydb->exec("update product set product_total=product_total+$soluongupdate where product_id=$id_sanpham");
-
             }
         }
-
         $this->mydb->delete("invoice_detail", "invoice_detail_id=:invoice_detail_id", array("invoice_detail_id" => $id_hoadonchitiet));
         $data = $this->update_data_invoice($id_hoadon);
         return array("status" => 1, "data" => $data);
@@ -287,14 +265,12 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         $tongtiensanpham = 0;
         $tongtienhoadon = 0;
         $kq = $this->mydb->select("select product_price,quantity,invoice_detail_discount from invoice_detail where invoice_id=:invoice_id", array("invoice_id" => $id_hoadon));
-
         foreach ($kq as $value) {
             $tien1 = $value['product_price'] * $value['quantity'];
             $tien2 = ($value['product_price'] * $value['quantity']) * ($value['invoice_detail_discount'] / 100);
             $tien = $tien1 - $tien2;
             $tongtiensanpham += (int)$tien;
         }
-
         $tien1 = $tongtiensanpham + $data['invoice_money_plus'] - $data['invoice_money_subtract'];
         $tien2 = $tien1 * ($data['invoice_total_discount'] / 100);
         $tongtienhoadon = $tien1 - $tien2;
@@ -311,7 +287,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         $dataupdate = array("product_detail" => array(), "product" => array());
         foreach ($kq as $value) {
             $ketquakiemtra = $this->check_invoice_detail($value['invoice_detail_id'], $value['quantity']);
-
             if ($ketquakiemtra['tinhtrang'] == true) {
                 $datasanphamchitiet = $ketquakiemtra['data'];
                 $soluonghienco = $datasanphamchitiet['soluongconlai'];
@@ -319,7 +294,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
                 $id_sanphamchitiet = $value['product_detail_id'];
                 $id_sanpham = $datasanphamchitiet['product_id'];
                 if ($id_sanphamchitiet != '') {
-
                     $soluongupdate = $soluonghienco - $soluongthem;
                     $dataupdate['product_detail'][] = array("product_detail_id" => $id_sanphamchitiet, "product_detail_total" => $soluongupdate);  // nếu không có lỗi
                 } else {
@@ -327,12 +301,9 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
                     $soluongupdate = $soluonghienco - $soluongthem;
                     $dataupdate['product'][] = array("product_id" => $id_sanpham, "product_total" => $soluongupdate);
                 }
-
             } else {
                 $error[] = $ketquakiemtra['tinnhan'];
             }
-
-
         }
 //            $data=$this->capnhatdulieu($id_hoadon);
 //            if($data['tongtienhoadon']<0)
@@ -342,7 +313,6 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
                 $id_sanphamchitiet = $value['product_detail_id'];
                 $soluong = $value['product_detail_total'];
                 $this->mydb->update("product_detail", array("product_detail_total" => $soluong), "product_detail_id=:product_detail_id", array("product_detail_id" => $id_sanphamchitiet));
-
             }
             foreach ($dataupdate['product'] as $value) {
                 $id_sanpham = $value['product_id'];
@@ -358,6 +328,5 @@ LEFT JOIN user ON invoice_detail.user_id_agency = user.user_id", array());
         } else {
             return array("status" => 0, "tinnhan" => $error);
         }
-
     }
 }

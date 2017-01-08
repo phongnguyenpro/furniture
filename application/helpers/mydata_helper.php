@@ -46,7 +46,7 @@ function get_articles_type()
 
 function get_checkout_type()
 {
-    return array('1' => "Khi nhận được hàng", '2' => "Chuyển khoản ngân hàng", '3' => "Ví Bảo Kim / Thẻ Nội Địa / Visa");
+    return array('1' => "Khi nhận được hàng", '2' => "Chuyển khoản ngân hàng");
 }
 
 function get_invoice_state()

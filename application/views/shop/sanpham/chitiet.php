@@ -1,5 +1,5 @@
 <script type="text/javascript"
-src="<?= load_frontend_view('assets/lib/jquery.elevatezoom.js') ?>"></script>
+        src="<?= load_frontend_view('assets/lib/jquery.elevatezoom.js') ?>"></script>
 
 <?php
 $data = $this->data;
@@ -99,7 +99,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                 <div class="pb-right-column col-xs-12 col-sm-6">
                     <h1 class="product-name"><?= $data['sanpham']['product_name'] ?></h1>
 
-                    <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> 
+                    <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i>
                         <?= $data['sanpham']['product_like'] ?></a>
 
                     <a class="btn-view-product"><i class="fa fa-eye"></i>
@@ -112,12 +112,12 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                     <div class="product-price-group">
                         <?php if ($data['sanpham']['product_price'] != $data['sanpham']['product_price_new']) { ?>
                             <span class="price giasanphammoi"><?= tien($data['sanpham']['product_price_new']) ?>&nbsp;
-                                ₫</span><?php if (kiemtranull($data['sanpham']['product_unit'])) echo "/ <b class='price'>" . $data['sanpham']['product_unit'] . "</b>" ?>
+                            ₫</span><?php if (kiemtranull($data['sanpham']['product_unit'])) echo "/ <b class='price'>" . $data['sanpham']['product_unit'] . "</b>" ?>
                             <span class="old-price giasanpham"><?= tien($data['sanpham']['product_price']) ?></span>
                             <span class="discount">-<?= $data['sanpham']['product_sale'] ?>%</span>
                         <?php } else { ?>
                             <span class="price giasanpham"><?= tien($data['sanpham']['product_price']) ?>&nbsp;
-                                ₫</span><?php if (kiemtranull($data['sanpham']['product_unit'])) echo "/ <b class='price'>" . $data['sanpham']['product_unit'] . "</b>" ?>
+                            ₫</span><?php if (kiemtranull($data['sanpham']['product_unit'])) echo "/ <b class='price'>" . $data['sanpham']['product_unit'] . "</b>" ?>
                         <?php } ?>
 
                     </div>
@@ -132,55 +132,57 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 
                             switch ($key) {
                                 case "Màu sắc": {
-                                        ?>
-                                        <div class="layered_subtitle thuoctinhmau" ><?= $key ?></div>
-                                        <div class="layered-content filter-color" style="float: left;width: 76%;">
+                                    ?>
+                                    <div class="layered_subtitle thuoctinhmau"><?= $key ?></div>
+                                    <div class="layered-content filter-color" style="float: left;width: 76%;">
+                                        <div class="check-box-list listgiatri" data-label="<?= $key ?>">
+                                            <?php foreach ($value as $value2) { ?>
+
+                                                <input data-name="<?= $value2['attr_val_value'] ?>"
+                                                       class="giatrithuoctinhchon"
+                                                       name="<?= $key ?>" type="radio"
+                                                       id="<?= $value2['attr_val_id'] ?>"
+                                                       value="<?= $value2['attr_val_id'] ?>"/>
+                                                <label style=" background:<?= $value2['attr_val_value'] ?>;"
+                                                       for="<?= $value2['attr_val_id'] ?>"><span
+                                                            class="button"></span></label>
+
+
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    break;
+                                }
+                                    ?>
+
+                                <?php default : { ?>
+
+                                <div class="attributes">
+                                    <div class="attribute-label"><?= $key ?></div>
+                                    <div class="attribute-list">
+                                        <div class="layered-content filter-size">
                                             <div class="check-box-list listgiatri" data-label="<?= $key ?>">
                                                 <?php foreach ($value as $value2) { ?>
-
-                                                    <input data-name="<?= $value2['attr_val_value'] ?>" class="giatrithuoctinhchon"
-                                                           name="<?= $key ?>" type="radio"
-                                                           id="<?= $value2['attr_val_id'] ?>"
-                                                           value="<?= $value2['attr_val_id'] ?>"/>
-                                                    <label style=" background:<?= $value2['attr_val_value'] ?>;"
-                                                           for="<?= $value2['attr_val_id'] ?>"><span
-                                                            class="button"></span></label>
+                                                    <input class="filter giatrithuoctinhchon"
+                                                           data-name="<?= $value2['attr_val_value'] ?>"
+                                                           data-label="<?= $key ?>"
+                                                           value="<?= $value2['attr_val_id'] ?>" type="radio"
+                                                           id="<?= $value2['attr_val_id'] ?>" name="<?= $key ?>">
+                                                    <label for="<?= $value2['attr_val_id'] ?>"><span
+                                                                class="button"></span><span><?= $value2['attr_val_value'] ?></span></label>
 
 
                                                 <?php } ?>
                                             </div>
                                         </div>
-                                        <?php
-                                        break;
-                                    }
-                                    ?>
 
-                                <?php default : { ?>
-
-                                        <div class="attributes">
-                                            <div class="attribute-label"><?= $key ?></div>
-                                            <div class="attribute-list">
-                                                <div class="layered-content filter-size">
-                                                    <div class="check-box-list listgiatri" data-label="<?= $key ?>">
-                                                        <?php foreach ($value as $value2) { ?>
-                                                            <input class="filter giatrithuoctinhchon"
-                                                                   data-name="<?= $value2['attr_val_value'] ?>" data-label="<?= $key ?>"
-                                                                   value="<?= $value2['attr_val_id'] ?>" type="radio"
-                                                                   id="<?= $value2['attr_val_id'] ?>" name="<?= $key ?>">
-                                                            <label for="<?= $value2['attr_val_id'] ?>"><span
-                                                                    class="button"></span><span><?= $value2['attr_val_value'] ?></span></label>
-
-
-                                                        <?php } ?>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <?php
-                                        break;
-                                    }
-                                    ?>
+                                    </div>
+                                </div>
+                                <?php
+                                break;
+                            }
+                                ?>
 
 
                                 <?php
@@ -194,7 +196,8 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                             <div class="attribute-list quantity">
 
                                 <button class="changesoluong" data-type="2"><b>-</b></button>
-                                <input min="1" max="<?= $data['sanpham']['product_total'] ?>" name="soluongthem" type="text"
+                                <input min="1" max="<?= $data['sanpham']['product_total'] ?>" name="soluongthem"
+                                       type="text"
                                        readonly value="1" id="quantity"/>
                                 <button class="changesoluong" data-type="1"><b>+</b></button>
                             </div>
@@ -237,7 +240,8 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                         <div class="share">
 
                             <div class="itemshare fb">
-                                <span class="fb-like" data-href="<?= $url ?>" data-layout="button_count" data-action="like"
+                                <span class="fb-like" data-href="<?= $url ?>" data-layout="button_count"
+                                      data-action="like"
                                       data-show-faces="true" data-share="true"></span>
                                 <span style="margin-left: 20px;" class="fb-send" data-href="<?= $url ?>"></span>
                             </div>
@@ -258,7 +262,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
             <div class="product-content clearfix">
 
 
-                <div id="product-detail" >
+                <div id="product-detail">
                     <?= $data['sanpham']['product_content'] ?>
                 </div>
                 <hr>
@@ -278,7 +282,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                     </table>
                 </div>
 
-                <div id="reviews" >
+                <div id="reviews">
                     <div class="product-comments-block-tab">
 
                         <div class="fb-comments fb-like" data-href="<?= $url ?>"
@@ -313,7 +317,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                             <a> <?= neods($value['product_description'], 120) ?></a>
                                             <?php
                                         } else {
-                                            
+
                                         }
                                         ?>
                                     </div>
@@ -326,7 +330,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                 </div>
                                 <div class="right-block">
                                     <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= $value['product_name'] ?></a>
+                                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"><?= $value['product_name'] ?></a>
 
                                     </h5>
 
@@ -340,12 +344,13 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                         <?php } ?>
                                     </div>
                                     <div class="info-bottom">
-                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                           class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                         <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                     </div>
                                 </div>
-                            </li>   
+                            </li>
                         <?php } ?>
 
 
@@ -380,7 +385,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                             <a> <?= neods($value['product_description'], 120) ?></a>
                                             <?php
                                         } else {
-                                            
+
                                         }
                                         ?>
                                     </div>
@@ -393,7 +398,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                 </div>
                                 <div class="right-block">
                                     <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= $value['product_name'] ?></a>
+                                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"><?= $value['product_name'] ?></a>
 
                                     </h5>
 
@@ -407,7 +412,8 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                         <?php } ?>
                                     </div>
                                     <div class="info-bottom">
-                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                           class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                         <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                     </div>

@@ -470,6 +470,16 @@ $data = $this->data["config"];
                             <span class="uk-input-group-addon">
                                 <i class="uk-icon-edit"></i>
                             </span>
+                                        <label for="product_edit_name_control">Google captcha sitekey: </label>
+                                        <input value='<?= $data['captchakey'] ?>' type="text" class="md-input"
+                                               id="product_edit_name_control" name="captchakey"/>
+                                    </div>
+                                </div>
+                                <div class="uk-form-row">
+                                    <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <i class="uk-icon-edit"></i>
+                            </span>
                                         <label for="product_edit_name_control">Google map Lat-Lng </label>
                                         <input value='<?= $data['maplat'] ?>' type="text" class="md-input"
                                                id="product_edit_name_control" name="maplat"/>

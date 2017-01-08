@@ -5,9 +5,9 @@
         $('.btn-laphoadon').removeProp('disabled');
         $('.btn-laphoadon').removeProp('style');
     };
-    var expCallback = function() {
+    var expCallback = function () {
         $('.btn-laphoadon').attr('disabled');
-        $('.btn-laphoadon').css('cursor','no-drop');
+        $('.btn-laphoadon').css('cursor', 'no-drop');
     };
 </script>
 <link href="<?= BASE_URL ?>public/lib/icheck/skins/flat/red.css" rel="stylesheet">
@@ -23,7 +23,6 @@ if (isset($this->data['giohang']))
 else
     $giohang = array();
 $thongtintaikhoan = isset($this->data['taikhoan']) == true ? $this->data['taikhoan'] : array();
-
 if (!empty($this->data['phivanchuyen'])) {
     function select_phivanchuyen($parent, $menuData, $text = "")
     {
@@ -34,14 +33,12 @@ if (!empty($this->data['phivanchuyen'])) {
                     $html .= "<option disabled value='{$value}'>";
                     $html .= $text . $menuData['items'][$value]['fee_shipping_name'];
                     $html .= "</option>";
-
                 } else {
                     $html .= "<option value='{$value}'>";
                     $html .= $text . $menuData['items'][$value]['fee_shipping_name'];
                     $html .= " + " . tien($menuData['items'][$value]['fee_shipping_value']) . "&#8363;";
                     $html .= "</option>";
                 }
-
                 $html .= select_phivanchuyen($value, $menuData, $text . "--");
             }
         }
@@ -53,7 +50,6 @@ if (!empty($this->data['phivanchuyen'])) {
         $phivanchuyen['parent'][$value['fee_shipping_parent']][] = $value['fee_shipping_id'];
     }
     $htmlphivanchuyen = select_phivanchuyen(0, $phivanchuyen);
-
 }
 ?>
 
@@ -133,7 +129,6 @@ if (!empty($this->data['phivanchuyen'])) {
                                     $tiengiamgia = ($value['giasanpham'] * $value['soluongthem']) * ($value['giamgia'] / 100);
                                     $tien = $tongtiensanpham - $tiengiamgia;
                                     echo tien($tien)
-
                                     ?> VND</span>
                             </td>
                             <td class="action">
@@ -212,28 +207,28 @@ if (!empty($this->data['phivanchuyen'])) {
                     </div>
 
                     <div class="col-md-6">
-                        <?php if (isset($htmlphivanchuyen)) { ?>
-                            <div class="panel panel-default ">
-                                <div class="panel-heading red">Phí vận chuyển</div>
-                                <div class="panel-body">
-
-                                    <label class="col-md-4">
-                                        Giao hàng đến:
-                                    </label>
-                                    <div class="col-md-8">
-                                        <select name="diadiemgiaohang" required="" class="diadiemgiaohang form-control">
-                                            <option disabled="" selected="">Chọn địa điểm giao hàng</option>
-                                            <?= $htmlphivanchuyen ?>
-                                        </select>
-                                        <script type="text/javascript">
-                                            $(document).ready(function () {
-                                                $(".diadiemgiaohang").select2();
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-
-                            </div>
+                        <?php if (isset($htmlphivanchuyen) || true) { ?>
+<!--                            <div class="panel panel-default ">-->
+<!--                                <div class="panel-heading red">Phí vận chuyển</div>-->
+<!--                                <div class="panel-body">-->
+<!---->
+<!--                                    <label class="col-md-4">-->
+<!--                                        Giao hàng đến:-->
+<!--                                    </label>-->
+<!--                                    <div class="col-md-8">-->
+<!--                                        <select name="diadiemgiaohang" required="" class="diadiemgiaohang form-control">-->
+<!--                                            <option disabled="" selected="">Chọn địa điểm giao hàng</option>-->
+<!--                                            --><?//= $htmlphivanchuyen ?>
+<!--                                        </select>-->
+<!--                                        <script type="text/javascript">-->
+<!--                                            $(document).ready(function () {-->
+<!--                                                $(".diadiemgiaohang").select2();-->
+<!--                                            });-->
+<!--                                        </script>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!---->
+<!--                            </div>-->
 
                             <div class="panel panel-default ">
                                 <div class="panel-heading red">Phương thức thanh toán</div>
@@ -255,7 +250,7 @@ if (!empty($this->data['phivanchuyen'])) {
                         <?php } ?>
 
 
-                        <div class=" col-md-12" id="contact_form_map">
+                        <div id="contact_form_map">
                             <div class="panel panel-default ">
                                 <div class="panel-heading ">Thông tin SHOP</div>
                                 <div class="panel-body" id="thongtinshop">
@@ -277,7 +272,7 @@ if (!empty($this->data['phivanchuyen'])) {
                     <div class="col-md-12 text-center">
                         <div class="form-selector">
                             <div class="g-recaptcha" data-callback="imNotARobot" data-expired-callback="expCallback"
-                                 data-sitekey="6LeXfg4UAAAAAO0Ioz6bzRRrylr1la5aggjA1HBB"></div>
+                                 data-sitekey="<?= CAPTCHAKEY ?>"></div>
                             <br/>
                             <button disabled style="cursor: no-drop;" class="btn-laphoadon animated swing"
                                     type="submit">Tạo hóa đơn
