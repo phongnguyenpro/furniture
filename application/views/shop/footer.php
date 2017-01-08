@@ -21,7 +21,7 @@
                 <div class="row">
 
                     <?php
-                    if (!$cache_category = cache_view_start("category")) {
+                    if (!$footer = cache_view_start("footer")) {
 
                         if (isset($this->data['footer']['parent'][0])) {
                             foreach ($this->data['footer']['parent'][0] as $value) {
@@ -44,7 +44,7 @@
                         }
                         cache_view_end("footer");
                     } else
-                        echo $cache_category
+                        echo $footer
                         ?>
 
 
