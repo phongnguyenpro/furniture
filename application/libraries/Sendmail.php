@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class SendMail {
 
     function html($data = '') {
-        $logo = LOGO;
+        $logo = BASE_URL.LOGO;
         $ten = TENSHOP;
         $diachi = DIACHI;
         $sdt = SDT;
@@ -33,10 +33,8 @@ class SendMail {
 ABC;
         return $html;
     }
-
-    function sendmail($nguoinhan = Array(), $data) {
-        require 'vendor/autoload.php';
-        $mail = new \PHPMailer();
+    function run($nguoinhan = Array(), $data) {
+        $mail = new PHPMailer();
 //Khai báo gửi mail bằng SMTP
         $mail->IsSMTP();
         $mail->Debugoutput = "html"; // Lỗi trả về hiển thị với cấu trúc HTML
@@ -48,7 +46,6 @@ ABC;
         $mail->Password = MATKHAUMAIL; //Mật khẩu của gmail
         $mail->SetFrom(TAIKHOANMAIL, TENSHOP); // Thông tin người gửi
         $mail->AddReplyTo(TAIKHOANMAIL, TENSHOP); // Ấn định email sẽ nhận khi người dùng reply lại.
-
         foreach ($nguoinhan as $value) {
             $mail->AddAddress($value['diachi'], $value['ten']); //Email của người nhận  
         }
@@ -56,9 +53,8 @@ ABC;
         $mail->MsgHTML($this->html($data['noidung'])); //Nội dung của bức thư.
         $mail->CharSet = 'UTF-8';
         if (!$mail->Send()) {
-            return array('tinhtrang' => 0);
+            return array('status' => 0);
         } else
-            return array('tinhtrang' => 1);
+            return array('status' => 1);
     }
-
 }

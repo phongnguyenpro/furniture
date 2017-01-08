@@ -22,7 +22,7 @@ class MY_Controller extends CI_Controller
             $this->adminsecurity->checkrole($this->url[1],$this->url[2]);
             $this->data["menu_item"] = $this->adminsecurity->menu_item();
 
-            load_config(array("CACHE", "URLANHCHEN", "LOGO","WIDTHANHBAIVIET","HEIGHTANHBAIVIET","KIEUIMAGE"));
+            load_config(array("CACHE", "URLANHCHEN", "LOGO","WIDTHANHBAIVIET","HEIGHTANHBAIVIET","KIEUIMAGE","TAIKHOANMAIL","MATKHAUMAIL","TENSHOP","SDT","DIACHI","EMAIL"));
         } else {
        
             if (file_exists($file_path = APPPATH . "models/" . $name_controller . '_model.php')) {
@@ -31,7 +31,7 @@ class MY_Controller extends CI_Controller
             $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
             load_config(array("CACHE", "LIMITDANHMUCIT", "LIMITDANHMUCNHIEU", "LIMITSANPHAMLIENQUAN",
                 "TENSHOP", "EMAIL", "LOGO", "SDT", "DIACHI","MIEUTA","THONGTINCHUYENKHOAN",
-                "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE","LIMITBAIVIET","MAPLAT"));
+                "WIDTHTHUMB", "LIMITDANHMUCTRANGCHU", "LIMITMODULE","LIMITBAIVIET","MAPLAT","TAIKHOANMAIL","MATKHAUMAIL"));
         }
     }
       public function error(){

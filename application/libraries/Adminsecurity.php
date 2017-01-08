@@ -191,6 +191,10 @@ class Adminsecurity {
                             "label" => "Cập nhật cấu hình",
                             "value" => "save"
                         ),
+                         array(
+                            "label" => "Test Email",
+                            "value" => "testmail"
+                        ),
                     ),
                 )
             )

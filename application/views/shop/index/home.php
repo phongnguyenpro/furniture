@@ -10,14 +10,14 @@
                 <div class="homeslider">
                     <div class="content-slide" style="height: 450px;overflow: hidden">
                         <ul id="slide-background" >
-                            <?php foreach ($this->data['module']['slider']["main"][1]['data'] as $value) { ?>
+                            <?php if(isset($this->data['module']['slider']["main"][1]['data'])){ foreach ($this->data['module']['slider']["main"][1]['data'] as $value) { ?>
                             <li data-background="">
                                 <a href="<?= $value['module_link'] ?>">
                                     <img alt="Funky roots" src="<?= $value['module_image'] ?>" title="<?= $this->data['module']['slider']["main"][1]["name"] ?>" />
                                 </a>
                             </li>
 
-                            <?php } ?>
+                            <?php }} ?>
                         </ul>
                     </div>
                 </div>
@@ -88,6 +88,7 @@
 
                             <ul class="nav-tab clearfix">
                                 <?php
+                                if(isset($this->data['module']["product"]["main"])){
                                 $i = 1;
                                 foreach ($this->data['module']["product"]["main"] as $key => $datasp) {
                                     ?>
@@ -167,7 +168,7 @@
                                                       </div>
                                                       <?php
                                                       $i++;
-                                                  }
+                                }}
                                                   ?>
                                                   <!-- End tab 1 -->
 

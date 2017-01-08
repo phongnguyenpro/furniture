@@ -827,7 +827,6 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
 //            $mail = new sendmail();
             $kq = $this->mydb->select("select max(invoice_id) as max from invoice", array());
             $id_hoadon = $kq[0]["max"] + 1;
-
             $hoadon['invoice_code'] = "HD" . $id_hoadon;
             $hoadon['invoice_amout'] = $tongtien;
             $hoadon['invoice_total_discount'] = 0;
@@ -874,25 +873,23 @@ and product_detail.product_id=:product_id", array("product_id" => $id_sanpham));
             $hoadon['invoice_protect_code'] = generate_password();
             $row = $this->mydb->insert("invoice", $hoadon);
             // send mail
-
             $id_hoadon = $row['id'];
             $i = 0;
-
-//            if (MATKHAUMAIL != '' && MATKHAUMAIL != NULL && strlen(MATKHAUMAIL) > 0) {
-//                $noidung['noidung'] = "Bạn nhận được một hóa đơn mới <br>Link: " . URL . "administrator247/hoadon/xem/" . $id_hoadon;
-//                $noidung['tieude'] = "Hóa đơn mới-" . Xulydulieu::ngayhientai();
-//                $diachi[0] = array("diachi" => EMAIL, "ten" => TENSHOP);
-//                $diachi1[0] = array("diachi" => "infoweb5916@gmail.com", "ten" => TENSHOP);
-//                $mail->sendmailoopmvclalala($diachi, $noidung);
-//                $mail->sendmailoopmvclalala($diachi1, $noidung);
-//                if ($hoadon['email'] != '') {
-//                    $noidung['noidung'] = "Cảm ơn bạn đã đặt hàng tại " . TENSHOP . "<br>Mã hóa đơn của bạn là " . $hoadon['mahoadon'] . "<br> Link: " . URL . "/hoadon?mahoadon=" . $hoadon['mahoadon'] . "&token=" . $hoadon['mabaove'];
-//                    $noidung['tieude'] = "Hóa đơn mới từ " . TENSHOP . "-" . Xulydulieu::ngayhientai();
-//                    $diachi[0] = array("diachi" => $hoadon['email'], "ten" => $hoadon['tenkhachhang']);
-//                    $mail->sendmailoopmvclalala($diachi, $noidung);
-//                }
-//            }
-
+            if(MATKHAUMAIL!='' && MATKHAUMAIL!=NULL && strlen(MATKHAUMAIL)>0)
+         {
+          $this->load->library("sendmail");
+          $noidung['noidung']="Bạn nhận được một hóa đơn mới <br>Link: ".ADMIN_URL."invoice/view/".$id_hoadon;
+          $noidung['tieude']="Hóa đơn mới-".  today();
+          $diachi[0]=array("diachi"=>TAIKHOANMAIL,"ten"=>TENSHOP);
+          $this->sendmail->run($diachi,$noidung);
+        if($hoadon['user_email']!='')
+        {
+        $noidung['noidung']="Cảm ơn bạn đã đặt hàng tại ".TENSHOP."<br>Mã hóa đơn của bạn là ".$hoadon['invoice_code']."<br> Link: ".BASE_URL."hoadon?mahoadon=".$hoadon['invoice_code']."&token=".$hoadon['invoice_protect_code'];
+        $noidung['tieude']="Hóa đơn mới từ ".TENSHOP."-".  today();
+        $diachi[0]=array("diachi"=>$hoadon['user_email'],"ten"=>$hoadon['user_name']);
+         $this->sendmail->run($diachi,$noidung);
+        }
+         }
             // lay thong tin chia se
             if (isset($_COOKIE['chiase'])) {
                 $chiase = unserialize($_COOKIE['chiase']);

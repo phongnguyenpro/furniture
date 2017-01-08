@@ -385,7 +385,55 @@ $data = $this->data["config"];
 
                     </div>
                 </div>
-
+    <div class="uk-width-xLarge-8-10  uk-width-large-10-10">
+                <div class="md-card">
+                    <div class="md-card-toolbar">
+                        <h3 class="md-card-toolbar-heading-text">
+                            Cấu hình EMAIL
+                        </h3>
+                          
+                    </div>
+                     <br>
+                         <div class="uk-grid">
+                        <div class="uk-width-medium-1-2">
+                          <div class="uk-form-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <i class="uk-icon-edit"></i>
+                            </span>
+                            <label for="product_edit_name_control">Tài khoản mail</label>
+                            <input value='<?= $data['taikhoanmail'] ?>'  type="text" class="md-input" id="product_edit_name_control" name="taikhoanmail" />
+                        </div>
+                    </div>  
+                            
+                                <div class="uk-form-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <i class="uk-icon-edit"></i>
+                            </span>
+                            <label for="product_edit_name_control">Mật khẩu</label>
+                            <input  value='<?= $data['matkhaumail'] ?>'  type="password" class="md-input" id="product_edit_name_control" name="matkhaumail" />
+                        </div>
+                    </div>
+                            
+                     
+                            
+                    </div>
+                             <div class="uk-width-medium-1-2">
+                                 
+                              <div class="uk-form-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <i class="uk-icon-send"></i>
+                            </span>
+                            
+                            <button type="button" class="md-btn md-btn-primary btntest">Test send mail</button> 
+                        </div>
+                    </div>    
+                             </div>
+                </div>
+              </div>
+              </div>
                 <div class="uk-width-xLarge-8-10  uk-width-large-10-10">
                     <div class="md-card">
                         <div class="md-card-toolbar">

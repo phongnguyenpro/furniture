@@ -4,9 +4,8 @@ $(document).ready(function () {
 
         curren = $(this);
         btnlinkload(curren);
-        $.post(URL + "sendmail/testmail", function (o) {
-
-            if (o.tinhtrang == 1) {
+        $.post(ADMIN_URL + "config/testmail", function (o) {
+            if (o.status == 1) {
                 alert("Mail đã được gửi đi");
                 btnlinkthanhcong(curren, "Đã gửi thành công");
             }
@@ -16,7 +15,6 @@ $(document).ready(function () {
             }
 
         }, "JSON")
-
     })
     $('#maucd').change(function () {
         $('#mauchudao').val($('#maucd').val());
