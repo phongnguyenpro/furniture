@@ -9,7 +9,6 @@ $(document).ready(function () {
                 $('.open-cate').click();
                 $('.colse-cate').click();
                 $('.vertical-groups').each(function () {
-
                     height1 = $(this).outerHeight() - 25;
                     height2 = $(this).children(".quangcaomenu").children('a').children().outerHeight();
                     htemp = $(this).children(".quangcaomenu").children(".htmlmenu").outerHeight();
@@ -18,6 +17,8 @@ $(document).ready(function () {
                     height = height1 + height2;
                     $(this).css("height", height);
                 })
+                 height=$('.vertical-menu-content').innerHeight();
+                 $('#left_column').css("margin-top",height);
             }
             else {
                 $('.open-cate').click();
@@ -35,7 +36,6 @@ $(document).ready(function () {
                 $(".vertical-menu-content").hide();
                 $('.colse-cate').click();
             }
-
         }
     });
 

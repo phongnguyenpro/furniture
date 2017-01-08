@@ -254,8 +254,7 @@
                                                                      <div class="add-to-cart">
                                                                         <?php if (kiemtranull($value['product_description'])) { ?>
                                                                         <a> <?= neods($value['product_description'], 120) ?></a>
-                                                                        <?php } else {
-                                                                            
+                                                                        <?php } else {   
                                                                         }
                                                                         ?>
                                                                     </div>

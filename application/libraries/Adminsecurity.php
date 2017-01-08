@@ -73,7 +73,7 @@ class Adminsecurity {
                 $result = $this->mydb->select("select role_role,role_controller,role_action from role where role_role=:role_role and role_action='index'", array("role_role" => $this->user["user_role"]));
                 foreach ($result as $k => $v) {
                     $this->list_role_user[$v["role_controller"]][] = $v["role_action"];
-                }
+                } 
                 if (!($this->user["user_role"] == "administrator")) {
                     // check role
                     $result = $this->mydb->select("select role_id from role where  role_role=:role_role "
@@ -522,11 +522,8 @@ class Adminsecurity {
                 "role" => array(
                     "attr" => array("label" => "Phân quyền"),
                     "action" => array(
-                        array("label" => "Hiển thị danh sách quyền",
+                        array("label" => "Truy cập phân quyền",
                             "value" => "index"
-                        ),
-                        array("label" => "Cập nhật quyền",
-                            "value" => "update"
                         ),
                     )
                 )

@@ -25,16 +25,36 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 <div id="fb-root"></div>
 
 
+<div class="columns-container">
+    <div class="container" id="columns">
 <!-- row -->
 <div class="row">
-
     <!-- Left colunm -->
     <div class="column col-xs-12 col-sm-3" id="left_column">
-
+        <?php $this->load->view(THEME . "/left") ?>
     </div>
+</div>
     <!-- ./left colunm -->
     <!-- Center colunm-->
     <div class="center_column col-xs-12 col-sm-9" id="center_column">
+         <div class="breadcrumb clearfix">
+            <span class="home navigation_page"  title="Return to Home">
+           <a href="<?= BASE_URL ?>"> Home</a>
+            </span>
+            <?php
+            for ($i = count($this->data["bre"]['info']) - 1; $i >= 0; $i--) {
+                ?>
+                <span class="navigation_page">
+                 <a
+                     <?php if (isset($this->data['bre']['info'][$i]['slug'])) { ?>
+                         href="<?= $this->data['bre']['info'][$i]['slug'] ?>"
+                     <?php } ?>
+                 >
+   <?= $this->data['bre']['info'][$i]['ten'] ?>
+                 </a>
+             </span>
+            <?php } ?>
+        </div>
         <!-- Product -->
         <div id="product">
             <div class="primary-box row">

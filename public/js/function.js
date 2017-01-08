@@ -244,8 +244,6 @@ function phantrangajax(total_page, cur_page) {
 function neods(str, l) {
     str = str.replace(/<(?:.|\n)*?>/gm, '');
     str = str.substr(0, l);
-
-
     return str;
 }
 $_checksumajax = function (formdata, url_callback, callback) {

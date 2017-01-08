@@ -126,16 +126,13 @@ class Product_category extends MY_Controller
         $meta['description'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
         $meta['image'] = LOGO;
         $data['meta'] = $meta;
-
         $data['menu'] = $menu;
         $data['category'] = $danhmuc;
-
         $this->load->model(array("module_model"));
         $data['module'] = $this->module_model->run("productcategory");
-
-        $data['footer'] = $this->module_model->footer();
-
+        $data['footer'] = $this->module_model->footer();       
         $this->data = $data;
+        $this->data["home"]=true;
         $this->load->view(THEME . '/header');
         $this->load->view(THEME . '/sanpham/danhmucnhieu');
         $this->load->view(THEME . '/footer');
@@ -154,24 +151,19 @@ class Product_category extends MY_Controller
 
         // end load sap xep
         $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $price);
-
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
         $meta['description'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
         $meta['image'] = LOGO;
         $data['meta'] = $meta;
-
         $data['menu'] = $menu;
         $data['category'] = $danhmuc;
-
         $this->load->model(array("module_model"));
         $data['module'] = $this->module_model->run("productcategory");
-
         $data['footer'] = $this->module_model->footer();
-
         $this->sapxep = $sapxep;
         $this->data = $data;
-
+        $this->data["home"]=true;
         $this->load->view(THEME . "/header");
         $this->load->view(THEME . "/sanpham/danhmuc");
         $this->load->view(THEME . "/footer");
@@ -215,13 +207,11 @@ class Product_category extends MY_Controller
             $data['meta'] = $meta;
             $data['menu'] = $this->module_model->menu();
             $data['category'] = $danhmuc;
-
             $this->load->model(array("module_model"));
             $data['module'] = $this->module_model->run("productdetail");
-
             $data['footer'] = $this->module_model->footer();
-
             $this->data = $data;
+            $this->data["home"]=true;
             if (isset($this->data['sanpham'])) {
                 $this->load->view(THEME . '/header');
                 $this->load->view(THEME . '/sanpham/chitiet');

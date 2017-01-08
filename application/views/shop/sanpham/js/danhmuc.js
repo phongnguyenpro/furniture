@@ -216,7 +216,7 @@ $(document).ready(function () {
                 html += '<img class="img-responsive" alt="product" src="' + BASE_URL + 'public/upload/images/thumb_product/' + value.product_avatar + '" /></a>';
                 html += ' <div class="quick-view"><a data-id="' + value.product_id + '" title="Yêu thích" class="heart yeuthich"></a></div>';
                 if (value.product_description != null && value.product_description != '') {
-                    ngangon = neods(value.product_description, 200) + "..."
+                 var  ngangon = neods(value.product_description, 100) + "...";
                 } else {
                     ngangon = '';
                 }
@@ -237,7 +237,7 @@ $(document).ready(function () {
                 else
                     html += ' <span class="price product-price">$' + tien(value.product_price) + ' &#8363;</span>';
                 html += '  <div class="info-orther">';
-                html += ' <div class="product-desc">' + ngangon + '</div>';
+                html += ' <div class="product-desc">' +   ngangon + '</div>';
                 html += '</div> ';
                 html += '  <div class="info-bottom"> ';
                 html += '  <a class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>';

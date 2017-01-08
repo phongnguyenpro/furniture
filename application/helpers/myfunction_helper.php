@@ -75,7 +75,7 @@ function string_input($str)
     //   $str=preg_replace('/([^\pL\.\^\pN\@\,\-\%\#\&\$\ \\r\\n\/\:]+)/u', '',$str);
     //$str = str_replace("'", "", $str);
     $str = trim($str);
-    $str = strip_tags($str); //bo php va html
+  //  $str = strip_tags($str); //bo php va html
     $str = htmlentities($str);
     $str = addslashes($str); //bo ky tu ',""
     $str = str_replace("\r\n", "<br>", $str);
@@ -266,6 +266,7 @@ function debug($parameter = "")
     echo "<pre>";
     print_r($parameter);
     echo "</pre>";
+    echo"<br>";
     exit();
 }
 
@@ -463,14 +464,12 @@ function kiemtranull($data)
             return true;
     }
 }
-
 function neods($string, $len)
 {
     $string = strip_tags($string); //bo php va html
     if ($len > strlen($string)) {
         $len = strlen($string);
     };
-
     $pos = strpos($string, ' ', $len);
 
     if ($pos) {

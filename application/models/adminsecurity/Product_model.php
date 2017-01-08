@@ -391,7 +391,6 @@ class Product_model extends MY_Model
 
     function update($data)
     {
-
         $product_id = $_POST["product_id"];
         // xu ly du lieu
         if (isset($data['product_feature']))
@@ -413,17 +412,16 @@ class Product_model extends MY_Model
             $data['product_selling'] = 1;
         else
             $data['product_selling'] = 2;
-
+        $data["product_name"] = string_input($data["product_name"]);
         // xu ly mieu ta va readmore
         //$x = strpos($data['product_content'], "{readmore}");
         $data['product_description'] = substr($data['product_content'], 0, 220);
-        // Xu lý thuoc tinh chon
+       // Xu lý thuoc tinh chon
         $hienthichitiet = array();
         if (isset($data['hienthichitiet'])) {
             $hienthichitiet = $data['hienthichitiet'];
             unset($data['hienthichitiet']);
         }
-
         $result = $this->mydb->select("select productattr_id from productattr ", array());
         foreach ($result as $value) {
             if (isset($data[$value['productattr_id']])) {

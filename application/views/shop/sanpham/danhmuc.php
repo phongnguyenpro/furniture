@@ -4,13 +4,10 @@ $phantrang = $this->data['phantrang'];
 ?>
 
 
-<!-- breadcrumb -->
-
-<!-- ./breadcrumb -->
-<!-- row -->
+<div class="columns-container">
+    <div class="container" id="columns">
 <div class="row">
     <!-- Left colunm -->
-
     <div class="column col-xs-12 col-sm-3" id="left_column">
         <?php $this->load->view(THEME . "/left") ?>
     </div>
@@ -18,7 +15,24 @@ $phantrang = $this->data['phantrang'];
 <!-- Center colunm-->
 
 <div class="center_column col-xs-12 col-sm-9" id="center_column">
-
+ <div class="breadcrumb clearfix">
+            <span class="home navigation_page"  title="Return to Home">
+           <a href="<?= BASE_URL ?>"> Home</a>
+            </span>
+            <?php
+            for ($i = count($this->data["bre"]['info']) - 1; $i >= 0; $i--) {
+                ?>
+                <span class="navigation_page">
+                 <a
+                     <?php if (isset($this->data['bre']['info'][$i]['slug'])) { ?>
+                         href="<?= $this->data['bre']['info'][$i]['slug'] ?>"
+                     <?php } ?>
+                 >
+   <?= $this->data['bre']['info'][$i]['ten'] ?>
+                 </a>
+             </span>
+            <?php } ?>
+        </div>
     <?php
     if (isset($this->data["module"]["banner"]["main"]["1"])) {
         ?>
@@ -40,7 +54,6 @@ $phantrang = $this->data['phantrang'];
     <!-- subcategories -->
     <div class="subcategories">
         <ul>
-
             <li data-tuychon="tatca"
                 class="tuychonsanpham <?= $this->data['tuychonsanpham'] == 'tatca' ? "current-categorie" : "" ?>">
                 <a>Tất cả</a>
@@ -275,7 +288,6 @@ if (isset($this->data['sanpham'])) {
 <!-- ./row-->
 </div>
 </div>
-
 <script>
     URLNOW = "<?= BASE_URL . "Product_category/category/" . $thongtindanhmuc['productcategory_id'] . "/" . $this->data['thongtindanhmuc']['productcategory_slug'] ?>";
 </script>

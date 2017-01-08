@@ -51,7 +51,7 @@ $(document).ready(function (e) {
         ],
         "createdRow": function (row, data, dataIndex) {
             $(row).attr('data-id', data[0]);
-            $(row).attr('data-stt', data[1]);
+            $(row).attr('data-stt', data[0]);
             $(row).attr('id', data[0]);
         },
         "fnInitComplete": function () {

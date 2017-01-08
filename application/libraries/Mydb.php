@@ -32,7 +32,6 @@ class Mydb extends PDO
 
         $sth->execute();
         $kq = $sth->fetchAll($fetchMode);
-
         return $kq;
 
     }

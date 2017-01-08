@@ -258,7 +258,7 @@ ABC;
     function load_category_condition($career_id = "")
     {
         if ($career_id != "")
-            $result = $this->mydb->select("select * from productcategory where career_id=:career_id ORDER by productcategory_index ", array("career_id" => $career_id));
+            $result = $this->mydb->select("select * from productcategory where career_id=:career_id or career_id=-1 ORDER by productcategory_index ", array("career_id" => $career_id));
         else
             $result = $this->mydb->select("select * from productcategory ORDER by productcategory_index ", array());
         $category = array();
