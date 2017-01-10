@@ -1,163 +1,84 @@
-<div class="col-left">
+<?php
+if (isset($this->data["module"]["product"]["left"])) {
+    foreach ($this->data["module"]["product"]["left"] as $k => $v) {
+        ?>  
+        <div class="block left-module product-list  ">
+            <p class="title_block"><?= $v["name"] ?></p>
+            <ul>
 
+                <?php foreach ($v["data"] as $k1 => $value) { ?>
+                    <li>
+                        <div class="product-container">
+                            <div class="left-block">
+                                <a title="<?= $value['product_name'] ?>"
+                                   href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                   class="loading">
+                                    <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
+                                         alt="<?= $value['product_name'] ?>"
+                                         data-src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
+                                </a>
 
-    <?php if (isset($this->data['module'])) { ?>
-
-        <?php foreach ($this->data['module'] as $key => $module) { ?>
-
-            <?php
-            if (false) {  //  module html
-                ?>
-                <?php
-                if (isset($module['data']['left'])) {
-                    foreach ($module['data']['left'] as $value) {
-                        ?>
-                        <div class="block left-module">-->
-                            <p class="title_block">--><?= $value['tieude'] ?></p>
-                            <div class="block_content">--><?= $value['noidung'] ?></div>
-
-                        </div>
-                    <?php } ?>
-                <?php }
-            } ?>
-            <?php
-            if ($key == "articles") {  // module bai viet
-                if (isset($module["left"])) {
-                    foreach ($module["left"] as $moduleProductLeft) {
-                        ?>
-                        <div class="block left-module">
-                            <p class="title_block"><?= $moduleProductLeft['name'] ?></p>
-                            <div class="block_content">
-                                <!-- layered -->
-                                <div class="layered">
-                                    <div class="layered-content ticker ">
-                                        <ul class="blog-list-sidebar clearfix ">
-                                            <?php
-                                            foreach ($moduleProductLeft['data'] as $value) {
-                                                ?>
-                                                <li>
-                                                    <div class="post-thumb">
-
-                                                        <a href="<?= BASE_URL . "bai-viet/" . $value['articles_id'] . "/" . $value['articles_slug'] ?>">
-                                                            <img
-                                                                    src="<?= BASE_URL . "public/upload/images/thumb_articles/" . $value['articles_avatar'] ?>"
-                                                                    alt="Blog">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-info">
-                                                        <h5 class="entry_title"><a
-                                                                    href="<?= BASE_URL . "bai-viet/" . $value['articles_id'] . "/" . $value['articles_slug'] ?>"><?= $value['articles_name'] ?></a>
-                                                        </h5>
-                                                        <div class="post-meta">
-                                                            <span><?= neods($value['articles_description'], 100) ?></span><br>
-                                                            <span class="date"><i
-                                                                        class="fa fa-calendar"></i><?= date_out($value['articles_date_create']) ?></span>
-                                                            <!--                                                <span class="comment-count">
-                                                                                                                <i class="fa fa-comment-o"></i> 3
-                                                                                                            </span>-->
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-                                    <div class="text-center controlticker"><a class="up"><i
-                                                    class="glyphicon glyphicon-download"></i></a></div>
+                                <div class="add-to-cart">
+                                    <?php if (kiemtranull($value['product_description'])) { ?>
+                                        <a> <?= neods($value['product_description'], 120) ?></a>
+                                        <?php
+                                    } else {
+                                        
+                                    }
+                                    ?>
                                 </div>
-                                <!-- ./layered -->
+                                <?php
+                                if ($value['product_sale'] > 0) {
+                                    ?>
+                                    <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
+                                    </div>
+                                <?php } ?>
                             </div>
-                        </div>
+                            <div class="right-block">
+                                <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
+                                                            href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= $value['product_name'] ?></a>
 
-                    <?php }
-                }
-            } ?>
-            <?php if ($key == "product") {
-                if (isset($module["left"])) {
-                    foreach ($module["left"] as $moduleProductLeft) {
-                        ?>
-                        <div class="block left-module ">
-                            <p class="title_block"><?= $moduleProductLeft['name'] ?></p>
-                            <div class="block_content product-onsale">
-                                <ul class="product-list owl-carousel" data-dots="false" data-nav="false" data-margin="0"
-                                    data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-items="1"
-                                    data-autoplay="true">
-                                    <?php
-                                    foreach ($moduleProductLeft['data'] as $value) {
-                                        ?>
-                                        <li>
-                                            <div class="">
-                                                <div class="left-block">
-                                                    <a title="<?= $value['product_name'] ?>"
-                                                       href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>">
-                                                        <img title="<?= $value['product_name'] ?>"
-                                                             alt="<?= $value['product_name'] ?>" class="img-responsive"
-                                                             src="<?= BASE_URL ?>public/upload/images/thumb_product/<?= $value['product_avatar'] ?>"/>
-                                                    </a>
+                                </h5>
 
-                                                    <div class="quick-view">
-                                                        <a title="Yêu thích" data-id="<?= $value['product_id'] ?>"
-                                                           class="heart yeuthich"></a>
-                                                    </div>
-                                                    <div class="add-to-cart">
-                                                        <?php if (kiemtranull($value['product_description'])) { ?>
-                                                            <a> <?= neods($value['product_description'], 120) ?></a>
-                                                        <?php } else {
-                                                        } ?>
-                                                    </div>
-                                                </div>
-                                                <div class="right-block">
-                                                    <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                                href="<?= BASE_URL . 'Product_category/product/' . $value['product_id'] . '/' . $value['product_slug'] ?>"><?= $value['product_name'] ?></a>
-
-                                                    </h5>
-
-                                                    <div class="content_price">
-                                                        <?php if ($value['product_price'] != $value['product_price_new']) { ?>
-                                                            <span
-                                                                    class="price product-price">$<?= tien($value['product_price_new']) ?>
-                                                                &nbsp;₫</span>
-                                                            <span
-                                                                    class="price old-price"><?= tien($value['product_price']) ?></span>
-                                                        <?php } else { ?>
-                                                            <span
-                                                                    class="price product-price"><?= tien($value['product_price']) ?>
-                                                                &nbsp;₫</span>
-                                                        <?php } ?>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </li>
+                                <div class="content_price">
+                                    <?php if ($value['product_price'] != $value['product_price_new']) { ?>
+                                        <span class="price product-price"><?= tien($value['product_price_new']) ?>
+                                            &nbsp;₫</span>
+                                        <span class="price old-price"><?= tien($value['product_price']) ?></span>
+                                    <?php } ELSE { ?>
+                                        <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
                                     <?php } ?>
+                                </div>
+                                <div class="info-bottom">
+                                    <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                    <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
-                                </ul>
+                                </div>
                             </div>
                         </div>
-                    <?php }
-                }
-            } ?>
-
-            <?php
-            if (false) { // module quang cao
-                ?>
-                <?php if (isset($module['data']['left'])) { ?>
-                    <div class="col-left-slide left-module">
-                        <ul class="owl-carousel owl-style2" data-items="1" data-nav="false" data-margin="0"
-                            data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-autoplay="true">
-                            <?php foreach ($module['data']['left'] as $value) { ?>
-                                <li><a href=""><img src="<?= $value['linkimage'] ?>" alt="slide-left"></a></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
+                    </li>
                 <?php } ?>
+            </ul>
+        </div>
 
-            <?php } ?>
-            <?php unset($this->module[$key]);;
-        }
-    } ?>
-    <!-- quang cao -->
+        <?php
+    }
+}
+?>
 
+<?php
 
-    <!-- ./left colunm -->
-      
-     
+if (isset($this->data["module"]["banner"]["left"])) {
+    foreach ($this->data["module"]["product"]["left"] as $k => $v) {
+        ?>  
+<div class="block left-module product-list  ">
+    
+    <?php
+            foreach ($v["data"] as $k1 => $value){
+    ?>
+    <a href="<?= $value["module_link"] ?>"><img src="<?= $value["module_img"] ?>" class="img-responsive"></a>
+            <?php }?>
+</div>
+
+<?php }}?>
+
