@@ -76,7 +76,7 @@ if (isset($this->data["module"]["banner"]["left"])) {
     <?php
             foreach ($v["data"] as $k1 => $value){
     ?>
-    <a href="<?= $value["module_link"] ?>"><img src="<?= $value["module_img"] ?>" class="img-responsive"></a>
+    <a href="<?= $value["module_link"] ?>"><img src="<?= $value["module_image"] ?>" class="img-responsive"></a>
             <?php }?>
 </div>
 
