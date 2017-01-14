@@ -18,7 +18,12 @@
                             <input class="form-control" name="productcategory_slug" type="text" placeholder="Slug danh mục">
                         </div>
                     </div>
-
+  <div class="form-group">
+                        <label class="col-md-3">Miêu tả: </label>
+                        <div class="col-md-9">
+                            <input class="form-control" name="productcategory_description" type="text" placeholder="Miêu tả danh mục">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3">Icon: </label>
                         <div class="col-md-8" style="padding-right: 0">
@@ -29,6 +34,7 @@
                                                                                class="uk-icon-edit"></i></a>
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label class="col-md-3">Ngành nghề: </label>
                         <div class="col-md-9">

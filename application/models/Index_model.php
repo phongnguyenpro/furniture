@@ -58,7 +58,7 @@ order by product_index desc limit $limit  ) as t
                
             $sql = "select product.product_id,productcategory_id,product_price,product_sale,product_feature,product_date_create,product_new,"
                     . " CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,"
-                    . "SUBSTR(INSERT(product.product_name,27,3,'...'),1,29) as product_name,product_slug,product_avatar,product_code,product_description "
+                    . "product_name,product_slug,product_avatar,product_code,product_description "
                     . "from product JOIN productcategory_detail ON product.product_id=productcategory_detail.product_id and ( product.product_id in " . $sql . " (-1) )"
                     . " GROUP by product.product_id order by product_index desc ";
             $kq = $this->mydb->select($sql, array());

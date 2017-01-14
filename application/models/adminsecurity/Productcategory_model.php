@@ -90,11 +90,11 @@ class Productcategory_model extends MY_Model
         $ten = $kq['productcategory_name'];
         $slug = $kq['productcategory_slug'];
         $id = $kq['productcategory_id'];
-        $slugview = BASE_URL . "danh-muc/" . $id . "/" . $slug;
+        $slugview = BASE_URL . "danh-muc/" . $slug ."-".$id;
         $icon = $kq['productcategory_icon'];
         $quangcao = $kq["productcategory_panel"];
         $id_nganhnhge = $kq['career_id'];
-
+        $description = $kq['productcategory_description'];
 
         if ($kq['productcategory_show'] == 1)
             $hienthi = '<input  value=1 type="checkbox" checked name="productcategory_show">';
@@ -124,12 +124,18 @@ class Productcategory_model extends MY_Model
          <input hidden="" name="productcategory_id" type="text" value="{$id}" placeholder="">
     </div>
   </div>
-
-    
+         
       <div class="form-group ">
             <label class="control-label col-sm-3" for="email"> Slug danh mục </label>
     <div class="col-sm-8">
         <input class="form-control"  name="productcategory_slug"  value='{$slug}' type="text" placeholder="">
+       
+    </div>
+  </div>
+              <div class="form-group ">
+            <label class="control-label col-sm-3" for="email"> Miêu tả danh mục </label>
+    <div class="col-sm-8">
+        <input class="form-control"  name="productcategory_description"  value='{$description}' type="text" placeholder="">
        
     </div>
   </div>
@@ -161,11 +167,7 @@ class Productcategory_model extends MY_Model
           <div class="col-sm-8">
           <input class="form-control" id="slugview" type="text" value="{$slugview}" placeholder="">
          </div>
-  </div>
-      
-              
-   
-          
+  </div>          
          <div class="form-group">  
            <label class="control-label col-sm-3" for="email"> Ngành nghề </label>
      <div class="col-sm-8">

@@ -228,7 +228,7 @@ $(document).ready(function () {
                 }
                 html += "</div>";
                 html += '<div class="right-block">';
-                html += '<h5 class="product-name"><a href="' + BASE_URL + 'san-pham/' + value.product_id + "/" + value.product_slug + '" >' + value.product_name + '</a>';
+                html += '<h5 class="product-name"><a href="' + BASE_URL + 'san-pham/' + value.product_id + "/" + value.product_slug + '" >' + neods(value.product_name,50)+"..." + '</a>';
                 html += '</h5>';
                 html += '  <div class="content_price">';
 

@@ -79,7 +79,7 @@ function buiding_menu($parent, $menuData, $data)
                                     <label for="product_edit_name_control">Đường dẫn</label>
                                     <input required="" type="text" class="md-input"
                                            id="product_edit_name_control"
-                                           value='<?= BASE_URL ?>bai-viet/<?= $data['baiviet']['articles_id'] ?>/<?= $data['baiviet']['articles_slug'] ?>'/>
+                                           value='<?= BASE_URL ?>bai-viet/<?= $data['baiviet']['articles_slug']."-".$data['baiviet']['articles_id'] ?>'/>
                                 </div>
                             </div>
                         </div>

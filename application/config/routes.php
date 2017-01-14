@@ -55,14 +55,16 @@ $route['baiviet/tag/(:any)/(:any)'] = 'articles/tag/$1';
 $route['yeu-thich'] = 'product_category/product_like';
 $route['hoadon'] = 'Invoice';
 $route['lien-he'] = 'Contact';
-$route['danh-muc/(:any)/(:any)'] = 'product_category/category/$1';
-$route['danh-muc-bai-viet/(:any)/(:any)'] = 'articles/category/$1/$2';
-$route['bai-viet/(:any)/(:any)'] = 'articles/details/$1';
 $route['checkout'] = 'product_category/checkout';
 $route['default_controller'] = 'index/home';
 $route['adminsecurity'] = 'adminsecurity/main';
 $route['404_override'] = '';
+
+$route['danh-muc-bai-viet/(:any)-(:any)'] = 'articles/category/$2/$1';
+$route['bai-viet/(:any)-(:any)'] = 'articles/details/$2/$1';
+$route['danh-muc/(:any)-(:any)'] = 'product_category/category/$2';
 $route['(:any)-(:any).html'] = 'product_category/product/$2/$1';
+
 
 // admin 
 $route['quantri'] = 'adminsecurity/main';

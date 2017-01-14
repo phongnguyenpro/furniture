@@ -36,7 +36,12 @@ $(document).ready(function () {
             $('#loadeditmenu').html('     <div class="uk-modal-spinner"></div>');
         }
     });
-
+  modalcreate.on({
+        'show.uk.modal': function(){
+        $("#createmenu").find("input").prop("value",'');
+    },
+    
+    });
     $(document).on('click', '.itemedit', function () {
         modal.show();
 

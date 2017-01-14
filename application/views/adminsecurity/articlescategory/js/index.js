@@ -24,16 +24,16 @@ $(document).ready(function () {
     var modalcreate = UIkit.modal("#showcreate");
 
     modal.on({
-
-//    'show.uk.modal': function(){
-//        console.log("Modal is visible.");
-//    },
-
         'hide.uk.modal': function () {
             $('#loadeditmenu').html('     <div class="uk-modal-spinner"></div>');
         }
     });
-
+modalcreate.on({
+        'show.uk.modal': function(){
+        $("#createdanhmucbaiviet").find("input").prop("value",'');
+    },
+    
+})
     $(document).on('click', '.itemedit', function () {
         modal.show();
 

@@ -15,8 +15,6 @@ class Product_category_model extends MY_Model
     {
         $this->danhmucsanpham = $data;
     }
-
-
     public function findParentAll($data, $id_danhmuc, $danhsach)
     {
         if (isset($data['item'][$id_danhmuc]['productcategory_id'])) {

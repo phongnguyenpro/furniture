@@ -10,7 +10,7 @@ if (isset($this->data["module"]["product"]["left"])) {
                     <li>
                         <div class="product-container">
                             <div class="left-block">
-                                <a title="<?= $value['product_name'] ?>"
+                                <a title="<?= neods($value['product_name'], 40) ?>"
                                    href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
                                    class="loading">
                                     <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
@@ -35,8 +35,8 @@ if (isset($this->data["module"]["product"]["left"])) {
                                 <?php } ?>
                             </div>
                             <div class="right-block">
-                                <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                            href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= $value['product_name'] ?></a>
+                                <h5 class="product-name"><a title="<?= neods($value['product_name'], 40) ?>"
+                                                            href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'], 40) ?></a>
 
                                 </h5>
 
@@ -67,18 +67,18 @@ if (isset($this->data["module"]["product"]["left"])) {
 ?>
 
 <?php
-
 if (isset($this->data["module"]["banner"]["left"])) {
-    foreach ($this->data["module"]["product"]["left"] as $k => $v) {
+    foreach ($this->data["module"]["banner"]["left"] as $k => $v) {
         ?>  
-<div class="block left-module product-list  ">
-    
-    <?php
-            foreach ($v["data"] as $k1 => $value){
-    ?>
-    <a href="<?= $value["module_link"] ?>"><img src="<?= $value["module_image"] ?>" class="img-responsive"></a>
-            <?php }?>
-</div>
+        <div class="block left-module product-list  ">
 
-<?php }}?>
+            <?php
+            foreach ($v["data"] as $k1 => $value) {
+                ?>
+                <a href="<?= $value["module_link"] ?>"><img src="<?= BASE_URL . $value["module_image"] ?>" class="img-responsive"></a>
+                <?php } ?>
+        </div>
+
+    <?php }
+} ?>
 

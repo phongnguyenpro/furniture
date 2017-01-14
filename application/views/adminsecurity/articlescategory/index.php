@@ -16,26 +16,18 @@
                         <input class="form-control" name="articlescategory_slug" type="text" placeholder="">
                     </div>
                 </div>
-
+              <div class="form-group">
+                    <label class="col-md-3">Miêu tả:</label>
+                    <div class="col-md-9">
+                        <input class="form-control" name="articlescategory_description" type="text" placeholder="">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-3">Icon:</label>
                     <div class="col-md-9">
                         <input class="form-control" name="articlescategory_icon" type="text" placeholder="">
                     </div>
                 </div>
-                <!--                <div class="form-group -->
-                <? //= count($this->ngonngu) == 1 ? "hidden" : "" ?><!--">-->
-                <!--                    <label class="col-md-3">Ngôn ngữ: </label>-->
-                <!--                    <div class="col-md-9">-->
-                <!--                        <select class="form-control" required="" name="id_ngonngu">-->
-                <!--                            --><?php //foreach ($this->ngonngu as $value) { ?>
-                <!--                                <option value="--><? //= $value['id_ngonngu'] ?><!--">-->
-                <? //= $value['tenngonngu'] ?><!--</option>-->
-                <!---->
-                <!--                            --><?php //} ?>
-                <!--                        </select>-->
-                <!--                    </div>-->
-                <!--                </div>-->
                 <div class="uk-form-row ">
                     <button class="uk-button">Tạo mới</button>
                 </div>

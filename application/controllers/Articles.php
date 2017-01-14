@@ -13,15 +13,15 @@ class Articles extends MY_Controller
 
     function category($id_danhmuc = "", $slug = "")
     {
-        if (check_url(array($id_danhmuc, $slug), $id_danhmuc)) {
+        if (check_url(array($id_danhmuc, $slug), $id_danhmuc)) {            
             if (isset($_GET['page']) && is_numeric($_GET['page'])) {
                 $trang = string_input($_GET['page']);
             } else
                 $trang = 1;
-
+            
             $this->load->model(array("module_model"));
 
-            $this->model->set_article_category($this->module_model->articles_category());
+            $this->model->set_article_category($this->module_model->articles_category());    
             $data = $this->model->load_data_category($id_danhmuc, $trang);
 
             $data['menu'] = $this->module_model->menu();

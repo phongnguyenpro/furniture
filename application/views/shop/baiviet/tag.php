@@ -4,10 +4,12 @@ $thongtintag = $this->data['thongtintag'];
 
 <!-- row -->
 <div class="row">
+    <!-- Left colunm -->
     <div class="column col-xs-12 col-sm-3" id="left_column">
-        <?php $this->load->view(THEME . '/left'); ?>
+        <div class="col-left">
+            <?php $this->load->view(THEME . '/left'); ?>
+        </div>
     </div>
-</div>
 <div class="center_column col-xs-12 col-sm-9" id="center_column">
     <h2 class="page-heading-title">
         <span class="page-heading-title"><?= $this->data['thongtintag']['tag_name'] ?></span>
@@ -19,7 +21,7 @@ $thongtintag = $this->data['thongtintag'];
                     <div class="row">
                         <div class="col-sm-3 col-xs-4">
                             <div class="entry-thumb image-hover2">
-                                <a href="<?= BASE_URL . "bai-viet/" . $value['articles_id'] . "/" . $value['articles_slug'] ?>">
+                                <a href="<?= BASE_URL . "bai-viet/" . $value['articles_slug']."-".$value['articles_id']  ?>">
                                     <img src="<?= BASE_URL . "public/upload/images/thumb_articles/" . $value['articles_avatar'] ?>"
                                          alt="Blog">
                                 </a>
@@ -28,7 +30,7 @@ $thongtintag = $this->data['thongtintag'];
                         <div class="col-sm-9 col-xs-8">
                             <div class="entry-ci">
                                 <h3 class="entry-title"><a
-                                            href="<?= BASE_URL . "bai-viet/" . $value['articles_id'] . "/" . $value['articles_slug'] ?>"><?= $value['articles_name'] ?></a>
+                                            href="<?= BASE_URL . "bai-viet/" . $value['articles_slug']."-".$value['articles_id']  ?>"><?= $value['articles_name'] ?></a>
                                 </h3>
                                 <div class="entry-meta-data">
                                             <span class="author">
@@ -43,7 +45,7 @@ $thongtintag = $this->data['thongtintag'];
                                     <?= $value['articles_description'] ?>
                                 </div>
                                 <div class="entry-more">
-                                    <a href="<?= BASE_URL . "bai-viet/" . $value['articles_id'] . "/" . $value['articles_slug'] ?>">Đọc
+                                    <a href="<?= BASE_URL . "bai-viet/" . $value['articles_slug']."-".$value['articles_id']  ?>">Đọc
                                         tiếp</a>
                                 </div>
                             </div>
@@ -70,10 +72,6 @@ $thongtintag = $this->data['thongtintag'];
                 </ul>
             </nav>
         </div>
-        <form method="GET" id="locsanpham">
-
-
-        </form>
     </div>
 
 </div>

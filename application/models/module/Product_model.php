@@ -22,7 +22,7 @@ class Product_model extends MY_Model {
                 $limit = LIMITMODULE;
             $select = "product.product_id,product_price,product_sale,product_feature,product_date_create,product_new, "
                     . "CAST((product_price-((product_sale/100)*product_price))  AS UNSIGNED ) as product_price_new,"
-                    . "SUBSTR(INSERT(product.product_name,27,3,'...'),1,29) as product_name,"
+                    . "product_name,"
                     . "product_slug,product_avatar,product_code,product_description";
             $data = array();
             switch ($product_type) {

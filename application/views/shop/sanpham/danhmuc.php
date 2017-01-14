@@ -115,13 +115,13 @@ $phantrang = $this->data['phantrang'];
                                                             }
                                                             ?>
 
-            <?php default : { ?>
+                                                        <?php default : { ?>
                                                                 <!-- bo loc -->
                                                                 <div class="layered-content filter-size">
                                                                     <div class="layered_subtitle"><a><?= $value['thongtin']['productattr_name'] ?></a></div>
                                                                     <div class="check-box-list listgiatri" data-label="<?= $key ?>">
                                                                         <ul>
-                    <?php foreach ($value['data'] as $value2) { ?>
+                                                                            <?php foreach ($value['data'] as $value2) { ?>
                                                                                 <li>
                                                                                     <input <?= in_array($value2['attr_val_id'], $this->data['filter']) == true ? "checked" : "" ?>
                                                                                         class="filter" value="<?= $value2['attr_val_id'] ?>"
@@ -129,10 +129,10 @@ $phantrang = $this->data['phantrang'];
                                                                                         name="filter[]">
                                                                                     <label for="<?= $value2['attr_val_id'] ?>">
                                                                                         <span class="button"></span>
-                        <?= string_output($value2['attr_val_value']) ?>
+                                                                                        <?= string_output($value2['attr_val_value']) ?>
                                                                                     </label>
                                                                                 </li>
-                    <?php } ?>
+                                                                            <?php } ?>
 
                                                                         </ul>
                                                                     </div>
@@ -142,7 +142,7 @@ $phantrang = $this->data['phantrang'];
                                                             }
                                                             ?>
                                                             <!--/bo loc -->
-                                                    <?php
+                                                        <?php
                                                     }
                                                 }
                                                 ?>
@@ -150,20 +150,20 @@ $phantrang = $this->data['phantrang'];
                                         </div>
                                     </div>
                                 </div>
-    <?php
-}
-?>
+                                <?php
+                            }
+                            ?>
                         </div>
                         <div class="box-orderby">
 
                             <span class="label-filter">Sắp xếp</span> 
                             <select name="sapxep" class='orderby'>
-<?php
-foreach ($this->sapxep as $key => $value) {
-    ?>
+                                <?php
+                                foreach ($this->sapxep as $key => $value) {
+                                    ?>
                                     <option <?= $value['selected'] ?>
                                         value="<?= $key ?>"><?= $value['ten'] ?></option>
-<?php } ?>
+                                    <?php } ?>
                             </select>
                             <div class="sort-product-icon sortby btn">
                                 <i data-type="asc"
@@ -200,7 +200,7 @@ foreach ($this->sapxep as $key => $value) {
                                 <li class="col-xs-6 col-sm-4">
                                     <div class="product-container">
                                         <div class="left-block">
-                                            <a title="<?= $value['product_name'] ?>"
+                                            <a title="<?= neods($value['product_name'], 40) ?>"
                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
                                                class="loading">
                                                 <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
@@ -217,16 +217,16 @@ foreach ($this->sapxep as $key => $value) {
                                                 }
                                                 ?>
                                             </div>
-        <?php
-        if ($value['product_sale'] > 0) {
-            ?>
+                                            <?php
+                                            if ($value['product_sale'] > 0) {
+                                                ?>
                                                 <div class="price-percent-reduction2">-<?= $value['product_sale'] ?>%<br>SAFE
                                                 </div>
-        <?php } ?>
+                                            <?php } ?>
                                         </div>
                                         <div class="right-block">
-                                            <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= $value['product_name'] ?></a>
+                                            <h5 class="product-name"><a title="<?= neods($value['product_name'], 40) ?>"
+                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'], 40) ?></a>
 
                                             </h5>
 
@@ -235,9 +235,9 @@ foreach ($this->sapxep as $key => $value) {
                                                     <span class="price product-price"><?= tien($value['product_price_new']) ?>
                                                         &nbsp;₫</span>
                                                     <span class="price old-price"><?= tien($value['product_price']) ?></span>
-        <?php } ELSE { ?>
+                                                <?php } ELSE { ?>
                                                     <span class="price product-price"><?= tien($value['product_price']) ?>&nbsp;₫</span>
-        <?php } ?>
+                                                <?php } ?>
                                             </div>
                                             <div class="info-bottom">
                                                 <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
@@ -249,10 +249,10 @@ foreach ($this->sapxep as $key => $value) {
                                     </div>
                                 </li>                
 
-    <?php
-    }
-}
-?>
+                                <?php
+                            }
+                        }
+                        ?>
 
 
                     </ul>
@@ -260,21 +260,21 @@ foreach ($this->sapxep as $key => $value) {
                 </div>
 
                 <!-- ./view-product-list-->
-<?php
-if (isset($this->data['phantrang'])) {
-    ?>
+                <?php
+                if (isset($this->data['phantrang'])) {
+                    ?>
                     <div class="sortPagiBar">
                         <div class="bottom-pagination">
 
                             <nav>
-                                    <?php
-                                    $totalpage = $this->data['phantrang']['totalpage'];
-                                    $currentpage = $this->data['phantrang']['currentpage'];
-                                    ?>
+                                <?php
+                                $totalpage = $this->data['phantrang']['totalpage'];
+                                $currentpage = $this->data['phantrang']['currentpage'];
+                                ?>
                                 <ul class="pagination">
-    <?=
-    phantrangajax($totalpage, $currentpage, BASE_URL);
-    ?>
+                                    <?=
+                                    phantrangajax($totalpage, $currentpage, BASE_URL);
+                                    ?>
 
                                 </ul>
                             </nav>
@@ -284,9 +284,9 @@ if (isset($this->data['phantrang'])) {
 
                         </form>
                     </div>
-    <?php
-}
-?>
+                    <?php
+                }
+                ?>
             </div>
             <!-- ./ Center colunm -->
         </div>

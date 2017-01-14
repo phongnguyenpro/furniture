@@ -178,7 +178,7 @@ function submenu_sanpham($danhmuc, $cha)
     if (isset($danhmuc['parent'][$cha])) {
         $html .= "<ul class='sub-sanpham'>";
         foreach ($danhmuc['parent'][$cha] as $value) {
-            $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_id'] . "/" . $danhmuc['item'][$value]['productcategory_slug'];
+            $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
             $curren = BASE_URL == $url ? "" : "";
             $html .= "<li class='" . $curren . "'><a href='$url'>" . $danhmuc['item'][$value]['productcategory_name'] . "</a>";
             $html .= submenu_sanpham($danhmuc, $value);
@@ -216,7 +216,7 @@ function submenu_sanpham($danhmuc, $cha)
                                     foreach ($danhmuc['parent'][0] as $value) {
                                         ?>
                                         <?php if (isset($danhmuc['parent'][$value]) || isset($this->data['module']['quangcao']['data']['menu'][$quangcao]) || isset($this->data['module']['html']['data']['menu'][$quangcao])) {
-                                            $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_id'] . "/" . $danhmuc['item'][$value]['productcategory_slug'];
+                                                 $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
                                             ?>
                                             <li class="<?= $item > 10 ? "cat-link-orther" : "" ?> <?= BASE_URL == $url ? "menuactive" : "" ?>">
                                                 <a class="parent" href="<?= $url ?>">
@@ -233,7 +233,7 @@ function submenu_sanpham($danhmuc, $cha)
                                                             <?php $i = 0;
                                                             foreach ($danhmuc['parent'][$value] as $value1) {
 
-                                                                $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value1]['productcategory_id'] . "/" . $danhmuc['item'][$value1]['productcategory_slug'];
+                                                                      $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
 
                                                                 $i++; ?>
                                                                 <div class="mega-group col-sm-4">
@@ -245,7 +245,7 @@ function submenu_sanpham($danhmuc, $cha)
 
                                                                         <ul class="group-link-default">
                                                                             <?php foreach ($danhmuc['parent'][$value1] as $value2) {
-                                                                                $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value2]['productcategory_id'] . "/" . $danhmuc['item'][$value2]['productcategory_slug'];
+                                                                                     $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
                                                                                 ?>
 
                                                                                 <li class="<?= BASE_URL == $url ? "" : "" ?>">
@@ -291,7 +291,7 @@ function submenu_sanpham($danhmuc, $cha)
                                                 </div>
                                             </li>
                                         <?php } else {
-                                            $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_id'] . "/" . $danhmuc['item'][$value]['productcategory_slug'];
+                                                       $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
                                             ?>
                                             <li class="<?= $item > 10 ? "cat-link-orther" : "" ?> <?= BASE_URL == $url ? "" : "" ?>">
                                                 <a href="<?= $url ?>">
@@ -352,7 +352,7 @@ function submenu_sanpham($danhmuc, $cha)
                                                     <?php
                                                     $i = 0;
                                                     foreach ($danhmuc['parent'][0] as $value) {
-                                                        $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_id'] . "/" . $danhmuc['item'][$value]['productcategory_slug'];
+                                                           $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
                                                         $i++;
                                                         ?>
 
@@ -370,7 +370,7 @@ function submenu_sanpham($danhmuc, $cha)
 
 
                                                                     <?php foreach ($danhmuc['parent'][$value] as $value1) {
-                                                                        $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value1]['productcategory_id'] . "/" . $danhmuc['item'][$value1]['productcategory_slug'];
+                                                                             $url = BASE_URL . "danh-muc/" . $danhmuc['item'][$value]['productcategory_slug']."-".$danhmuc['item'][$value]['productcategory_id'];
                                                                         ?>
                                                                         <li class="link_container danhmuccap2">
                                                                             <a href="<?= $url ?>"><?= $danhmuc['item'][$value1]['productcategory_name'] ?></a>

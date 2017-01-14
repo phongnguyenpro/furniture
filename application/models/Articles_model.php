@@ -48,9 +48,8 @@ class Articles_model extends MY_Model
     {
         $temp = $data['item'][$id_danhmuc];
         $temp['ten'] = $temp['articlescategory_name'];
-        $temp['slug'] = BASE_URL . "danh-muc-bai-viet/" . $data['item'][$id_danhmuc]['articlescategory_id'] . "/" . $data['item'][$id_danhmuc]['articlescategory_slug'];
+        $temp['slug'] = BASE_URL . "danh-muc-bai-viet/" . $data['item'][$id_danhmuc]['articlescategory_slug']."-".$data['item'][$id_danhmuc]['articlescategory_id'];
         $danhsach['info'][] = $temp;
-
         $danhsach['itemdanhmucbaiviet'][$data['item'][$id_danhmuc]['articlescategory_id']] = $data['item'][$id_danhmuc];
         $cha = $data['item'][$id_danhmuc]['articlescategory_parent'];
         if ($cha != 0) {

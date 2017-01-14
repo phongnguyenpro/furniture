@@ -1,17 +1,15 @@
 <?php
 
-class ArticlesCategory_model extends MY_Model
-{
-    function __construct($type = null)
-    {
+class ArticlesCategory_model extends MY_Model {
+
+    function __construct($type = null) {
         parent::__construct($type);
     }
 
-    function load_articles_category()
-    {
+    function load_articles_category() {
         $result = $this->mydb->select("select * from articlescategory ORDER by articlescategory_index ", array());
         foreach ($result as $value) {
-            $menuData['items'][$value['articlescategory_id']] = $value;//Lưu dữ liệu các biến có id khác nh
+            $menuData['items'][$value['articlescategory_id']] = $value; //Lưu dữ liệu các biến có id khác nh
             $menuData['parent'][$value['articlescategory_parent']][] = $value['articlescategory_id'];
         }
         if (isset($menuData))
@@ -20,8 +18,7 @@ class ArticlesCategory_model extends MY_Model
             return '';
     }
 
-    function buiding_articles_category($parent, $menuData)
-    {
+    function buiding_articles_category($parent, $menuData) {
         $html = "";
         if (isset($menuData['parent'][$parent])) {
             if ($parent != 0)
@@ -29,7 +26,7 @@ class ArticlesCategory_model extends MY_Model
             foreach ($menuData['parent'][$parent] as $value) {
                 $html .= "<li data-id=" . $menuData['items'][$value]['articlescategory_id'] . " class='uk-nestable-item'>";
                 $html .= "<div class='uk-nestable-panel'>"
-                    . "<div class='uk-nestable-toggle' data-nestable-action='toggle'></div><span>" . $menuData['items'][$value]['articlescategory_name'] . "</span> <a class='itemedit uk-badge'><i class='uk-icon-pencil-square-o'></i> Chỉnh sửa</a>";
+                        . "<div class='uk-nestable-toggle' data-nestable-action='toggle'></div><span>" . $menuData['items'][$value]['articlescategory_name'] . "</span> <a class='itemedit uk-badge'><i class='uk-icon-pencil-square-o'></i> Chỉnh sửa</a>";
                 if (check_login_user(array(1, 2)) || true) {
                     $html .= "--- <a class='deletemenu uk-badge uk-badge-danger' ref='" . $menuData['items'][$value]['articlescategory_id'] . "'><i class='uk-icon-times'></i>Xóa</a>";
                 }
@@ -37,13 +34,13 @@ class ArticlesCategory_model extends MY_Model
                 $html .= $this->buiding_articles_category($value, $menuData);
                 $html .= "</li>";
             }
-            if ($parent != 0) $html .= "</ul>";
+            if ($parent != 0)
+                $html .= "</ul>";
         }
         return $html;
     }
 
-    function create_articles_category($data)
-    {
+    function create_articles_category($data) {
         $count = $this->mydb->select("select max(articlescategory_index) as max from articlescategory", array());
         $stt = $count[0]['max'] + 1;
         $data['articlescategory_index'] = $stt;
@@ -51,8 +48,7 @@ class ArticlesCategory_model extends MY_Model
         return array('status' => 1, 'id' => $insert['id'], 'name' => $data['articlescategory_name']);
     }
 
-    function delete_articles_category($id)
-    {
+    function delete_articles_category($id) {
         $result = $this->mydb->select("select * from articlescategory ORDER by articlescategory_index ", array());
 
         foreach ($result as $value) {
@@ -72,8 +68,7 @@ class ArticlesCategory_model extends MY_Model
         return array("id" => $id, "status" => 1);
     }
 
-    function buiding_delete_articles_category($dataxoa, $parent, $menuData)
-    {
+    function buiding_delete_articles_category($dataxoa, $parent, $menuData) {
         if (isset($menuData['parent'][$parent])) {
             foreach ($menuData['parent'][$parent] as $value) {
                 $dataxoa[] = $value;
@@ -83,8 +78,7 @@ class ArticlesCategory_model extends MY_Model
         return $dataxoa;
     }
 
-    function updatesort($menu)
-    {
+    function updatesort($menu) {
         foreach ($menu as $value) {
             $data['articlescategory_id'] = $value['id'];
             $data['articlescategory_parent'] = $value['cha'];
@@ -95,8 +89,7 @@ class ArticlesCategory_model extends MY_Model
         return true;
     }
 
-    function load_info_articles_category($id)
-    {
+    function load_info_articles_category($id) {
 //        $objngongu = new \lib\table\NgonNgu();
 //        $datangonngu = $objngongu->loadngonngu();
         $kq = $this->mydb->select("select * from articlescategory where articlescategory_id=:articlescategory_id", array('articlescategory_id' => $id));
@@ -104,9 +97,10 @@ class ArticlesCategory_model extends MY_Model
         $ten = $kq['articlescategory_name'];
         $slug = $kq['articlescategory_slug'];
         $id = $kq['articlescategory_id'];
-        $slugview = BASE_URL . "danh-muc-bai-viet/" . $id . "/" . $slug;
+        $slugview = BASE_URL . "danh-muc-bai-viet/" . $slug . "-" . $id;
         $icon = $kq['articlescategory_icon'];
         $hide = '';
+        $description = $kq["articlescategory_description"];
         $htmlngonngu = '';
 //        $ngonngu = $kq['id_ngonngu'];
 //        $hide = count($datangonngu) == 1 ? "hidden" : "";
@@ -130,7 +124,7 @@ class ArticlesCategory_model extends MY_Model
     </div>
   </div>
 
-    
+   
       <div class="form-group">
             <label class="control-label col-sm-3" for="email"> Slug danh mục </label>
     <div class="col-sm-8">
@@ -138,7 +132,14 @@ class ArticlesCategory_model extends MY_Model
        
     </div>
   </div>
-        
+ 
+      <div class="form-group">
+            <label class="control-label col-sm-3" for="email">Miêu tả </label>
+    <div class="col-sm-8">
+        <input class="form-control"  name="articlescategory_description"  value='{$description}' type="text" placeholder="">
+       
+    </div>
+  </div>     
        <div class="form-group ">
             <label class="control-label col-sm-3" for="email"> Đường dẫn trang </label>
           <div class="col-sm-8">
@@ -170,8 +171,7 @@ ABC;
         return array('html' => $html, 'status' => 1);
     }
 
-    function update_info_articles_category($data)
-    {
+    function update_info_articles_category($data) {
         // đổi ngôn ngữ
         $id_danhmucbaiviet = $data['articlescategory_id'];
 //        $ngonnguhientai = $this->mydb->select("select id_ngonngu from danhmucbaiviet where id_danhmucbaiviet=:id_danhmucbaiviet", array("id_danhmucbaiviet" => $id_danhmucbaiviet));
