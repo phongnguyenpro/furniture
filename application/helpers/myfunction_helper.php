@@ -190,7 +190,6 @@ function delete_cook($key, $value = FALSE)
 {
     setcookie($key, $value, time() - (86400 * 10), '/');
 }
-
 function create_cook_time($key, $value, $time)
 {
     setcookie($key, $value, time() + $time, "/");
