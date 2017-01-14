@@ -1,6 +1,6 @@
 <?php
 
-class ArticlesCategory extends MY_Controller
+class Articlescategory extends MY_Controller
 {
     public $stt = 1;
 

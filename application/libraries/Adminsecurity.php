@@ -64,7 +64,7 @@ class Adminsecurity {
     public function checkrole($controler = "", $action = "") {
         $this->controller = string_lower($controler);
         $this->action = string_lower($action);
-        if (isset($_COOKIE["user"])) {
+        if (isset($_COOKIE["user"]) && $this->controller != "login" ) {
             $user = GetUserLogin();
             $result = $this->mydb->select("select user_id,user_name,user_email,user_avatar,user_password,user_role,user_role_name from user where user_email=:user_email and user_password=:user_password", array("user_email" => $user["user_email"], "user_password" => $user["user_password"]));
             if (!empty($result)) {
@@ -87,7 +87,7 @@ class Adminsecurity {
                         if ($this->isajax) {
                             echo json_encode(array("status" => 2, "message" => "Bạn không có quyền truy cập"));
                             exit();
-                        } else {
+                        } else {          
                             if ($this->controller != "access") {
                                 Header("Location:" . ADMIN_URL . "access/notaccess");
                                 exit();
