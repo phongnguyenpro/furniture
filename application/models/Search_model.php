@@ -30,7 +30,6 @@ select product_id from product_tag JOIN tag ON tag.tag_id=product_tag.tag_id and
             $this->load->model("module/header_model");
             $danhsachcon = search_all_child($this->header_model->category(), $category_id, array($category_id));
             $sqlwhere = "productcategory_id=" . implode(" or category_id=", $danhsachcon);
-            debug($sqlwhere);
             $sql = "select product_avatar,product.product_id,product_code,product_name,product_slug,product_price,product_description  from product JOIN productcategory_detail ON product_show=1 and product.product_id=productcategory_detail.product_id  and ($sqlwhere) and ( product.product_id='$str' or product_name like '%$str%' or product_code like '%$str%' or product_price like '%$str%' or product_search like '%$str%' $sqlgia $sqltag)
 GROUP by product.product_id limit 10";
         }

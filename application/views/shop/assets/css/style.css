@@ -1694,7 +1694,7 @@ span.notify-right {
 
 .vertical-dropdown-menu {
     position: absolute;
-    top: -15px;
+    top: -4px;
     left: 100%;
     z-index: 900;
     -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;

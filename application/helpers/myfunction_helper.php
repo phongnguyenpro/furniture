@@ -75,8 +75,8 @@ function string_input($str)
     //   $str=preg_replace('/([^\pL\.\^\pN\@\,\-\%\#\&\$\ \\r\\n\/\:]+)/u', '',$str);
     //$str = str_replace("'", "", $str);
     $str = trim($str);
-  //  $str = strip_tags($str); //bo php va html
-    $str = htmlentities($str);
+    $str = strip_tags($str); //bo php va html
+ //   $str = htmlentities($str);
     $str = addslashes($str); //bo ky tu ',""
     $str = str_replace("\r\n", "<br>", $str);
     return $str;

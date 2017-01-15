@@ -110,7 +110,7 @@ class Product_model extends MY_Model
             unset($data["tmp_photo"]);
         }
         // xu ly mieu ta va readmore
-        $data['product_description'] = substr($data['product_content'], 0, 220);
+        $data['product_description'] = substr(string_input($data['product_content']), 0, 220);
         // Xu lý thuoc tinh san pham
         $hienthichitiet = array();
         if (isset($data['hienthichitiet'])) {
@@ -415,7 +415,7 @@ class Product_model extends MY_Model
         $data["product_name"] = string_input($data["product_name"]);
         // xu ly mieu ta va readmore
         //$x = strpos($data['product_content'], "{readmore}");
-        $data['product_description'] = substr($data['product_content'], 0, 220);
+        $data['product_description'] = substr(string_input($data['product_content']), 0, 220);
        // Xu lý thuoc tinh chon
         $hienthichitiet = array();
         if (isset($data['hienthichitiet'])) {

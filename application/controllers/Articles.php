@@ -35,9 +35,8 @@ class Articles extends MY_Controller
 
             $data['bre'] = $this->model->load_bre($id_danhmuc);
 
-
             $meta['title'] = $data['bre']['thongtindanhmucchinh']['articlescategory_name'];
-            $meta['description'] = $data['bre']['thongtindanhmucchinh']['articlescategory_name'] . "/ " . SDT . "/ " . DIACHI;
+            $meta['description'] = string_output($data['thongtindanhmuc']['articlescategory_description']);
             $meta['image'] = LOGO;
             $data['meta'] = $meta;
 

@@ -14,9 +14,7 @@ if (!isset($_SESSION['token']))
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="content-language" content="vi">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -106,9 +104,9 @@ if (!isset($_SESSION['token']))
         <div class="col-xs-10 col-sm-8 header-search-box">
             <form class="form-inline">
                 <div class="form-group form-category">
-                    <select class="select-category" id="selectdanhmuc" disabled="">
-                        <option value="-1">Tìm kiếm sản phẩm</option>
-                    </select>
+                    <div class="select-category" id="selectdanhmuc" disabled="">
+                        Tìm kiếm sản phẩm
+                    </div>
                 </div>
                 <div class="form-group input-serach">
                     <input type="text" id="search-terms" placeholder="Tìm kiếm">

@@ -123,7 +123,7 @@ class Product_category extends MY_Controller
 
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
-        $meta['description'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
+        $meta['description'] = string_output($data['thongtindanhmuc']['productcategory_description']);
         $meta['image'] = LOGO;
         $data['meta'] = $meta;
         $data['menu'] = $menu;
@@ -153,7 +153,7 @@ class Product_category extends MY_Controller
         $data = $this->model->data_product_oneCategory($id_danhmuc, $orderby, $filter, $noibat, $giamgia, $page, $type, $price);
         $meta = array();
         $meta['title'] = $data['thongtindanhmuc']['productcategory_name'];
-        $meta['description'] = $data['thongtindanhmuc']['productcategory_name'] . "/ " . SDT . "/ " . DIACHI;
+        $meta['description'] = string_output($data['thongtindanhmuc']['productcategory_description']);
         $meta['image'] = LOGO;
         $data['meta'] = $meta;
         $data['menu'] = $menu;

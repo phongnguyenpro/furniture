@@ -82,7 +82,7 @@ $(document).ready(function () {
     dangtim = false;
     $('#search-terms').keyup(function () {
         if (!dangtim) {
-            id_danhmuc = $("#selectdanhmuc").val();
+            id_danhmuc = -1;
             dangtim = true;
             str = $(this).val();
             $('.btnsearch').html('<i class="fa fa-spinner fa-spin"></i>');
@@ -91,8 +91,9 @@ $(document).ready(function () {
             $.post(BASE_URL + "search", {"str": str, "id_danhmuc": id_danhmuc}, function (o) {
                 html = '';
                 if (o.tinhtrang == 1) {
+                    console.log(o.data);
                     for (key in o.data) {
-                        obj = o.data[key];
+                       var obj = o.data[key];
                         html += ' <li class="clearfix" id="itemsearch">';
                         html += ' <div class="imageleft">';
                         html += ' <a href="' + BASE_URL + 'san-pham/' + obj.product_id + "/" + obj.product_slug + ' ">';
@@ -101,9 +102,9 @@ $(document).ready(function () {
                         html += ' <div class="inforight "><a href="' + BASE_URL + 'san-pham/' + obj.product_id + "/" + obj.product_slug + ' ">';
                         html += obj.product_name + " | " + obj.product_code + " | " + format1(parseInt(obj.product_price), "") + '&nbsp;₫ </a>';
                         if (obj.product_description != '' && obj.product_description != null) {
-                            html += '<br><span>' + neods(obj.product_description, 200) + '...</span>';
+                            html += '<br><span>' + neods(obj.product_description, 220) + '...</span>';
                         }
-                        html += '</div>';
+                        html += '</div></li>';
                     }
                     dangtim = false;
                     $('.btnsearch').html('<i class="fa fa-search" id="search-icon"></i>');
