@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery.bxslider/jquery.bxslider.min.js") ?>"/></script> <!-- Trình chiếu -->
+<script type="text/javascript" src="<?= load_frontend_view("assets/lib/jquery.bxslider/jquery.bxslider.min.js") ?>"></script> <!-- Trình chiếu -->
 <link rel="stylesheet" type="text/css" href="<?= load_frontend_view("assets/lib/jquery.bxslider/jquery.bxslider.css") ?>" />
 
 <!-- Home slideder-->
@@ -25,7 +25,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="header-banner banner-opacity">
+               <!-- <div class="header-banner banner-opacity">
                     <ul>
                         <?php
                         if (isset($this->data['module']['banner']['main'][1]["data"])) {
@@ -36,7 +36,7 @@
     <?php } ?>
 <?php } ?>
                     </ul>
-                </div>
+                </div>-->
                 <!-- END Home slideder-->
 
                 <!-- servives -->
@@ -113,7 +113,7 @@
                             foreach ($this->data['module']["product"]["main"] as $key => $datasp) {
                                 ?>
                                 <div id="tab-<?= $key ?>" class="tab-panel <?= $i == 1 ? "active" : "" ?>">
-                                    <ul  class="product-list owl-carousel"  data-dots="false" data-loop="false" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":2},"600":{"items":2},"1000":{"items":"4"}}'>        
+                                    <ul  class="product-list owl-carousel"  data-dots="false" data-loop="false" data-nav = "true" data-margin = "30" data-autoplayTimeout="1000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":2},"600":{"items":2},"1000":{"items":"4"}}'>
         <?php foreach ($datasp['data'] as $value) { ?>
                                             <li>
                                                 <div class="">
@@ -131,7 +131,7 @@
                                                                 <a> <?= neods($value['product_description'], 120) ?></a>
                                                                 <?php
                                                             } else {
-                                                                
+
                                                             }
                                                             ?>
                                                         </div>
@@ -165,7 +165,7 @@
                                                     </div>
 
                                                 </div>
-                                            </li>                
+                                            </li>
 
 
                                 <?php } ?>
@@ -209,7 +209,7 @@
     <?= $sanpham['thongtin']['productcategory_name'] ?></a></div>
                             <!--                  <span class="toggle-menu"></span>-->
                         <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse">           
+                        <div class="collapse navbar-collapse">
 
                             <ul class="nav navbar-nav">
 
@@ -256,7 +256,7 @@
 
         <?php
         foreach ($sanpham['data'] as $value) {
-            ?>    
+            ?>
 
                                                 <li>
                                                     <div class="">
@@ -274,7 +274,7 @@
                                                                     <a> <?= neods($value['product_description'], 120) ?></a>
                                                                 <?php
                                                             } else {
-                                                                
+
                                                             }
                                                             ?>
                                                             </div>
@@ -307,7 +307,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </li>               
+                                                </li>
 
         <?php } ?>
                                         </ul>
@@ -320,7 +320,7 @@
 
                         </div>
                     </div>
-                </div>  
+                </div>
             </div><!-- Ket thuc mot cai -->
     <?php
     $i++;
@@ -342,7 +342,7 @@
                         </div>
                     </div>
     <?php } ?>
-            </div>    			
+            </div>
 <?php } ?>
     </div>
 </div>  <!-- box -->

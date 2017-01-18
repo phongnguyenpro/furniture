@@ -2190,13 +2190,13 @@ span.notify-right {
 .header-top-right {
     margin-left: -15px;
     padding: 0;
+    padding-left: 15px;
     margin-top: 12px;
 }
 
 .header-top-right .homeslider {
-    width: 68%;
+    width: 100%;
     float: left;
-    margin-left: 14px;
 }
 
 .header-top-right .header-banner {
@@ -2529,8 +2529,9 @@ span.notify-right {
     font-size: 12px;
     margin-top: 20px;
     float: left;
-    width: 99%;
+    width: 100%;
     margin: 12px;
+    margin-left: 0;
     box-shadow: 3px 3px 0px 0px #d9d9d9;
 }
 

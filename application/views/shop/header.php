@@ -201,7 +201,7 @@ function submenu_sanpham($danhmuc, $cha)
                     <div class="box-vertical-megamenus">
                         <h4 class="title">
                             <span class="title-menu"> <i class="fa fa-th-list" aria-hidden="true"></i> DANH MỤC SẢN PHẨM</span>
-                            <span class="btn-open-mobile pull-right home-page"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></span>
+                            <span class="btn-open-mobile pull-right home-page"><i class="fa fa-bars" aria-hidden="true"></i></span>
                         </h4>
                         <div class="vertical-menu-content is-home">
                             <ul class="vertical-menu-list">
