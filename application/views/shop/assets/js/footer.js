@@ -39,55 +39,24 @@ $(document).ready(function () {
         }
     });
 
-
-    setTimeout(function () {
-        window.fbAsyncInit = function () {
-            FB.init({
-                xfbml: true,
-                version: 'v2.5'
-            });
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {
-                return;
-            }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/vi_VN/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-    }, 2000)
-    windowwidth = $(window).width();
+  var windowwidth = $(window).width();
     left = (windowwidth - 252) / 2;
     $('.boxdangload').css("left", left);
     $('.dangload').hide();
     $('.thongbao').hide();
 
-
-//$ ( window ). bind ( "load" ,  function ()  {
-//    var timeout = setTimeout ( function ()  { 
-//        $ ( "img.lazy" ). trigger ( "sporty" ) 
-//    },  50000 ); 
-//});
-
-
-    menuactive = $('li.menuactive').parents('li.li-sub').addClass("menuactive");
+   var menuactive = $('li.menuactive').parents('li.li-sub').addClass("menuactive");
     menuactive = $('li.menuactive').parents('li.dropdown').addClass("menuactive");
     console.log(menuactive);
 
 
-    dangtim = false;
+   var dangtim = false;
     $('#search-terms').keyup(function () {
         if (!dangtim) {
             id_danhmuc = -1;
             dangtim = true;
             str = $(this).val();
             $('.btnsearch').html('<i class="fa fa-spinner fa-spin"></i>');
-
-
             $.post(BASE_URL + "search", {"str": str, "id_danhmuc": id_danhmuc}, function (o) {
                 html = '';
                 if (o.tinhtrang == 1) {

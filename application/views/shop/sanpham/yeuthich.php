@@ -27,8 +27,8 @@
                             </td>
                             <td class="cart_description">
 
-                                <p class="product-name"><a
-                                        href="<?= BASE_URL ?>san-pham/<?= $value['product_id'] ?>/<?= $value['product_slug'] ?>"><?= $value['product_name'] ?> </a>
+                                <p class="product-name">
+                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                 </p>
                                 <small class="cart_ref">Mã SP : <?= $value['product_code'] ?></small>
                                 <br>

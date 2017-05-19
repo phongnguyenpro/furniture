@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
      // my domain
-        define('BASE_URL',"http://localhost:81/furniture/");
-        define('ADMIN_URL',"http://localhost:81/furniture/adminsecurity/");
+        define('BASE_URL',"http://localhost/furniture/");
+        define('ADMIN_URL',"http://localhost/furniture/quantri/");
         define('HASH_KEY',"ILOVEYOY");
         
 // MY CONSTANTS

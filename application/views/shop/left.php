@@ -11,7 +11,7 @@ if (isset($this->data["module"]["product"]["left"])) {
                         <div class="product-container">
                             <div class="left-block">
                                 <a title="<?= neods($value['product_name'], 40) ?>"
-                                   href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                   href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                    class="loading">
                                     <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                          alt="<?= $value['product_name'] ?>"
@@ -36,7 +36,7 @@ if (isset($this->data["module"]["product"]["left"])) {
                             </div>
                             <div class="right-block">
                                 <h5 class="product-name"><a title="<?= neods($value['product_name'], 40) ?>"
-                                                            href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'], 40) ?></a>
+                                                            href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" ><?= neods($value['product_name'], 40) ?></a>
 
                                 </h5>
 
@@ -50,7 +50,7 @@ if (isset($this->data["module"]["product"]["left"])) {
                                     <?php } ?>
                                 </div>
                                 <div class="info-bottom">
-                                    <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                    <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                     <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                 </div>

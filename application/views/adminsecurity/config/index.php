@@ -480,9 +480,19 @@ $data = $this->data["config"];
                             <span class="uk-input-group-addon">
                                 <i class="uk-icon-edit"></i>
                             </span>
-                                        <label for="product_edit_name_control">Google map Lat-Lng </label>
+                                        <label for="product_edit_name_control">Google map Lat </label>
                                         <input value='<?= $data['maplat'] ?>' type="text" class="md-input"
                                                id="product_edit_name_control" name="maplat"/>
+                                    </div>
+                                </div>
+                                     <div class="uk-form-row">
+                                    <div class="uk-input-group">
+                            <span class="uk-input-group-addon">
+                                <i class="uk-icon-edit"></i>
+                            </span>
+                                        <label for="product_edit_name_control">Google map Lng </label>
+                                        <input value='<?= $data['maplng'] ?>' type="text" class="md-input"
+                                               id="product_edit_name_control" name="maplng"/>
                                     </div>
                                 </div>
                             </div>

@@ -306,7 +306,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                     <li>
                                          <div class="left-block">
                                                     <a title="<?= neods($value['product_name'],40) ?>"
-                                                       href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                                       href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                                        class="loading">
                                                         <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                                              alt="<?= $value['product_name'] ?>"
@@ -331,7 +331,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                                 </div>
                                                 <div class="right-block">
                                                     <h5 class="product-name"><a title="<?= neods($value['product_name'],40) ?>"
-                                                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'],40) ?></a>
+                                                                                href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" ><?= neods($value['product_name'],40) ?></a>
 
                                                     </h5>
 
@@ -345,7 +345,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                                         <?php } ?>
                                                     </div>
                                                     <div class="info-bottom">
-                                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                                        <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                                         <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                                     </div>
@@ -373,7 +373,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
 
                                         <div class="left-block">
                                             <a title="<?= $value['product_name'] ?>"
-                                               href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                               href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                                class="loading">
                                                 <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                                      alt="<?= $value['product_name'] ?>"
@@ -398,7 +398,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                         </div>
                                         <div class="right-block">
                                             <h5 class="product-name"><a title="<?= $value['product_name'] ?>"
-                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"><?= $value['product_name'] ?></a>
+                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"><?= $value['product_name'] ?></a>
 
                                             </h5>
 
@@ -412,7 +412,7 @@ $url = BASE_URL . "san-pham/" . $data['sanpham']['product_id'] . "/" . $data['sa
                                                 <?php } ?>
                                             </div>
                                             <div class="info-bottom">
-                                                <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                                <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                                    class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                                 <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 

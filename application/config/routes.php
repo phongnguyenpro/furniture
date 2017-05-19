@@ -58,7 +58,7 @@ $route['lien-he'] = 'Contact';
 $route['checkout'] = 'product_category/checkout';
 $route['default_controller'] = 'index/home';
 $route['adminsecurity'] = 'adminsecurity/main';
-$route['404_override'] = '';
+$route['404_override'] = 'error';
 
 $route['danh-muc-bai-viet/(:any)-(:any)'] = 'articles/category/$2/$1';
 $route['bai-viet/(:any)-(:any)'] = 'articles/details/$2/$1';

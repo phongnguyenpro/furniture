@@ -58,8 +58,10 @@ class User_model extends MY_Model {
         return true;
     }
 
-    function update($data) {
+    function update($data){
         $info_old = $this->mydb->select("select * from user where user_id=:user_id", array("user_id" => $data["user_id"]))[0];
+        $user["user_avatar"] = $info_old["user_avatar"];
+        $user["user_password"] = $info_old["user_password"];  
         if (isset($_FILES['user_avatar']))
             $data['user_avatar'] = $_FILES['user_avatar'];
         if (isset($data['user_avatar'])) {
@@ -70,24 +72,42 @@ class User_model extends MY_Model {
                 $url = "public/upload/images/user_profile/" . $name;
                 $this->image->crop($file['tmp_name'], $url, WIDTHANHBAIVIET, HEIGHTANHBAIVIET, KIEUIMAGE);
                 $data['user_avatar'] = $name;
+                $user["user_avatar"] = $data["user_avatar"];
                 delete_image($info_old["user_avatar"], "user_profile");
             } else
                 unset($data['user_avatar']);
         }
         if (isset($data["user_password"]) && $data["user_password"] != $info_old["user_password"])
+        {
             $data["user_password"] = md5($data["user_password"]);
+            $user["user_password"] = $data["user_password"];    
+        }
         $data["user_role_name"] = $data["user_role"] == "administrator" ? "Administrator" :
                 ( $data["user_role"] == "user" ? "User" :
                         $this->mydb->select("select usergroup_name from usergroup where usergroup_id=:usergroup_id", array("usergroup_id" => $data["user_role"]))[0]["usergroup_name"]
                 );
+        if($data["user_email"]!=$info_old["user_email"])
+        {
+        if(!$this->check_exist_user($data["user_email"])["status"] == 1) {
+               // tồn tại
+               session_set("notify", array("type" => 4, "messager" => "Tài khoản " . $data["user_name"] . " chưa được cập nhật. Vì email đã tồn tại!"));
+            return true;         
+        }
+        }
         $data["user_status"] = isset($data["user_status"]) ? 1 : -1;
         $data["user_date_update"] = today();
         $data["user_birthday"] = date_input($data["user_birthday"]);
         $data["user_note"] = string_input($data["user_note"]);
-
         $result = $this->mydb->update("user", $data, "user_id=:user_id", array("user_id" => $data["user_id"]));
         if ($result["row"] > 0) {
-            session_set("notify", array("type" => 3, "messager" => "Tài khoản " . $data["user_email"] . " đã cập nhật thông tin thành công"));
+             // tao cookie
+                    $user["user_id"] = $data["user_id"];
+                    $user["user_email"] = $data["user_email"];
+                    $user["user_name"] = $data["user_name"];                  
+                    $user["user_role"] = $data["user_role"];
+                    $user["user_role_name"] = $data["user_role_name"];
+                    SetUserLogin($user);
+            session_set("notify", array("type" => 3, "messager" => "Tài khoản " . $data["user_name"] . " đã cập nhật thông tin thành công"));
         }
         return true;
     }

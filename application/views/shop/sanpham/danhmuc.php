@@ -201,7 +201,7 @@ $phantrang = $this->data['phantrang'];
                                     <div class="product-container">
                                         <div class="left-block">
                                             <a title="<?= neods($value['product_name'], 40) ?>"
-                                               href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                               href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                                class="loading">
                                                 <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                                      alt="<?= $value['product_name'] ?>"
@@ -226,7 +226,7 @@ $phantrang = $this->data['phantrang'];
                                         </div>
                                         <div class="right-block">
                                             <h5 class="product-name"><a title="<?= neods($value['product_name'], 40) ?>"
-                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'], 40) ?></a>
+                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" ><?= neods($value['product_name'], 40) ?></a>
 
                                             </h5>
 
@@ -240,7 +240,7 @@ $phantrang = $this->data['phantrang'];
                                                 <?php } ?>
                                             </div>
                                             <div class="info-bottom">
-                                                <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                                <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                                 <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                             </div>
@@ -294,6 +294,6 @@ $phantrang = $this->data['phantrang'];
     </div>
 </div>
 <script>
-    URLNOW = "<?= BASE_URL . "Product_category/category/" . $thongtindanhmuc['productcategory_id'] . "/" . $this->data['thongtindanhmuc']['productcategory_slug'] ?>";
+    URLNOW = "<?= BASE_URL . "danh-muc/"  . $this->data['thongtindanhmuc']['productcategory_slug']."-".$thongtindanhmuc['productcategory_id'] ?>";
 </script>
 <script src="<?= load_frontend_view('sanpham/js/danhmuc.js') ?>"></script>

@@ -34,7 +34,7 @@ ABC;
         return $html;
     }
     function run($nguoinhan = Array(), $data) {
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(true);
 //Khai báo gửi mail bằng SMTP
         $mail->IsSMTP();
         $mail->Debugoutput = "html"; // Lỗi trả về hiển thị với cấu trúc HTML

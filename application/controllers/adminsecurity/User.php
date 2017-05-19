@@ -48,6 +48,7 @@ class User extends MY_Controller {
     }
 
     function update($user_id = "") {
+       
         if (isset($_POST["user_id"])) {
             $this->update_post($_POST["user_id"], generate_key("update_post"));
         } else {
@@ -56,9 +57,9 @@ class User extends MY_Controller {
     }
 
     function update_post($id_user, $key) {
-        if (generate_key("update_post") == $key && !isset($_POST["user_email"])) {
+        if (generate_key("update_post") == $key) {
             $data = $_POST;
-            if ($this->model->update($data)) {
+            if ($this->model->update($data)) { 
                 Header("Location:" . ADMIN_URL . "user/update/" . $data["user_id"]);
             }
         } else

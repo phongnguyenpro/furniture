@@ -447,18 +447,87 @@ function buiding_menu($parent, $menuData, $data) {
                                                class=" label label-info suasanphamchitiet">Sửa</a>
                                             <a data-id_sanphamchitiet="<?= $key ?>"
                                                class="label label-danger xoasanphamchitiet">Xóa</a>
-
                                         </td>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
-         
-            
-            
+                    <div class="md-card">
+                <div class="md-card-toolbar">
+                    <div class="md-card-toolbar-actions">
+                        <i class="boxchonfile md-icon material-icons">
+                            <input multiple="" id="chonfile" type="file"></i>
+                      
+
+                    </div>
+                    <h3 class="md-card-toolbar-heading-text">
+                        Photos
+                    </h3>
+                </div>
+                <div class="md-card-content">
+
+                    <div class="uk-margin-bottom uk-text-center uk-position-relative">
+                        <div class="boxanhdaidien">
+                            <div class="boxphantram">
+                                <div class="uk-progress uk-progress-striped uk-active">
+                                    <div class="uk-progress-bar phantramanhdaidien" style="width:0%;"></div>
+                                </div>
+                            </div>
+                            <img class="img-responsive" id="imgavatar"
+                                 src="<?= BASE_URL."public/upload/images/product/".$product["product"]["product_avatar"] ?>">
+                            <a class="changeavatar">
+                                <input type="file" class="form-control" id="doiavatar">
+                                <i class="glyphicon glyphicon-camera"></i>
+                                Cập nhật ảnh đại diện
+                            </a>
+                           
+
+                        </div>
+
+                    </div>
+                        <ul class="uk-sortable  uk-grid uk-grid-small uk-grid-width-1-5"
+                                data-uk-sortable="{group:'connected-group'}">
+                                <?php if($product["product"]["product_avatar"]!=""){ ?>
+                            <li class="uk-grid-margin uk-sortable-item  "  >
+                                    <a type="button" tenhinh='<?= $product["product"]["product_avatar"] ?>'
+                                       class="themanh uk-modal-close uk-close uk-close-alt uk-position-absolute">
+                                    </a>
+                                    <div>
+                                        <img
+                                            src="<?= BASE_URL ?>public/upload/images/product/<?= $product["product"]["product_avatar"] ?>"
+                                            alt="" class="img-responsive img_small">
+                                    </div>
+                                </li>
+                                <?php } ?>
+                                <?php foreach ($product['product_images'] as $key => $value) { ?>
+
+                                <li data-id="<?= $value['product_images_id'] ?>" class="uk-grid-margin">
+                                    <a type="button" tenhinh='<?= $value['product_images_name'] ?>'
+                                       ref='<?= $value['product_images_id'] ?>'
+                                       class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute">
+                                    </a>
+                                                                        <a type="button" tenhinh='<?= $value['product_images_name'] ?>'
+                                       ref='<?= $value['product_images_id'] ?>'
+                                       class="themanh uk-modal-close uk-close uk-close-alt uk-position-absolute">
+                                    </a>
+                                    <div>
+                                        <img
+                                            src="<?= BASE_URL ?>public/upload/images/product/<?= $value['product_images_name'] ?>"
+                                            alt="" class="img-responsive img_small">
+                                        
+                                    </div>
+                                </li>
+
+                                <?php } ?>
+
+
+                            </ul>
+
+                </div>
+                <div id="thongbaoupdate"></div>
+            </div>
             <div class="md-card">
                 <div class="md-card-toolbar">
                     <h3 class="md-card-toolbar-heading-text">
@@ -620,63 +689,7 @@ function buiding_menu($parent, $menuData, $data) {
             </div>
 
 
-            <div class="md-card">
-                <div class="md-card-toolbar">
-                    <div class="md-card-toolbar-actions">
-                        <i class="boxchonfile md-icon material-icons">
-                            <input multiple="" id="chonfile" type="file"></i>
-                      
-
-                    </div>
-                    <h3 class="md-card-toolbar-heading-text">
-                        Photos
-                    </h3>
-                </div>
-                <div class="md-card-content">
-
-                    <div class="uk-margin-bottom uk-text-center uk-position-relative">
-                        <div class="boxanhdaidien">
-                            <div class="boxphantram">
-                                <div class="uk-progress uk-progress-striped uk-active">
-                                    <div class="uk-progress-bar phantramanhdaidien" style="width:0%;"></div>
-                                </div>
-                            </div>
-                            <img class="img-responsive" id="imgavatar"
-                                 src="<?= BASE_URL."public/upload/images/product/".$product["product"]["product_avatar"] ?>">
-                            <a class="changeavatar">
-                                <input type="file" class="form-control" id="doiavatar">
-                                <i class="glyphicon glyphicon-camera"></i>
-                                Cập nhật ảnh đại diện
-                            </a>
-                           
-
-                        </div>
-
-                    </div>
-                        <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3"
-                                data-uk-sortable="{group:'connected-group'}">
-
-                                <?php foreach ($product['product_images'] as $key => $value) { ?>
-
-                                <li data-id="<?= $value['product_images_id'] ?>" class="uk-grid-margin  ">
-                                    <a type="button" tenhinh='<?= $value['product_images_name'] ?>'
-                                       ref='<?= $value['product_images_id'] ?>'
-                                       class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>
-                                    <div>
-                                        <img
-                                            src="<?= BASE_URL ?>public/upload/images/product/<?= $value['product_images_name'] ?>"
-                                            alt="" class="img-responsive">
-                                    </div>
-                                </li>
-
-                                <?php } ?>
-
-
-                            </ul>
-
-                </div>
-                <div id="thongbaoupdate"></div>
-            </div>
+            
 
 
             <!--                        <div class="md-card">

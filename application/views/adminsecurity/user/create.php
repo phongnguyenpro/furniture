@@ -33,7 +33,7 @@ $user = $this->data["user"];
                                         <i class="uk-icon-edit"></i>
                                     </span>
                                     <label for="product_edit_name_control">Emai đăng nhập</label>
-                                    <input  <?= isset($this->data["is_edit"]) ? "disabled" : "" ?>  required="" type="email"  name="user_email"  class="md-input" id="product_edit_name_control"  value='<?= $this->data['user']["user_email"] ?>'/>
+                                    <input  <?= isset($this->data["is_edit"]) ? "" : "" ?>  required="" type="email"  name="user_email"  class="md-input" id="product_edit_name_control"  value='<?= $this->data['user']["user_email"] ?>'/>
                                     <?php if (isset($this->data["is_edit"])) { ?>
                                         <input class="hidden" value='<?= $this->data['user']["user_id"] ?>' name="user_id" >
                                     <?php } ?>

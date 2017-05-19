@@ -490,3 +490,14 @@ label.label i
     border:1px solid #94a0b4;
     color:#000
 }
+.uk-grid-margin .themanh
+{
+        margin-left: 40px;
+}
+.uk-grid-margin .themanh:after
+{
+    opacity: 1 !important;
+    color: #727272;
+    content: '+';
+    font-family: serif;
+}

@@ -21,7 +21,7 @@ class Product_category_model extends MY_Model
             // thong tin cho bre
             $temp['productcategory_id'] = $data['item'][$id_danhmuc]['productcategory_id'];
             $temp['ten'] = $data['item'][$id_danhmuc]['productcategory_name'];
-            $temp['slug'] = BASE_URL . "danh-muc/" . $temp['productcategory_id'] . "/" . $data['item'][$id_danhmuc]['productcategory_slug'];
+            $temp['slug'] = BASE_URL . "danh-muc/" . "/" . $data['item'][$id_danhmuc]['productcategory_slug']."-".$temp['productcategory_id'] ;
             $danhsach['info'][] = $temp;
 
             //$danhsach['itemdanhmucsanpham'][$data['item'][$id_danhmuc]['productcategory_id']]=$temp;

@@ -440,7 +440,7 @@ $(document).ready(function (e) {
                 var ketqua = JSON.parse(request.responseText);
                 if (ketqua.status == 1) {
                     progwith.remove();
-                    html = '<a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>\n\
+                    html = '<a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="xoaanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a><a type="button" tenhinh="' + ketqua.tenhinh + '" ref="' + ketqua.id_hinh + '" class="themanh uk-modal-close uk-close uk-close-alt uk-position-absolute"></a>\n\
                         <div><img src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img_small"></div>';
                     htmlchonhinh = '<li data-name="' + ketqua.tenhinh + '" class="uk-grid-margin itemhinhchon" ><img title="' + ketqua.tenhinh + '" src="' + BASE_URL + 'public/upload/images/product/' + ketqua.tenhinh + '" alt="" class="img-responsive img_small"></li>';
                     boxupload.append(html);
@@ -503,6 +503,7 @@ $(document).ready(function (e) {
 
 
     nestable.on({
+        animation : 200,
         'stop.uk.sortable': function () {
 
             var list_images = $(".uk-sortable").data("sortable").serialize();
@@ -521,4 +522,8 @@ $(document).ready(function (e) {
             }, "JSON")
         }
     });
+    $(document).on("click",".themanh",function(){
+        var src  = BASE_URL + "public/upload/images/product/"+$(this).attr("tenhinh");
+                 CKEDITOR.instances['mieuta'].insertHtml("<img src='"+src+"' >");
+    })
 });

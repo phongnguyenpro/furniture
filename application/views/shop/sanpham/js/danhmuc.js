@@ -212,7 +212,7 @@ $(document).ready(function () {
             //   console.log(o.sanpham.length);
             o.sanpham.forEach(function (value) {
                 html += '<li class="col-xs-6 col-sm-4"><div class="product-container"><div class="left-block">';
-                html += '<a href="' + BASE_URL + 'san-pham/' + value.product_id + "/" + value.product_slug + '">';
+                html += '<a href="' + BASE_URL  + value.product_slug +"-"+value.product_id+'.html">';
                 html += '<img class="img-responsive" alt="product" src="' + BASE_URL + 'public/upload/images/thumb_product/' + value.product_avatar + '" /></a>';
                 html += ' <div class="quick-view"><a data-id="' + value.product_id + '" title="Yêu thích" class="heart yeuthich"></a></div>';
                 if (value.product_description != null && value.product_description != '') {
@@ -228,7 +228,7 @@ $(document).ready(function () {
                 }
                 html += "</div>";
                 html += '<div class="right-block">';
-                html += '<h5 class="product-name"><a href="' + BASE_URL + 'san-pham/' + value.product_id + "/" + value.product_slug + '" >' + neods(value.product_name,50)+"..." + '</a>';
+                html += '<h5 class="product-name"><a href="' + BASE_URL  + value.product_slug +"-"+value.product_id+'.html" >' + neods(value.product_name,50)+"..." + '</a>';
                 html += '</h5>';
                 html += '  <div class="content_price">';
 

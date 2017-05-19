@@ -34,9 +34,8 @@ class Articles extends MY_Controller
             $data['footer'] = $this->module_model->footer();
 
             $data['bre'] = $this->model->load_bre($id_danhmuc);
-
             $meta['title'] = $data['bre']['thongtindanhmucchinh']['articlescategory_name'];
-            $meta['description'] = string_output($data['thongtindanhmuc']['articlescategory_description']);
+            $meta['description'] = string_output($data['bre']['thongtindanhmucchinh']['articlescategory_description']);
             $meta['image'] = LOGO;
             $data['meta'] = $meta;
 

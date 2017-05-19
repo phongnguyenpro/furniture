@@ -100,8 +100,12 @@ class Product extends MY_Controller
 
     function sort_image()
     {
+        if(isset($_POST["list_images"]))
+        {
         $obj = $_POST['list_images'];
         $this->model->sort_images($obj);
+        }
+        else echo json_encode (array("status"=>1));
     }
 
     function upload_image()

@@ -119,7 +119,7 @@
                                                 <div class="">
                                                     <div class="left-block">
                                                         <a title="<?= neods($value['product_name'], 40) ?>"
-                                                           href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                                           href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                                            class="loading">
                                                             <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                                                  alt="<?= $value['product_name'] ?>"
@@ -144,7 +144,7 @@
                                                     </div>
                                                     <div class="right-block">
                                                         <h5 class="product-name"><a title="<?= neods($value['product_name'], 40) ?>"
-                                                                                    href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'], 40) ?></a>
+                                                                                    href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" ><?= neods($value['product_name'], 40) ?></a>
 
                                                         </h5>
 
@@ -158,7 +158,7 @@
             <?php } ?>
                                                         </div>
                                                         <div class="info-bottom">
-                                                            <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                                            <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                                             <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                                         </div>
@@ -204,7 +204,7 @@
                 <nav class="navbar nav-menu nav-menu-red show-brand">
                     <div class="container">
                         <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-brand"><a  href="<?= BASE_URL ?>danh-muc/<?= $sanpham['thongtin']['productcategory_id'] ?>/<?= $sanpham['thongtin']['productcategory_slug'] ?>" >
+                        <div class="navbar-brand"><a  href="<?= BASE_URL ?>danh-muc/<?= $sanpham['thongtin']['productcategory_slug']."-".$sanpham['thongtin']['productcategory_id'] ?>" >
                             <!--                          <img alt="fashion" src="assets/data/fashion.png" />-->
     <?= $sanpham['thongtin']['productcategory_name'] ?></a></div>
                             <!--                  <span class="toggle-menu"></span>-->
@@ -262,7 +262,7 @@
                                                     <div class="">
                                                         <div class="left-block">
                                                             <a title="<?= neods($value['product_name'], 40) ?>"
-                                                               href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>"
+                                                               href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>"
                                                                class="loading">
                                                                 <img class="img-responsive b-lazy" title="<?= $value['product_name'] ?>"
                                                                      alt="<?= $value['product_name'] ?>"
@@ -287,7 +287,7 @@
                                                         </div>
                                                         <div class="right-block">
                                                             <h5 class="product-name"><a title="<?= neods($value['product_name'], 40) ?>"
-                                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" ><?= neods($value['product_name'], 40) ?></a>
+                                                                                        href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" ><?= neods($value['product_name'], 40) ?></a>
 
                                                             </h5>
 
@@ -301,7 +301,7 @@
             <?php } ?>
                                                             </div>
                                                             <div class="info-bottom">
-                                                                <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . "-html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
+                                                                <a href="<?= BASE_URL . $value['product_slug'] . "-" . $value['product_id'] . ".html" ?>" class="btn-view-product"><i class="fa fa-shopping-cart"></i> Mua sản phẩm</a>
                                                                 <a class="btn-view-product"><i class="fa fa-heart" aria-hidden="true"></i> </a>
 
                                                             </div>

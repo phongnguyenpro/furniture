@@ -57,9 +57,9 @@ config.toolbar_Basic =
           config.enterMode =CKEDITOR.ENTER_BR;
           
           
-          config.filebrowserBrowseUrl =ADMIN_URL+"selectphoto";
-    config.filebrowserImageBrowseUrl=ADMIN_URL+'selectphoto?type=Images' ; 
-    config.filebrowserFlashBrowseUrl = ADMIN_URL+'selectphoto?type=Flash' , 
+          config.filebrowserBrowseUrl =ADMIN_URL+"media/selectphoto";
+    config.filebrowserImageBrowseUrl=ADMIN_URL+'media/selectphoto?type=Images' ; 
+    config.filebrowserFlashBrowseUrl = ADMIN_URL+'media/selectphoto?type=Flash' , 
     config.filebrowserUploadUrl =  '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files' , 
     config.filebrowserImageUploadUrl =  '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images' , 
     config.filebrowserFlashUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash' 

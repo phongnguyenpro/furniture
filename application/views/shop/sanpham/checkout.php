@@ -100,7 +100,7 @@ if (!empty($this->data['phivanchuyen'])) {
 
                         <tr>
                             <td class="cart_product">
-                                <a href="<?= BASE_URL . "san-pham/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>">
+                                <a href="<?= BASE_URL .  $value['slugsanpham'] . "-" . $value['id_sanpham']  . ".html" ?>">
                                     <img class="img-responsive"
                                          src="<?= BASE_URL . "public/upload/images/thumb_product/" . $value['hinhsanpham'] ?>"
                                          alt="p10">
@@ -108,7 +108,7 @@ if (!empty($this->data['phivanchuyen'])) {
                             </td>
                             <td class="cart_description">
                                 <p class="product-name"><a
-                                            href="<?= BASE_URL . "san-pham/" . $value['id_sanpham'] . "/" . $value['slugsanpham'] ?>"><?= $value['tensanpham'] ?> </a>
+                                            href="<?= BASE_URL .  $value['slugsanpham'] . "-" . $value['id_sanpham']  . ".html" ?>"><?= $value['tensanpham'] ?> </a>
                                 </p>
                                 <?php if (kiemtranull($value['masanpham'])) { ?>
                                     <small class="cart_ref">Mã SP : <?= $value['masanpham'] ?></small><br><?php } ?>
